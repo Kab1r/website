@@ -9,7 +9,7 @@ content_template: templates/concept
 
 Cette documentation permet d'installer rapidement un cluster Kubernetes hébergé
 sur GCE, Azure, Openstack, AWS, vSphere, Oracle Cloud Infrastructure
-(expérimental) ou sur des serveurs physiques (bare metal) grâce à
+(expérimental) ou sur des serveurs physiques (bare metal) grâce �
 [Kubespray](https://github.com/kubernetes-incubator/kubespray).
 
 Kubespray se base sur des outils de provisioning, des
@@ -49,7 +49,7 @@ Les serveurs doivent être installés en s'assurant des éléments suivants:
   playbooks Ansible**
 - Les serveurs cibles doivent avoir **accès à Internet** afin de télécharger les
   images Docker. Autrement, une configuration supplémentaire est nécessaire, (se
-  référer à
+  référer �
   [Offline Environment](https://github.com/kubernetes-sigs/kubespray/blob/master/docs/downloads.md#offline-environment))
 - Les serveurs cibles doivent être configurés afin d'autoriser le transfert IPv4
   (**IPv4 forwarding**)
@@ -76,7 +76,7 @@ les outils suivants:
 Lorsque vos serveurs sont disponibles, créez un fichier d'inventaire Ansible
 ([inventory](http://docs.ansible.com/ansible/intro_inventory.html)). Vous pouvez
 le créer manuellement ou en utilisant un script d'inventaire dynamique. Pour
-plus d'informations se référer à
+plus d'informations se référer �
 [Building your own inventory](https://github.com/kubernetes-incubator/kubespray/blob/master/docs/getting-started.md#building-your-own-inventory).
 
 ### (3/5) Préparation au déploiement de votre cluster
@@ -119,7 +119,7 @@ peuvent être nécessaires afin d'obtenir de meilleurs résultats.
 ### (5/5) Vérifier le déploiement
 
 Kubespray fournit le moyen de vérifier la connectivité inter-pods ainsi que la
-résolution DNS grâce à
+résolution DNS grâce �
 [Netchecker](https://github.com/kubernetes-incubator/kubespray/blob/master/docs/netcheck.md).
 Les pods netchecker-agents s'assurent que la résolution DNS (services
 Kubernetes) ainsi que le ping entre les pods fonctionnent correctement. Ces pods
@@ -134,16 +134,16 @@ cluster: _scale_ et _upgrade_.
 ### Mise à l'échelle du cluster
 
 Vous pouvez ajouter des noeuds à votre cluster en exécutant le playbook `scale`.
-Pour plus d'informations se référer à
+Pour plus d'informations se référer �
 [Adding nodes](https://github.com/kubernetes-incubator/kubespray/blob/master/docs/getting-started.md#adding-nodes).
 vous pouvez retirer des noeuds de votre cluster en exécutant le playbook
-`remove-node`. Se référer à
+`remove-node`. Se référer �
 [Remove nodes](https://github.com/kubernetes-incubator/kubespray/blob/master/docs/getting-started.md#remove-nodes).
 
 ### Mise à jour du cluster
 
 Vous pouvez mettre à jour votre cluster en exécutant le playbook
-`upgrade-cluster`. Pour plus d'informations se référer à
+`upgrade-cluster`. Pour plus d'informations se référer �
 [Upgrades](https://github.com/kubernetes-incubator/kubespray/blob/master/docs/upgrades.md).
 
 ## Nettoyage
