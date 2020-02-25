@@ -8,12 +8,16 @@ short_description: >
 
 aka:
 tags:
-- architecture
-- fundamental
+  - architecture
+  - fundamental
 ---
- Composant du master qui exécute les {{< glossary_tooltip text="contrôleurs" term_id="controller" >}}.
+
+Composant du master qui exécute les
+{{< glossary_tooltip text="contrôleurs" term_id="controller" >}}.
 
 <!--more-->
 
-Logiquement, chaque {{< glossary_tooltip text="contrôleur" term_id="controller" >}} est un processus à part mais,
-pour réduire la complexité, les contrôleurs sont tous compilés dans un seul binaire et s'exécutent dans un seul processus.
+Logiquement, chaque
+{{< glossary_tooltip text="contrôleur" term_id="controller" >}} est un processus
+à part mais, pour réduire la complexité, les contrôleurs sont tous compilés dans
+un seul binaire et s'exécutent dans un seul processus.
