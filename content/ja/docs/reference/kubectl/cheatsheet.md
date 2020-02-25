@@ -8,7 +8,8 @@ card:
 
 {{% capture overview %}}
 
-[Kubectl概要](/docs/reference/kubectl/overview/)と[JsonPathガイド](/docs/reference/kubectl/jsonpath)も合わせてご覧ください。
+[Kubectl 概要](/docs/reference/kubectl/overview/)と[JsonPath ガイド](/docs/reference/kubectl/jsonpath)も
+合わせてご覧ください。
 
 このページは`kubectl`コマンドの概要です。
 
@@ -18,7 +19,7 @@ card:
 
 # kubectl - チートシート
 
-## Kubectlコマンドの補完
+## Kubectl コマンドの補完
 
 ### BASH
 
@@ -41,16 +42,18 @@ source <(kubectl completion zsh)  # 現在のzshシェルでコマンド補完�
 echo "if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi" >> ~/.zshrc # zshシェルでのコマンド補完を永続化するために.zshrcに追記します。
 ```
 
-## Kubectlコンテキストの設定
+## Kubectl コンテキストの設定
 
-`kubectl`がどのKubernetesクラスターと通信するかを設定します。
-設定ファイル詳細については[kubeconfigを使用した複数クラスターとの認証](/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)をご覧ください。
+`kubectl`がどの Kubernetes クラスターと通信するかを設定します。設定ファイル詳細
+について
+は[kubeconfig を使用した複数クラスターとの認証](/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)を
+ご覧ください。
 
 ```bash
 kubectl config view # マージされたkubeconfigの設定を表示します。
 
 # 複数のkubeconfigファイルを同時に読み込む場合はこのように記述します。
-KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 
+KUBECONFIG=~/.kube/config:~/.kube/kubconfig2
 
 kubectl config view
 
@@ -72,19 +75,21 @@ kubectl config set-context --current --namespace=ggckad-s2
 # 特定のユーザー名と名前空間を使用してコンテキストを設定します
 kubectl config set-context gce --user=cluster-admin --namespace=foo \
   && kubectl config use-context gce
- 
+
 kubectl config unset users.foo    # ユーザーfooを削除します
 ```
 
 ## Apply
 
-`apply`はKubernetesリソースを定義するファイルを通じてアプリケーションを管理します。`kubectl apply`を実行して、クラスター内のリソースを作成および更新します。これは、本番環境でKubernetesアプリケーションを管理する推奨方法です。
-詳しくは[Kubectl Book](https://kubectl.docs.kubernetes.io)をご覧ください。
+`apply`は Kubernetes リソースを定義するファイルを通じてアプリケーションを管理し
+ます。`kubectl apply`を実行して、クラスター内のリソースを作成および更新します。
+これは、本番環境で Kubernetes アプリケーションを管理する推奨方法です。詳しく
+は[Kubectl Book](https://kubectl.docs.kubernetes.io)をご覧ください。
 
+## Object の作成
 
-## Objectの作成
-
-Kubernetesのマニフェストファイルは、jsonまたはyamlで定義できます。ファイル拡張子として、`.yaml`や`.yml`、`.json`が使えます。
+Kubernetes のマニフェストファイルは、json または yaml で定義できます。ファイル拡
+張子として、`.yaml`や`.yml`、`.json`が使えます。
 
 ```bash
 kubectl apply -f ./my-manifest.yaml            # リソースを作成します
@@ -202,7 +207,9 @@ kubectl get events --sort-by=.metadata.creationTimestamp
 
 ## リソースのアップデート
 
-version 1.11で`rolling-update`は廃止されました、代わりに`rollout`コマンドをお使いください(詳しくはこちらをご覧ください [CHANGELOG-1.11.md](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.11.md))。
+version 1.11 で`rolling-update`は廃止されました、代わりに`rollout`コマンドをお使
+いください(詳しくはこちらをご覧ください
+[CHANGELOG-1.11.md](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.11.md))。
 
 ```bash
 kubectl set image deployment/frontend www=image:v2               # frontend Deploymentのwwwコンテナイメージをv2にローリングアップデートします
@@ -254,7 +261,7 @@ kubectl patch sa default --type='json' -p='[{"op": "add", "path": "/secrets/1", 
 
 ## リソースの編集
 
-任意のエディターでAPIリソースを編集します。
+任意のエディターで API リソースを編集します。
 
 ```bash
 kubectl edit svc/docker-registry                      # docker-registryという名前のサービスを編集します
@@ -288,13 +295,13 @@ kubectl logs my-pod                                 # Podのログをダンプ�
 kubectl logs -l name=myLabel                        # name=myLabelラベルの持つPodのログをダンプします(標準出力)
 kubectl logs my-pod --previous                      # 以前に存在したコンテナのPodログをダンプします(標準出力)
 kubectl logs my-pod -c my-container                 # 複数コンテナがあるPodで、特定のコンテナのログをダンプします(標準出力)
-kubectl logs -l name=myLabel -c my-container        # name=mylabelラベルを持つPodのログをダンプします(標準出力) 
+kubectl logs -l name=myLabel -c my-container        # name=mylabelラベルを持つPodのログをダンプします(標準出力)
 kubectl logs my-pod -c my-container --previous      # 複数コンテナがあるPodで、以前に作成した特定のコンテナのログをダンプします(標準出力)
 kubectl logs -f my-pod                              # Podのログをストリームで確認します(標準出力)
 kubectl logs -f my-pod -c my-container              # 複数のコンテナがあるPodで、特定のコンテナのログをストリームで確認します(標準出力)
 kubectl logs -f -l name=myLabel --all-containers    # name-myLabelラベルを持つすべてのコンテナのログをストリームで確認します(標準出力)
 kubectl run -i --tty busybox --image=busybox -- sh  # Podをインタラクティブシェルとして実行します
-kubectl run nginx --image=nginx --restart=Never -n 
+kubectl run nginx --image=nginx --restart=Never -n
 mynamespace                                         # 特定のネームスペースでnginx Podを実行します
 kubectl run nginx --image=nginx --restart=Never     # nginx Podを実行し、マニフェストファイルををpod.yamlという名前で書き込みます
 --dry-run -o yaml > pod.yaml
@@ -322,13 +329,15 @@ kubectl taint nodes foo dedicated=special-user:NoSchedule
 
 ### リソースタイプ
 
-サポートされているすべてのリソースタイプを、それらが[API group](/docs/concepts/overview/kubernetes-api/#api-groups)か[Namespaced](/docs/concepts/overview/working-with-objects/namespaces)、[Kind](/docs/concepts/overview/working-with-objects/kubernetes-objects)に関わらずその短縮名をリストします。
+サポートされているすべてのリソースタイプを、それら
+が[API group](/docs/concepts/overview/kubernetes-api/#api-groups)か[Namespaced](/docs/concepts/overview/working-with-objects/namespaces)、[Kind](/docs/concepts/overview/working-with-objects/kubernetes-objects)に
+関わらずその短縮名をリストします。
 
 ```bash
 kubectl api-resources
 ```
 
-APIリソースを探索するためのその他の操作: 
+API リソースを探索するためのその他の操作:
 
 ```bash
 kubectl api-resources --namespaced=true      # 名前空間付きのすべてのリソースを表示します
@@ -341,44 +350,54 @@ kubectl api-resources --api-group=extensions # "extensions" APIグループの�
 
 ### 出力のフォーマット
 
-特定の形式で端末ウィンドウに詳細を出力するには、サポートされている`kubectl`コマンドに`-o`または`--output`フラグを追加します。
+特定の形式で端末ウィンドウに詳細を出力するには、サポートされている`kubectl`コマ
+ンドに`-o`または`--output`フラグを追加します。
 
-出力フォーマット | 説明
----------------- | -----------
-`-o=custom-columns=<spec>` | カスタムカラムを使用してコンマ区切りのテーブルを表示します
-`-o=custom-columns-file=<filename>` | `<filename>`ファイル内のカスタムカラムテンプレートを使用してテーブルを表示します
-`-o=json`     | JSON形式のAPIオブジェクトを出力します
-`-o=jsonpath=<template>` | [jsonpath](/docs/reference/kubectl/jsonpath)式で定義されたフィールドを出力します
-`-o=jsonpath-file=<filename>` | `<filename>`ファイル内の[jsonpath](/docs/reference/kubectl/jsonpath)式で定義されたフィールドを出力します
-`-o=name`     | リソース名のみを出力し、それ以外は何も出力しません。
-`-o=wide`     | 追加の情報を含むプレーンテキスト形式で出力します。Podの場合、Node名が含まれます。
-`-o=yaml`     | YAML形式のAPIオブジェクトを出力します
+| 出力フォーマット                    | 説明                                                                                                     |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `-o=custom-columns=<spec>`          | カスタムカラムを使用してコンマ区切りのテーブルを表示します                                               |
+| `-o=custom-columns-file=<filename>` | `<filename>`ファイル内のカスタムカラムテンプレートを使用してテーブルを表示します                         |
+| `-o=json`                           | JSON 形式の API オブジェクトを出力します                                                                 |
+| `-o=jsonpath=<template>`            | [jsonpath](/docs/reference/kubectl/jsonpath)式で定義されたフィールドを出力します                         |
+| `-o=jsonpath-file=<filename>`       | `<filename>`ファイル内の[jsonpath](/docs/reference/kubectl/jsonpath)式で定義されたフィールドを出力します |
+| `-o=name`                           | リソース名のみを出力し、それ以外は何も出力しません。                                                     |
+| `-o=wide`                           | 追加の情報を含むプレーンテキスト形式で出力します。Pod の場合、Node 名が含まれます。                      |
+| `-o=yaml`                           | YAML 形式の API オブジェクトを出力します                                                                 |
 
-### Kubectlのログレベルとデバッグ
-kubectlのログレベルは、レベルを表す整数が後に続く`-v`または`--v`フラグで制御されます。一般的なKubernetesのログ記録規則と関連するログレベルについて、[こちら](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md)で説明します。
+### Kubectl のログレベルとデバッグ
 
-ログレベル    | 説明
---------------| -----------
-`--v=0`       | これは、クラスターオペレーターにログレベルが0であることを"常に"見えるようにするために役立ちます
-`--v=1`       | 冗長性が必要ない場合は、妥当なデフォルトのログレベルです
-`--v=2`       | サービスに関する重要な定常状態情報と、システムの重要な変更に関連する可能性がある重要なログメッセージを表示します。 これは、ほとんどのシステムで推奨されるデフォルトのログレベルです。
-`--v=3`       | 変更に関するより詳細なログレベルを表示します
-`--v=4`       | デバックにむいたログレベルで表示します
-`--v=6`       | 要求されたリソースを表示します
-`--v=7`       | HTTPリクエストのヘッダを表示します
-`--v=8`       | HTTPリクエストのコンテンツを表示します
-`--v=9`       | HTTPリクエストのコンテンツをtruncationなしで表示します
+kubectl のログレベルは、レベルを表す整数が後に続く`-v`または`--v`フラグで制御さ
+れます。一般的な Kubernetes のログ記録規則と関連するログレベルについて
+、[こちら](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md)で
+説明します。
+
+| ログレベル | 説明                                                                                                                                                                                  |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--v=0`    | これは、クラスターオペレーターにログレベルが 0 であることを"常に"見えるようにするために役立ちます                                                                                     |
+| `--v=1`    | 冗長性が必要ない場合は、妥当なデフォルトのログレベルです                                                                                                                              |
+| `--v=2`    | サービスに関する重要な定常状態情報と、システムの重要な変更に関連する可能性がある重要なログメッセージを表示します。 これは、ほとんどのシステムで推奨されるデフォルトのログレベルです。 |
+| `--v=3`    | 変更に関するより詳細なログレベルを表示します                                                                                                                                          |
+| `--v=4`    | デバックにむいたログレベルで表示します                                                                                                                                                |
+| `--v=6`    | 要求されたリソースを表示します                                                                                                                                                        |
+| `--v=7`    | HTTP リクエストのヘッダを表示します                                                                                                                                                   |
+| `--v=8`    | HTTP リクエストのコンテンツを表示します                                                                                                                                               |
+| `--v=9`    | HTTP リクエストのコンテンツを truncation なしで表示します                                                                                                                             |
 
 {{% /capture %}}
 
 {{% capture whatsnext %}}
 
-* kubectlについてより深く学びたい方は[kubectl概要](/docs/reference/kubectl/overview/)をご覧ください。
+- kubectl についてより深く学びたい方
+  は[kubectl 概要](/docs/reference/kubectl/overview/)をご覧ください。
 
-* オプションについては[kubectl](/docs/reference/kubectl/kubectl/) optionsをご覧ください。
+- オプションについては[kubectl](/docs/reference/kubectl/kubectl/) options をご覧
+  ください。
 
-* また[kubectlの利用パターン](/docs/reference/kubectl/conventions/)では再利用可能なスクリプトでkubectlを利用する方法を学べます。
+- また[kubectl の利用パターン](/docs/reference/kubectl/conventions/)では再利用可
+  能なスクリプトで kubectl を利用する方法を学べます。
 
-* コミュニティ版[kubectlチートシート](https://github.com/dennyzhang/cheatsheet-kubernetes-A4)もご覧ください。
+- コミュニティ
+  版[kubectl チートシート](https://github.com/dennyzhang/cheatsheet-kubernetes-A4)も
+  ご覧ください。
 
 {{% /capture %}}

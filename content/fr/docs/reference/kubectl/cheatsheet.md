@@ -10,7 +10,8 @@ original: d4d55a703
 
 {{% capture overview %}}
 
-Voir aussi : [Aperçu Kubectl](/docs/reference/kubectl/overview/) et [Guide JsonPath](/docs/reference/kubectl/jsonpath).
+Voir aussi : [Aperçu Kubectl](/docs/reference/kubectl/overview/) et
+[Guide JsonPath](/docs/reference/kubectl/jsonpath).
 
 Cette page donne un aperçu de la commande `kubectl`.
 
@@ -29,7 +30,8 @@ source <(kubectl completion bash) # active l'auto-complétion pour bash dans le 
 echo "source <(kubectl completion bash)" >> ~/.bashrc # ajoute l'auto-complétion de manière permanente à votre shell bash
 ```
 
-Vous pouvez de plus déclarer un alias pour `kubectl` qui fonctionne aussi avec l'auto-complétion :
+Vous pouvez de plus déclarer un alias pour `kubectl` qui fonctionne aussi avec
+l'auto-complétion :
 
 ```bash
 alias k=kubectl
@@ -45,7 +47,10 @@ echo "if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi" >> ~
 
 ## Contexte et configuration de Kubectl
 
-Indique avec quel cluster Kubernetes `kubectl` communique et modifie les informations de configuration. Voir la documentation [Authentification multi-clusters avec kubeconfig](/docs/tasks/access-application-cluster/configure-access-multiple-clusters/) pour des informations détaillées sur le fichier de configuration.
+Indique avec quel cluster Kubernetes `kubectl` communique et modifie les
+informations de configuration. Voir la documentation
+[Authentification multi-clusters avec kubeconfig](/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)
+pour des informations détaillées sur le fichier de configuration.
 
 ```bash
 kubectl config view # Affiche les paramètres fusionnés de kubeconfig
@@ -77,14 +82,17 @@ kubectl config unset users.foo                       # Supprime l'utilisateur fo
 ```
 
 ## Apply
-`apply` gère des applications en utilisant des fichiers définissant des ressources Kubernetes. 
-Elle crée et met à jour des ressources dans un cluster en exécutant `kubectl apply`. 
-C'est la manière recommandée de gérer des applications Kubernetes en production. Voir le [Livre Kubectl](https://kubectl.docs.kubernetes.io).
+
+`apply` gère des applications en utilisant des fichiers définissant des
+ressources Kubernetes. Elle crée et met à jour des ressources dans un cluster en
+exécutant `kubectl apply`. C'est la manière recommandée de gérer des
+applications Kubernetes en production. Voir le
+[Livre Kubectl](https://kubectl.docs.kubernetes.io).
 
 ## Création d'objets
 
-Les manifests Kubernetes peuvent être définis en json ou yaml. Les extensions de fichier `.yaml`,
-`.yml`, et `.json` peuvent être utilisés.
+Les manifests Kubernetes peuvent être définis en json ou yaml. Les extensions de
+fichier `.yaml`, `.yml`, et `.json` peuvent être utilisés.
 
 ```bash
 kubectl apply -f ./my-manifest.yaml            # Crée une ou plusieurs ressources
@@ -156,8 +164,8 @@ kubectl get services --sort-by=.metadata.name # Liste les services classés par 
 # Liste les pods classés par nombre de redémarrages
 kubectl get pods --sort-by='.status.containerStatuses[0].restartCount'
 
-# Affiche les pods du namespace test classés par capacité de stockage 
-kubectl get pods -n test --sort-by=.spec.capacity.storage  
+# Affiche les pods du namespace test classés par capacité de stockage
+kubectl get pods -n test --sort-by=.spec.capacity.storage
 
 # Affiche la version des labels de tous les pods ayant un label app=cassandra
 kubectl get pods --selector=app=cassandra -o \
@@ -197,7 +205,9 @@ kubectl get events --sort-by=.metadata.creationTimestamp
 
 ## Mise à jour de ressources
 
-Depuis la version 1.11, `rolling-update` a été déprécié (voir [CHANGELOG-1.11.md](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.11.md)), utilisez plutôt `rollout`.
+Depuis la version 1.11, `rolling-update` a été déprécié (voir
+[CHANGELOG-1.11.md](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.11.md)),
+utilisez plutôt `rollout`.
 
 ```bash
 kubectl set image deployment/frontend www=image:v2               # Rolling update du conteneur "www" du déploiement "frontend", par mise à jour de son image
@@ -247,6 +257,7 @@ kubectl patch sa default --type='json' -p='[{"op": "add", "path": "/secrets/1", 
 ```
 
 ## Édition de ressources
+
 Ceci édite n'importe quelle ressource de l'API dans un éditeur.
 
 ```bash
@@ -311,7 +322,13 @@ kubectl taint nodes foo dedicated=special-user:NoSchedule
 
 ### Types de ressources
 
-Liste tous les types de ressources pris en charge avec leurs noms courts (shortnames), [groupe d'API (API group)](/docs/concepts/overview/kubernetes-api/#api-groups), si elles sont [cantonnées à un namespace (namespaced)](/docs/concepts/overview/working-with-objects/namespaces), et leur [Genre (Kind)](/docs/concepts/overview/working-with-objects/kubernetes-objects):
+Liste tous les types de ressources pris en charge avec leurs noms courts
+(shortnames),
+[groupe d'API (API group)](/docs/concepts/overview/kubernetes-api/#api-groups),
+si elles sont
+[cantonnées à un namespace (namespaced)](/docs/concepts/overview/working-with-objects/namespaces),
+et leur
+[Genre (Kind)](/docs/concepts/overview/working-with-objects/kubernetes-objects):
 
 ```bash
 kubectl api-resources
@@ -330,10 +347,12 @@ kubectl api-resources --api-group=extensions # Toutes les ressources dans le gro
 
 ### Formattage de l'affichage
 
-Pour afficher les détails sur votre terminal dans un format spécifique, vous pouvez utiliser une des options `-o` ou `--output` avec les commandes `kubectl` qui les prennent en charge.
+Pour afficher les détails sur votre terminal dans un format spécifique, vous
+pouvez utiliser une des options `-o` ou `--output` avec les commandes `kubectl`
+qui les prennent en charge.
 
 | Format d'affichage                  | Description                                                                                                           |
-|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | `-o=custom-columns=<spec>`          | Affiche un tableau en spécifiant une liste de colonnes séparées par des virgules                                      |
 | `-o=custom-columns-file=<filename>` | Affiche un tableau en utilisant les colonnes spécifiées dans le fichier `<filename>`                                  |
 | `-o=json`                           | Affiche un objet de l'API formaté en JSON                                                                             |
@@ -342,13 +361,17 @@ Pour afficher les détails sur votre terminal dans un format spécifique, vous p
 | `-o=name`                           | Affiche seulement le nom de la ressource et rien de plus                                                              |
 | `-o=wide`                           | Affiche dans le format texte avec toute information supplémentaire, et pour des pods, le nom du noeud est inclus      |
 | `-o=yaml`                           | Affiche un objet de l'API formaté en YAML                                                                             |
+
 ### Verbosité de l'affichage de Kubectl et débogage
 
-La verbosité de Kubectl est contrôlée par une des options `-v` ou `--v` suivie d'un entier représentant le niveau de log. Les conventions générales de logging de Kubernetes et les niveaux de log associés sont décrits [ici](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md).
+La verbosité de Kubectl est contrôlée par une des options `-v` ou `--v` suivie
+d'un entier représentant le niveau de log. Les conventions générales de logging
+de Kubernetes et les niveaux de log associés sont décrits
+[ici](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md).
 
 | Verbosité | Description                                                                                                                                                                                                                           |
-|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `--v=0`   | Le minimum qui doit *toujours* être affiché à un opérateur.                                                                                                                                                                             |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--v=0`   | Le minimum qui doit _toujours_ être affiché à un opérateur.                                                                                                                                                                           |
 | `--v=1`   | Un niveau de log par défaut raisonnable si vous n'avez pas besoin de verbosité.                                                                                                                                                       |
 | `--v=2`   | Informations utiles sur l'état stable du service et messages de logs importants qui peuvent être corrélés à des changements significatifs dans le système. C'est le niveau de log par défaut recommandé pour la plupart des systèmes. |
 | `--v=3`   | Informations étendues sur les changements.                                                                                                                                                                                            |
@@ -357,16 +380,20 @@ La verbosité de Kubectl est contrôlée par une des options `-v` ou `--v` suivi
 | `--v=7`   | Affiche les entêtes des requêtes HTTP.                                                                                                                                                                                                |
 | `--v=8`   | Affiche les contenus des requêtes HTTP.                                                                                                                                                                                               |
 | `--v=9`   | Affiche les contenus des requêtes HTTP sans les tronquer.                                                                                                                                                                             |
+
 {{% /capture %}}
 
 {{% capture whatsnext %}}
 
-* En savoir plus sur l'[Aperçu de kubectl](/docs/reference/kubectl/overview/).
+- En savoir plus sur l'[Aperçu de kubectl](/docs/reference/kubectl/overview/).
 
-* Voir les options [kubectl](/docs/reference/kubectl/kubectl/).
+- Voir les options [kubectl](/docs/reference/kubectl/kubectl/).
 
-* Voir aussi les [Conventions d'usage de kubectl](/docs/reference/kubectl/conventions/) pour comprendre comment l'utiliser dans des scripts réutilisables.
+- Voir aussi les
+  [Conventions d'usage de kubectl](/docs/reference/kubectl/conventions/) pour
+  comprendre comment l'utiliser dans des scripts réutilisables.
 
-* Voir plus d'[aides-mémoire kubectl](https://github.com/dennyzhang/cheatsheet-kubernetes-A4).
+- Voir plus
+  d'[aides-mémoire kubectl](https://github.com/dennyzhang/cheatsheet-kubernetes-A4).
 
 {{% /capture %}}

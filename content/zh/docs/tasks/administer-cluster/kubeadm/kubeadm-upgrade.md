@@ -1,16 +1,19 @@
 ---
 reviewers:
-- sig-cluster-lifecycle
+  - sig-cluster-lifecycle
 title: 升级 kubeadm 集群
 content_template: templates/task
 ---
-<!--
----
+
+## <!--
+
 reviewers:
-- sig-cluster-lifecycle
-title: Upgrading kubeadm clusters
-content_template: templates/task
+
+- sig-cluster-lifecycle title: Upgrading kubeadm clusters content_template:
+  templates/task
+
 ---
+
 -->
 
 {{% capture overview %}}
@@ -19,12 +22,15 @@ content_template: templates/task
 This page explains how to upgrade a Kubernetes cluster created with kubeadm from version
 1.16.x to version 1.17.x, and from version 1.17.x to 1.17.y (where `y > x`).
 -->
-本页介绍了如何将 `kubeadm` 创建的 Kubernetes 集群从 1.16.x 版本升级到 1.17.x 版本，以及从版本 1.17.x 升级到 1.17.y ，其中 `y > x`。
+
+本页介绍了如何将 `kubeadm` 创建的 Kubernetes 集群从 1.16.x 版本升级到 1.17.x 版
+本，以及从版本 1.17.x 升级到 1.17.y ，其中 `y > x`。
 
 <!--
 To see information about upgrading clusters created using older versions of kubeadm,
 please refer to following pages instead:
 -->
+
 要查看 kubeadm 创建的有关旧版本集群升级的信息，请参考以下页面：
 
 <!--
@@ -32,6 +38,7 @@ please refer to following pages instead:
 - [Upgrading kubeadm cluster from 1.14 to 1.15](https://v1-15.docs.kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade-1-15/)
 - [Upgrading kubeadm cluster from 1.13 to 1.14](https://v1-15.docs.kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade-1-14/)
 -->
+
 - [将 kubeadm 集群从 1.15 升级到 1.16](https://v1-16.docs.kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/)
 - [将 kubeadm 集群从 1.14 升级到 1.15](https://v1-15.docs.kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade-1-15/)
 - [将 kubeadm 集群从 1.13 升级到 1.14](https://v1-15.docs.kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade-1-14/)
@@ -43,6 +50,7 @@ The upgrade workflow at high level is the following:
 1. Upgrade additional control plane nodes.
 1. Upgrade worker nodes.
 -->
+
 高版本升级工作流如下：
 
 1. 升级主控制平面节点。
@@ -61,16 +69,18 @@ The upgrade workflow at high level is the following:
 - Make sure to back up any important components, such as app-level state stored in a database.
   `kubeadm upgrade` does not touch your workloads, only components internal to Kubernetes, but backups are always a best practice.
 -->
+
 - 您需要有一个由 `kubeadm` 创建并运行着 1.16.0 或更高版本的 Kubernetes 集群。
 - [禁用 Swap](https://serverfault.com/questions/684771/best-way-to-disable-swap-in-linux)。
 - 集群应使用静态的控制平面和 etcd pod 或者 外部 etcd。
 - 务必仔细认真阅读[发行说明]({{< latest-release-notes >}})。
-- 务必备份所有重要组件，例如存储在数据库中应用层面的状态。
-  `kubeadm upgrade` 不会影响您的工作负载，只会涉及 Kubernetes 内部的组件，但备份终究是好的。
+- 务必备份所有重要组件，例如存储在数据库中应用层面的状态。 `kubeadm upgrade` 不
+  会影响您的工作负载，只会涉及 Kubernetes 内部的组件，但备份终究是好的。
 
 <!--
 ### Additional information
 -->
+
 ### 附加信息
 
 <!--
@@ -79,9 +89,11 @@ The upgrade workflow at high level is the following:
   or between PATCH versions of the same MINOR. That is, you cannot skip MINOR versions when you upgrade.
   For example, you can upgrade from 1.y to 1.y+1, but not from 1.y to 1.y+2.
 -->
+
 - 升级后，因为容器 spec 哈希值已更改，所以所有容器都会重新启动。
-- 您只能从一个次版本升级到下一个次版本，或者同样次版本的补丁版。也就是说，升级时无法跳过版本。
-  例如，您只能从 1.y 升级到 1.y+1，而不能从 from 1.y 升级到 1.y+2。
+- 您只能从一个次版本升级到下一个次版本，或者同样次版本的补丁版。也就是说，升级时
+  无法跳过版本。例如，您只能从 1.y 升级到 1.y+1，而不能从 from 1.y 升级到
+  1.y+2。
 
 {{% /capture %}}
 
@@ -90,6 +102,7 @@ The upgrade workflow at high level is the following:
 <!--
 ## Determine which version to upgrade to
 -->
+
 ## 确定要升级到哪个版本
 
 <!--
@@ -109,25 +122,30 @@ The upgrade workflow at high level is the following:
     {{% /tab %}}
     {{< /tabs >}}
 -->
+
 1.  找到最新的稳定版 1.17:
 
     {{< tabs name="k8s_install_versions" >}}
-    {{% tab name="Ubuntu, Debian or HypriotOS" %}}
-    apt update
-    apt-cache policy kubeadm
+    {{% tab name="Ubuntu, Debian or HypriotOS" %}} apt update apt-cache policy
+    kubeadm
+
     # 在列表中查找最新的 1.17 版本
+
     # 它看起来应该是 1.17.x-00 ，其中 x 是最新的补丁
-    {{% /tab %}}
-    {{% tab name="CentOS, RHEL or Fedora" %}}
-    yum list --showduplicates kubeadm --disableexcludes=kubernetes
+
+    {{% /tab %}} {{% tab name="CentOS, RHEL or Fedora" %}} yum list
+    --showduplicates kubeadm --disableexcludes=kubernetes
+
     # 在列表中查找最新的 1.17 版本
+
     # 它看起来应该是 1.17.x-0 ，其中 x 是最新的补丁
-    {{% /tab %}}
-    {{< /tabs >}}
+
+    {{% /tab %}} {{< /tabs >}}
 
 <!--
 ## Upgrade the first control plane node
 -->
+
 ## 升级第一个控制平面节点
 
 <!--
@@ -146,19 +164,21 @@ The upgrade workflow at high level is the following:
     {{% /tab %}}
     {{< /tabs >}}
 -->
+
 1.  在第一个控制平面节点上，升级 kubeadm :
 
     {{< tabs name="k8s_install_kubeadm_first_cp" >}}
     {{% tab name="Ubuntu, Debian or HypriotOS" %}}
+
     # 用最新的修补程序版本替换 1.17.x-00 中的 x
+
     apt-mark unhold kubeadm && \
     apt-get update && apt-get install -y kubeadm=1.17.x-00 && \
-    apt-mark hold kubeadm
-    {{% /tab %}}
-    {{% tab name="CentOS, RHEL or Fedora" %}}
+    apt-mark hold kubeadm {{% /tab %}} {{% tab name="CentOS, RHEL or Fedora" %}}
+
     # 用最新的修补程序版本替换 1.17.x-0 中的 x
-    yum install -y kubeadm-1.17.x-0 --disableexcludes=kubernetes
-    {{% /tab %}}
+
+    yum install -y kubeadm-1.17.x-0 --disableexcludes=kubernetes {{% /tab %}}
     {{< /tabs >}}
 
 <!--
@@ -168,6 +188,7 @@ The upgrade workflow at high level is the following:
     kubeadm version
     ```
 -->
+
 1.  验证 kubeadm 版本：
 
     ```shell
@@ -177,6 +198,7 @@ The upgrade workflow at high level is the following:
 <!--
 1.  Drain the control plane node:
 -->
+
 1.  腾空控制平面节点：
 
     ```shell
@@ -186,6 +208,7 @@ The upgrade workflow at high level is the following:
 <!--
 1.  On the control plane node, run:
 -->
+
 1.  在主节点上，运行:
 
     ```shell
@@ -195,6 +218,7 @@ The upgrade workflow at high level is the following:
     <!--
     You should see output similar to this:
     -->
+
     您应该可以看到与下面类似的输出：
 
     ```shell
@@ -231,11 +255,13 @@ The upgrade workflow at high level is the following:
     <!--
     This command checks that your cluster can be upgraded, and fetches the versions you can upgrade to.
     -->
+
     此命令检查您的集群是否可以升级，并可以获取到升级的版本。
 
 <!--
 1.  Choose a version to upgrade to, and run the appropriate command. For example:
 -->
+
 1.  选择要升级到的版本，然后运行相应的命令。例如:
 
     ```shell
@@ -245,11 +271,13 @@ The upgrade workflow at high level is the following:
     <!--
     - Replace `x` with the patch version you picked for this ugprade.
     -->
+
     - 将 `x` 替换为您为此升级选择的修补程序版本。
 
     <!--
     You should see output similar to this:
     -->
+
     您应该可以看见与下面类似的输出：
 
     ```shell
@@ -337,6 +365,7 @@ The upgrade workflow at high level is the following:
 <!--
 1.  Manually upgrade your CNI provider plugin.
 -->
+
 1.  手动升级你的 CNI 供应商插件。
 
     <!--
@@ -344,58 +373,63 @@ The upgrade workflow at high level is the following:
     Check the [addons](/docs/concepts/cluster-administration/addons/) page to
     find your CNI provider and see whether additional upgrade steps are required.
     -->
-    您的容器网络接口（CNI）应该提供了程序自身的升级说明。
-    检查[插件](/docs/concepts/cluster-administration/addons/)页面查找您 CNI 所提供的程序，并查看是否需要其他升级步骤。
+
+    您的容器网络接口（CNI）应该提供了程序自身的升级说明。检
+    查[插件](/docs/concepts/cluster-administration/addons/)页面查找您 CNI 所提供
+    的程序，并查看是否需要其他升级步骤。
 
     <!--
     This step is not required on additional control plane nodes if the CNI provider runs as a DaemonSet.
     -->
+
     如果 CNI 提供程序作为 DaemonSet 运行，则在其他控制平面节点上不需要此步骤。
 
 <!--
 1.  Uncordon the control plane node
 -->
+
 1.  取消对控制面节点的保护
 
     ```shell
     kubectl uncordon $CP_NODE
-    ``` 
+    ```
 
 <!--
 1.  Upgrade the kubelet and kubectl on the control plane node:
 -->
+
 1.  升级控制平面节点上的 kubelet 和 kubectl ：
     {{< tabs name="k8s_install_kubelet" >}}
     {{% tab name="Ubuntu, Debian or HypriotOS" %}}
     # 用最新的修补程序版本替换 1.17.x-00 中的 x
     apt-mark unhold kubelet kubectl && \
     apt-get update && apt-get install -y kubelet=1.17.x-00 kubectl=1.17.x-00 && \
-    apt-mark hold kubelet kubectl
-    {{% /tab %}}
+    apt-mark hold kubelet kubectl {{% /tab %}}
     {{% tab name="CentOS, RHEL or Fedora" %}}
     # 用最新的修补程序版本替换 1.17.x-00 中的 x
-    yum install -y kubelet-1.17.x-0 kubectl-1.17.x-0 --disableexcludes=kubernetes
-    {{% /tab %}}
-    {{< /tabs >}}
-
+    yum install -y kubelet-1.17.x-0 kubectl-1.17.x-0
+    --disableexcludes=kubernetes {{% /tab %}} {{< /tabs >}}
 
 <!--
 1. Restart the kubelet
 -->
+
 1. 重启 kubelet
 
-    ```shell
-    sudo systemctl restart kubelet
-    ```
+   ```shell
+   sudo systemctl restart kubelet
+   ```
 
 <!--
 ## Upgrade additional control plane nodes
 -->
+
 ## 升级其他控制平面节点
 
 <!--
 1.  Same as the first control plane node but use:
 -->
+
 1.  与第一个控制平面节点相同，但使用：
 
 ```
@@ -411,22 +445,27 @@ sudo kubeadm upgrade apply
 <!--
 Also `sudo kubeadm upgrade plan` is not needed.
 -->
+
 也不需要 `sudo kubeadm upgrade plan` 。
 
 <!--
 ## Upgrade worker nodes
 -->
+
 ## 升级工作节点
 
 <!--
 The upgrade procedure on worker nodes should be executed one node at a time or few nodes at a time,
 without compromising the minimum required capacity for running your workloads.
 -->
-工作节点上的升级过程应该一次执行一个节点，或者一次执行几个节点，以不影响运行工作负载所需的最小容量。
+
+工作节点上的升级过程应该一次执行一个节点，或者一次执行几个节点，以不影响运行工作
+负载所需的最小容量。
 
 <!--
 ### Upgrade kubeadm
 -->
+
 ### 升级 kubeadm
 
 <!--
@@ -445,24 +484,27 @@ without compromising the minimum required capacity for running your workloads.
     {{% /tab %}}
     {{< /tabs >}}
 -->
+
 1.  在所有工作节点升级 kubeadm :
 
     {{< tabs name="k8s_install_kubeadm_worker_nodes" >}}
     {{% tab name="Ubuntu, Debian or HypriotOS" %}}
+
     # 用最新的修补程序版本替换 1.17.x-00 中的 x
+
     apt-mark unhold kubeadm && \
     apt-get update && apt-get install -y kubeadm=1.17.x-00 && \
-    apt-mark hold kubeadm
-    {{% /tab %}}
-    {{% tab name="CentOS, RHEL or Fedora" %}}
+    apt-mark hold kubeadm {{% /tab %}} {{% tab name="CentOS, RHEL or Fedora" %}}
+
     # 用最新的修补程序版本替换 1.17.x-00 中的 x
-    yum install -y kubeadm-1.17.x-0 --disableexcludes=kubernetes
-    {{% /tab %}}
+
+    yum install -y kubeadm-1.17.x-0 --disableexcludes=kubernetes {{% /tab %}}
     {{< /tabs >}}
 
 <!--
 ### Cordon the node
 -->
+
 ### 保护节点
 
 <!--
@@ -480,6 +522,7 @@ without compromising the minimum required capacity for running your workloads.
     node/ip-172-31-85-18 drained
     ```
 -->
+
 1.  通过将节点标记为不可调度并逐出工作负载，为维护做好准备。运行：
 
     ```shell
@@ -489,6 +532,7 @@ without compromising the minimum required capacity for running your workloads.
     <!--
     You should see output similar to this:
     -->
+
     您应该可以看见与下面类似的输出：
 
     ```shell
@@ -500,6 +544,7 @@ without compromising the minimum required capacity for running your workloads.
 <!--
 ### Upgrade the kubelet config
 -->
+
 ### 升级 kubelet 配置
 
 <!--
@@ -511,6 +556,7 @@ without compromising the minimum required capacity for running your workloads.
 
     Replace `x` with the patch version you picked for this ugprade.
 -->
+
 1.  升级 kubelet 配置:
 
     ```shell
@@ -520,12 +566,13 @@ without compromising the minimum required capacity for running your workloads.
     <!--
     Replace `x` with the patch version you picked for this ugprade.
     -->
-    用最新的修补程序版本替换 1.14.x-00 中的 x
 
+    用最新的修补程序版本替换 1.14.x-00 中的 x
 
 <!--
 ### Upgrade kubelet and kubectl
 -->
+
 ### 升级 kubelet 与 kubectl
 
 <!--
@@ -544,20 +591,23 @@ without compromising the minimum required capacity for running your workloads.
     {{% /tab %}}
     {{< /tabs >}}
 -->
-1.  通过运行适用于您的 Linux 发行版包管理器升级 Kubernetes 软件包版本： 
+
+1.  通过运行适用于您的 Linux 发行版包管理器升级 Kubernetes 软件包版本：
 
     {{< tabs name="k8s_kubelet_and_kubectl" >}}
     {{% tab name="Ubuntu, Debian or HypriotOS" %}}
+
     # 用最新的修补程序版本替换 1.17.x-00 中的 xs
+
     apt-mark unhold kubelet kubectl && \
     apt-get update && apt-get install -y kubelet=1.17.x-00 kubectl=1.17.x-00 && \
-    apt-mark hold kubelet kubectl
-    {{% /tab %}}
+    apt-mark hold kubelet kubectl {{% /tab %}}
     {{% tab name="CentOS, RHEL or Fedora" %}}
+
     # 用最新的修补程序版本替换 1.17.x-00 中的 x
-    yum install -y kubelet-1.17.x-0 kubectl-1.17.x-0 --disableexcludes=kubernetes
-    {{% /tab %}}
-    {{< /tabs >}}
+
+    yum install -y kubelet-1.17.x-0 kubectl-1.17.x-0
+    --disableexcludes=kubernetes {{% /tab %}} {{< /tabs >}}
 
 <!--
 1. Restart the kubelet
@@ -566,6 +616,7 @@ without compromising the minimum required capacity for running your workloads.
     sudo systemctl restart kubelet
     ```
 -->
+
 1.  重启 kubelet
 
     ```shell
@@ -575,6 +626,7 @@ without compromising the minimum required capacity for running your workloads.
 <!--
 ### Uncordon the node
 -->
+
 ### 取消对节点的保护
 
 <!--
@@ -584,6 +636,7 @@ without compromising the minimum required capacity for running your workloads.
     kubectl uncordon $NODE
     ```
 -->
+
 1.  通过将节点标记为可调度，让节点重新上线:
 
     ```shell
@@ -599,9 +652,11 @@ After the kubelet is upgraded on all nodes verify that all nodes are available a
 kubectl get nodes
 ```
 -->
+
 ## 验证集群的状态
 
-在所有节点上升级 kubelet 后，通过从 kubectl 可以访问集群的任何位置运行以下命令，验证所有节点是否再次可用：
+在所有节点上升级 kubelet 后，通过从 kubectl 可以访问集群的任何位置运行以下命令，
+验证所有节点是否再次可用：
 
 ```shell
 kubectl get nodes
@@ -610,7 +665,8 @@ kubectl get nodes
 <!--
 The `STATUS` column should show `Ready` for all your nodes, and the version number should be updated.
 -->
-`STATUS` 应显示所有节点为 `Ready` 状态，并且版本号已经被更新。 
+
+`STATUS` 应显示所有节点为 `Ready` 状态，并且版本号已经被更新。
 
 {{% /capture %}}
 
@@ -622,11 +678,13 @@ This command is idempotent and eventually makes sure that the actual state is th
 
 To recover from a bad state, you can also run `kubeadm upgrade --force` without changing the version that your cluster is running.
 -->
+
 ## 从故障状态恢复
 
-如果 `kubeadm upgrade` 失败并且没有回滚，例如由于执行期间意外关闭，您可以再次运行 `kubeadm upgrade`。
-此命令是幂等的，并最终确保实际状态是您声明的所需状态。
-要从故障状态恢复，您还可以运行 `kubeadm upgrade --force` 而不去更改集群正在运行的版本。
+如果 `kubeadm upgrade` 失败并且没有回滚，例如由于执行期间意外关闭，您可以再次运
+行 `kubeadm upgrade`。此命令是幂等的，并最终确保实际状态是您声明的所需状态。要从
+故障状态恢复，您还可以运行 `kubeadm upgrade --force` 而不去更改集群正在运行的版
+本。
 
 <!--
 ## How it works
@@ -643,6 +701,7 @@ To recover from a bad state, you can also run `kubeadm upgrade --force` without 
 - Applies the new `kube-dns` and `kube-proxy` manifests and makes sure that all necessary RBAC rules are created.
 - Creates new certificate and key files of the API server and backs up old files if they're about to expire in 180 days.
 -->
+
 ## 它是怎么工作的
 
 `kubeadm upgrade apply` 做了以下工作：
@@ -663,7 +722,10 @@ To recover from a bad state, you can also run `kubeadm upgrade --force` without 
 - Optionally backups the kube-apiserver certificate.
 - Upgrades the static Pod manifests for the control plane components.
 -->
-`kubeadm upgrade node experimental-control-plane` 在其他控制平面节点上执行以下操作：
+
+`kubeadm upgrade node experimental-control-plane` 在其他控制平面节点上执行以下操
+作：
+
 - 从集群中获取 kubeadm `ClusterConfiguration`。
 - 可选地备份 kube-apiserver 证书。
 - 升级控制平面组件的静态 Pod 清单。

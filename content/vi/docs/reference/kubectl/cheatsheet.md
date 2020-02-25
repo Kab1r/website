@@ -1,7 +1,7 @@
 ---
 title: kubectl Cheat Sheet
 reviewers:
-- ngtuna
+  - ngtuna
 content_template: templates/concept
 card:
   name: reference
@@ -10,7 +10,8 @@ card:
 
 {{% capture overview %}}
 
-Xem thêm: [Kubectl Overview](/docs/reference/kubectl/overview/) và [JsonPath Guide](/docs/reference/kubectl/jsonpath).
+Xem thêm: [Kubectl Overview](/docs/reference/kubectl/overview/) và
+[JsonPath Guide](/docs/reference/kubectl/jsonpath).
 
 Trang này là trang tổng quan của lệnh `kubectl`.
 
@@ -25,7 +26,7 @@ Trang này là trang tổng quan của lệnh `kubectl`.
 ### BASH
 
 ```bash
-source <(kubectl completion bash) # thiết lập autocomplete trong bash vào shell hiện tại, gói bash-completion nên được cài đặt trước tiên 
+source <(kubectl completion bash) # thiết lập autocomplete trong bash vào shell hiện tại, gói bash-completion nên được cài đặt trước tiên
 echo "source <(kubectl completion bash)" >> ~/.bashrc # thêm vĩnh viễn autocomplete vào trong bash shell
 ```
 
@@ -45,24 +46,25 @@ echo "if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi" >> ~
 
 ## Ngữ cảnh và cấu hình kubectl
 
-Thiết lập cụm Kubernetes nào mà `kubectl` sẽ giao tiếp với và sửa đổi thông tin cấu hình.
-Xem tài liệu [Xác thực giữa các cụm với kubeconfig](/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)
+Thiết lập cụm Kubernetes nào mà `kubectl` sẽ giao tiếp với và sửa đổi thông tin
+cấu hình. Xem tài liệu
+[Xác thực giữa các cụm với kubeconfig](/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)
 để biết thông tin chi tiết của tệp cấu hình.
 
 ```bash
 kubectl config view # Hiển thị các thiết lập kubeconfig đã được merged
 
 # sử dụng nhiều tệp kubeconfig cùng một lúc và xem cấu hình hợp nhất
-KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 
+KUBECONFIG=~/.kube/config:~/.kube/kubconfig2
 
 kubectl config view
 
 # lấy mật khẩu cho người dùng e2e
 kubectl config view -o jsonpath='{.users[?(@.name == "e2e")].user.password}'
 
-kubectl config view -o jsonpath='{.users[].name}'    # hiển thị người dùng đầu tiên  
-kubectl config view -o jsonpath='{.users[*].name}'   # lấy danh sách người dùng  
-kubectl config get-contexts                          # hiển thị danh sách các ngữ cảnh 
+kubectl config view -o jsonpath='{.users[].name}'    # hiển thị người dùng đầu tiên
+kubectl config view -o jsonpath='{.users[*].name}'   # lấy danh sách người dùng
+kubectl config get-contexts                          # hiển thị danh sách các ngữ cảnh
 kubectl config current-context                       # hiển thị ngữ cảnh hiện tại
 kubectl config use-context my-cluster-name           # thiết lập ngữ cảnh mặc định cho my-cluster-name
 
@@ -75,17 +77,21 @@ kubectl config set-context --current --namespace=ggckad-s2
 # thiết lập ngữ cảnh sử dụng tên người dùng và namespace cụ thể
 kubectl config set-context gce --user=cluster-admin --namespace=foo \
   && kubectl config use-context gce
- 
+
 kubectl config unset users.foo                       # xóa người dùng foo
 ```
 
 ## Apply
-`apply` quản lý các ứng dụng thông qua các tệp định nghĩa tài nguyên Kubernetes. Nó tạo và cập nhật các tài nguyên trong một cụm thông qua việc chạy `kubectl apply`. Đây là cách được đề xuất để quản lý các ứng dụng Kubernetes trong thực tế. Xem thêm [Kubectl Book](https://kubectl.docs.kubernetes.io).
+
+`apply` quản lý các ứng dụng thông qua các tệp định nghĩa tài nguyên Kubernetes.
+Nó tạo và cập nhật các tài nguyên trong một cụm thông qua việc chạy
+`kubectl apply`. Đây là cách được đề xuất để quản lý các ứng dụng Kubernetes
+trong thực tế. Xem thêm [Kubectl Book](https://kubectl.docs.kubernetes.io).
 
 ## Tạo một đối tượng
 
-Kubernetes manifests có thể được định nghĩa trong tệp json hoặc yaml. Phần mở rộng `.yaml`,
-`.yml`, và `.json` có thể được dùng.
+Kubernetes manifests có thể được định nghĩa trong tệp json hoặc yaml. Phần mở
+rộng `.yaml`, `.yml`, và `.json` có thể được dùng.
 
 ```bash
 kubectl apply -f ./my-manifest.yaml            # tạo tài nguyên
@@ -167,7 +173,7 @@ kubectl get pods --selector=app=cassandra -o \
   jsonpath='{.items[*].metadata.labels.version}'
 
 # Liệt kê tất cả các worker nodes (sử dụng một selector để loại trừ kết quả có một nhãn
-# có tên 'node-role.kubernetes.io/master'  
+# có tên 'node-role.kubernetes.io/master'
 kubectl get node --selector='!node-role.kubernetes.io/master'
 
 # Liệt kê tất cả các pods đang chạy trong namespace
@@ -197,7 +203,9 @@ kubectl get events --sort-by=.metadata.creationTimestamp
 
 ## Cập nhật các tài nguyên
 
-Theo như phiên bản 1.11, `rolling-update` đã không còn được dùng nữa (xem [CHANGELOG-1.11.md](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.11.md)), sử dụng `rollout` thay thế.
+Theo như phiên bản 1.11, `rolling-update` đã không còn được dùng nữa (xem
+[CHANGELOG-1.11.md](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.11.md)),
+sử dụng `rollout` thay thế.
 
 ```bash
 kubectl set image deployment/frontend www=image:v2               # Cập nhận container "www" của deployment "frontend", cập nhật image
@@ -209,7 +217,7 @@ kubectl rollout status -w deployment/frontend                    # Xem trạng t
 
 # không còn được sử dụng kể từ phiên bản 1.11
 kubectl rolling-update frontend-v1 -f frontend-v2.json           # (không dùng nữa) Cập nhật pods của frontend-v1
-kubectl rolling-update frontend-v1 frontend-v2 --image=image:v2  # (không dùng nữa) Đổi tên tài nguyên và cập nhật image 
+kubectl rolling-update frontend-v1 frontend-v2 --image=image:v2  # (không dùng nữa) Đổi tên tài nguyên và cập nhật image
 kubectl rolling-update frontend --image=image:v2                 # (không dùng nữa) Cập nhật image của pod của frontend
 kubectl rolling-update frontend-v1 frontend-v2 --rollback        # (không dùng nữa) Hủy bỏ tiến trình cập nhật hiện tại
 
@@ -221,7 +229,7 @@ kubectl replace --force -f ./pod.json
 # Tạo một services cho nginx, phục vụ trên công 80 và kết nối đến các container trên cổng 8000
 kubectl expose rc nginx --port=80 --target-port=8000
 
-# Cập nhật phiên bản image của một container đơn lẻ lên v4 
+# Cập nhật phiên bản image của một container đơn lẻ lên v4
 kubectl get pod mypod -o yaml | sed 's/\(image: myimage\):.*$/\1:v4/' | kubectl replace -f -
 
 kubectl label pods my-pod new-label=awesome                      # Thêm một nhãn
@@ -249,6 +257,7 @@ kubectl patch sa default --type='json' -p='[{"op": "add", "path": "/secrets/1", 
 ```
 
 ## Chỉnh sửa các tài nguyên
+
 Chỉnh sửa bất kì API tài nguyên nào trong trình soạn thảo ưa thích của bạn.
 
 ```bash
@@ -289,7 +298,7 @@ kubectl logs -f my-pod                              # lấy logs của pod my-po
 kubectl logs -f my-pod -c my-container              # lấy logs của container my-container trong pod my-pod (stdout, trường hợp nhiều container)
 kubectl logs -f -l name=myLabel --all-containers    # lấy logs của tất cả các container của pod có nhãn name=myLabel (stdout)
 kubectl run -i --tty busybox --image=busybox -- sh  # Chạy pod trong một shell tương tác
-kubectl run nginx --image=nginx --restart=Never -n 
+kubectl run nginx --image=nginx --restart=Never -n
 mynamespace                                         # Chạy pod nginx trong một namespace cụ thể
 kubectl run nginx --image=nginx --restart=Never     # Chạy pod nginx và ghi spec của nó vào file có tên pod.yaml
 --dry-run -o yaml > pod.yaml
@@ -317,7 +326,10 @@ kubectl taint nodes foo dedicated=special-user:NoSchedule
 
 ### Các loại tài nguyên
 
-Liệt kê tất cả các loại tài nguyên được hỗ trợ cùng với tên viết tắt của chúng, [API group](/docs/concepts/overview/kubernetes-api/#api-groups), cho dù chúng là [namespaced](/docs/concepts/overview/working-with-objects/namespaces), và [Kind](/docs/concepts/overview/working-with-objects/kubernetes-objects):
+Liệt kê tất cả các loại tài nguyên được hỗ trợ cùng với tên viết tắt của chúng,
+[API group](/docs/concepts/overview/kubernetes-api/#api-groups), cho dù chúng là
+[namespaced](/docs/concepts/overview/working-with-objects/namespaces), và
+[Kind](/docs/concepts/overview/working-with-objects/kubernetes-objects):
 
 ```bash
 kubectl api-resources
@@ -336,45 +348,51 @@ kubectl api-resources --api-group=extensions # Tất cả tài nguyên trong nh�
 
 ### Định dạng đầu ra
 
-Để xuất thông tin chi tiết ra cửa sổ terminal của bạn theo một định dạng cụ thể, bạn có thể thêm các cờ `-o` hoặc `--output` vào lệnh `kubectl` được hỗ trợ.
+Để xuất thông tin chi tiết ra cửa sổ terminal của bạn theo một định dạng cụ thể,
+bạn có thể thêm các cờ `-o` hoặc `--output` vào lệnh `kubectl` được hỗ trợ.
 
-Định dạng đầu ra | Mô tả
---------------| -----------
-`-o=custom-columns=<spec>` | In một bảng bằng danh sách, các cột tùy chỉnh được phân tách bằng dấu phẩy
-`-o=custom-columns-file=<filename>` | In một bảng bằng cách sử dụng mẫu cột tùy chỉnh trong tệp `<filename>`
-`-o=json`     | Xuất ra một đối tượng API theo định dạng JSON
-`-o=jsonpath=<template>` | In ra các trường được xác định trong [jsonpath](/docs/reference/kubectl/jsonpath) 
-`-o=jsonpath-file=<filename>` |In ra các trường được xác định bởi [jsonpath](/docs/reference/kubectl/jsonpath) trong tệp `<filename>`
-`-o=name`     | Chỉ in tên tài nguyên và không có gì khác
-`-o=wide`     | Xuất ra ở định dạng văn bản thuần với bất kì thông tin bổ sung nào và đối với pods, cần phải thêm tên node
-`-o=yaml`     | Xuất ra đối tượng API theo định dạng YAML
+| Định dạng đầu ra                    | Mô tả                                                                                                      |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `-o=custom-columns=<spec>`          | In một bảng bằng danh sách, các cột tùy chỉnh được phân tách bằng dấu phẩy                                 |
+| `-o=custom-columns-file=<filename>` | In một bảng bằng cách sử dụng mẫu cột tùy chỉnh trong tệp `<filename>`                                     |
+| `-o=json`                           | Xuất ra một đối tượng API theo định dạng JSON                                                              |
+| `-o=jsonpath=<template>`            | In ra các trường được xác định trong [jsonpath](/docs/reference/kubectl/jsonpath)                          |
+| `-o=jsonpath-file=<filename>`       | In ra các trường được xác định bởi [jsonpath](/docs/reference/kubectl/jsonpath) trong tệp `<filename>`     |
+| `-o=name`                           | Chỉ in tên tài nguyên và không có gì khác                                                                  |
+| `-o=wide`                           | Xuất ra ở định dạng văn bản thuần với bất kì thông tin bổ sung nào và đối với pods, cần phải thêm tên node |
+| `-o=yaml`                           | Xuất ra đối tượng API theo định dạng YAML                                                                  |
 
 ### Kubectl output verbosity and debugging
 
-Kubectl verbosity được kiểm soát bởi cờ `-v` or `--v` theo sau là một số nguyên biểu thị mức log. Các quy ước ghi logs của Kubernetes và các mức logs liên quan được mô tả ở [đây](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md).
+Kubectl verbosity được kiểm soát bởi cờ `-v` or `--v` theo sau là một số nguyên
+biểu thị mức log. Các quy ước ghi logs của Kubernetes và các mức logs liên quan
+được mô tả ở
+[đây](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md).
 
-Verbosity | Description
---------------| -----------
-`--v=0` | Hữu ích cho việc hiển thị cho các người vận hành cụm.
-`--v=1` | Một mức log mặc định hợp lý nếu bạn không muốn lấy quá nhiều logs.
-`--v=2` | Thông tin trạng thái về services và các thông điệp logs quan trọng có thể tương quan với những thay đổi quan trọng trong hệ thống. Đây là mức ghi logs mặc định được khuyến nghị cho hầu hết các hệ thống.
-`--v=3` | Thông tin mở rộng về những thay đổi.
-`--v=4` | Debug level verbosity.
-`--v=6` | Hiển thị tài nguyên được yêu cầu.
-`--v=7` | Hiển thị HTTP request headers.
-`--v=8` | Hiển thị nội dung HTTP request.
-`--v=9` | Hiển thị nội dung HTTP request mà không cắt ngắn nội dung.
+| Verbosity | Description                                                                                                                                                                                                |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--v=0`   | Hữu ích cho việc hiển thị cho các người vận hành cụm.                                                                                                                                                      |
+| `--v=1`   | Một mức log mặc định hợp lý nếu bạn không muốn lấy quá nhiều logs.                                                                                                                                         |
+| `--v=2`   | Thông tin trạng thái về services và các thông điệp logs quan trọng có thể tương quan với những thay đổi quan trọng trong hệ thống. Đây là mức ghi logs mặc định được khuyến nghị cho hầu hết các hệ thống. |
+| `--v=3`   | Thông tin mở rộng về những thay đổi.                                                                                                                                                                       |
+| `--v=4`   | Debug level verbosity.                                                                                                                                                                                     |
+| `--v=6`   | Hiển thị tài nguyên được yêu cầu.                                                                                                                                                                          |
+| `--v=7`   | Hiển thị HTTP request headers.                                                                                                                                                                             |
+| `--v=8`   | Hiển thị nội dung HTTP request.                                                                                                                                                                            |
+| `--v=9`   | Hiển thị nội dung HTTP request mà không cắt ngắn nội dung.                                                                                                                                                 |
 
 {{% /capture %}}
 
 {{% capture whatsnext %}}
 
-* Đọc thêm về [Tổng quan kubectl](/docs/reference/kubectl/overview/).
+- Đọc thêm về [Tổng quan kubectl](/docs/reference/kubectl/overview/).
 
-* Xem các tùy chọn [kubectl](/docs/reference/kubectl/kubectl/).
+- Xem các tùy chọn [kubectl](/docs/reference/kubectl/kubectl/).
 
-* [kubectl Usage Conventions](/docs/reference/kubectl/conventions/) để hiểu làm thế nào để sử dụng `kubectl` trong các kịch bản có thể tái sử dụng.
+- [kubectl Usage Conventions](/docs/reference/kubectl/conventions/) để hiểu làm
+  thế nào để sử dụng `kubectl` trong các kịch bản có thể tái sử dụng.
 
-* Xem thêm bản cộng đồng [kubectl cheatsheets](https://github.com/dennyzhang/cheatsheet-kubernetes-A4).
+- Xem thêm bản cộng đồng
+  [kubectl cheatsheets](https://github.com/dennyzhang/cheatsheet-kubernetes-A4).
 
 {{% /capture %}}
