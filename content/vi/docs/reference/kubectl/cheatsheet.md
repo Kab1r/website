@@ -10,7 +10,7 @@ card:
 
 {{% capture overview %}}
 
-Xem thêm: [Kubectl Overview](/docs/reference/kubectl/overview/) và
+Xem thêm: [Kubectl Overview](/docs/reference/kubectl/overview/) v�
 [JsonPath Guide](/docs/reference/kubectl/jsonpath).
 
 Trang này là trang tổng quan của lệnh `kubectl`.
@@ -327,8 +327,8 @@ kubectl taint nodes foo dedicated=special-user:NoSchedule
 ### Các loại tài nguyên
 
 Liệt kê tất cả các loại tài nguyên được hỗ trợ cùng với tên viết tắt của chúng,
-[API group](/docs/concepts/overview/kubernetes-api/#api-groups), cho dù chúng là
-[namespaced](/docs/concepts/overview/working-with-objects/namespaces), và
+[API group](/docs/concepts/overview/kubernetes-api/#api-groups), cho dù chúng l�
+[namespaced](/docs/concepts/overview/working-with-objects/namespaces), v�
 [Kind](/docs/concepts/overview/working-with-objects/kubernetes-objects):
 
 ```bash
