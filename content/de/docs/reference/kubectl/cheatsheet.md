@@ -8,7 +8,8 @@ card:
 
 {{% capture overview %}}
 
-Siehe auch: [Kubectl Überblick](/docs/reference/kubectl/overview/) und [JsonPath Dokumentation](/docs/reference/kubectl/jsonpath).
+Siehe auch: [Kubectl Überblick](/docs/reference/kubectl/overview/) und
+[JsonPath Dokumentation](/docs/reference/kubectl/jsonpath).
 
 Diese Seite ist eine Übersicht über den Befehl `kubectl`.
 
@@ -27,7 +28,8 @@ source <(kubectl completion bash) # Wenn Sie autocomplete in bash in der aktuell
 echo "source <(kubectl completion bash)" >> ~/.bashrc # Fügen Sie der Bash-Shell dauerhaft Autocomplete hinzu.
 ```
 
-Sie können auch ein Abkürzungsalias für `kubectl` verwenden, welches auch mit Vervollständigung funktioniert:
+Sie können auch ein Abkürzungsalias für `kubectl` verwenden, welches auch mit
+Vervollständigung funktioniert:
 
 ```bash
 alias k=kubectl
@@ -43,7 +45,10 @@ echo "if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi" >> ~
 
 ## Kubectl Kontext und Konfiguration
 
-Legen Sie fest, welcher Kubernetes-Cluster mit `kubectl` kommuniziert und dessen Konfiguration ändert. Lesen Sie die Dokumentation [Authentifizierung mit kubeconfig über mehrere Cluster hinweg](/docs/tasks/access-application-cluster/configure-access-multiple-clusters/) für ausführliche Informationen zur Konfigurationsdatei.
+Legen Sie fest, welcher Kubernetes-Cluster mit `kubectl` kommuniziert und dessen
+Konfiguration ändert. Lesen Sie die Dokumentation
+[Authentifizierung mit kubeconfig über mehrere Cluster hinweg](/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)
+für ausführliche Informationen zur Konfigurationsdatei.
 
 ```bash
 kubectl config view # Zusammengeführte kubeconfig-Einstellungen anzeigen.
@@ -69,12 +74,18 @@ kubectl config unset users.foo                       # delete user foo
 ```
 
 ## Apply
-`apply` verwaltet Anwendungen durch Dateien, die Kubernetes-Ressourcen definieren. Es erstellt und aktualisiert Ressourcen in einem Cluster durch Ausführen von `kubectl apply`. Dies ist die empfohlene Methode zur Verwaltung von Kubernetes-Anwendungen in der Produktion. Lesen Sie die ausführliche [Kubectl Dokumentation](https://kubectl.docs.kubernetes.io) für weitere Informationen.
+
+`apply` verwaltet Anwendungen durch Dateien, die Kubernetes-Ressourcen
+definieren. Es erstellt und aktualisiert Ressourcen in einem Cluster durch
+Ausführen von `kubectl apply`. Dies ist die empfohlene Methode zur Verwaltung
+von Kubernetes-Anwendungen in der Produktion. Lesen Sie die ausführliche
+[Kubectl Dokumentation](https://kubectl.docs.kubernetes.io) für weitere
+Informationen.
 
 ## Objekte erstellen
 
-Kubernetes Manifeste können in Json oder Yaml definiert werden. Die Dateierweiterungen `.yaml`,
-`.yml`, und `.json` können verwendet werden.
+Kubernetes Manifeste können in Json oder Yaml definiert werden. Die
+Dateierweiterungen `.yaml`, `.yml`, und `.json` können verwendet werden.
 
 ```bash
 kubectl apply -f ./my-manifest.yaml            # Ressource(n) erstellen
@@ -180,7 +191,9 @@ kubectl get events --sort-by=.metadata.creationTimestamp
 
 ## Ressourcen aktualisieren
 
-Ab Version 1.11 ist das `rolling-update` veraltet (Lesen Sie [CHANGELOG-1.11.md](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.11.md) für weitere Informationen), verwenden Sie stattdessen `rollout`.
+Ab Version 1.11 ist das `rolling-update` veraltet (Lesen Sie
+[CHANGELOG-1.11.md](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.11.md)
+für weitere Informationen), verwenden Sie stattdessen `rollout`.
 
 ```bash
 kubectl set image deployment/frontend www=image:v2               # Fortlaufende Aktualisierung der "www" Container der "Frontend"-Bereitstellung, Aktualisierung des Images
@@ -228,6 +241,7 @@ kubectl patch sa default --type='json' -p='[{"op": "add", "path": "/secrets/1", 
 ```
 
 ## Ressourcen bearbeiten
+
 Bearbeiten Sie eine beliebige API-Ressource in einem Editor.
 
 ```bash
@@ -287,7 +301,10 @@ kubectl taint nodes foo dedicated=special-user:NoSchedule
 
 ### Ressourcentypen
 
-Liste aller unterstützten Ressourcentypen mit ihren Kurzbezeichnungen, der [API-Gruppe](/docs/concepts/overview/kubernetes-api/#api-groups), unabhängig davon ob sie im Namespace liegen, und der [Art](/docs/concepts/overview/working-with-objects/kubernetes-objects):
+Liste aller unterstützten Ressourcentypen mit ihren Kurzbezeichnungen, der
+[API-Gruppe](/docs/concepts/overview/kubernetes-api/#api-groups), unabhängig
+davon ob sie im Namespace liegen, und der
+[Art](/docs/concepts/overview/working-with-objects/kubernetes-objects):
 
 ```bash
 kubectl api-resources
@@ -306,45 +323,55 @@ kubectl api-resources --api-group=extensions # Alle Ressourcen in der API-Gruppe
 
 ### Ausgabe formatieren
 
-Um Details in einem bestimmten Format an Ihr Terminalfenster auszugeben, können Sie entweder das `-o` oder `--output`  Flag zu einem unterstützten `kubectl` Befehl anhängens.
+Um Details in einem bestimmten Format an Ihr Terminalfenster auszugeben, können
+Sie entweder das `-o` oder `--output` Flag zu einem unterstützten `kubectl`
+Befehl anhängens.
 
-Ausgabeformat | Beschreibung
---------------| -----------
-`-o=custom-columns=<spec>` | Ausgabe einer Tabelle mit einer durch Kommas getrennten Liste benutzerdefinierter Spalten
-`-o=custom-columns-file=<dateiname>` | Drucken Sie eine Tabelle mit der benutzerdefinierten Spaltenvorlage in der `<dateiname>` Datei
-`-o=json`     | Ausgabe eines JSON-formatierten API-Objekts
-`-o=jsonpath=<template>` | Ausgabe der in einem [jsonpath](/docs/reference/kubectl/jsonpath)-Ausdruck definierten Felder
-`-o=jsonpath-file=<dateiname>` | Ausgabe der in einem [jsonpath](/docs/reference/kubectl/jsonpath)-Ausdruck definierten Felder in der `<dateiname>` Datei
-`-o=name`     | Ausgabe von nur dem Ressourcennamen und nichts anderes
-`-o=wide`     | Ausgabe im Klartextformat mit zusätzlichen Informationen. Bei Pods ist der Node-Name enthalten
-`-o=yaml`     | Gibt ein YAML-formatiertes API-Objekt aus
+| Ausgabeformat                        | Beschreibung                                                                                                             |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `-o=custom-columns=<spec>`           | Ausgabe einer Tabelle mit einer durch Kommas getrennten Liste benutzerdefinierter Spalten                                |
+| `-o=custom-columns-file=<dateiname>` | Drucken Sie eine Tabelle mit der benutzerdefinierten Spaltenvorlage in der `<dateiname>` Datei                           |
+| `-o=json`                            | Ausgabe eines JSON-formatierten API-Objekts                                                                              |
+| `-o=jsonpath=<template>`             | Ausgabe der in einem [jsonpath](/docs/reference/kubectl/jsonpath)-Ausdruck definierten Felder                            |
+| `-o=jsonpath-file=<dateiname>`       | Ausgabe der in einem [jsonpath](/docs/reference/kubectl/jsonpath)-Ausdruck definierten Felder in der `<dateiname>` Datei |
+| `-o=name`                            | Ausgabe von nur dem Ressourcennamen und nichts anderes                                                                   |
+| `-o=wide`                            | Ausgabe im Klartextformat mit zusätzlichen Informationen. Bei Pods ist der Node-Name enthalten                           |
+| `-o=yaml`                            | Gibt ein YAML-formatiertes API-Objekt aus                                                                                |
 
 ### Kubectl Ausgabe Ausführlichkeit und Debugging
 
-Die Ausführlichkeit von Kubectl wird mit den Flags `-v` oder `--v ` gesteuert, gefolgt von einer Ganzzahl, die die Protokollebene darstellt. Allgemeine Protokollierungskonventionen für Kubernetes und die zugehörigen Protokollebenen werden [hier](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md) beschrieben.
+Die Ausführlichkeit von Kubectl wird mit den Flags `-v` oder `--v` gesteuert,
+gefolgt von einer Ganzzahl, die die Protokollebene darstellt. Allgemeine
+Protokollierungskonventionen für Kubernetes und die zugehörigen Protokollebenen
+werden
+[hier](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md)
+beschrieben.
 
-Ausführlichkeit | Beschreibung
---------------| -----------
-`--v=0` | Allgemein nützlich, damit dies für den Bediener IMMER sichtbar ist.
-`--v=1` | Eine vernünftige Standardprotokollebene, wenn Sie keine Ausführlichkeit wünschen.
-`--v=2` | Nützliche Informationen zum stabilen Status des Dienstes und wichtige Protokollnachrichten, die möglicherweise zu erheblichen Änderungen im System führen. Dies ist die empfohlene Standardprotokollebene für die meisten Systeme.
-`--v=3` | Erweiterte Informationen zu Änderungen.
-`--v=4` | Debug-Level-Ausführlichkeit.
-`--v=6` | Angeforderte Ressourcen anzeigen
-`--v=7` | HTTP-Anforderungsheader anzeigen
-`--v=8` | HTTP-Anforderungsinhalt anzeigen
-`--v=9` | HTTP-Anforderungsinhalt anzeigen, ohne den Inhalt zu kürzen.
+| Ausführlichkeit | Beschreibung                                                                                                                                                                                                                       |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--v=0`         | Allgemein nützlich, damit dies für den Bediener IMMER sichtbar ist.                                                                                                                                                                |
+| `--v=1`         | Eine vernünftige Standardprotokollebene, wenn Sie keine Ausführlichkeit wünschen.                                                                                                                                                  |
+| `--v=2`         | Nützliche Informationen zum stabilen Status des Dienstes und wichtige Protokollnachrichten, die möglicherweise zu erheblichen Änderungen im System führen. Dies ist die empfohlene Standardprotokollebene für die meisten Systeme. |
+| `--v=3`         | Erweiterte Informationen zu Änderungen.                                                                                                                                                                                            |
+| `--v=4`         | Debug-Level-Ausführlichkeit.                                                                                                                                                                                                       |
+| `--v=6`         | Angeforderte Ressourcen anzeigen                                                                                                                                                                                                   |
+| `--v=7`         | HTTP-Anforderungsheader anzeigen                                                                                                                                                                                                   |
+| `--v=8`         | HTTP-Anforderungsinhalt anzeigen                                                                                                                                                                                                   |
+| `--v=9`         | HTTP-Anforderungsinhalt anzeigen, ohne den Inhalt zu kürzen.                                                                                                                                                                       |
 
 {{% /capture %}}
 
 {{% capture whatsnext %}}
 
-* Lernen Sie mehr im [Überblick auf kubectl](/docs/reference/kubectl/overview/).
+- Lernen Sie mehr im [Überblick auf kubectl](/docs/reference/kubectl/overview/).
 
-* Erkunden Sie [kubectl](/docs/reference/kubectl/kubectl/) Optionen.
+- Erkunden Sie [kubectl](/docs/reference/kubectl/kubectl/) Optionen.
 
-* Und ebenfalls die [kubectl Nutzungskonventionen](/docs/reference/kubectl/conventions/) um zu verstehen, wie man es in wiederverwendbaren Skripten verwendet.
+- Und ebenfalls die
+  [kubectl Nutzungskonventionen](/docs/reference/kubectl/conventions/) um zu
+  verstehen, wie man es in wiederverwendbaren Skripten verwendet.
 
-* Entdecken Sie mehr Community [kubectl Spickzettel](https://github.com/dennyzhang/cheatsheet-kubernetes-A4).
+- Entdecken Sie mehr Community
+  [kubectl Spickzettel](https://github.com/dennyzhang/cheatsheet-kubernetes-A4).
 
 {{% /capture %}}
