@@ -1,6 +1,6 @@
 ---
 reviewers:
-- janetkuo
+  - janetkuo
 title: Perform a Rollback on a DaemonSet
 content_template: templates/task
 weight: 20
@@ -8,20 +8,18 @@ weight: 20
 
 {{% capture overview %}}
 
-This page shows how to perform a rollback on a DaemonSet. 
+This page shows how to perform a rollback on a DaemonSet.
 
 {{% /capture %}}
-
 
 {{% capture prerequisites %}}
 
-* The DaemonSet rollout history and DaemonSet rollback features are only
+- The DaemonSet rollout history and DaemonSet rollback features are only
   supported in `kubectl` in Kubernetes version 1.7 or later.
-* Make sure you know how to [perform a rolling update on a
-  DaemonSet](/docs/tasks/manage-daemon/update-daemon-set/).
+- Make sure you know how to
+  [perform a rolling update on a DaemonSet](/docs/tasks/manage-daemon/update-daemon-set/).
 
 {{% /capture %}}
-
 
 {{% capture steps %}}
 
@@ -47,7 +45,7 @@ REVISION        CHANGE-CAUSE
 ...
 ```
 
-* Change cause is copied from DaemonSet annotation `kubernetes.io/change-cause`
+- Change cause is copied from DaemonSet annotation `kubernetes.io/change-cause`
   to its revisions upon creation. You may specify `--record=true` in `kubectl`
   to record the command executed in the change cause annotation.
 
@@ -94,8 +92,8 @@ DaemonSet. The real rollback is done asynchronously on the server side.
 
 To watch the progress of the rollback:
 
-```shell 
-kubectl rollout status ds/<daemonset-name> 
+```shell
+kubectl rollout status ds/<daemonset-name>
 ```
 
 When the rollback is complete, the output is similar to this:
@@ -105,7 +103,6 @@ daemonset "<daemonset-name>" successfully rolled out
 ```
 
 {{% /capture %}}
-
 
 {{% capture discussion %}}
 
@@ -138,22 +135,19 @@ revision. The name of a ControllerRevision object must be a valid
 `kubectl rollout undo` takes a specific `ControllerRevision` and replaces
 DaemonSet template with the template stored in the `ControllerRevision`.
 `kubectl rollout undo` is equivalent to updating DaemonSet template to a
-previous revision through other commands, such as `kubectl edit` or `kubectl
-apply`.
+previous revision through other commands, such as `kubectl edit` or
+`kubectl apply`.
 
-{{< note >}}
-DaemonSet revisions only roll forward. That is to say, after a
+{{< note >}} DaemonSet revisions only roll forward. That is to say, after a
 rollback completes, the revision number (`.revision` field) of the
-`ControllerRevision` being rolled back to will advance. For example, if you
-have revision 1 and 2 in the system, and roll back from revision 2 to revision
-1, the `ControllerRevision` with `.revision: 1` will become `.revision: 3`.
+`ControllerRevision` being rolled back to will advance. For example, if you have
+revision 1 and 2 in the system, and roll back from revision 2 to revision 1, the
+`ControllerRevision` with `.revision: 1` will become `.revision: 3`.
 {{< /note >}}
 
 ## Troubleshooting
 
-* See [troubleshooting DaemonSet rolling
-  update](/docs/tasks/manage-daemon/update-daemon-set/#troubleshooting).
+- See
+  [troubleshooting DaemonSet rolling update](/docs/tasks/manage-daemon/update-daemon-set/#troubleshooting).
 
 {{% /capture %}}
-
-
