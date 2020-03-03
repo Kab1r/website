@@ -135,7 +135,7 @@ CCM 打破了 Kubernetes 控制器管理器（KCM）的一些功能，并将其�
 Volume controller was deliberately chosen to not be a part of CCM. Due to the complexity involved and due to the existing efforts to abstract away vendor specific volume logic, it was decided that volume controller will not be moved to CCM.
 -->
 
-注意卷控制器不属于 CCM，由于其中涉及到的复杂性和对现有供应商特定卷的逻辑抽象，因
+注意卷控制器不属于 CCM，由于其中涉及到的复杂性和对现有供应商特定卷的逻辑抽象，�
 此决定了卷控制器不会被移动到 CCM 之中。
 
 {{< /note >}}
