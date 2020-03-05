@@ -1,19 +1,24 @@
 ---
 reviewers:
-- derekwaynecarr
-- janetkuo
+  - derekwaynecarr
+  - janetkuo
 title: Share a Cluster with Namespaces
 content_template: templates/task
 ---
 
-{{% capture overview %}}
-This page shows how to view, work in, and delete {{< glossary_tooltip text="namespaces" term_id="namespace" >}}. The page also shows how to use Kubernetes namespaces to subdivide your cluster.
+{{% capture overview %}} This page shows how to view, work in, and delete
+{{< glossary_tooltip text="namespaces" term_id="namespace" >}}. The page also
+shows how to use Kubernetes namespaces to subdivide your cluster.
 {{% /capture %}}
 
 {{% capture prerequisites %}}
-* Have an [existing Kubernetes cluster](/docs/setup/).
-* Have a basic understanding of Kubernetes _[Pods](/docs/concepts/workloads/pods/pod/)_, _[Services](/docs/concepts/services-networking/service/)_, and _[Deployments](/docs/concepts/workloads/controllers/deployment/)_.
-{{% /capture %}}
+
+- Have an [existing Kubernetes cluster](/docs/setup/).
+- Have a basic understanding of Kubernetes
+  _[Pods](/docs/concepts/workloads/pods/pod/)_,
+  _[Services](/docs/concepts/services-networking/service/)_, and
+  _[Deployments](/docs/concepts/workloads/controllers/deployment/)_.
+  {{% /capture %}}
 
 {{% capture steps %}}
 
@@ -24,6 +29,7 @@ This page shows how to view, work in, and delete {{< glossary_tooltip text="name
 ```shell
 kubectl get namespaces
 ```
+
 ```
 NAME          STATUS    AGE
 default       Active    11d
@@ -33,9 +39,13 @@ kube-public   Active    11d
 
 Kubernetes starts with three initial namespaces:
 
-   * `default` The default namespace for objects with no other namespace
-   * `kube-system` The namespace for objects created by the Kubernetes system
-   * `kube-public` This namespace is created automatically and is readable by all users (including those not authenticated). This namespace is mostly reserved for cluster usage, in case that some resources should be visible and readable publicly throughout the whole cluster. The public aspect of this namespace is only a convention, not a requirement.
+- `default` The default namespace for objects with no other namespace
+- `kube-system` The namespace for objects created by the Kubernetes system
+- `kube-public` This namespace is created automatically and is readable by all
+  users (including those not authenticated). This namespace is mostly reserved
+  for cluster usage, in case that some resources should be visible and readable
+  publicly throughout the whole cluster. The public aspect of this namespace is
+  only a convention, not a requirement.
 
 You can also get the summary of a specific namespace using:
 
@@ -48,6 +58,7 @@ Or you can get detailed information with:
 ```shell
 kubectl describe namespaces <name>
 ```
+
 ```
 Name:           default
 Labels:         <none>
@@ -62,51 +73,62 @@ Resource Limits
  Container          cpu         -   -   100m
 ```
 
-Note that these details show both resource quota (if present) as well as resource limit ranges.
+Note that these details show both resource quota (if present) as well as
+resource limit ranges.
 
-Resource quota tracks aggregate usage of resources in the *Namespace* and allows cluster operators
-to define *Hard* resource usage limits that a *Namespace* may consume.
+Resource quota tracks aggregate usage of resources in the _Namespace_ and allows
+cluster operators to define _Hard_ resource usage limits that a _Namespace_ may
+consume.
 
-A limit range defines min/max constraints on the amount of resources a single entity can consume in
-a *Namespace*.
+A limit range defines min/max constraints on the amount of resources a single
+entity can consume in a _Namespace_.
 
-See [Admission control: Limit Range](https://git.k8s.io/community/contributors/design-proposals/resource-management/admission_control_limit_range.md)
+See
+[Admission control: Limit Range](https://git.k8s.io/community/contributors/design-proposals/resource-management/admission_control_limit_range.md)
 
 A namespace can be in one of two phases:
 
-   * `Active` the namespace is in use
-   * `Terminating` the namespace is being deleted, and can not be used for new objects
+- `Active` the namespace is in use
+- `Terminating` the namespace is being deleted, and can not be used for new
+  objects
 
-See the [design doc](https://git.k8s.io/community/contributors/design-proposals/architecture/namespaces.md#phases) for more details.
+See the
+[design doc](https://git.k8s.io/community/contributors/design-proposals/architecture/namespaces.md#phases)
+for more details.
 
 ## Creating a new namespace
 
 1. Create a new YAML file called `my-namespace.yaml` with the contents:
 
-    ```yaml
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: <insert-namespace-name-here>
-    ```
-    Then run:
-   
-    ```
-    kubectl create -f ./my-namespace.yaml
-    ```
+   ```yaml
+   apiVersion: v1
+   kind: Namespace
+   metadata:
+     name: <insert-namespace-name-here>
+   ```
+
+   Then run:
+
+   ```
+   kubectl create -f ./my-namespace.yaml
+   ```
 
 2. Alternatively, you can create namespace using below command:
 
-    ```
-    kubectl create namespace <insert-namespace-name-here>
-    ``` 
+   ```
+   kubectl create namespace <insert-namespace-name-here>
+   ```
 
 The name of your namespace must be a valid
 [DNS label](/docs/concepts/overview/working-with-objects/names#dns-label-names).
 
-There's an optional field `finalizers`, which allows observables to purge resources whenever the namespace is deleted. Keep in mind that if you specify a nonexistent finalizer, the namespace will be created but will get stuck in the `Terminating` state if the user tries to delete it.
+There's an optional field `finalizers`, which allows observables to purge
+resources whenever the namespace is deleted. Keep in mind that if you specify a
+nonexistent finalizer, the namespace will be created but will get stuck in the
+`Terminating` state if the user tries to delete it.
 
-More information on `finalizers` can be found in the namespace [design doc](https://git.k8s.io/community/contributors/design-proposals/architecture/namespaces.md#finalizers).
+More information on `finalizers` can be found in the namespace
+[design doc](https://git.k8s.io/community/contributors/design-proposals/architecture/namespaces.md#finalizers).
 
 ## Deleting a namespace
 
@@ -116,210 +138,242 @@ Delete a namespace with
 kubectl delete namespaces <insert-some-namespace-name>
 ```
 
-{{< warning >}}
-This deletes _everything_ under the namespace!
-{{< /warning >}}
+{{< warning >}} This deletes _everything_ under the namespace! {{< /warning >}}
 
-This delete is asynchronous, so for a time you will see the namespace in the `Terminating` state.
+This delete is asynchronous, so for a time you will see the namespace in the
+`Terminating` state.
 
 ## Subdividing your cluster using Kubernetes namespaces
 
 1. Understand the default namespace
 
-    By default, a Kubernetes cluster will instantiate a default namespace when provisioning the cluster to hold the default set of Pods,
-    Services, and Deployments used by the cluster.
+   By default, a Kubernetes cluster will instantiate a default namespace when
+   provisioning the cluster to hold the default set of Pods, Services, and
+   Deployments used by the cluster.
 
-    Assuming you have a fresh cluster, you can introspect the available namespaces by doing the following:
+   Assuming you have a fresh cluster, you can introspect the available
+   namespaces by doing the following:
 
-    ```shell
-    kubectl get namespaces
-    ```
-    ```
-    NAME      STATUS    AGE
-    default   Active    13m
-    ```
+   ```shell
+   kubectl get namespaces
+   ```
+
+   ```
+   NAME      STATUS    AGE
+   default   Active    13m
+   ```
 
 2. Create new namespaces
 
-    For this exercise, we will create two additional Kubernetes namespaces to hold our content.
+   For this exercise, we will create two additional Kubernetes namespaces to
+   hold our content.
 
-    In a scenario where an organization is using a shared Kubernetes cluster for development and production use cases:
+   In a scenario where an organization is using a shared Kubernetes cluster for
+   development and production use cases:
 
-    The development team would like to maintain a space in the cluster where they can get a view on the list of Pods, Services, and Deployments
-    they use to build and run their application.  In this space, Kubernetes resources come and go, and the restrictions on who can or cannot modify resources
-    are relaxed to enable agile development.
+   The development team would like to maintain a space in the cluster where they
+   can get a view on the list of Pods, Services, and Deployments they use to
+   build and run their application. In this space, Kubernetes resources come and
+   go, and the restrictions on who can or cannot modify resources are relaxed to
+   enable agile development.
 
-    The operations team would like to maintain a space in the cluster where they can enforce strict procedures on who can or cannot manipulate the set of
-    Pods, Services, and Deployments that run the production site.
+   The operations team would like to maintain a space in the cluster where they
+   can enforce strict procedures on who can or cannot manipulate the set of
+   Pods, Services, and Deployments that run the production site.
 
-    One pattern this organization could follow is to partition the Kubernetes cluster into two namespaces: `development` and `production`.
+   One pattern this organization could follow is to partition the Kubernetes
+   cluster into two namespaces: `development` and `production`.
 
-    Let's create two new namespaces to hold our work.
+   Let's create two new namespaces to hold our work.
 
-    Create the `development` namespace using kubectl:
+   Create the `development` namespace using kubectl:
 
-    ```shell
-    kubectl create -f https://k8s.io/examples/admin/namespace-dev.json
-    ```
+   ```shell
+   kubectl create -f https://k8s.io/examples/admin/namespace-dev.json
+   ```
 
-    And then let's create the `production` namespace using kubectl:
+   And then let's create the `production` namespace using kubectl:
 
-    ```shell
-    kubectl create -f https://k8s.io/examples/admin/namespace-prod.json
-    ```
+   ```shell
+   kubectl create -f https://k8s.io/examples/admin/namespace-prod.json
+   ```
 
-    To be sure things are right, list all of the namespaces in our cluster.
+   To be sure things are right, list all of the namespaces in our cluster.
 
-    ```shell
-    kubectl get namespaces --show-labels
-    ```
-    ```
-    NAME          STATUS    AGE       LABELS
-    default       Active    32m       <none>
-    development   Active    29s       name=development
-    production    Active    23s       name=production
-    ```
+   ```shell
+   kubectl get namespaces --show-labels
+   ```
+
+   ```
+   NAME          STATUS    AGE       LABELS
+   default       Active    32m       <none>
+   development   Active    29s       name=development
+   production    Active    23s       name=production
+   ```
 
 3. Create pods in each namespace
 
-    A Kubernetes namespace provides the scope for Pods, Services, and Deployments in the cluster.
+   A Kubernetes namespace provides the scope for Pods, Services, and Deployments
+   in the cluster.
 
-    Users interacting with one namespace do not see the content in another namespace.
+   Users interacting with one namespace do not see the content in another
+   namespace.
 
-    To demonstrate this, let's spin up a simple Deployment and Pods in the `development` namespace.
+   To demonstrate this, let's spin up a simple Deployment and Pods in the
+   `development` namespace.
 
-    We first check what is the current context:
+   We first check what is the current context:
 
-    ```shell
-    kubectl config view
-    ```
-    ```yaml
-    apiVersion: v1
-    clusters:
-     cluster:
-        certificate-authority-data: REDACTED
-        server: https://130.211.122.180
-      name: lithe-cocoa-92103_kubernetes
-    contexts:
-     context:
-        cluster: lithe-cocoa-92103_kubernetes
-        user: lithe-cocoa-92103_kubernetes
-      name: lithe-cocoa-92103_kubernetes
-    current-context: lithe-cocoa-92103_kubernetes
-    kind: Config
-    preferences: {}
-    users:
+   ```shell
+   kubectl config view
+   ```
+
+   ```yaml
+   apiVersion: v1
+   clusters:
+    cluster:
+       certificate-authority-data: REDACTED
+       server: https://130.211.122.180
      name: lithe-cocoa-92103_kubernetes
-      user:
-        client-certificate-data: REDACTED
-        client-key-data: REDACTED
-        token: 65rZW78y8HbwXXtSXuUw9DbP4FLjHi4b
-     name: lithe-cocoa-92103_kubernetes-basic-auth
-      user:
-        password: h5M0FtUUIflBSdI7
-        username: admin
-    ```
+   contexts:
+    context:
+       cluster: lithe-cocoa-92103_kubernetes
+       user: lithe-cocoa-92103_kubernetes
+     name: lithe-cocoa-92103_kubernetes
+   current-context: lithe-cocoa-92103_kubernetes
+   kind: Config
+   preferences: {}
+   users:
+    name: lithe-cocoa-92103_kubernetes
+     user:
+       client-certificate-data: REDACTED
+       client-key-data: REDACTED
+       token: 65rZW78y8HbwXXtSXuUw9DbP4FLjHi4b
+    name: lithe-cocoa-92103_kubernetes-basic-auth
+     user:
+       password: h5M0FtUUIflBSdI7
+       username: admin
+   ```
 
-    ```shell
-    kubectl config current-context
-    ```
-    ```
-    lithe-cocoa-92103_kubernetes
-    ```
+   ```shell
+   kubectl config current-context
+   ```
 
-    The next step is to define a context for the kubectl client to work in each namespace. The values of "cluster" and "user" fields are copied from the current context.
+   ```
+   lithe-cocoa-92103_kubernetes
+   ```
 
-    ```shell
-    kubectl config set-context dev --namespace=development --cluster=lithe-cocoa-92103_kubernetes --user=lithe-cocoa-92103_kubernetes
-    kubectl config set-context prod --namespace=production --cluster=lithe-cocoa-92103_kubernetes --user=lithe-cocoa-92103_kubernetes
-    ```
+   The next step is to define a context for the kubectl client to work in each
+   namespace. The values of "cluster" and "user" fields are copied from the
+   current context.
 
-    The above commands provided two request contexts you can alternate against depending on what namespace you
-    wish to work against.
+   ```shell
+   kubectl config set-context dev --namespace=development --cluster=lithe-cocoa-92103_kubernetes --user=lithe-cocoa-92103_kubernetes
+   kubectl config set-context prod --namespace=production --cluster=lithe-cocoa-92103_kubernetes --user=lithe-cocoa-92103_kubernetes
+   ```
 
-    Let's switch to operate in the `development` namespace.
+   The above commands provided two request contexts you can alternate against
+   depending on what namespace you wish to work against.
 
-    ```shell
-    kubectl config use-context dev
-    ```
+   Let's switch to operate in the `development` namespace.
 
-    You can verify your current context by doing the following:
+   ```shell
+   kubectl config use-context dev
+   ```
 
-    ```shell
-    kubectl config current-context
-    dev
-    ```
+   You can verify your current context by doing the following:
 
-    At this point, all requests we make to the Kubernetes cluster from the command line are scoped to the `development` namespace.
+   ```shell
+   kubectl config current-context
+   dev
+   ```
 
-    Let's create some contents.
+   At this point, all requests we make to the Kubernetes cluster from the
+   command line are scoped to the `development` namespace.
 
-    ```shell
-    kubectl run snowflake --image=k8s.gcr.io/serve_hostname --replicas=2
-    ```
-    We have just created a deployment whose replica size is 2 that is running the pod called `snowflake` with a basic container that just serves the hostname.
-    Note that `kubectl run` creates deployments only on Kubernetes cluster >= v1.2. If you are running older versions, it creates replication controllers instead.
-    If you want to obtain the old behavior, use `--generator=run/v1` to create replication controllers. See [`kubectl run`](/docs/reference/generated/kubectl/kubectl-commands/#run) for more details.
+   Let's create some contents.
 
-    ```shell
-    kubectl get deployment
-    ```
-    ```
-    NAME         READY   UP-TO-DATE   AVAILABLE   AGE
-    snowflake    2/2     2            2           2m
-    ```
-    ```shell
-    kubectl get pods -l run=snowflake
-    ```
-    ```
-    NAME                         READY     STATUS    RESTARTS   AGE
-    snowflake-3968820950-9dgr8   1/1       Running   0          2m
-    snowflake-3968820950-vgc4n   1/1       Running   0          2m
-    ```
+   ```shell
+   kubectl run snowflake --image=k8s.gcr.io/serve_hostname --replicas=2
+   ```
 
-    And this is great, developers are able to do what they want, and they do not have to worry about affecting content in the `production` namespace.
+   We have just created a deployment whose replica size is 2 that is running the
+   pod called `snowflake` with a basic container that just serves the hostname.
+   Note that `kubectl run` creates deployments only on Kubernetes cluster >=
+   v1.2. If you are running older versions, it creates replication controllers
+   instead. If you want to obtain the old behavior, use `--generator=run/v1` to
+   create replication controllers. See
+   [`kubectl run`](/docs/reference/generated/kubectl/kubectl-commands/#run) for
+   more details.
 
-    Let's switch to the `production` namespace and show how resources in one namespace are hidden from the other.
+   ```shell
+   kubectl get deployment
+   ```
 
-    ```shell
-    kubectl config use-context prod
-    ```
+   ```
+   NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+   snowflake    2/2     2            2           2m
+   ```
 
-    The `production` namespace should be empty, and the following commands should return nothing.
+   ```shell
+   kubectl get pods -l run=snowflake
+   ```
 
-    ```shell
-    kubectl get deployment
-    kubectl get pods
-    ```
+   ```
+   NAME                         READY     STATUS    RESTARTS   AGE
+   snowflake-3968820950-9dgr8   1/1       Running   0          2m
+   snowflake-3968820950-vgc4n   1/1       Running   0          2m
+   ```
 
-    Production likes to run cattle, so let's create some cattle pods.
+   And this is great, developers are able to do what they want, and they do not
+   have to worry about affecting content in the `production` namespace.
 
-    ```shell
-    kubectl run cattle --image=k8s.gcr.io/serve_hostname --replicas=5
+   Let's switch to the `production` namespace and show how resources in one
+   namespace are hidden from the other.
 
-    kubectl get deployment
-    ```
-    ```
-    NAME         READY   UP-TO-DATE   AVAILABLE   AGE
-    cattle       5/5     5            5           10s
-    ```
+   ```shell
+   kubectl config use-context prod
+   ```
 
-    ```shell
-    kubectl get pods -l run=cattle
-    ```
-    ```
-    NAME                      READY     STATUS    RESTARTS   AGE
-    cattle-2263376956-41xy6   1/1       Running   0          34s
-    cattle-2263376956-kw466   1/1       Running   0          34s
-    cattle-2263376956-n4v97   1/1       Running   0          34s
-    cattle-2263376956-p5p3i   1/1       Running   0          34s
-    cattle-2263376956-sxpth   1/1       Running   0          34s
-    ```
+   The `production` namespace should be empty, and the following commands should
+   return nothing.
 
-At this point, it should be clear that the resources users create in one namespace are hidden from the other namespace.
+   ```shell
+   kubectl get deployment
+   kubectl get pods
+   ```
 
-As the policy support in Kubernetes evolves, we will extend this scenario to show how you can provide different
-authorization rules for each namespace.
+   Production likes to run cattle, so let's create some cattle pods.
+
+   ```shell
+   kubectl run cattle --image=k8s.gcr.io/serve_hostname --replicas=5
+
+   kubectl get deployment
+   ```
+
+   ```
+   NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+   cattle       5/5     5            5           10s
+   ```
+
+   ```shell
+   kubectl get pods -l run=cattle
+   ```
+
+   ```
+   NAME                      READY     STATUS    RESTARTS   AGE
+   cattle-2263376956-41xy6   1/1       Running   0          34s
+   cattle-2263376956-kw466   1/1       Running   0          34s
+   cattle-2263376956-n4v97   1/1       Running   0          34s
+   cattle-2263376956-p5p3i   1/1       Running   0          34s
+   cattle-2263376956-sxpth   1/1       Running   0          34s
+   ```
+
+At this point, it should be clear that the resources users create in one
+namespace are hidden from the other namespace.
+
+As the policy support in Kubernetes evolves, we will extend this scenario to
+show how you can provide different authorization rules for each namespace.
 
 {{% /capture %}}
 
@@ -327,18 +381,22 @@ authorization rules for each namespace.
 
 ## Understanding the motivation for using namespaces
 
-A single cluster should be able to satisfy the needs of multiple users or groups of users (henceforth a 'user community').
+A single cluster should be able to satisfy the needs of multiple users or groups
+of users (henceforth a 'user community').
 
-Kubernetes _namespaces_ help different projects, teams, or customers to share a Kubernetes cluster.
+Kubernetes _namespaces_ help different projects, teams, or customers to share a
+Kubernetes cluster.
 
 It does this by providing the following:
 
 1. A scope for [Names](/docs/concepts/overview/working-with-objects/names/).
-2. A mechanism to attach authorization and policy to a subsection of the cluster.
+2. A mechanism to attach authorization and policy to a subsection of the
+   cluster.
 
 Use of multiple namespaces is optional.
 
-Each user community wants to be able to work in isolation from other communities.
+Each user community wants to be able to work in isolation from other
+communities.
 
 Each user community has its own:
 
@@ -356,29 +414,37 @@ The Namespace provides a unique scope for:
 
 Use cases include:
 
-1.  As a cluster operator, I want to support multiple user communities on a single cluster.
-2.  As a cluster operator, I want to delegate authority to partitions of the cluster to trusted users
-    in those communities.
-3.  As a cluster operator, I want to limit the amount of resources each community can consume in order
-    to limit the impact to other communities using the cluster.
-4.  As a cluster user, I want to interact with resources that are pertinent to my user community in
-    isolation of what other user communities are doing on the cluster.
+1.  As a cluster operator, I want to support multiple user communities on a
+    single cluster.
+2.  As a cluster operator, I want to delegate authority to partitions of the
+    cluster to trusted users in those communities.
+3.  As a cluster operator, I want to limit the amount of resources each
+    community can consume in order to limit the impact to other communities
+    using the cluster.
+4.  As a cluster user, I want to interact with resources that are pertinent to
+    my user community in isolation of what other user communities are doing on
+    the cluster.
 
 ## Understanding namespaces and DNS
 
-When you create a [Service](/docs/concepts/services-networking/service/), it creates a corresponding [DNS entry](/docs/concepts/services-networking/dns-pod-service/).
-This entry is of the form `<service-name>.<namespace-name>.svc.cluster.local`, which means
-that if a container just uses `<service-name>` it will resolve to the service which
-is local to a namespace.  This is useful for using the same configuration across
-multiple namespaces such as Development, Staging and Production.  If you want to reach
-across namespaces, you need to use the fully qualified domain name (FQDN).
+When you create a [Service](/docs/concepts/services-networking/service/), it
+creates a corresponding
+[DNS entry](/docs/concepts/services-networking/dns-pod-service/). This entry is
+of the form `<service-name>.<namespace-name>.svc.cluster.local`, which means
+that if a container just uses `<service-name>` it will resolve to the service
+which is local to a namespace. This is useful for using the same configuration
+across multiple namespaces such as Development, Staging and Production. If you
+want to reach across namespaces, you need to use the fully qualified domain name
+(FQDN).
 
 {{% /capture %}}
 
 {{% capture whatsnext %}}
-* Learn more about [setting the namespace preference](/docs/concepts/overview/working-with-objects/namespaces/#setting-the-namespace-preference).
-* Learn more about [setting the namespace for a request](/docs/concepts/overview/working-with-objects/namespaces/#setting-the-namespace-for-a-request)
-* See [namespaces design](https://github.com/kubernetes/community/blob/{{< param "githubbranch" >}}/contributors/design-proposals/architecture/namespaces.md).
-{{% /capture %}}
 
-
+- Learn more about
+  [setting the namespace preference](/docs/concepts/overview/working-with-objects/namespaces/#setting-the-namespace-preference).
+- Learn more about
+  [setting the namespace for a request](/docs/concepts/overview/working-with-objects/namespaces/#setting-the-namespace-for-a-request)
+- See [namespaces design](https://github.com/kubernetes/community/blob/{{< param
+  "githubbranch" >}}/contributors/design-proposals/architecture/namespaces.md).
+  {{% /capture %}}
