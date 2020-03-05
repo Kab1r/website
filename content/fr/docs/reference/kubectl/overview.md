@@ -129,7 +129,7 @@ référence de [kubectl](/docs/user-guide/kubectl/).
 Le tableau suivant inclut la liste de tous les types de ressources pris en
 charge et leurs alias abrégés.
 
-(cette sortie peut être obtenue depuis `kubectl api-resources`, et correspond à
+(cette sortie peut être obtenue depuis `kubectl api-resources`, et correspond �
 Kubernetes 1.13.3.)
 
 | Nom de la ressource               | Noms abrégés  | Groupe API                   | Par namespace | Genre de la ressource          |
