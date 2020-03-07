@@ -462,7 +462,7 @@ Events:
 은
 [인그레스 컨트롤러](/ko/docs/concepts/services-networking/ingress-controllers)
 설명서를 확인한다. 페더레이션 클러스터에서 인그레스 배포에 대한 자세한 내용은
-[페더레이션 설명서](https://github.com/kubernetes-sigs/federation-v2) 를 참조할
+[페더레이션 설명서](https://github.com/kubernetes-sigs/federation-v2) 를 참조�
 수 있다.
 
 ## 앞으로의 할일

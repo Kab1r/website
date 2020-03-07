@@ -35,7 +35,7 @@ weight: 10
 ## 매니페스트로 멀티-아키텍처 이미지 빌드
 
 Docker CLI는 현재 `docker manifest` 커맨드와 `create`, `annotate`, `push`와 같은
-서브 커맨드를 함께 지원한다. 이 커맨드는 매니페스트를 빌드하고 푸시하는데 사용할
+서브 커맨드를 함께 지원한다. 이 커맨드는 매니페스트를 빌드하고 푸시하는데 사용�
 수 있다. 매니페스트를 보기 위해서는 `docker manifest inspect`를 사용하면 된다.
 
 다음에서 docker 문서를 확인하기 바란다.
@@ -171,7 +171,7 @@ kubelet은 ECR 자격 증명을 가져오고 주기적으로 갱신할 것이다
 - `DOCKER_EMAIL`: `${some-email-address}`
 
 해당 변수에 대한 값을 채우고 나면
-[쿠버네티스 시크릿을 구성하고 그것을 파드 디플로이를 위해서 사용](/ko/docs/concepts/containers/images/#파드에-imagepullsecrets-명시)할
+[쿠버네티스 시크릿을 구성하고 그것을 파드 디플로이를 위해서 사용](/ko/docs/concepts/containers/images/#파드에-imagepullsecrets-명시)�
 수 있다.
 
 ### IBM 클라우드 컨테이너 레지스트리 사용
@@ -314,7 +314,7 @@ GCE 및 자동 노드 교체를 수행하는 다른 클라우드 제공자에 �
 러나, 컨테이너의 `imagePullPolicy` 속성이 `IfNotPresent` 또는 `Never`으로 설정되
 어 있다면, 로컬 이미지가 사용된다(우선적으로 또는 배타적으로).
 
-레지스트리 인증의 대안으로 미리 풀 된 이미지에 의존하고 싶다면, 클러스터의 모든
+레지스트리 인증의 대안으로 미리 풀 된 이미지에 의존하고 싶다면, 클러스터의 모�
 노드가 동일한 미리 내려받은 이미지를 가지고 있는지 확인해야 한다.
 
 이것은 특정 이미지를 속도를 위해 미리 로드하거나 프라이빗 레지스트리에 대한 인증
@@ -380,7 +380,7 @@ EOF
 [서비스 어카운트에 ImagePullSecrets 추가](/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account)를
 확인한다.
 
-이것은 노드 당 `.docker/config.json`와 함께 사용할 수 있다. 자격 증명은 병합될
+이것은 노드 당 `.docker/config.json`와 함께 사용할 수 있다. 자격 증명은 병합�
 것이다. 이 방법은 Google 쿠버네티스 엔진에서 작동될 것이다.
 
 ### 유스케이스
