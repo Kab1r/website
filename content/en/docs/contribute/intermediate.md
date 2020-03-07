@@ -11,12 +11,11 @@ card:
 {{% capture overview %}}
 
 This page assumes that you've read and mastered the tasks in the
-[start contributing](/docs/contribute/start/) topic and are ready to
-learn about more ways to contribute.
+[start contributing](/docs/contribute/start/) topic and are ready to learn about
+more ways to contribute.
 
-{{< note >}}
-Some tasks require you to use the Git command line client and other tools.
-{{< /note >}}
+{{< note >}} Some tasks require you to use the Git command line client and other
+tools. {{< /note >}}
 
 {{% /capture %}}
 
@@ -38,34 +37,35 @@ that one person does all of them all of the time.
 ## Learn about Prow
 
 [Prow](https://github.com/kubernetes/test-infra/blob/master/prow/README.md) is
-the Kubernetes-based CI/CD system that runs jobs against pull requests (PRs). Prow
-enables chatbot-style commands to handle GitHub actions across the Kubernetes
-organization. You can perform a variety of actions such as [adding and removing
-labels](#add-and-remove-labels), closing issues, and assigning an approver. Type
-the Prow command into a comment field using the `/<command-name>` format. Some common
-commands are:
+the Kubernetes-based CI/CD system that runs jobs against pull requests (PRs).
+Prow enables chatbot-style commands to handle GitHub actions across the
+Kubernetes organization. You can perform a variety of actions such as
+[adding and removing labels](#add-and-remove-labels), closing issues, and
+assigning an approver. Type the Prow command into a comment field using the
+`/<command-name>` format. Some common commands are:
 
-- `/lgtm` (looks good to me): adds the `lgtm` label, signalling that a reviewer has finished reviewing the PR
+- `/lgtm` (looks good to me): adds the `lgtm` label, signalling that a reviewer
+  has finished reviewing the PR
 - `/approve`: approves a PR so it can merge (approver use only)
 - `/assign`: assigns a person to review or approve a PR
 - `/close`: closes an issue or PR
-- `/hold`: adds the `do-not-merge/hold` label, indicating the PR cannot be automatically merged
+- `/hold`: adds the `do-not-merge/hold` label, indicating the PR cannot be
+  automatically merged
 - `/hold cancel`: removes the `do-not-merge/hold` label
 
-{{% note %}}
-Not all commands are available to every user. The Prow bot will tell you if you
-try to execute a command beyond your authorization level.
+{{% note %}} Not all commands are available to every user. The Prow bot will
+tell you if you try to execute a command beyond your authorization level.
 {{% /note %}}
 
-Familiarize yourself with the [list of Prow
-commands](https://prow.k8s.io/command-help) before you review PRs or triage issues.
-
+Familiarize yourself with the
+[list of Prow commands](https://prow.k8s.io/command-help) before you review PRs
+or triage issues.
 
 ## Review pull requests
 
-In any given week, a specific docs approver volunteers to do initial triage
-and review of [pull requests and issues](#triage-and-categorize-issues). This
-person is the "PR Wrangler" for the week. The schedule is maintained using the
+In any given week, a specific docs approver volunteers to do initial triage and
+review of [pull requests and issues](#triage-and-categorize-issues). This person
+is the "PR Wrangler" for the week. The schedule is maintained using the
 [PR Wrangler scheduler](https://github.com/kubernetes/website/wiki/PR-Wranglers).
 To be added to this list, attend the weekly SIG Docs meeting and volunteer. Even
 if you are not on the schedule for the current week, you can still review pull
@@ -89,13 +89,13 @@ active participants.
 
 Before you start reviewing PRs, make sure you are familiar with the
 [Documentation Content Guide](/docs/contribute/style/content-guide/), the
-[Documentation Style Guide](/docs/contribute/style/style-guide/),
-and the [code of conduct](/community/code-of-conduct/).
+[Documentation Style Guide](/docs/contribute/style/style-guide/), and the
+[code of conduct](/community/code-of-conduct/).
 
 ### Find a PR to review
 
-To see all open PRs, go to the **Pull Requests** tab in the GitHub repository.
-A PR is eligible for review when it meets all of the following criteria:
+To see all open PRs, go to the **Pull Requests** tab in the GitHub repository. A
+PR is eligible for review when it meets all of the following criteria:
 
 - Has the `cncf-cla:yes` tag
 - Does not have WIP in the description
@@ -128,23 +128,25 @@ more information about the responsibilities of reviewers and approvers, see
   indicates that a PR is technically accurate by leaving a `/lgtm` comment on
   the PR.
 
-    {{< note >}}Don't add a `/lgtm` unless you are confident in the technical
-    accuracy of the documentation modified or introduced in the PR.{{< /note >}}
+  {{< note >}}Don't add a `/lgtm` unless you are confident in the technical
+  accuracy of the documentation modified or introduced in the PR.{{< /note >}}
 
-- An approver reviews pull request content for docs quality and adherence to
-  SIG Docs guidelines found in the Content and Style guides. Only people listed as
+- An approver reviews pull request content for docs quality and adherence to SIG
+  Docs guidelines found in the Content and Style guides. Only people listed as
   approvers in the
   [`OWNERS`](https://github.com/kubernetes/website/blob/master/OWNERS) file can
   approve a PR. To approve a PR, leave an `/approve` comment on the PR.
 
 A PR is merged when it has both a `/lgtm` comment from anyone in the Kubernetes
 organization and an `/approve` comment from an approver in the
-`sig-docs-maintainers` group, as long as it is not on hold and the PR author
-has signed the CLA.
+`sig-docs-maintainers` group, as long as it is not on hold and the PR author has
+signed the CLA.
 
 {{< note >}}
 
-The ["Participating"](/docs/contribute/participating/#approvers) section contains more information for reviewers and approvers, including specific responsibilities for approvers.
+The ["Participating"](/docs/contribute/participating/#approvers) section
+contains more information for reviewers and approvers, including specific
+responsibilities for approvers.
 
 {{< /note >}}
 
@@ -165,67 +167,66 @@ The ["Participating"](/docs/contribute/participating/#approvers) section contain
     symbol. Within a line, the actual modified content has a slightly darker
     green background than the rest of the line.
 
-      - Especially if the PR uses tricky formatting or changes CSS, Javascript,
-        or other site-wide elements, you can preview the website with the PR
-        applied. Go to the **Conversation** tab and click the **Details** link
-        for the `deploy/netlify` test, near the bottom of the page. It opens in
-        the same browser window by default, so open it in a new window so you
-        don't lose your partial review. Switch back to the **Files changed** tab
-        to resume your review.
-      - Make sure the PR complies with the Content and Style guides; link the
-        author to the relevant part of the guide(s) if it doesn't.
-      - If you have a question, comment, or other feedback about a given
-        change, hover over a line and click the blue-and-white `+` symbol that
-        appears. Type your comment and click **Start a review**.
-      - If you have more comments, leave them in the same way.
-      - By convention, if you see a small problem that does not have to do with
-        the main purpose of the PR, such as a typo or whitespace error, you can
-        call it out, prefixing your comment with `nit:` so that the author knows
-        you consider it trivial. They should still address it.
-      - When you've reviewed everything, or if you didn't have any comments, go
-        back to the top of the page and click **Review changes**. Choose either
-        **Comment** or **Request Changes**. Add a summary of your review, and
-        add appropriate
-        [Prow commands](https://prow.k8s.io/command-help) to separate lines in
-        the Review Summary field. SIG Docs follows the
-        [Kubernetes code review process](https://github.com/kubernetes/community/blob/master/contributors/guide/owners.md#the-code-review-process).
-        All of your comments will be sent to the PR author in a single
-        notification.
+    - Especially if the PR uses tricky formatting or changes CSS, Javascript, or
+      other site-wide elements, you can preview the website with the PR applied.
+      Go to the **Conversation** tab and click the **Details** link for the
+      `deploy/netlify` test, near the bottom of the page. It opens in the same
+      browser window by default, so open it in a new window so you don't lose
+      your partial review. Switch back to the **Files changed** tab to resume
+      your review.
+    - Make sure the PR complies with the Content and Style guides; link the
+      author to the relevant part of the guide(s) if it doesn't.
+    - If you have a question, comment, or other feedback about a given change,
+      hover over a line and click the blue-and-white `+` symbol that appears.
+      Type your comment and click **Start a review**.
+    - If you have more comments, leave them in the same way.
+    - By convention, if you see a small problem that does not have to do with
+      the main purpose of the PR, such as a typo or whitespace error, you can
+      call it out, prefixing your comment with `nit:` so that the author knows
+      you consider it trivial. They should still address it.
+    - When you've reviewed everything, or if you didn't have any comments, go
+      back to the top of the page and click **Review changes**. Choose either
+      **Comment** or **Request Changes**. Add a summary of your review, and add
+      appropriate [Prow commands](https://prow.k8s.io/command-help) to separate
+      lines in the Review Summary field. SIG Docs follows the
+      [Kubernetes code review process](https://github.com/kubernetes/community/blob/master/contributors/guide/owners.md#the-code-review-process).
+      All of your comments will be sent to the PR author in a single
+      notification.
 
-          - If you think the PR is ready to be merged, add the text `/approve` to
-            your summary.
-          - If the PR does not need additional technical review, add the
-            text `/lgtm` as well.
-          - If the PR *does* need additional technical review, add the text
-            `/assign` with the GitHub username of the person who needs to
-            provide technical review. Look at the `reviewers` field in the
-            front-matter at the top of a given Markdown file to see who can
-            provide technical review.
-          - To prevent the PR from being merged, add `/hold`. This sets the
-            label `do-not-merge/hold`.
-          - If a PR has no conflicts and has the `lgtm` and `approve` labels but
-            no `hold` label, it is merged automatically.
-          - If a PR has the `lgtm` and/or `approve` labels and new changes are
-            detected, these labels are removed automatically.
+      - If you think the PR is ready to be merged, add the text `/approve` to
+        your summary.
+      - If the PR does not need additional technical review, add the text
+        `/lgtm` as well.
+      - If the PR _does_ need additional technical review, add the text
+        `/assign` with the GitHub username of the person who needs to provide
+        technical review. Look at the `reviewers` field in the front-matter at
+        the top of a given Markdown file to see who can provide technical
+        review.
+      - To prevent the PR from being merged, add `/hold`. This sets the label
+        `do-not-merge/hold`.
+      - If a PR has no conflicts and has the `lgtm` and `approve` labels but no
+        `hold` label, it is merged automatically.
+      - If a PR has the `lgtm` and/or `approve` labels and new changes are
+        detected, these labels are removed automatically.
 
-            See
-            [the list of all available slash commands](https://prow.k8s.io/command-help)
-            that can be used in PRs.
+        See
+        [the list of all available slash commands](https://prow.k8s.io/command-help)
+        that can be used in PRs.
 
     - If you previously selected **Request changes** and the PR author has
       addressed your concerns, you can change your review status either in the
       **Files changed** tab or at the bottom of the **Conversation** tab. Be
-      sure to add the `/approve` tag and assign technical reviewers if necessary,
-      so that the PR can be merged.
+      sure to add the `/approve` tag and assign technical reviewers if
+      necessary, so that the PR can be merged.
 
 ### Commit into another person's PR
 
 Leaving PR comments is helpful, but there may be times when you need to commit
 into another person's PR, rather than just leaving a review.
 
-Resist the urge to "take over" for another person unless they explicitly ask
-you to, or you want to resurrect a long-abandoned PR. While it may be faster
-in the short term, it deprives the person of the chance to contribute.
+Resist the urge to "take over" for another person unless they explicitly ask you
+to, or you want to resurrect a long-abandoned PR. While it may be faster in the
+short term, it deprives the person of the chance to contribute.
 
 The process you use depends on whether you need to edit a file that is already
 in the scope of the PR or a file that the PR has not yet touched.
@@ -235,28 +236,27 @@ true:
 
 - If the PR author pushed their branch directly to the
   [https://github.com/kubernetes/website/](https://github.com/kubernetes/website/)
-  repository, only a reviewer with push access can commit into their PR.
-  Authors should be encouraged to push their branch to their fork before
-  opening the PR.
-- If the PR author explicitly disallowed edits from approvers, you can't
-  commit into their PR unless they change this setting.
+  repository, only a reviewer with push access can commit into their PR. Authors
+  should be encouraged to push their branch to their fork before opening the PR.
+- If the PR author explicitly disallowed edits from approvers, you can't commit
+  into their PR unless they change this setting.
 
 #### If the file is already changed by the PR
 
-This method uses the GitHub UI. If you prefer, you can use the command line
-even if the file you want to change is part of the PR, if you are more
-comfortable working that way.
+This method uses the GitHub UI. If you prefer, you can use the command line even
+if the file you want to change is part of the PR, if you are more comfortable
+working that way.
 
 1.  Click the **Files changed** tab.
-2.  Scroll down to the file you want to edit, and click the pencil icon for
-    that file.
+2.  Scroll down to the file you want to edit, and click the pencil icon for that
+    file.
 3.  Make your changes, add a commit message in the field below the editor, and
     click **Commit changes**.
 
 Your commit is now pushed to the branch the PR represents (probably on the
-author's fork) and now shows up in the PR and your changes are reflected in
-the **Files changed** tab. Leave a comment letting the PR author know you
-changed the PR.
+author's fork) and now shows up in the PR and your changes are reflected in the
+**Files changed** tab. Leave a comment letting the PR author know you changed
+the PR.
 
 If the author is using the command line rather than the GitHub UI to work on
 this PR, they need to fetch their fork's changes and rebase their local branch
@@ -270,39 +270,39 @@ to the GitHub UI.
 
 1.  Get the URL for the author's fork. You can find it near the bottom of the
     **Conversation** tab. Look for the text **Add more commits by pushing to**.
-    The first link after this phrase is to the branch, and the second link is
-    to the fork. Copy the second link. Note the name of the branch for later.
+    The first link after this phrase is to the branch, and the second link is to
+    the fork. Copy the second link. Note the name of the branch for later.
 
 2.  Add the fork as a remote. In your terminal, go to your clone of the
-    repository. Decide on a name to give the remote (such as the author's
-    GitHub username), and add the remote using the following syntax:
+    repository. Decide on a name to give the remote (such as the author's GitHub
+    username), and add the remote using the following syntax:
 
-      ```bash
-      git remote add <name> <url-of-fork>
-      ```
+    ```bash
+    git remote add <name> <url-of-fork>
+    ```
 
 3.  Fetch the remote. This doesn't change any local files, but updates your
-    clone's notion of the remote's objects (such as branches and tags) and
-    their current state.
+    clone's notion of the remote's objects (such as branches and tags) and their
+    current state.
 
-      ```bash
-      git remote fetch <name>
-      ```
+    ```bash
+    git remote fetch <name>
+    ```
 
 4.  Check out the remote branch. This command will fail if you already have a
     local branch with the same name.
 
-      ```bash
-      git checkout <branch-from-PR>
-      ```
+    ```bash
+    git checkout <branch-from-PR>
+    ```
 
 5.  Make your changes, use `git add` to add them, and commit them.
 
 6.  Push your changes to the author's remote.
 
-      ```bash
-      git push <remote-name> <branch-name>
-      ```
+    ```bash
+    git push <remote-name> <branch-name>
+    ```
 
 7.  Go back to the GitHub IU and refresh the PR. Your changes appear. Leave the
     PR author a comment letting them know you changed the PR.
@@ -321,31 +321,33 @@ graphical Git client instead.
 
 ### Clone the repository
 
-You only need to clone the repository once per physical system where you work
-on the Kubernetes documentation.
+You only need to clone the repository once per physical system where you work on
+the Kubernetes documentation.
 
-1.  Create a fork of the `kubernetes/website` repository on GitHub. In your
-    web browser, go to
+1.  Create a fork of the `kubernetes/website` repository on GitHub. In your web
+    browser, go to
     [https://github.com/kubernetes/website](https://github.com/kubernetes/website)
     and click the **Fork** button. After a few seconds, you are redirected to
-    the URL for your fork, which is `https://github.com/<github_username>/website`.
+    the URL for your fork, which is
+    `https://github.com/<github_username>/website`.
 
 2.  In a terminal window, use `git clone` to clone the your fork.
 
-      ```bash
-      git clone git@github.com/<github_username>/website
-      ```
+    ```bash
+    git clone git@github.com/<github_username>/website
+    ```
 
-      The new directory `website` is created in your current directory, with
-      the contents of your GitHub repository. Your fork is your `origin`.
+    The new directory `website` is created in your current directory, with the
+    contents of your GitHub repository. Your fork is your `origin`.
 
-3.  Change to the new `website` directory. Set the `kubernetes/website` repository as the `upstream` remote.
+3.  Change to the new `website` directory. Set the `kubernetes/website`
+    repository as the `upstream` remote.
 
-      ```bash
-      cd website
+    ```bash
+    cd website
 
-      git remote add upstream https://github.com/kubernetes/website.git
-      ```
+    git remote add upstream https://github.com/kubernetes/website.git
+    ```
 
 4.  Confirm your `origin` and `upstream` repositories.
 
@@ -371,9 +373,9 @@ but the following guidelines apply:
 - For general improvements to existing content, start from `master`.
 - For new content that is about features that already exist in a released
   version of Kubernetes, start from `master`.
-- For long-running efforts that multiple SIG Docs contributors will collaborate on,
-  such as content reorganization, use a specific feature branch created for that
-  effort.
+- For long-running efforts that multiple SIG Docs contributors will collaborate
+  on, such as content reorganization, use a specific feature branch created for
+  that effort.
 - For new content that relates to upcoming but unreleased Kubernetes versions,
   use the pre-release feature branch created for that Kubernetes version.
 
@@ -385,58 +387,59 @@ terminology), use the following workflow to be sure your work is based on the
 most up-to-date version of that branch.
 
 1.  There are three different copies of the repository when you work locally:
-    `local`, `upstream`, and `origin`. Fetch both the `origin` and `upstream` remotes. This
-    updates your cache of the remotes without actually changing any of the copies.
+    `local`, `upstream`, and `origin`. Fetch both the `origin` and `upstream`
+    remotes. This updates your cache of the remotes without actually changing
+    any of the copies.
 
-      ```bash
-      git fetch origin
-      git fetch upstream
-      ```
+    ```bash
+    git fetch origin
+    git fetch upstream
+    ```
 
-    This workflow deviates from the one defined in the Community's [GitHub
-    Workflow](https://github.com/kubernetes/community/blob/master/contributors/guide/github-workflow.md).
-    In this workflow, you do not need to merge your local copy of `master` with `upstream/master` before
-    pushing the updates to your fork. That step is not required in
-    `kubernetes/website` because you are basing your branch on the upstream repository.
+    This workflow deviates from the one defined in the Community's
+    [GitHub Workflow](https://github.com/kubernetes/community/blob/master/contributors/guide/github-workflow.md).
+    In this workflow, you do not need to merge your local copy of `master` with
+    `upstream/master` before pushing the updates to your fork. That step is not
+    required in `kubernetes/website` because you are basing your branch on the
+    upstream repository.
 
 2.  Create a local working branch based on the most appropriate upstream branch:
-    `upstream/dev-1.xx` for feature developers or `upstream/master` for all other
-    contributors. This example assumes you are basing your work on
+    `upstream/dev-1.xx` for feature developers or `upstream/master` for all
+    other contributors. This example assumes you are basing your work on
     `upstream/master`. Because you didn't update your local `master` to match
     `upstream/master` in the previous step, you need to explicitly create your
     branch off of `upstream/master`.
 
-      ```bash
-      git checkout -b <my_new_branch> upstream/master
-      ```
+    ```bash
+    git checkout -b <my_new_branch> upstream/master
+    ```
 
-3.  With your new branch checked out, make your changes using a text editor.
-    At any time, use the `git status` command to see what you've changed.
+3.  With your new branch checked out, make your changes using a text editor. At
+    any time, use the `git status` command to see what you've changed.
 
-4.  When you are ready to submit a pull request, commit your changes. First
-    use `git status` to see what changes need to be added to the changeset.
-    There are two important sections: `Changes staged for commit` and
+4.  When you are ready to submit a pull request, commit your changes. First use
+    `git status` to see what changes need to be added to the changeset. There
+    are two important sections: `Changes staged for commit` and
     `Changes not staged for commit`. Any files that show up in the latter
     section under `modified` or `untracked` need to be added if you want them to
     be part of this commit. For each file that needs to be added, use `git add`.
 
-      ```bash
-      git add example-file.md
-      ```
+    ```bash
+    git add example-file.md
+    ```
 
-      When all your intended changes are included, create a commit using the
-      `git commit` command:
+    When all your intended changes are included, create a commit using the
+    `git commit` command:
 
-      ```bash
-      git commit -m "Your commit message"
-      ```
+    ```bash
+    git commit -m "Your commit message"
+    ```
 
-      {{< note >}}
-      Do not reference a GitHub issue or pull request by ID or URL in the
-      commit message. If you do, it will cause that issue or pull request to get
-      a notification every time the commit shows up in a new Git branch. You can
-      link issues and pull requests together later in the GitHub UI.
-      {{< /note >}}
+    {{< note >}} Do not reference a GitHub issue or pull request by ID or URL in
+    the commit message. If you do, it will cause that issue or pull request to
+    get a notification every time the commit shows up in a new Git branch. You
+    can link issues and pull requests together later in the GitHub UI.
+    {{< /note >}}
 
 5.  Optionally, you can test your change by staging the site locally using the
     `hugo` command. See [View your changes locally](#view-your-changes-locally).
@@ -447,29 +450,29 @@ most up-to-date version of that branch.
     need to push the branch to your fork, which is the endpoint for the `origin`
     remote.
 
-      ```bash
-      git push origin <my_new_branch>
-      ```
+    ```bash
+    git push origin <my_new_branch>
+    ```
 
-      Technically, you can omit the branch name from the `push` command, but
-      the behavior in that case depends upon the version of Git you are using.
-      The results are more repeatable if you include the branch name.
+    Technically, you can omit the branch name from the `push` command, but the
+    behavior in that case depends upon the version of Git you are using. The
+    results are more repeatable if you include the branch name.
 
 7.  Go to https://github.com/kubernetes/website in your web browser. GitHub
-    detects that you pushed a new branch to your fork and offers to create a pull
-    request. Fill in the pull request template.
+    detects that you pushed a new branch to your fork and offers to create a
+    pull request. Fill in the pull request template.
 
-      - The title should be no more than 50 characters and summarize the intent
-        of the change.
-      - The long-form description should contain more information about the fix,
-        including a line like `Fixes #12345` if the pull request fixes a GitHub
-        issue. This will cause the issue to be closed automatically when the
-        pull request is merged.
-      - You can add labels or other metadata and assign reviewers. See
-        [Triage and categorize issues](#triage-and-categorize-issues) for the
-        syntax.
+    - The title should be no more than 50 characters and summarize the intent of
+      the change.
+    - The long-form description should contain more information about the fix,
+      including a line like `Fixes #12345` if the pull request fixes a GitHub
+      issue. This will cause the issue to be closed automatically when the pull
+      request is merged.
+    - You can add labels or other metadata and assign reviewers. See
+      [Triage and categorize issues](#triage-and-categorize-issues) for the
+      syntax.
 
-      Click **Create pull request**.
+    Click **Create pull request**.
 
 8.  Several automated tests will run against the state of the website with your
     changes applied. If any of the tests fail, click the **Details** link for
@@ -501,62 +504,62 @@ most up-to-date version of that branch.
     changes from your fork before you can add more changes. Use the following
     commands to do this, assuming that your branch is currently checked out.
 
-      ```bash
-      git fetch origin
-      git rebase origin/<your-branch-name>
-      ```
+    ```bash
+    git fetch origin
+    git rebase origin/<your-branch-name>
+    ```
 
-      After rebasing, you need to add the `--force-with-lease` flag to
-      force push the branch's new changes to your fork.
+    After rebasing, you need to add the `--force-with-lease` flag to force push
+    the branch's new changes to your fork.
 
-      ```bash
-      git push --force-with-lease origin <your-branch-name>
-      ```
+    ```bash
+    git push --force-with-lease origin <your-branch-name>
+    ```
 
 11. If someone else's change is merged into the branch your work is based on,
     and you have made changes to the same parts of the same files, a conflict
     might occur. If the pull request shows that there are conflicts to resolve,
     you can resolve them using the GitHub UI or you can resolve them locally.
 
-      First, do step 10 to be sure that your fork and your local branch are in
-      the same state.
+    First, do step 10 to be sure that your fork and your local branch are in the
+    same state.
 
-      Next, fetch `upstream` and rebase your branch on the branch it was
-      originally based on, like `upstream/master`.
+    Next, fetch `upstream` and rebase your branch on the branch it was
+    originally based on, like `upstream/master`.
 
-      ```bash
-      git fetch upstream
-      git rebase upstream/master
-      ```
+    ```bash
+    git fetch upstream
+    git rebase upstream/master
+    ```
 
-      If there are conflicts Git can't automatically resolve, you can see the
-      conflicted files using the `git status` command. For each conflicted file,
-      edit it and look for the conflict markers `>>>`, `<<<`, and `===`. Resolve
-      the conflict and remove the conflict markers. Then add the changes to the
-      changeset using `git add <filename>` and continue the rebase using
-      `git rebase --continue`. When all commits have been applied and there are
-      no more conflicts, `git status` will show that you are not in a rebase and
-      there are no changes that need to be committed. At that point, force-push
-      the branch to your fork, and the pull request should no longer show any
-      conflicts.
+    If there are conflicts Git can't automatically resolve, you can see the
+    conflicted files using the `git status` command. For each conflicted file,
+    edit it and look for the conflict markers `>>>`, `<<<`, and `===`. Resolve
+    the conflict and remove the conflict markers. Then add the changes to the
+    changeset using `git add <filename>` and continue the rebase using
+    `git rebase --continue`. When all commits have been applied and there are no
+    more conflicts, `git status` will show that you are not in a rebase and
+    there are no changes that need to be committed. At that point, force-push
+    the branch to your fork, and the pull request should no longer show any
+    conflicts.
 
 12. If your PR still has multiple commits after amending previous commits, you
-    must squash multiple commits into a single commit before your PR can be merged.
-    You can check the number of commits on your PR's `Commits` tab or by running
-    `git log` locally. Squashing commits is a form of rebasing.
+    must squash multiple commits into a single commit before your PR can be
+    merged. You can check the number of commits on your PR's `Commits` tab or by
+    running `git log` locally. Squashing commits is a form of rebasing.
 
     ```bash
     git rebase -i HEAD~<number_of_commits>
-    ```  
+    ```
 
-    The `-i` switch tells git you want to rebase interactively. This enables
-    you to tell git which commits to squash into the first one. For
-    example, you have 3 commits on your branch:
+    The `-i` switch tells git you want to rebase interactively. This enables you
+    to tell git which commits to squash into the first one. For example, you
+    have 3 commits on your branch:
 
     ```
     12345 commit 4 (2 minutes ago)
     6789d commit 3 (30 minutes ago)
-    456df commit 2 (1 day ago)     
+    456df commit 2 (1 day ago)
     ```
 
     You must squash your last three commits into the first one.
@@ -582,61 +585,60 @@ most up-to-date version of that branch.
     squash 12345 commit 4
     ```
 
-    Save and close your editor. Then push your squashed
-    commit with `git push --force-with-lease origin <branch_name>`.
+    Save and close your editor. Then push your squashed commit with
+    `git push --force-with-lease origin <branch_name>`.
 
-
-If you're having trouble resolving conflicts or you get stuck with
-anything else related to your pull request, ask for help on the `#sig-docs`
-Slack channel or the
+If you're having trouble resolving conflicts or you get stuck with anything else
+related to your pull request, ask for help on the `#sig-docs` Slack channel or
+the
 [kubernetes-sig-docs mailing list](https://groups.google.com/forum/#!forum/kubernetes-sig-docs).
 
 ### View your changes locally
 
-{{< tabs name="tab_with_hugo" >}}
-{{% tab name="Hugo in a container" %}}
+{{< tabs name="tab_with_hugo" >}} {{% tab name="Hugo in a container" %}}
 
 If you aren't ready to create a pull request but you want to see what your
-changes look like, you can build and run a docker image to generate all the documentation and
-serve it locally.
+changes look like, you can build and run a docker image to generate all the
+documentation and serve it locally.
 
 1.  Build the image locally:
 
-      ```bash
-      make docker-image
-      ```
+    ```bash
+    make docker-image
+    ```
 
-2.  Once the `kubernetes-hugo` image has been built locally, you can build and serve the site:
+2.  Once the `kubernetes-hugo` image has been built locally, you can build and
+    serve the site:
 
-      ```bash
-      make docker-serve
-      ```
+    ```bash
+    make docker-serve
+    ```
 
 3.  In your browser's address bar, enter `localhost:1313`. Hugo will watch the
     filesystem for changes and rebuild the site as needed.
 
 4.  To stop the local Hugo instance, go back to the terminal and type `Ctrl+C`
-    or just close the terminal window.
-{{% /tab %}}
-{{% tab name="Hugo locally" %}}
+    or just close the terminal window. {{% /tab %}}
+    {{% tab name="Hugo locally" %}}
 
-Alternatively, you can install and use the `hugo` command on your development machine:
+Alternatively, you can install and use the `hugo` command on your development
+machine:
 
-1.  Install the [Hugo](https://gohugo.io/getting-started/installing/) version specified in [`website/netlify.toml`](https://raw.githubusercontent.com/kubernetes/website/master/netlify.toml).
+1.  Install the [Hugo](https://gohugo.io/getting-started/installing/) version
+    specified in
+    [`website/netlify.toml`](https://raw.githubusercontent.com/kubernetes/website/master/netlify.toml).
 
 2.  In a terminal, go to the root directory of your clone of the Kubernetes
     docs, and enter this command:
 
-      ```bash
-      hugo server
-      ```
+    ```bash
+    hugo server
+    ```
 
 3.  In your browser’s address bar, enter `localhost:1313`.
 
 4.  To stop the local Hugo instance, go back to the terminal and type `Ctrl+C`
-    or just close the terminal window.
-{{% /tab %}}
-{{< /tabs >}}
+    or just close the terminal window. {{% /tab %}} {{< /tabs >}}
 
 ## Triage and categorize issues
 
@@ -647,22 +649,25 @@ documentation issues. General website issues are also filed in the
 When you triage an issue, you:
 
 - Validate the issue
-    - Make sure the issue is about website documentation. Some issues can be closed quickly by
-      answering a question or pointing the reporter to a resource. See the
-      [Support requests or code bug reports](#support-requests-or-code-bug-reports) section for details.
-    - Assess whether the issue has merit. Add the `triage/needs-information` label if the issue doesn't have enough
-      detail to be actionable or the template is not filled out adequately.
-      Close the issue if it has both the `lifecycle/stale` and `triage/needs-information` labels.
+  - Make sure the issue is about website documentation. Some issues can be
+    closed quickly by answering a question or pointing the reporter to a
+    resource. See the
+    [Support requests or code bug reports](#support-requests-or-code-bug-reports)
+    section for details.
+  - Assess whether the issue has merit. Add the `triage/needs-information` label
+    if the issue doesn't have enough detail to be actionable or the template is
+    not filled out adequately. Close the issue if it has both the
+    `lifecycle/stale` and `triage/needs-information` labels.
 - Add a priority label (the
   [Issue Triage Guidelines](https://github.com/kubernetes/community/blob/master/contributors/guide/issue-triage.md#define-priority)
   define Priority labels in detail)
-    - `priority/critical-urgent` - do this right now
-    - `priority/important-soon` - do this within 3 months
-    - `priority/important-longterm` - do this within 6 months
-    - `priority/backlog` - this can be deferred indefinitely; lowest priority;
-      do this when resources are available
-    - `priority/awaiting-more-evidence` - placeholder for a potentially good issue
-       so it doesn't get lost
+  - `priority/critical-urgent` - do this right now
+  - `priority/important-soon` - do this within 3 months
+  - `priority/important-longterm` - do this within 6 months
+  - `priority/backlog` - this can be deferred indefinitely; lowest priority; do
+    this when resources are available
+  - `priority/awaiting-more-evidence` - placeholder for a potentially good issue
+    so it doesn't get lost
 - Optionally, add a `help` or `good first issue` label if the issue is suitable
   for someone with very little Kubernetes or SIG Docs experience. Consult
   [Help Wanted and Good First Issue Labels](https://github.com/kubernetes/community/blob/master/contributors/guide/help-wanted.md)
@@ -670,17 +675,19 @@ When you triage an issue, you:
 - At your discretion, take ownership of an issue and submit a PR for it
   (especially if it is quick or relates to work you were already doing).
 
-This GitHub Issue [filter](https://github.com/kubernetes/website/issues?q=is%3Aissue+is%3Aopen+-label%3Apriority%2Fbacklog+-label%3Apriority%2Fimportant-longterm+-label%3Apriority%2Fimportant-soon+-label%3Atriage%2Fneeds-information+-label%3Atriage%2Fsupport+sort%3Acreated-asc)
+This GitHub Issue
+[filter](https://github.com/kubernetes/website/issues?q=is%3Aissue+is%3Aopen+-label%3Apriority%2Fbacklog+-label%3Apriority%2Fimportant-longterm+-label%3Apriority%2Fimportant-soon+-label%3Atriage%2Fneeds-information+-label%3Atriage%2Fsupport+sort%3Acreated-asc)
 finds all the issues that need to be triaged.
 
 If you have questions about triaging an issue, ask in `#sig-docs` on Slack or
-the [kubernetes-sig-docs mailing list](https://groups.google.com/forum/#!forum/kubernetes-sig-docs).
+the
+[kubernetes-sig-docs mailing list](https://groups.google.com/forum/#!forum/kubernetes-sig-docs).
 
 ### Add and remove labels
 
-To add a label, leave a comment like `/<label-to-add>` or `/<label-category> <label-to-add>`. The label must
-already exist. If you try to add a label that does not exist, the command is
-silently ignored.
+To add a label, leave a comment like `/<label-to-add>` or
+`/<label-category> <label-to-add>`. The label must already exist. If you try to
+add a label that does not exist, the command is silently ignored.
 
 Examples:
 
@@ -691,7 +698,8 @@ Examples:
 - `/good-first-issue`
 - `/lifecycle frozen`
 
-To remove a label, leave a comment like `/remove-<label-to-remove>` or `/remove-<label-category> <label-to-remove>`.
+To remove a label, leave a comment like `/remove-<label-to-remove>` or
+`/remove-<label-category> <label-to-remove>`.
 
 Examples:
 
@@ -703,25 +711,26 @@ Examples:
 - `/remove-lifecycle frozen`
 
 The list of all the labels used across Kubernetes is
-[here](https://github.com/kubernetes/kubernetes/labels). Not all labels
-are used by SIG Docs.
+[here](https://github.com/kubernetes/kubernetes/labels). Not all labels are used
+by SIG Docs.
 
 ### More about labels
 
 - An issue can have multiple labels.
 - Some labels use slash notation for grouping, which can be thought of like
   "sub-labels". For instance, many `sig/` labels exist, such as `sig/cli` and
-  `sig/api-machinery` ([full list](https://github.com/kubernetes/website/labels?utf8=%E2%9C%93&q=sig%2F)).
-- Some labels are automatically added based on metadata in the files involved
-  in the issue, slash commands used in the comments of the issue, or
-  information in the issue text.
-- Additional labels are manually added by the person triaging the issue (or the person
-  reporting the issue)
-  - `kind/bug`, `kind/feature`, and `kind/documentation`: A bug is a problem with existing content or
-    functionality, and a feature is a request for new content or functionality.
-    The `kind/documentation` label is seldom used.
-  - `language/ja`, `language/ko` and similar [language
-    labels](https://github.com/kubernetes/website/labels?utf8=%E2%9C%93&q=language)
+  `sig/api-machinery`
+  ([full list](https://github.com/kubernetes/website/labels?utf8=%E2%9C%93&q=sig%2F)).
+- Some labels are automatically added based on metadata in the files involved in
+  the issue, slash commands used in the comments of the issue, or information in
+  the issue text.
+- Additional labels are manually added by the person triaging the issue (or the
+  person reporting the issue)
+  - `kind/bug`, `kind/feature`, and `kind/documentation`: A bug is a problem
+    with existing content or functionality, and a feature is a request for new
+    content or functionality. The `kind/documentation` label is seldom used.
+  - `language/ja`, `language/ko` and similar
+    [language labels](https://github.com/kubernetes/website/labels?utf8=%E2%9C%93&q=language)
     if the issue is about localized content.
 
 ### Issue lifecycle
@@ -739,11 +748,10 @@ of inactivity. A user manually adds this label to issues that need to remain
 open for much longer than 90 days, such as those with a
 `priority/important-longterm` label.
 
-
 ### Handling special issue types
 
-We encounter the following types of issues often enough to document how
-to handle them.
+We encounter the following types of issues often enough to document how to
+handle them.
 
 #### Duplicate issues
 
@@ -758,15 +766,16 @@ help reduce confusion and avoid duplicating work on the same problem.
 
 Depending on where the dead link is reported, different actions are required to
 resolve the issue. Dead links in the API and Kubectl docs are automation issues
-and should be assigned `/priority critical-urgent` until the problem can be fully understood. All other
-dead links are issues that need to be manually fixed and can be assigned `/priority important-longterm`.
+and should be assigned `/priority critical-urgent` until the problem can be
+fully understood. All other dead links are issues that need to be manually fixed
+and can be assigned `/priority important-longterm`.
 
 #### Blog issues
 
 [Kubernetes Blog](https://kubernetes.io/blog/) entries are expected to become
-outdated over time, so we maintain only blog entries that are less than one year old.
-If an issue is related to a blog entry that is more than one year old, it should be closed
-without fixing.
+outdated over time, so we maintain only blog entries that are less than one year
+old. If an issue is related to a blog entry that is more than one year old, it
+should be closed without fixing.
 
 #### Support requests or code bug reports
 
@@ -806,8 +815,8 @@ If this is a documentation issue, please re-open this issue.
 
 ## Document new features
 
-Each major Kubernetes release includes new features, and many of them need
-at least a small amount of documentation to show people how to use them.
+Each major Kubernetes release includes new features, and many of them need at
+least a small amount of documentation to show people how to use them.
 
 Often, the SIG responsible for a feature submits draft documentation for the
 feature as a pull request to the appropriate release branch of
@@ -818,21 +827,23 @@ editorial feedback or edits the draft directly.
 
 To find out about upcoming features, attend the weekly sig-release meeting (see
 the [community](https://kubernetes.io/community/) page for upcoming meetings)
-and monitor the release-specific documentation
-in the [kubernetes/sig-release](https://github.com/kubernetes/sig-release/)
-repository. Each release has a sub-directory under the [/sig-release/tree/master/releases/](https://github.com/kubernetes/sig-release/tree/master/releases)
-directory. Each sub-directory contains a release schedule, a draft of the release
-notes, and a document listing each person on the release team.
+and monitor the release-specific documentation in the
+[kubernetes/sig-release](https://github.com/kubernetes/sig-release/) repository.
+Each release has a sub-directory under the
+[/sig-release/tree/master/releases/](https://github.com/kubernetes/sig-release/tree/master/releases)
+directory. Each sub-directory contains a release schedule, a draft of the
+release notes, and a document listing each person on the release team.
 
-- The release schedule contains links to all other documents, meetings,
-  meeting minutes, and milestones relating to the release. It also contains
-  information about the goals and timeline of the release, and any special
-  processes in place for this release. Near the bottom of the document, several
+- The release schedule contains links to all other documents, meetings, meeting
+  minutes, and milestones relating to the release. It also contains information
+  about the goals and timeline of the release, and any special processes in
+  place for this release. Near the bottom of the document, several
   release-related terms are defined.
 
-    This document also contains a link to the **Feature tracking sheet**, which is
-    the official way to find out about all new features scheduled to go into the
-    release.
+  This document also contains a link to the **Feature tracking sheet**, which is
+  the official way to find out about all new features scheduled to go into the
+  release.
+
 - The release team document lists who is responsible for each release role. If
   it's not clear who to talk to about a specific feature or question you have,
   either attend the release meeting to ask your question, or contact the release
@@ -844,20 +855,20 @@ notes, and a document listing each person on the release team.
 #### The feature tracking sheet
 
 The feature tracking sheet
-[for a given Kubernetes release](https://github.com/kubernetes/sig-release/tree/master/releases) lists each feature that is planned for a release.
-Each line item includes the name of the feature, a link to the feature's main
-GitHub issue, its stability level (Alpha, Beta, or Stable), the SIG and
-individual responsible for implementing it, whether it
-needs docs, a draft release note for the feature, and whether it has been
-merged. Keep the following in mind:
+[for a given Kubernetes release](https://github.com/kubernetes/sig-release/tree/master/releases)
+lists each feature that is planned for a release. Each line item includes the
+name of the feature, a link to the feature's main GitHub issue, its stability
+level (Alpha, Beta, or Stable), the SIG and individual responsible for
+implementing it, whether it needs docs, a draft release note for the feature,
+and whether it has been merged. Keep the following in mind:
 
 - Beta and Stable features are generally a higher documentation priority than
   Alpha features.
 - It's hard to test (and therefore, document) a feature that hasn't been merged,
   or is at least considered feature-complete in its PR.
-- Determining whether a feature needs documentation is a manual process and
-  just because a feature is not marked as needing docs doesn't mean it doesn't
-  need them.
+- Determining whether a feature needs documentation is a manual process and just
+  because a feature is not marked as needing docs doesn't mean it doesn't need
+  them.
 
 ### Document a feature
 
@@ -866,10 +877,10 @@ responsible for implementing the new feature. This means that your role may be
 more of a shepherding role for a given feature than developing the documentation
 from scratch.
 
-After you've chosen a feature to document/shepherd, ask about it in the `#sig-docs`
-Slack channel, in a weekly sig-docs meeting, or directly on the PR filed by the
-feature SIG. If you're given the go-ahead, you can edit into the PR using one of
-the techniques described in
+After you've chosen a feature to document/shepherd, ask about it in the
+`#sig-docs` Slack channel, in a weekly sig-docs meeting, or directly on the PR
+filed by the feature SIG. If you're given the go-ahead, you can edit into the PR
+using one of the techniques described in
 [Commit into another person's PR](#commit-into-another-persons-pr).
 
 If you need to write a new topic, the following links are useful:
@@ -910,9 +921,10 @@ deadlines. Some deadlines related to documentation are:
   milestone.
 
 If your feature is an Alpha feature and is behind a feature gate, make sure you
-add it to [Feature gates](/docs/reference/command-line-tools-reference/feature-gates/)
-as part of your pull request. If your feature is moving to Beta 
-or to General Availability, update the feature gates file.
+add it to
+[Feature gates](/docs/reference/command-line-tools-reference/feature-gates/) as
+part of your pull request. If your feature is moving to Beta or to General
+Availability, update the feature gates file.
 
 ## Contribute to other repos
 
@@ -937,10 +949,10 @@ the templates with as much detail as possible when you file issues or PRs.
 ## Localize content
 
 The Kubernetes documentation is written in English first, but we want people to
-be able to read it in their language of choice. If you are comfortable
-writing in another language, especially in the software domain, you can help
-localize the Kubernetes documentation or provide feedback on existing localized
-content. See [Localization](/docs/contribute/localization/) and ask on the
+be able to read it in their language of choice. If you are comfortable writing
+in another language, especially in the software domain, you can help localize
+the Kubernetes documentation or provide feedback on existing localized content.
+See [Localization](/docs/contribute/localization/) and ask on the
 [kubernetes-sig-docs mailing list](https://groups.google.com/forum/#!forum/kubernetes-sig-docs)
 or in `#sig-docs` on Slack if you are interested in helping out.
 
@@ -950,11 +962,12 @@ Follow these guidelines for working with localized content:
 
 - Limit PRs to a single language.
 
-   Each language has its own reviewers and approvers.
+  Each language has its own reviewers and approvers.
 
 - Reviewers, verify that PRs contain changes to only one language.
 
-   If a PR contains changes to source in more than one language, ask the PR contributor to open separate PRs for each language.
+  If a PR contains changes to source in more than one language, ask the PR
+  contributor to open separate PRs for each language.
 
 {{% /capture %}}
 
