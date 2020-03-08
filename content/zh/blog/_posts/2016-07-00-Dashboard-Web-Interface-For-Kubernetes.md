@@ -20,7 +20,7 @@ _Editor’s note: this post is part of a [series of in-depth articles](https://k
 [Kubernetes Dashboard](http://github.com/kubernetes/dashboard) is a project that aims to bring a general purpose monitoring and operational web interface to the Kubernetes world.&nbsp;Three months ago we [released](https://kubernetes.io/blog/2016/04/building-awesome-user-interfaces-for-kubernetes) the first production ready version, and since then the dashboard has made massive improvements. In a single UI, you’re able to perform majority of possible interactions with your Kubernetes clusters without ever leaving your browser. This blog post breaks down new features introduced in the latest release and outlines the roadmap for the future.&nbsp;
 -->
 
-_编者按：这篇文章
+_编者按：这篇文�
 是[一系列深入的文章](https://kubernetes.io/blog/2016/07/five-days-of-kubernetes-1-3)
 中关于 Kubernetes 1.3 的新内容的一部分_
 [Kubernetes Dashboard](http://github.com/kubernetes/dashboard)是一个旨在为

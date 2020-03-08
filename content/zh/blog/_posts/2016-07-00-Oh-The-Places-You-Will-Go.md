@@ -103,7 +103,7 @@ So I’m looking forward to seeing more and more growth happen further and furth
 
 等等我们就走！我们将取代那些控制器，建立更多，API 基金会让我们构建任何我们可以用
 这种方式表达的东西 - 大多数东西只是标签或注释远离！但你的思想不会由语言来定义：
-有了第三方资源，你可以表达任何你选择的东西。现在我们可以不用在 Kubernetes 建造
+有了第三方资源，你可以表达任何你选择的东西。现在我们可以不用在 Kubernetes 建�
 Kubernetes 了，创造出与其他任何东西一样感觉是 Kubernetes 的一部分的东西。最近添
 加的许多功能，如 ingress、DNS integration、autoscaling and network policies ，都
 已经完成或可以通过这种方式完成。最终，在这些事情发生之前很难想象你会是怎样的一个
