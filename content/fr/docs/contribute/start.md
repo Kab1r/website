@@ -28,7 +28,7 @@ référentiels de code Kubernetes, reportez-vous à la section sur
 
 ## Les bases de notre documentation
 
-La documentation de Kubernetes est écrite en Markdown puis traitée et déployée à
+La documentation de Kubernetes est écrite en Markdown puis traitée et déployée �
 l’aide de Hugo. Le code source est sur GitHub:
 [https://github.com/kubernetes/website](https://github.com/kubernetes/website).
 La majeure partie de la documentation anglaise est stockée dans
@@ -116,7 +116,7 @@ un bogue d'abord.
 
   Si vous voyez un problème dans une page existante de
   [la documentation Kubernetes](/docs/), allez au bas de la page et cliquez sur
-  le bouton **Create an Issue**. Si vous n'êtes pas actuellement connecté à
+  le bouton **Create an Issue**. Si vous n'êtes pas actuellement connecté �
   GitHub, connectez-vous. Un formulaire de ticket GitHub apparaît avec du
   contenu pré-rempli.
 
@@ -131,7 +131,7 @@ un bogue d'abord.
   doit aller ou si vous pensez qu'il ne correspond pas aux pages existantes,
   vous pouvez toujours ouvrir un ticket. Vous pouvez soit choisir une page
   existante à proximité du lieu où le nouveau contenu doit aller et classer le
-  problème à partir de cette page, soit aller directement à
+  problème à partir de cette page, soit aller directement �
   [https://github.com/kubernetes/website/issues/new/](https://github.com/kubernetes/website/issues/new/)
   et déposer le problème à partir de là.
 
@@ -168,7 +168,7 @@ L'équipe SIG Docs communique à l'aide des mécanismes suivants:
 - [Rejoignez la liste de diffusion `kubernetes-sig-docs`](https://groups.google.com/forum/#!forum/kubernetes-sig-docs),
   où des discussions plus larges ont lieu et où les décisions officielles sont
   enregistrées.
-- Participer à
+- Participer �
   l'[hebdomadaire SIG Docs](https://github.com/kubernetes/community/tree/master/sig-docs),
   une réunion vidéo, qui est annoncée sur le canal Slack et la liste de
   diffusion. Actuellement, ces réunions ont lieu sur Zoom. Vous devez donc
@@ -218,7 +218,7 @@ simplement les instructions ci-dessous. Vous n'avez pas besoin
 d'[ouvrir un ticket](#file-actionable-issues) (bien que vous puissiez aussi).
 
 Si vous souhaitez commencer par trouver un problème existant sur lequel
-travailler, allez à
+travailler, allez �
 [https://github.com/kubernetes/website/issues](https://github.com/kubernetes/website/issues)
 et chercher des problèmes avec le label `good first issue` (vous pouvez utiliser
 [ce](https://github.com/kubernetes/website/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
@@ -241,7 +241,7 @@ la décision:
     ou modifications à venir pour une version à venir non encore publiée.
 - Utilisez une branche de fonctionnalités approuvée par SIG Docs pour collaborer
   à de grandes améliorations ou modifications de la documentation existante, y
-  compris la réorganisation du contenu ou des modifications apportées à
+  compris la réorganisation du contenu ou des modifications apportées �
   l'apparence du site Web.
 
 Si vous ne savez toujours pas quelle branche choisir, demandez `#sig-docs` sur
@@ -341,7 +341,7 @@ commentaire, vous pourrez avoir une idée des conventions des pull requests, de
 l'étiquette des interactions entre les différents membres et ainsi vous habituer
 au processus.
 
-1.  Allez à
+1.  Allez �
     [https://github.com/kubernetes/website/pulls](https://github.com/kubernetes/website/pulls).
     Vous verrez une liste de toutes les pull requests ouvertes visant site web
     Kubernetes et la documentation.
