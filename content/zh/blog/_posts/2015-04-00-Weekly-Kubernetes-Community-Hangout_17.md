@@ -4,19 +4,22 @@ date: 2015-04-17
 slug: weekly-kubernetes-community-hangout_17
 ---
 
-<!--
+## <!--
+
+title: " Weekly Kubernetes Community Hangout Notes - April 17 2015 " date:
+2015-04-17 slug: weekly-kubernetes-community-hangout_17 url:
+/blog/2015/04/Weekly-Kubernetes-Community-Hangout_17
+
 ---
-title: " Weekly Kubernetes Community Hangout Notes - April 17 2015 "
-date: 2015-04-17
-slug: weekly-kubernetes-community-hangout_17
-url: /blog/2015/04/Weekly-Kubernetes-Community-Hangout_17
----
+
 -->
 
 <!--
 Every week the Kubernetes contributing community meet virtually over Google Hangouts. We want anyone who's interested to know what's discussed in this forum.
 -->
-每个星期，Kubernetes 贡献者社区几乎都会在谷歌 Hangouts 上聚会。我们希望任何对此感兴趣的人都能了解这个论坛的讨论内容。
+
+每个星期，Kubernetes 贡献者社区几乎都会在谷歌 Hangouts 上聚会。我们希望任何对此
+感兴趣的人都能了解这个论坛的讨论内容。
 
 <!--
 Agenda
@@ -27,16 +30,18 @@ Agenda
 * Versioned clients
 
 -->
+
 议程
 
-* Mesos 集成
-* 高可用性（HA）
-* 向 e2e 添加性能和分析详细信息以跟踪回归
-* 客户端版本化
+- Mesos 集成
+- 高可用性（HA）
+- 向 e2e 添加性能和分析详细信息以跟踪回归
+- 客户端版本化
 
 <!--
 Notes
 -->
+
 笔记
 
 <!--
@@ -51,13 +56,13 @@ Notes
 
 -->
 
-* Mesos 集成
+- Mesos 集成
 
-    * Mesos 集成提案：
+  - Mesos 集成提案：
 
-    * 没有阻塞集成的因素。
+  - 没有阻塞集成的因素。
 
-    * 文档需要更新。
+  - 文档需要更新。
 
 <!--
 
@@ -73,15 +78,15 @@ Notes
 
 -->
 
-* HA
+- HA
 
-    * 提案今天应该会提交。
+  - 提案今天应该会提交。
 
-    * Etcd 集群。
+  - Etcd 集群。
 
-    * apiserver 负载均衡。
+  - apiserver 负载均衡。
 
-    * 控制器管理器和其他主组件的冷备用。
+  - 控制器管理器和其他主组件的冷备用。
 
 <!--
 
@@ -97,15 +102,15 @@ Notes
 
 -->
 
-* 向 e2e 添加性能和分析详细信息以跟踪回归
+- 向 e2e 添加性能和分析详细信息以跟踪回归
 
-    * 希望红色为性能回归
+  - 希望红色为性能回归
 
-    * 需要公共数据库才能发布数据
+  - 需要公共数据库才能发布数据
 
-        * 查看
+    - 查看
 
-    * Justin 致力于多平台 e2e 仪表盘
+  - Justin 致力于多平台 e2e 仪表盘
 
 <!--
 
@@ -125,19 +130,19 @@ Notes
 
 -->
 
-* 客户端版本化
+- 客户端版本化
 
-    *
+  \*
 
-    *
+  \*
 
-    * 客户端库当前使用内部 API 对象。
+  - 客户端库当前使用内部 API 对象。
 
-    * 尽管没有人反映频繁修改 `types.go` 有多痛苦，但我们很为此担心。
+  - 尽管没有人反映频繁修改 `types.go` 有多痛苦，但我们很为此担心。
 
-    * 结构化类型在客户端中很有用。版本化的结构就可以了。
+  - 结构化类型在客户端中很有用。版本化的结构就可以了。
 
-    * 如果从 json/yaml (kubectl) 开始，则不应转换为结构化类型。使用 swagger。
+  - 如果从 json/yaml (kubectl) 开始，则不应转换为结构化类型。使用 swagger。
 
 <!--
 
@@ -152,15 +157,15 @@ Notes
     * Policy proposal coming in the next week or so
 -->
 
-* Security context
+- Security context
 
-    *
+  \*
 
-    * 管理员可以限制谁可以运行特权容器或需要特定的 unix uid
+  - 管理员可以限制谁可以运行特权容器或需要特定的 unix uid
 
-    * kubelet 将能够从 apiserver 获取证书
+  - kubelet 将能够从 apiserver 获取证书
 
-    * 政策提案将于下周左右出台
+  - 政策提案将于下周左右出台
 
 <!--
 
@@ -178,57 +183,84 @@ Notes
 
 -->
 
-* 讨论用户的上游，等等进入Kubernetes，至少是可选的
-* 1.0 路线图
+- 讨论用户的上游，等等进入 Kubernetes，至少是可选的
+- 1.0 路线图
 
-    * 重点是性能，稳定性，集群升级
+  - 重点是性能，稳定性，集群升级
 
-    * TJ 一直在对[roadmap.md][4]进行一些编辑，但尚未发布PR
-* Kubernetes UI
+  - TJ 一直在对[roadmap.md][4]进行一些编辑，但尚未发布 PR
 
-    * 依赖关系分解为第三方
+- Kubernetes UI
 
-    * @lavalamp 是评论家
+  - 依赖关系分解为第三方
 
+  - @lavalamp 是评论家
 
 [1]: http://kubernetes.io/images/nav_logo.svg
 [2]: http://kubernetes.io/docs/
 [3]: https://kubernetes.io/blog/
-[4]: https://github.com/GoogleCloudPlatform/kubernetes/blob/master/docs/roadmap.md
-[5]: https://kubernetes.io/blog/2015/04/weekly-kubernetes-community-hangout_17 "permanent link"
+[4]:
+  https://github.com/GoogleCloudPlatform/kubernetes/blob/master/docs/roadmap.md
+[5]:
+  https://kubernetes.io/blog/2015/04/weekly-kubernetes-community-hangout_17
+  "permanent link"
 [6]: https://resources.blogblog.com/img/icon18_edit_allbkg.gif
-[7]: https://www.blogger.com/post-edit.g?blogID=112706738355446097&postID=630924463010638300&from=pencil "Edit Post"
-[8]: https://www.blogger.com/share-post.g?blogID=112706738355446097&postID=630924463010638300&target=email "Email This"
-[9]: https://www.blogger.com/share-post.g?blogID=112706738355446097&postID=630924463010638300&target=blog "BlogThis!"
-[10]: https://www.blogger.com/share-post.g?blogID=112706738355446097&postID=630924463010638300&target=twitter "Share to Twitter"
-[11]: https://www.blogger.com/share-post.g?blogID=112706738355446097&postID=630924463010638300&target=facebook "Share to Facebook"
-[12]: https://www.blogger.com/share-post.g?blogID=112706738355446097&postID=630924463010638300&target=pinterest "Share to Pinterest"
+[7]:
+  https://www.blogger.com/post-edit.g?blogID=112706738355446097&postID=630924463010638300&from=pencil
+  "Edit Post"
+[8]:
+  https://www.blogger.com/share-post.g?blogID=112706738355446097&postID=630924463010638300&target=email
+  "Email This"
+[9]:
+  https://www.blogger.com/share-post.g?blogID=112706738355446097&postID=630924463010638300&target=blog
+  "BlogThis!"
+[10]:
+  https://www.blogger.com/share-post.g?blogID=112706738355446097&postID=630924463010638300&target=twitter
+  "Share to Twitter"
+[11]:
+  https://www.blogger.com/share-post.g?blogID=112706738355446097&postID=630924463010638300&target=facebook
+  "Share to Facebook"
+[12]:
+  https://www.blogger.com/share-post.g?blogID=112706738355446097&postID=630924463010638300&target=pinterest
+  "Share to Pinterest"
 [13]: https://kubernetes.io/blog/search/label/community%20meetings
 [14]: https://kubernetes.io/blog/search/label/containers
 [15]: https://kubernetes.io/blog/search/label/docker
 [16]: https://kubernetes.io/blog/search/label/k8s
 [17]: https://kubernetes.io/blog/search/label/kubernetes
 [18]: https://kubernetes.io/blog/search/label/open%20source
-[19]: https://kubernetes.io/blog/2015/04/kubernetes-and-mesosphere-dcos "Newer Post"
-[20]: https://kubernetes.io/blog/2015/04/introducing-kubernetes-v1beta3 "Older Post"
+[19]:
+  https://kubernetes.io/blog/2015/04/kubernetes-and-mesosphere-dcos
+  "Newer Post"
+[20]:
+  https://kubernetes.io/blog/2015/04/introducing-kubernetes-v1beta3
+  "Older Post"
 [21]: https://kubernetes.io/blog/feeds/630924463010638300/comments/default
 [22]: https://img2.blogblog.com/img/widgets/arrow_dropdown.gif
 [23]: https://img1.blogblog.com/img/icon_feed12.png
 [24]: https://img1.blogblog.com/img/widgets/subscribe-netvibes.png
-[25]: https://www.netvibes.com/subscribe.php?url=http%3A%2F%2Fblog.kubernetes.io%2Ffeeds%2Fposts%2Fdefault
+[25]:
+  https://www.netvibes.com/subscribe.php?url=http%3A%2F%2Fblog.kubernetes.io%2Ffeeds%2Fposts%2Fdefault
 [26]: https://img1.blogblog.com/img/widgets/subscribe-yahoo.png
-[27]: https://add.my.yahoo.com/content?url=http%3A%2F%2Fblog.kubernetes.io%2Ffeeds%2Fposts%2Fdefault
+[27]:
+  https://add.my.yahoo.com/content?url=http%3A%2F%2Fblog.kubernetes.io%2Ffeeds%2Fposts%2Fdefault
 [28]: https://kubernetes.io/blog/feeds/posts/default
-[29]: https://www.netvibes.com/subscribe.php?url=http%3A%2F%2Fblog.kubernetes.io%2Ffeeds%2F630924463010638300%2Fcomments%2Fdefault
-[30]: https://add.my.yahoo.com/content?url=http%3A%2F%2Fblog.kubernetes.io%2Ffeeds%2F630924463010638300%2Fcomments%2Fdefault
+[29]:
+  https://www.netvibes.com/subscribe.php?url=http%3A%2F%2Fblog.kubernetes.io%2Ffeeds%2F630924463010638300%2Fcomments%2Fdefault
+[30]:
+  https://add.my.yahoo.com/content?url=http%3A%2F%2Fblog.kubernetes.io%2Ffeeds%2F630924463010638300%2Fcomments%2Fdefault
 [31]: https://resources.blogblog.com/img/icon18_wrench_allbkg.png
-[32]: //www.blogger.com/rearrange?blogID=112706738355446097&widgetType=Subscribe&widgetId=Subscribe1&action=editWidget§ionId=sidebar-right-1 "Edit"
+[32]:
+  //www.blogger.com/rearrange?blogID=112706738355446097&widgetType=Subscribe&widgetId=Subscribe1&action=editWidget§ionId=sidebar-right-1
+  "Edit"
 [33]: https://twitter.com/kubernetesio
 [34]: https://github.com/kubernetes/kubernetes
 [35]: http://slack.k8s.io/
 [36]: http://stackoverflow.com/questions/tagged/kubernetes
 [37]: http://get.k8s.io/
-[38]: //www.blogger.com/rearrange?blogID=112706738355446097&widgetType=HTML&widgetId=HTML2&action=editWidget§ionId=sidebar-right-1 "Edit"
+[38]:
+  //www.blogger.com/rearrange?blogID=112706738355446097&widgetType=HTML&widgetId=HTML2&action=editWidget§ionId=sidebar-right-1
+  "Edit"
 [39]: javascript:void(0)
 [40]: https://kubernetes.io/blog/2018/
 [41]: https://kubernetes.io/blog/2018/01/
@@ -278,9 +310,14 @@ Notes
 [85]: https://kubernetes.io/blog/2015/04/faster-than-speeding-latte
 [86]: https://kubernetes.io/blog/2015/04/weekly-kubernetes-community-hangout
 [87]: https://kubernetes.io/blog/2015/03/
-[88]: //www.blogger.com/rearrange?blogID=112706738355446097&widgetType=BlogArchive&widgetId=BlogArchive1&action=editWidget§ionId=sidebar-right-1 "Edit"
-[89]: //www.blogger.com/rearrange?blogID=112706738355446097&widgetType=HTML&widgetId=HTML1&action=editWidget§ionId=sidebar-right-1 "Edit"
+[88]:
+  //www.blogger.com/rearrange?blogID=112706738355446097&widgetType=BlogArchive&widgetId=BlogArchive1&action=editWidget§ionId=sidebar-right-1
+  "Edit"
+[89]:
+  //www.blogger.com/rearrange?blogID=112706738355446097&widgetType=HTML&widgetId=HTML1&action=editWidget§ionId=sidebar-right-1
+  "Edit"
 [90]: https://www.blogger.com
-[91]: //www.blogger.com/rearrange?blogID=112706738355446097&widgetType=Attribution&widgetId=Attribution1&action=editWidget§ionId=footer-3 "Edit"
-
-  [*[3:27 PM]: 2015-04-17T15:27:00-07:00
+[91]:
+  //www.blogger.com/rearrange?blogID=112706738355446097&widgetType=Attribution&widgetId=Attribution1&action=editWidget§ionId=footer-3
+  "Edit"
+[*[3:27 pm]: 2015-04-17T15:27:00-07:00

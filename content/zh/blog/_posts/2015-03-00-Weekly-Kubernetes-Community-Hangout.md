@@ -4,23 +4,27 @@ date: 2015-03-28
 slug: weekly-kubernetes-community-hangout
 ---
 
-<!--
+## <!--
+
+title: " Weekly Kubernetes Community Hangout Notes - March 27 2015 " date:
+2015-03-28 slug: weekly-kubernetes-community-hangout url:
+/blog/2015/03/Weekly-Kubernetes-Community-Hangout
+
 ---
-title: " Weekly Kubernetes Community Hangout Notes - March 27 2015 "
-date: 2015-03-28
-slug: weekly-kubernetes-community-hangout
-url: /blog/2015/03/Weekly-Kubernetes-Community-Hangout
----
+
 -->
 
 <!--
 Every week the Kubernetes contributing community meet virtually over Google Hangouts. We want anyone who's interested to know what's discussed in this forum.
 -->
-每个星期，Kubernetes 贡献者社区几乎都会在谷歌 Hangouts 上聚会。我们希望任何对此感兴趣的人都能了解这个论坛的讨论内容。
+
+每个星期，Kubernetes 贡献者社区几乎都会在谷歌 Hangouts 上聚会。我们希望任何对此
+感兴趣的人都能了解这个论坛的讨论内容。
 
 <!--
 Agenda:
 -->
+
 日程安排：
 
 <!--
@@ -42,6 +46,7 @@ Agenda:
 <!--
 Notes from meeting:
 -->
+
 从会议指出：
 
 <!--
@@ -58,7 +63,7 @@ Notes from meeting:
 
 -->
 
-* 演示远程执行
+- 演示远程执行
 
 <!--
 
@@ -107,8 +112,8 @@ Notes from meeting:
 
 -->
 
-* Andy 还演示了端口转发
-* nnsenter 与 docker exec
+- Andy 还演示了端口转发
+- nnsenter 与 docker exec
 
 <!--
 
@@ -129,8 +134,8 @@ Notes from meeting:
 
 -->
 
-* 如果能在博客上发表这方面的文章就太好了
-* wheezy 中的 nginx 版本太旧，无法支持所需的主代理功能
+- 如果能在博客上发表这方面的文章就太好了
+- wheezy 中的 nginx 版本太旧，无法支持所需的主代理功能
 
 <!--
 
@@ -145,10 +150,10 @@ Notes from meeting:
 
 2\. Clayton: 我们的社区组织在哪里，例如 kubernetes UI 组件？
 
-* google-containers-ui IRC 频道，邮件列表。
-* Tim: google-containers 前缀是历史的，应该只做 "kubernetes-ui"
-* 也希望将设计资源投入使用，并且 bower 期望自己的仓库。
-* 通用协议
+- google-containers-ui IRC 频道，邮件列表。
+- Tim: google-containers 前缀是历史的，应该只做 "kubernetes-ui"
+- 也希望将设计资源投入使用，并且 bower 期望自己的仓库。
+- 通用协议
 
 <!--
 
@@ -163,10 +168,10 @@ Notes from meeting:
 
 3\. Brian Grant:
 
-* 测试 v1beta3，准备进入。
-* Paul 力于改变命令行的内容。
-* 下周初至中旬，尝试默认启用v1beta3 ?
-* 对于任何其他更改，请发出文件并抄送 thockin。
+- 测试 v1beta3，准备进入。
+- Paul 力于改变命令行的内容。
+- 下周初至中旬，尝试默认启用 v1beta3 ?
+- 对于任何其他更改，请发出文件并抄送 thockin。
 
 <!--
 
@@ -174,7 +179,7 @@ Notes from meeting:
 
 -->
 
-4\. 一般认为30分钟比60分钟好
+4\. 一般认为 30 分钟比 60 分钟好
 
 <!--
 
@@ -182,4 +187,4 @@ Notes from meeting:
 
 -->
 
-* 不应该为了填满时间而人为地延长。
+- 不应该为了填满时间而人为地延长。

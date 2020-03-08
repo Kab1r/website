@@ -4,12 +4,12 @@ date: 2015-04-30
 slug: weekly-kubernetes-community-hangout_29
 ---
 
-<!--
----
-title: " Weekly Kubernetes Community Hangout Notes - April 24 2015 "
-date: 2015-04-30
-slug: weekly-kubernetes-community-hangout_29
-url: /blog/2015/04/Weekly-Kubernetes-Community-Hangout_29
+## <!--
+
+title: " Weekly Kubernetes Community Hangout Notes - April 24 2015 " date:
+2015-04-30 slug: weekly-kubernetes-community-hangout_29 url:
+/blog/2015/04/Weekly-Kubernetes-Community-Hangout_29
+
 ---
 
 -->
@@ -17,7 +17,9 @@ url: /blog/2015/04/Weekly-Kubernetes-Community-Hangout_29
 <!--
 Every week the Kubernetes contributing community meet virtually over Google Hangouts. We want anyone who's interested to know what's discussed in this forum.
 -->
-每个星期，Kubernetes 贡献者社区几乎都会在谷歌 Hangouts 上聚会。我们希望任何对此感兴趣的人都能了解这个论坛的讨论内容。
+
+每个星期，Kubernetes 贡献者社区几乎都会在谷歌 Hangouts 上聚会。我们希望任何对此
+感兴趣的人都能了解这个论坛的讨论内容。
 
 <!--
 Agenda:
@@ -25,9 +27,10 @@ Agenda:
 * Flocker and Kubernetes integration demo
 
 -->
+
 日程安排：
 
-* Flocker 和 Kubernetes 集成演示
+- Flocker 和 Kubernetes 集成演示
 
 <!--
 Notes:
@@ -46,20 +49,22 @@ Notes:
         * Tim: Should take no more than 45 minutes to add it to kubernetes:)
 
 -->
+
 笔记：
 
-* flocker 和 kubernetes 集成演示
-* * Flocker Q/A
+- flocker 和 kubernetes 集成演示
+- - Flocker Q/A
 
-    * 迁移后文件是否仍存在于node1上？
+    - 迁移后文件是否仍存在于 node1 上？
 
-    * Brendan: 有没有计划把它做成一本书？我们不需要 powerstrip？
+    - Brendan: 有没有计划把它做成一本书？我们不需要 powerstrip？
 
-        * Luke:  需要找出感兴趣的来决定我们是否想让它成为 kube 中的一个一流的持久性磁盘提供商。
+      - Luke: 需要找出感兴趣的来决定我们是否想让它成为 kube 中的一个一流的持久性
+        磁盘提供商。
 
-        * Brendan: 删除对 powerstrip 的需求会使其易于使用。完全去做。
+      - Brendan: 删除对 powerstrip 的需求会使其易于使用。完全去做。
 
-        * Tim: 将它添加到 kubernetes 应该不超过45分钟:)
+      - Tim: 将它添加到 kubernetes 应该不超过 45 分钟:)
 
 <!--
 
@@ -137,6 +142,5 @@ Notes:
         * Tim: pmorie 正在通过它使 kubelet 在容器中工作。可能重复使用。
 
     * Kai: Cinder 支持即将到来。几天之后。
-* Bob: 向 GKE 推送 kube 的过程是怎样的？需要更多的可见度。
 
-
+- Bob: 向 GKE 推送 kube 的过程是怎样的？需要更多的可见度。
