@@ -37,7 +37,7 @@ schedulers.
 Flow graph scheduling with the Poseidon-Firmament scheduler provides the
 following advantages:
 
-- Workloads (Pods) are bulk scheduled to enable scheduling at massive scale.  
+- Workloads (Pods) are bulk scheduled to enable scheduling at massive scale.
   The Poseidon-Firmament scheduler outperforms the Kubernetes default scheduler
   by a wide margin when it comes to throughput performance for scenarios where
   compute resource requirements are somewhat uniform across your workload
