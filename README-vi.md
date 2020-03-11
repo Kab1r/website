@@ -11,7 +11,7 @@ rất vui vì bạn muốn đóng góp.
 
 Bạn có thể click vào nút **Fork** ở góc trên bên phải màn hình để tạo bản sao
 của kho lưu trữ này trong tài khoản GitHub của bạn. Bản sao này được gọi là một
-bản _fork_. Thực hiện bất kì thay đổi nào mà bạn muốn trong bản fork của bạn và
+bản _fork_. Thực hiện bất kì thay đổi nào mà bạn muốn trong bản fork của bạn v�
 khi bạn sẵn sang gửi những thay đổi đó cho chúng tôi, hãy đến bản fork của bạn
 và tạo một Pull Request mới để cho chúng tôi biết về nó.
 
@@ -40,7 +40,7 @@ Cách được đề xuất để chạy trang web Kubernetes cục bộ là dù
 [Docker](https://docker.com) image chứa trình tạo web tĩnh
 [Hugo](https://gohugo.io).
 
-> Nếu bạn làm việc trên môi trường Windows, bạn sẽ cần thêm môt vài công cụ mà
+> Nếu bạn làm việc trên môi trường Windows, bạn sẽ cần thêm môt vài công cụ m�
 > bạn có thể cài đặt với [Chocolatey](https://chocolatey.org).
 > `choco install make`
 
@@ -77,7 +77,7 @@ xác định bởi biến môi trường `HUGO_VERSION` trong file
 make serve
 ```
 
-Câu lệnh trên sẽ khởi động server Hugo cục bộ trên cổng 1313. Mở trình duyệt và
+Câu lệnh trên sẽ khởi động server Hugo cục bộ trên cổng 1313. Mở trình duyệt v�
 đến địa chỉ http://localhost:1313 để xem website. Khi bạn thay đổi các file
 nguồn, Hugo cập nhật website và buộc làm mới trình duyệt.
 
