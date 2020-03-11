@@ -648,7 +648,7 @@ Each feature gate is designed for enabling/disabling a specific feature:
 - `EnableAggregatedDiscoveryTimeout` （ _已弃用_ ）：对聚集的发现调用启用五秒钟
   超时设置。
 - `EnableEquivalenceClassCache`：调度 Pod 时，使 scheduler 缓存节点的等效项。
-- `EphemeralContainers`：启用添加
+- `EphemeralContainers`：启用添�
   {{< glossary_tooltip text="临时容器" term_id="ephemeral-container" >}} 到正在
   运行的 Pod 的特性。
 - `EvenPodsSpread`：使 Pod 能够在拓扑域之间平衡调度。请参阅
