@@ -614,7 +614,7 @@ kube-apiserver 这样的控制平面组件。然而，由于解析 (`mapStringSt
 
 如果您决定传递一个支持多个逗号分隔值（例如
 `--apiserver-extra-args "enable-admission-plugins=LimitRanger,NamespaceExists"`）
-参数，将出现 `flag: malformed pair, expect string=string` 错误。发生这种问题是因
+参数，将出现 `flag: malformed pair, expect string=string` 错误。发生这种问题是�
 为参数列表 `--apiserver-extra-args` 预期的是 `key=value` 形式，而这里的
 `NamespacesExists` 被误认为是缺少取值的键名。
 
