@@ -204,7 +204,7 @@ Si vous êtes sur MacOS et que vous utilisez le gestionnaire de paquets
     ```
 
     Pour connaître la dernière version stable (par exemple, en scripting), jetez
-    un coup d'oeil à
+    un coup d'oeil �
     [https://storage.googleapis.com/kubernetes-release/release/stable.txt](https://storage.googleapis.com/kubernetes-release/release/stable.txt).
 
 2.  Ajoutez le binaire dans votre PATH.
@@ -454,7 +454,7 @@ instructions ci-dessous ne fonctionnent que si vous utilisez Bash 4.1+.
 ### Installer bash-completion
 
 {{< note >}} Comme mentionné, ces instructions supposent que vous utilisez Bash
-4.1+, ce qui signifie que vous installerez bash-completion v2 (contrairement à
+4.1+, ce qui signifie que vous installerez bash-completion v2 (contrairement �
 Bash 3.2 et bash-completion v1, auquel cas la complétion pour kubectl ne
 fonctionnera pas). {{< /note >}}
 
