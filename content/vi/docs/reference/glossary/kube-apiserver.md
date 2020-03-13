@@ -20,7 +20,7 @@ API server là một thành phần của Kubernetes
 
 <!--more-->
 
-Thực thi chính của API server là
+Thực thi chính của API server l�
 [kube-apiserver](/docs/reference/generated/kube-apiserver/). kube-apiserver được
 thiết kế để co giãn theo chiều ngang &mdash; có nghĩa là nó co giãn bằng cách
 triển khai thêm các thực thể. Bạn có thể chạy một vài thực thể của

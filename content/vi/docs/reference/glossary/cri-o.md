@@ -20,5 +20,5 @@ cái mà tương thích với Open Container Initiative (OCI)
 [runtime spec](http://www.github.com/opencontainers/runtime-spec).
 
 Triển khai CRI-O cho phép Kuberentes sử dụng bất kì OCI-compliant runtime như
-container runtime để chạy {{< glossary_tooltip text="Pods" term_id="pod" >}}, và
+container runtime để chạy {{< glossary_tooltip text="Pods" term_id="pod" >}}, v�
 để lấy CRI container image từ các remote registry.

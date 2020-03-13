@@ -4,7 +4,7 @@ id: kube-scheduler
 date: 2020-03-05
 full_link: /docs/reference/generated/kube-scheduler/
 short_description: >
-  Thành phần của Control Plane, được dùng để giám sát việc tạo những pod mới mà
+  Thành phần của Control Plane, được dùng để giám sát việc tạo những pod mới m�
   chưa được chỉ định vào node nào, và chọn một node để chúng chạy trên đó.
 
 aka:
@@ -12,7 +12,7 @@ tags:
   - architecture
 ---
 
-Thành phần của Control Plane, được dùng để giám sát việc tạo những pod mới mà
+Thành phần của Control Plane, được dùng để giám sát việc tạo những pod mới m�
 chưa được chỉ định vào node nào, và chọn một node để chúng chạy trên đó.
 
 <!--more-->
