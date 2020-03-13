@@ -34,7 +34,7 @@ GiB 메모리가 필요하다. 이 튜토리얼에서 클러스터 노드를 통
 클러스터를 이용하거나, 다른 테넌트에 간섭을 하는 혼란이 발생하지 않도록 해야 합
 니다.
 
-이 튜토리얼은 클러스터가 동적으로 퍼시스턴트볼륨을 프로비저닝하도록 구성한다고
+이 튜토리얼은 클러스터가 동적으로 퍼시스턴트볼륨을 프로비저닝하도록 구성한다�
 가정한다. 그렇게 설정되어 있지 않다면튜토리얼을 시작하기 전에 수동으로 3개의 20
 GiB 볼륨을프로비저닝해야 한다. {{% /capture %}}
 
@@ -60,7 +60,7 @@ GiB 볼륨을프로비저닝해야 한다. {{% /capture %}}
 보장한다.
 
 앙상블은 리더 선출을 위해 Zab 프로토콜을 사용하고, 리더 선출과 선거가 완료되기
-전까지 앙상블은 데이터를 쓸 수 없다. 완료되면 앙상블은 Zab을 이용하여 확인하고
+전까지 앙상블은 데이터를 쓸 수 없다. 완료되면 앙상블은 Zab을 이용하여 확인하�
 클라이언트에 보이도록 모든 쓰기를 쿼럼(quorum)에 복제한다. 가중치있는 쿼럼과 관
 련 없이, 쿼럼은 현재 리더를 포함하는 앙상블의 대다수 컴포넌트이다. 예를 들어 앙
 상블이 3개 서버인 경우, 리더와 다른 서버로 쿼럼을 구성한다. 앙상블이 쿼럼을 달성
@@ -82,7 +82,7 @@ ZooKeeper는 전체 상태 머신을 메모리에 보존하고 모든 돌연변�
 
 {{< codenew file="application/zookeeper/zookeeper.yaml" >}}
 
-터미널을 열고
+터미널을 열�
 [`kubectl apply`](/docs/reference/generated/kubectl/kubectl-commands/#apply) 명
 령어로메니페스트를 생성하자.
 
@@ -228,7 +228,7 @@ server.3=zk-2.zk-hs.default.svc.cluster.local:2888:3888
 
 ### 합의 달성
 
-합의 프로토콜에서 각 참가자의 식별자는 유일해야 한다. Zab 프로토콜에서 동일한 고
+합의 프로토콜에서 각 참가자의 식별자는 유일해야 한다. Zab 프로토콜에서 동일한 �
 유 식별자를 요청하는 참가자는 없다. 이는 시스템 프로세스가 어떤 프로세스가 어떤
 데이터를 커밋했는지 동의하게 하는데 필요하다. 2개 파드를 동일 순번으로 시작하였
 다면 두 대의 ZooKeeper 서버는 둘 다 스스로를 동일 서버로 식별한다.
@@ -278,7 +278,7 @@ server.2=zk-1.zk-hs.default.svc.cluster.local:2888:3888
 server.3=zk-2.zk-hs.default.svc.cluster.local:2888:3888
 ```
 
-서버가 Zab 프로토콜로 값을 커밋 시도하면, 합의를 이루어 값을 커밋하거나(리더 선
+서버가 Zab 프로토콜로 값을 커밋 시도하면, 합의를 이루어 값을 커밋하거나(리더 �
 출에 성공했고 나머지 두 개 파드도 Running과 Ready 상태라면) 실패한다(조건 중 하
 나라도 충족하지 않으면). 다른 서버를 대신하여 쓰기를 승인하는 상태는 발생하지 않
 는다.
@@ -428,7 +428,7 @@ dataLength = 5
 numChildren = 0
 ```
 
-`zk` 스테이트풀셋의 `spec`에 `volumeClaimTemplates` 필드는 각 파드에 프로비전될
+`zk` 스테이트풀셋의 `spec`에 `volumeClaimTemplates` 필드는 각 파드에 프로비전�
 퍼시스턴트볼륨을 지정한다.
 
 ```yaml
@@ -619,8 +619,8 @@ F S UID        PID  PPID  C PRI  NI ADDR SZ WCHAN  STIME TTY          TIME CMD
 0 S zookeep+    27     1  0  80   0 - 1155556 -    20:46 ?        00:00:19 /usr/lib/jvm/java-8-openjdk-amd64/bin/java -Dzookeeper.log.dir=/var/log/zookeeper -Dzookeeper.root.logger=INFO,CONSOLE -cp /usr/bin/../build/classes:/usr/bin/../build/lib/*.jar:/usr/bin/../share/zookeeper/zookeeper-3.4.9.jar:/usr/bin/../share/zookeeper/slf4j-log4j12-1.6.1.jar:/usr/bin/../share/zookeeper/slf4j-api-1.6.1.jar:/usr/bin/../share/zookeeper/netty-3.10.5.Final.jar:/usr/bin/../share/zookeeper/log4j-1.2.16.jar:/usr/bin/../share/zookeeper/jline-0.9.94.jar:/usr/bin/../src/java/lib/*.jar:/usr/bin/../etc/zookeeper: -Xmx2G -Xms2G -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=false org.apache.zookeeper.server.quorum.QuorumPeerMain /usr/bin/../etc/zookeeper/zoo.cfg
 ```
 
-기본적으로 파드의 퍼시스턴트볼륨은 ZooKeeper 서버의 데이터 디렉터리에 마운트되고
-, 루트 사용자만이 접근 가능하다. 이 구성은 ZooKeeper 프로세스가 WAL에 기록하고
+기본적으로 파드의 퍼시스턴트볼륨은 ZooKeeper 서버의 데이터 디렉터리에 마운트되�
+, 루트 사용자만이 접근 가능하다. 이 구성은 ZooKeeper 프로세스가 WAL에 기록하�
 스냅샷을 저장하는 것을 방지한다.
 
 `zk-0` 파드의 ZooKeeper 데이터 디렉터리의 권한을 얻어오는 아래 명령어를 이용하자
@@ -641,7 +641,7 @@ drwxr-sr-x 3 zookeeper zookeeper 4096 Dec  5 20:45 /var/lib/zookeeper/data
 ## ZooKeeper 프로세스 관리하기
 
 [ZooKeeper 문서](https://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_supervision)에
-서는 "ZooKeeper의 서버 프로세스(JVM)을 관리할감독 프로세스를 필요할 것이다."라고
+서는 "ZooKeeper의 서버 프로세스(JVM)을 관리할감독 프로세스를 필요할 것이다."라�
 말한다. 와치독(감독 프로세스)를 활용하여 실패한 프로세스를 재시작하는 것은 분산
 시스템에서일반적인 방식이다. 쿠버네티스에서 애플리케이션을 배포할 때에는감독 프
 로세스로 외부 유틸리티를 사용하기보다 쿠버네티스를 애플리케이션의와치독으로서 사
@@ -849,7 +849,7 @@ ZooKeeper는 변조된 데이터를 성공적으로 커밋하기 위한 서버�
 의 응용 프로그램을 함께 배치하는 것을 배제한다.
 
 기본적으로 쿠버네티스는 동일 노드상에 `스테이트풀셋`의 파드를 위치시킬 수 있다.
-생성한 3개의 서버 앙상블에서 2개의 서버가 같은 노드에 있다면, 그 노드는 실패하고
+생성한 3개의 서버 앙상블에서 2개의 서버가 같은 노드에 있다면, 그 노드는 실패하�
 ZooKeeper 서비스 클라이언트는 그 파드들의 최소 하나가 재스케쥴링될 때까지 작동
 중단을 경험할 것이다.
 

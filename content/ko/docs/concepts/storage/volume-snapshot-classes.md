@@ -26,7 +26,7 @@ weight: 30
 전 할 때 사용되는 `driver`, `deletionPolicy` 그리고 `parameters` 필드를 포함한다
 .
 
-`VolumeSnapshotClass` 오브젝트의 이름은 중요하며, 사용자가 특정클래스를 요청할
+`VolumeSnapshotClass` 오브젝트의 이름은 중요하며, 사용자가 특정클래스를 요청�
 수 있는 방법이다. 관리자는 `VolumeSnapshotClass` 오브젝트를처음 생성할 때 클래스
 의 이름과 기타 파라미터를 설정하고, 오브젝트가생성된 이후에는 업데이트할 수 없다
 .
