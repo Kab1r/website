@@ -114,7 +114,7 @@ access the Pods.
 
 {{< note >}} This manifest file creates a Service named `redis-master` with a
 set of labels that match the labels previously defined, so the Service routes
-network traffic to the Redis master Pod.  
+network traffic to the Redis master Pod.
 {{< /note >}}
 
 ## Start up the Redis Slaves

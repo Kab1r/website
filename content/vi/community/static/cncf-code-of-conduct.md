@@ -7,7 +7,7 @@
 
 Là người đóng góp và duy trì dự án này, và vì lợi ích thúc đẩy một cộng đồng mở,
 chúng tôi cam kết tôn trọng tất cả những người đóng góp thông qua việc báo cáo
-các vấn đề, các tính năng yêu cầu, cập nhật tài liệu, gửi PRs hay patches, và
+các vấn đề, các tính năng yêu cầu, cập nhật tài liệu, gửi PRs hay patches, v�
 các hoạt động khác.
 
 Chúng tôi cam kết tham gia dự án này là một trải nghiệm tốt cho mọi người, bất
@@ -49,5 +49,5 @@ http://contributor-covenant.org/version/1/2/0/
 
 Các sự kiện CNCF được điều hành bởi Linux Foundation
 [Quy tắc ứng xử](https://events.linuxfoundation.org/code-of-conduct/) có sẵn
-trên trang sự kiện. Điều này được thiết kế để tương thích với chính sách trên và
+trên trang sự kiện. Điều này được thiết kế để tương thích với chính sách trên v�
 cũng bao gồm nhiều chi tiết hơn về cách ứng phó với các sự cố.
