@@ -6,7 +6,8 @@ content_template: templates/concept
 
 {{% capture overview %}}
 
-Kind — это инструмент для запуска локальных кластеров Kubernetes с помощью "узлов" контейнера Docker.
+Kind — это инструмент для запуска локальных кластеров Kubernetes с помощью
+"узлов" контейнера Docker.
 
 {{% /capture %}}
 
@@ -14,6 +15,7 @@ Kind — это инструмент для запуска локальных к
 
 ## Установка
 
-Смотрите страницу [по установке Kind](https://kind.sigs.k8s.io/docs/user/quick-start/).
+Смотрите страницу
+[по установке Kind](https://kind.sigs.k8s.io/docs/user/quick-start/).
 
 {{% /capture %}}
