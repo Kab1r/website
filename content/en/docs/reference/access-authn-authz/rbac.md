@@ -689,7 +689,7 @@ This is commonly used by add-on API servers for unified authentication and autho
 <td><b>system:kubelet-api-admin</b></td>
 <td>None</td>
 <td>Allows full access to the kubelet API.</td>
-</tr>  
+</tr>
 <tr>
 <td><b>system:node-bootstrapper</b></td>
 <td>None</td>
