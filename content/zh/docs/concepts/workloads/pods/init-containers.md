@@ -419,7 +419,7 @@ OnFailure 策略。
 因为 Init 容器可能会被重启、重试或者重新执行，所以 Init 容器的代码应该是幂等的。
 特别地，基于 `EmptyDirs` 写文件的代码，应该对输出文件可能已经存在做好准备。
 
-Init 容器具有应用容器的所有字段。 然而 Kubernetes 禁止使用 `readinessProbe`，因
+Init 容器具有应用容器的所有字段。 然而 Kubernetes 禁止使用 `readinessProbe`，�
 为 Init 容器不能定义不同于完成（completion）的就绪（readiness）。 这一点会在校验
 时强制执行。
 
@@ -469,7 +469,7 @@ A Pod can restart, causing re-execution of init containers, for the following re
 
 -->
 
-### Pod 重启的原因
+### Pod 重启的原�
 
 Pod 重启导致 Init 容器重新执行，主要有如下几个原因：
 

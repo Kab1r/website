@@ -312,7 +312,7 @@ Kubernetes は、Init コンテナが完了と異なる状態を定義できな�
 要されます。
 
 Init コンテナがずっと失敗し続けたままの状態を防ぐために、Pod
-に`activeDeadlineSeconds`、コンテナに`livenessProbe`の設定をそれぞれ使用してくだ
+に`activeDeadlineSeconds`、コンテナに`livenessProbe`の設定をそれぞれ使用してく�
 さい。`activeDeadlineSeconds`の設定は Init コンテナにも適用されます。
 
 ある Pod 内の各アプリケーションコンテナと Init コンテナの名前はユニークである必
@@ -360,7 +360,7 @@ Pod レベルの cgroups は、スケジューラーと同様に、有効な Pod
 
 ApiServer のバージョン 1.6.0 かそれ以上のバージョンのクラスターは
 、`.spec.initContainers`フィールドを使った Init コンテナの機能をサポートしていま
-す。  
+す。
 それ以前のバージョンでは、α 版か β 版のアノテーションを使って Init コンテナを使
 用できます。また、`.spec.initContainers`フィールドは、Kubernetes1.3.0 かそれ以上
 のバージョンで Init コンテナを使用できるようにするためと、ApiServer バージョン

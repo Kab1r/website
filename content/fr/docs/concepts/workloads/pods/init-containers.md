@@ -315,7 +315,7 @@ détaillé.
 
 Pendant le démarrage d'un Pod, chaque init container démarre en ordre, après que
 le réseau et les volumes ont été initialisés. Chaque conteneur doit se terminer
-avec succès avant que le prochain ne démarre. Si un conteneur n'arrive pas à
+avec succès avant que le prochain ne démarre. Si un conteneur n'arrive pas �
 démarrer à cause d'un problème d'exécution ou se termine avec un échec, il est
 redémarré selon la `restartPolicy` du Pod. Toutefois, si la `restartPolicy` du
 Pod est configurée à "Always", les init containers utilisent la `restartPolicy`
@@ -399,7 +399,7 @@ les raisons suivantes :
 
 - Lire à propos de la
   [création d'un Pod ayant un init container](/docs/tasks/configure-pod-container/configure-pod-initialization/#creating-a-pod-that-has-an-init-container)
-- Apprendre à
+- Apprendre �
   [debugger les init containers](/docs/tasks/debug-application-cluster/debug-init-containers/)
 
 {{% /capture %}}
