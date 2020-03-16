@@ -1,7 +1,7 @@
 ---
 reviewers:
-- mikedanese
-- thockin
+  - mikedanese
+  - thockin
 title: Container Lifecycle Hooks
 content_template: templates/concept
 weight: 30
@@ -9,20 +9,21 @@ weight: 30
 
 {{% capture overview %}}
 
-This page describes how kubelet managed Containers can use the Container lifecycle hook framework
-to run code triggered by events during their management lifecycle.
+This page describes how kubelet managed Containers can use the Container
+lifecycle hook framework to run code triggered by events during their management
+lifecycle.
 
 {{% /capture %}}
-
 
 {{% capture body %}}
 
 ## Overview
 
-Analogous to many programming language frameworks that have component lifecycle hooks, such as Angular,
-Kubernetes provides Containers with lifecycle hooks.
-The hooks enable Containers to be aware of events in their management lifecycle
-and run code implemented in a handler when the corresponding lifecycle hook is executed.
+Analogous to many programming language frameworks that have component lifecycle
+hooks, such as Angular, Kubernetes provides Containers with lifecycle hooks. The
+hooks enable Containers to be aware of events in their management lifecycle and
+run code implemented in a handler when the corresponding lifecycle hook is
+executed.
 
 ## Container hooks
 
@@ -30,71 +31,70 @@ There are two hooks that are exposed to Containers:
 
 `PostStart`
 
-This hook executes immediately after a container is created.
-However, there is no guarantee that the hook will execute before the container ENTRYPOINT.
-No parameters are passed to the handler.
+This hook executes immediately after a container is created. However, there is
+no guarantee that the hook will execute before the container ENTRYPOINT. No
+parameters are passed to the handler.
 
 `PreStop`
 
-This hook is called immediately before a container is terminated due to an API request or management event such as liveness probe failure, preemption, resource contention and others. A call to the preStop hook fails if the container is already in terminated or completed state.
-It is blocking, meaning it is synchronous,
-so it must complete before the call to delete the container can be sent.
-No parameters are passed to the handler.
+This hook is called immediately before a container is terminated due to an API
+request or management event such as liveness probe failure, preemption, resource
+contention and others. A call to the preStop hook fails if the container is
+already in terminated or completed state. It is blocking, meaning it is
+synchronous, so it must complete before the call to delete the container can be
+sent. No parameters are passed to the handler.
 
 A more detailed description of the termination behavior can be found in
 [Termination of Pods](/docs/concepts/workloads/pods/pod/#termination-of-pods).
 
 ### Hook handler implementations
 
-Containers can access a hook by implementing and registering a handler for that hook.
-There are two types of hook handlers that can be implemented for Containers:
+Containers can access a hook by implementing and registering a handler for that
+hook. There are two types of hook handlers that can be implemented for
+Containers:
 
-* Exec - Executes a specific command, such as `pre-stop.sh`, inside the cgroups and namespaces of the Container.
-Resources consumed by the command are counted against the Container.
-* HTTP - Executes an HTTP request against a specific endpoint on the Container.
+- Exec - Executes a specific command, such as `pre-stop.sh`, inside the cgroups
+  and namespaces of the Container. Resources consumed by the command are counted
+  against the Container.
+- HTTP - Executes an HTTP request against a specific endpoint on the Container.
 
 ### Hook handler execution
 
-When a Container lifecycle management hook is called,
-the Kubernetes management system executes the handler in the Container registered for that hook. 
+When a Container lifecycle management hook is called, the Kubernetes management
+system executes the handler in the Container registered for that hook.
 
-Hook handler calls are synchronous within the context of the Pod containing the Container.
-This means that for a `PostStart` hook,
-the Container ENTRYPOINT and hook fire asynchronously.
-However, if the hook takes too long to run or hangs,
+Hook handler calls are synchronous within the context of the Pod containing the
+Container. This means that for a `PostStart` hook, the Container ENTRYPOINT and
+hook fire asynchronously. However, if the hook takes too long to run or hangs,
 the Container cannot reach a `running` state.
 
-The behavior is similar for a `PreStop` hook.
-If the hook hangs during execution,
-the Pod phase stays in a `Terminating` state and is killed after `terminationGracePeriodSeconds` of pod ends.
-If a `PostStart` or `PreStop` hook fails,
-it kills the Container.
+The behavior is similar for a `PreStop` hook. If the hook hangs during
+execution, the Pod phase stays in a `Terminating` state and is killed after
+`terminationGracePeriodSeconds` of pod ends. If a `PostStart` or `PreStop` hook
+fails, it kills the Container.
 
-Users should make their hook handlers as lightweight as possible.
-There are cases, however, when long running commands make sense,
-such as when saving state prior to stopping a Container.
+Users should make their hook handlers as lightweight as possible. There are
+cases, however, when long running commands make sense, such as when saving state
+prior to stopping a Container.
 
 ### Hook delivery guarantees
 
-Hook delivery is intended to be *at least once*,
-which means that a hook may be called multiple times for any given event,
-such as for `PostStart` or `PreStop`.
+Hook delivery is intended to be _at least once_, which means that a hook may be
+called multiple times for any given event, such as for `PostStart` or `PreStop`.
 It is up to the hook implementation to handle this correctly.
 
-Generally, only single deliveries are made.
-If, for example, an HTTP hook receiver is down and is unable to take traffic,
-there is no attempt to resend.
-In some rare cases, however, double delivery may occur.
-For instance, if a kubelet restarts in the middle of sending a hook,
-the hook might be resent after the kubelet comes back up.
+Generally, only single deliveries are made. If, for example, an HTTP hook
+receiver is down and is unable to take traffic, there is no attempt to resend.
+In some rare cases, however, double delivery may occur. For instance, if a
+kubelet restarts in the middle of sending a hook, the hook might be resent after
+the kubelet comes back up.
 
 ### Debugging Hook handlers
 
-The logs for a Hook handler are not exposed in Pod events.
-If a handler fails for some reason, it broadcasts an event.
-For `PostStart`, this is the `FailedPostStartHook` event,
-and for `PreStop`, this is the `FailedPreStopHook` event.
-You can see these events by running `kubectl describe pod <pod_name>`.
+The logs for a Hook handler are not exposed in Pod events. If a handler fails
+for some reason, it broadcasts an event. For `PostStart`, this is the
+`FailedPostStartHook` event, and for `PreStop`, this is the `FailedPreStopHook`
+event. You can see these events by running `kubectl describe pod <pod_name>`.
 Here is some example output of events from running this command:
 
 ```
@@ -116,8 +116,9 @@ Events:
 
 {{% capture whatsnext %}}
 
-* Learn more about the [Container environment](/docs/concepts/containers/container-environment/).
-* Get hands-on experience
+- Learn more about the
+  [Container environment](/docs/concepts/containers/container-environment/).
+- Get hands-on experience
   [attaching handlers to Container lifecycle events](/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/).
 
 {{% /capture %}}
