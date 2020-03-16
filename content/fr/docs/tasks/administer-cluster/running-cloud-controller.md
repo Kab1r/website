@@ -24,7 +24,7 @@ Pour des raisons de retro-compatibilité, le
 fourni dans le projet de base Kubernetes utilise les mêmes bibliothèques ​​que
 `kube-controller-manager`. Les fournisseurs de cloud déjà pris en charge
 nativement par Kubernetes devraient utiliser le cloud-controller-manager
-​disponible ​dans le code de Kubernetes pour effectuer une transition visant à
+​disponible ​dans le code de Kubernetes pour effectuer une transition visant �
 faire sortir cette prise en charge du code de Kubernetes. Dans les futures
 versions de Kubernetes, tous les cloud-controller-manager seront développés en
 dehors du projet de base de Kubernetes géré par des sig leads ou des
@@ -73,7 +73,7 @@ façons:
   initialisation à partir d'un contrôleur externe avant de pouvoir planifier un
   travail. Notez que si le cloud-controller-manager n'est pas disponible, les
   nouveaux nœuds du cluster ne seront pas valides. Le marquage est important car
-  le planificateur peut nécessiter des informations spécifiques au cloud à
+  le planificateur peut nécessiter des informations spécifiques au cloud �
   propos des nœuds, telles que leur région ou leur type (CPU performant, gpu,
   mémoire importante, instance ponctuelle, etc.).
 - Les informations relatives aux nœuds s'exécutant dans le cloud ne seront plus
@@ -88,7 +88,7 @@ façons:
 
 À partir de la version 1.8, le cloud-controller-manager peut implémenter:
 
-- contrôleur de nœud - responsable de la mise à jour des nœud kubernetes à
+- contrôleur de nœud - responsable de la mise à jour des nœud kubernetes �
   l’aide des API de cloud et de la suppression des nœud kubernetes supprimés sur
   votre cloud.
 - contrôleur de service - responsable des loadbalancers sur votre cloud vers des

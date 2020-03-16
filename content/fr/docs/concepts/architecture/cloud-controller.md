@@ -15,7 +15,7 @@ et le planificateur. Il peut également être démarré en tant qu’addon Kuber
 auquel cas il s’exécute sur Kubernetes.
 
 La conception du gestionnaire de contrôleur de cloud repose sur un mécanisme de
-plugin qui permet aux nouveaux fournisseurs de cloud de s'intégrer facilement à
+plugin qui permet aux nouveaux fournisseurs de cloud de s'intégrer facilement �
 Kubernetes à l'aide de plugins. Des plans sont en place pour intégrer de
 nouveaux fournisseurs de cloud sur Kubernetes et pour migrer les fournisseurs de
 cloud de l'ancien modèle vers le nouveau modèle CCM.
@@ -70,7 +70,7 @@ partie de CCM. En raison de la complexité du processus et des efforts déployé
 pour supprimer la logique de volume spécifique au fournisseur, il a été décidé
 que le contrôleur de volume ne serait pas déplacé vers CCM. {{< /note >}}
 
-Le plan initial de prise en charge des volumes à l'aide de CCM consistait à
+Le plan initial de prise en charge des volumes à l'aide de CCM consistait �
 utiliser des volumes Flex pour prendre en charge des volumes pouvant être
 connectés. Cependant, un effort concurrentiel appelé CSI est prévu pour
 remplacer Flex.
