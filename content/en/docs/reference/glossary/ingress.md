@@ -4,17 +4,20 @@ id: ingress
 date: 2018-04-12
 full_link: /docs/concepts/services-networking/ingress/
 short_description: >
-  An API object that manages external access to the services in a cluster, typically HTTP.
+  An API object that manages external access to the services in a cluster,
+  typically HTTP.
 
-aka: 
+aka:
 tags:
-- networking
-- architecture
-- extension
+  - networking
+  - architecture
+  - extension
 ---
- An API object that manages external access to the services in a cluster, typically HTTP.
 
-<!--more--> 
+An API object that manages external access to the services in a cluster,
+typically HTTP.
 
-Ingress may provide load balancing, SSL termination and name-based virtual hosting.
+<!--more-->
 
+Ingress may provide load balancing, SSL termination and name-based virtual
+hosting.

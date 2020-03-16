@@ -1,8 +1,8 @@
 ---
 reviewers:
-- jlowdermilk
-- justinsb
-- quinton-hoole
+  - jlowdermilk
+  - justinsb
+  - quinton-hoole
 title: Running in multiple zones
 weight: 10
 content_template: templates/concept
@@ -18,78 +18,80 @@ This page describes how to run a cluster in multiple zones.
 
 ## Introduction
 
-Kubernetes 1.2 adds support for running a single cluster in multiple failure zones
-(GCE calls them simply "zones", AWS calls them "availability zones", here we'll refer to them as "zones").
-This is a lightweight version of a broader Cluster Federation feature (previously referred to by the affectionate
-nickname ["Ubernetes"](https://github.com/kubernetes/community/blob/{{< param "githubbranch" >}}/contributors/design-proposals/multicluster/federation.md)).
-Full Cluster Federation allows combining separate
-Kubernetes clusters running in different regions or cloud providers
-(or on-premises data centers).  However, many
-users simply want to run a more available Kubernetes cluster in multiple zones
-of their single cloud provider, and this is what the multizone support in 1.2 allows
-(this previously went by the nickname "Ubernetes Lite").
+Kubernetes 1.2 adds support for running a single cluster in multiple failure
+zones (GCE calls them simply "zones", AWS calls them "availability zones", here
+we'll refer to them as "zones"). This is a lightweight version of a broader
+Cluster Federation feature (previously referred to by the affectionate nickname
+["Ubernetes"](https://github.com/kubernetes/community/blob/{{< param
+"githubbranch" >}}/contributors/design-proposals/multicluster/federation.md)).
+Full Cluster Federation allows combining separate Kubernetes clusters running in
+different regions or cloud providers (or on-premises data centers). However,
+many users simply want to run a more available Kubernetes cluster in multiple
+zones of their single cloud provider, and this is what the multizone support in
+1.2 allows (this previously went by the nickname "Ubernetes Lite").
 
 Multizone support is deliberately limited: a single Kubernetes cluster can run
-in multiple zones, but only within the same region (and cloud provider).  Only
-GCE and AWS are currently supported automatically (though it is easy to
-add similar support for other clouds or even bare metal, by simply arranging
-for the appropriate labels to be added to nodes and volumes).
-
+in multiple zones, but only within the same region (and cloud provider). Only
+GCE and AWS are currently supported automatically (though it is easy to add
+similar support for other clouds or even bare metal, by simply arranging for the
+appropriate labels to be added to nodes and volumes).
 
 ## Functionality
 
-When nodes are started, the kubelet automatically adds labels to them with
-zone information.
+When nodes are started, the kubelet automatically adds labels to them with zone
+information.
 
-Kubernetes will automatically spread the pods in a replication controller
-or service across nodes in a single-zone cluster (to reduce the impact of
-failures.)  With multiple-zone clusters, this spreading behavior is
-extended across zones (to reduce the impact of zone failures.)  (This is
-achieved via `SelectorSpreadPriority`).  This is a best-effort
-placement, and so if the zones in your cluster are heterogeneous
-(e.g. different numbers of nodes, different types of nodes, or
-different pod resource requirements), this might prevent perfectly
-even spreading of your pods across zones. If desired, you can use
-homogeneous zones (same number and types of nodes) to reduce the
-probability of unequal spreading.
+Kubernetes will automatically spread the pods in a replication controller or
+service across nodes in a single-zone cluster (to reduce the impact of
+failures.) With multiple-zone clusters, this spreading behavior is extended
+across zones (to reduce the impact of zone failures.) (This is achieved via
+`SelectorSpreadPriority`). This is a best-effort placement, and so if the zones
+in your cluster are heterogeneous (e.g. different numbers of nodes, different
+types of nodes, or different pod resource requirements), this might prevent
+perfectly even spreading of your pods across zones. If desired, you can use
+homogeneous zones (same number and types of nodes) to reduce the probability of
+unequal spreading.
 
-When persistent volumes are created, the `PersistentVolumeLabel`
-admission controller automatically adds zone labels to them.  The scheduler (via the
-`VolumeZonePredicate` predicate) will then ensure that pods that claim a
-given volume are only placed into the same zone as that volume, as volumes
-cannot be attached across zones.
+When persistent volumes are created, the `PersistentVolumeLabel` admission
+controller automatically adds zone labels to them. The scheduler (via the
+`VolumeZonePredicate` predicate) will then ensure that pods that claim a given
+volume are only placed into the same zone as that volume, as volumes cannot be
+attached across zones.
 
 ## Limitations
 
 There are some important limitations of the multizone support:
 
-* We assume that the different zones are located close to each other in the
-network, so we don't perform any zone-aware routing.  In particular, traffic
-that goes via services might cross zones (even if some pods backing that service
-exist in the same zone as the client), and this may incur additional latency and cost.
+- We assume that the different zones are located close to each other in the
+  network, so we don't perform any zone-aware routing. In particular, traffic
+  that goes via services might cross zones (even if some pods backing that
+  service exist in the same zone as the client), and this may incur additional
+  latency and cost.
 
-* Volume zone-affinity will only work with a `PersistentVolume`, and will not
-work if you directly specify an EBS volume in the pod spec (for example).
+- Volume zone-affinity will only work with a `PersistentVolume`, and will not
+  work if you directly specify an EBS volume in the pod spec (for example).
 
-* Clusters cannot span clouds or regions (this functionality will require full
-federation support).
+- Clusters cannot span clouds or regions (this functionality will require full
+  federation support).
 
-* Although your nodes are in multiple zones, kube-up currently builds
-a single master node by default.  While services are highly
-available and can tolerate the loss of a zone, the control plane is
-located in a single zone.  Users that want a highly available control
-plane should follow the [high availability](/docs/admin/high-availability) instructions.
+- Although your nodes are in multiple zones, kube-up currently builds a single
+  master node by default. While services are highly available and can tolerate
+  the loss of a zone, the control plane is located in a single zone. Users that
+  want a highly available control plane should follow the
+  [high availability](/docs/admin/high-availability) instructions.
 
 ### Volume limitations
-The following limitations are addressed with [topology-aware volume binding](/docs/concepts/storage/storage-classes/#volume-binding-mode).
 
-* StatefulSet volume zone spreading when using dynamic provisioning is currently not compatible with
-  pod affinity or anti-affinity policies.
+The following limitations are addressed with
+[topology-aware volume binding](/docs/concepts/storage/storage-classes/#volume-binding-mode).
 
-* If the name of the StatefulSet contains dashes ("-"), volume zone spreading
+- StatefulSet volume zone spreading when using dynamic provisioning is currently
+  not compatible with pod affinity or anti-affinity policies.
+
+- If the name of the StatefulSet contains dashes ("-"), volume zone spreading
   may not provide a uniform distribution of storage across zones.
 
-* When specifying multiple PVCs in a Deployment or Pod spec, the StorageClass
+- When specifying multiple PVCs in a Deployment or Pod spec, the StorageClass
   needs to be configured for a specific single zone, or the PVs need to be
   statically provisioned in a specific zone. Another workaround is to use a
   StatefulSet, which will ensure that all the volumes for a replica are
@@ -97,14 +99,15 @@ The following limitations are addressed with [topology-aware volume binding](/do
 
 ## Walkthrough
 
-We're now going to walk through setting up and using a multi-zone
-cluster on both GCE & AWS.  To do so, you bring up a full cluster
-(specifying `MULTIZONE=true`), and then you add nodes in additional zones
-by running `kube-up` again (specifying `KUBE_USE_EXISTING_MASTER=true`).
+We're now going to walk through setting up and using a multi-zone cluster on
+both GCE & AWS. To do so, you bring up a full cluster (specifying
+`MULTIZONE=true`), and then you add nodes in additional zones by running
+`kube-up` again (specifying `KUBE_USE_EXISTING_MASTER=true`).
 
 ### Bringing up your cluster
 
-Create the cluster as normal, but pass MULTIZONE to tell the cluster to manage multiple zones; creating nodes in us-central1-a.
+Create the cluster as normal, but pass MULTIZONE to tell the cluster to manage
+multiple zones; creating nodes in us-central1-a.
 
 GCE:
 
@@ -118,15 +121,15 @@ AWS:
 curl -sS https://get.k8s.io | MULTIZONE=true KUBERNETES_PROVIDER=aws KUBE_AWS_ZONE=us-west-2a NUM_NODES=3 bash
 ```
 
-This step brings up a cluster as normal, still running in a single zone
-(but `MULTIZONE=true` has enabled multi-zone capabilities).
+This step brings up a cluster as normal, still running in a single zone (but
+`MULTIZONE=true` has enabled multi-zone capabilities).
 
 ### Nodes are labeled
 
-View the nodes; you can see that they are labeled with zone information.
-They are all in `us-central1-a` (GCE) or `us-west-2a` (AWS) so far.  The
-labels are `failure-domain.beta.kubernetes.io/region` for the region,
-and `failure-domain.beta.kubernetes.io/zone` for the zone:
+View the nodes; you can see that they are labeled with zone information. They
+are all in `us-central1-a` (GCE) or `us-west-2a` (AWS) so far. The labels are
+`failure-domain.beta.kubernetes.io/region` for the region, and
+`failure-domain.beta.kubernetes.io/zone` for the zone:
 
 ```shell
 kubectl get nodes --show-labels
@@ -144,11 +147,10 @@ kubernetes-minion-a12q   Ready                      <none>   6m    v1.13.0      
 
 ### Add more nodes in a second zone
 
-Let's add another set of nodes to the existing cluster, reusing the
-existing master, running in a different zone (us-central1-b or us-west-2b).
-We run kube-up again, but by specifying `KUBE_USE_EXISTING_MASTER=true`
-kube-up will not create a new master, but will reuse one that was previously
-created instead.
+Let's add another set of nodes to the existing cluster, reusing the existing
+master, running in a different zone (us-central1-b or us-west-2b). We run
+kube-up again, but by specifying `KUBE_USE_EXISTING_MASTER=true` kube-up will
+not create a new master, but will reuse one that was previously created instead.
 
 GCE:
 
@@ -156,16 +158,15 @@ GCE:
 KUBE_USE_EXISTING_MASTER=true MULTIZONE=true KUBERNETES_PROVIDER=gce KUBE_GCE_ZONE=us-central1-b NUM_NODES=3 kubernetes/cluster/kube-up.sh
 ```
 
-On AWS we also need to specify the network CIDR for the additional
-subnet, along with the master internal IP address:
+On AWS we also need to specify the network CIDR for the additional subnet, along
+with the master internal IP address:
 
 ```shell
 KUBE_USE_EXISTING_MASTER=true MULTIZONE=true KUBERNETES_PROVIDER=aws KUBE_AWS_ZONE=us-west-2b NUM_NODES=3 KUBE_SUBNET_CIDR=172.20.1.0/24 MASTER_INTERNAL_IP=172.20.0.9 kubernetes/cluster/kube-up.sh
 ```
 
-
-View the nodes again; 3 more nodes should have launched and be tagged
-in us-central1-b:
+View the nodes again; 3 more nodes should have launched and be tagged in
+us-central1-b:
 
 ```shell
 kubectl get nodes --show-labels
@@ -186,7 +187,8 @@ kubernetes-minion-wf8i   Ready                      <none>   2m    v1.13.0      
 
 ### Volume affinity
 
-Create a volume using the dynamic volume creation (only PersistentVolumes are supported for zone affinity):
+Create a volume using the dynamic volume creation (only PersistentVolumes are
+supported for zone affinity):
 
 ```bash
 kubectl apply -f - <<EOF
@@ -213,16 +215,15 @@ kubectl apply -f - <<EOF
 EOF
 ```
 
-{{< note >}}
-For version 1.3+ Kubernetes will distribute dynamic PV claims across
-the configured zones. For version 1.2, dynamic persistent volumes were
-always created in the zone of the cluster master
-(here us-central1-a / us-west-2a); that issue
-([#23330](https://github.com/kubernetes/kubernetes/issues/23330))
-was addressed in 1.3+.
-{{< /note >}}
+{{< note >}} For version 1.3+ Kubernetes will distribute dynamic PV claims
+across the configured zones. For version 1.2, dynamic persistent volumes were
+always created in the zone of the cluster master (here us-central1-a /
+us-west-2a); that issue
+([#23330](https://github.com/kubernetes/kubernetes/issues/23330)) was addressed
+in 1.3+. {{< /note >}}
 
-Now let's validate that Kubernetes automatically labeled the zone & region the PV was created in.
+Now let's validate that Kubernetes automatically labeled the zone & region the
+PV was created in.
 
 ```shell
 kubectl get pv --show-labels
@@ -235,9 +236,9 @@ NAME           CAPACITY   ACCESSMODES   RECLAIM POLICY   STATUS    CLAIM        
 pv-gce-mj4gm   5Gi        RWO           Retain           Bound     default/claim1   manual                    46s       failure-domain.beta.kubernetes.io/region=us-central1,failure-domain.beta.kubernetes.io/zone=us-central1-a
 ```
 
-So now we will create a pod that uses the persistent volume claim.
-Because GCE PDs / AWS EBS volumes cannot be attached across zones,
-this means that this pod can only be created in the same zone as the volume:
+So now we will create a pod that uses the persistent volume claim. Because GCE
+PDs / AWS EBS volumes cannot be attached across zones, this means that this pod
+can only be created in the same zone as the volume:
 
 ```yaml
 kubectl apply -f - <<EOF
@@ -283,8 +284,8 @@ kubernetes-minion-9vlv   Ready     22m    v1.6.0+fff5156   beta.kubernetes.io/in
 
 ### Pods are spread across zones
 
-Pods in a replication controller or service are automatically spread
-across zones.  First, let's launch more nodes in a third zone:
+Pods in a replication controller or service are automatically spread across
+zones. First, let's launch more nodes in a third zone:
 
 GCE:
 
@@ -304,7 +305,8 @@ Verify that you now have nodes in 3 zones:
 kubectl get nodes --show-labels
 ```
 
-Create the guestbook-go example, which includes an RC of size 3, running a simple web app:
+Create the guestbook-go example, which includes an RC of size 3, running a
+simple web app:
 
 ```shell
 find kubernetes/examples/guestbook-go/ -name '*.json' | xargs -I {} kubectl apply -f {}
@@ -333,9 +335,8 @@ kubernetes-minion-281d   Ready     <none>   20m    v1.13.0          beta.kuberne
 kubernetes-minion-olsh   Ready     <none>   3m     v1.13.0          beta.kubernetes.io/instance-type=n1-standard-2,failure-domain.beta.kubernetes.io/region=us-central1,failure-domain.beta.kubernetes.io/zone=us-central1-f,kubernetes.io/hostname=kubernetes-minion-olsh
 ```
 
-
-Load-balancers span all zones in a cluster; the guestbook-go example
-includes an example load-balanced service:
+Load-balancers span all zones in a cluster; the guestbook-go example includes an
+example load-balanced service:
 
 ```shell
 kubectl describe service guestbook | grep LoadBalancer.Ingress
@@ -379,7 +380,8 @@ The output is similar to this:
   "HOSTNAME": "guestbook-ppm40",
 ```
 
-The load balancer correctly targets all the pods, even though they are in multiple zones.
+The load balancer correctly targets all the pods, even though they are in
+multiple zones.
 
 ### Shutting down the cluster
 

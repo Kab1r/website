@@ -1,9 +1,9 @@
 ---
 title: kubectl Cheat Sheet
 reviewers:
-- erictune
-- krousey
-- clove
+  - erictune
+  - krousey
+  - clove
 content_template: templates/concept
 card:
   name: reference
@@ -12,7 +12,8 @@ card:
 
 {{% capture overview %}}
 
-See also: [Kubectl Overview](/docs/reference/kubectl/overview/) and [JsonPath Guide](/docs/reference/kubectl/jsonpath).
+See also: [Kubectl Overview](/docs/reference/kubectl/overview/) and
+[JsonPath Guide](/docs/reference/kubectl/jsonpath).
 
 This page is an overview of the `kubectl` command.
 
@@ -31,7 +32,8 @@ source <(kubectl completion bash) # setup autocomplete in bash into the current 
 echo "source <(kubectl completion bash)" >> ~/.bashrc # add autocomplete permanently to your bash shell.
 ```
 
-You can also use a shorthand alias for `kubectl` that also works with completion: 
+You can also use a shorthand alias for `kubectl` that also works with
+completion:
 
 ```bash
 alias k=kubectl
@@ -47,15 +49,16 @@ echo "[[ $commands[kubectl] ]] && source <(kubectl completion zsh)" >> ~/.zshrc 
 
 ## Kubectl Context and Configuration
 
-Set which Kubernetes cluster `kubectl` communicates with and modifies configuration
-information. See [Authenticating Across Clusters with kubeconfig](/docs/tasks/access-application-cluster/configure-access-multiple-clusters/) documentation for
-detailed config file information.
+Set which Kubernetes cluster `kubectl` communicates with and modifies
+configuration information. See
+[Authenticating Across Clusters with kubeconfig](/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)
+documentation for detailed config file information.
 
 ```bash
 kubectl config view # Show Merged kubeconfig settings.
 
 # use multiple kubeconfig files at the same time and view merged config
-KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 
+KUBECONFIG=~/.kube/config:~/.kube/kubconfig2
 
 kubectl config view
 
@@ -64,7 +67,7 @@ kubectl config view -o jsonpath='{.users[?(@.name == "e2e")].user.password}'
 
 kubectl config view -o jsonpath='{.users[].name}'    # display the first user
 kubectl config view -o jsonpath='{.users[*].name}'   # get a list of users
-kubectl config get-contexts                          # display list of contexts 
+kubectl config get-contexts                          # display list of contexts
 kubectl config current-context                       # display the current-context
 kubectl config use-context my-cluster-name           # set the default context to my-cluster-name
 
@@ -77,12 +80,16 @@ kubectl config set-context --current --namespace=ggckad-s2
 # set a context utilizing a specific username and namespace.
 kubectl config set-context gce --user=cluster-admin --namespace=foo \
   && kubectl config use-context gce
- 
+
 kubectl config unset users.foo                       # delete user foo
 ```
 
 ## Apply
-`apply` manages applications through files defining Kubernetes resources. It creates and updates resources in a cluster through running `kubectl apply`. This is the recommended way of managing Kubernetes applications on production. See [Kubectl Book](https://kubectl.docs.kubernetes.io).
+
+`apply` manages applications through files defining Kubernetes resources. It
+creates and updates resources in a cluster through running `kubectl apply`. This
+is the recommended way of managing Kubernetes applications on production. See
+[Kubectl Book](https://kubectl.docs.kubernetes.io).
 
 ## Creating Objects
 
@@ -200,11 +207,13 @@ kubectl diff -f ./my-manifest.yaml
 
 ## Updating Resources
 
-As of version 1.11 `rolling-update` have been deprecated (see [CHANGELOG-1.11.md](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.11.md)), use `rollout` instead.
+As of version 1.11 `rolling-update` have been deprecated (see
+[CHANGELOG-1.11.md](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.11.md)),
+use `rollout` instead.
 
 ```bash
 kubectl set image deployment/frontend www=image:v2               # Rolling update "www" containers of "frontend" deployment, updating the image
-kubectl rollout history deployment/frontend                      # Check the history of deployments including the revision 
+kubectl rollout history deployment/frontend                      # Check the history of deployments including the revision
 kubectl rollout undo deployment/frontend                         # Rollback to the previous deployment
 kubectl rollout undo deployment/frontend --to-revision=2         # Rollback to a specific revision
 kubectl rollout status -w deployment/frontend                    # Watch rolling update status of "frontend" deployment until completion
@@ -253,6 +262,7 @@ kubectl patch sa default --type='json' -p='[{"op": "add", "path": "/secrets/1", 
 ```
 
 ## Editing Resources
+
 Edit any API resource in your preferred editor.
 
 ```bash
@@ -293,7 +303,7 @@ kubectl logs -f my-pod                              # stream pod logs (stdout)
 kubectl logs -f my-pod -c my-container              # stream pod container logs (stdout, multi-container case)
 kubectl logs -f -l name=myLabel --all-containers    # stream all pods logs with label name=myLabel (stdout)
 kubectl run -i --tty busybox --image=busybox -- sh  # Run pod as interactive shell
-kubectl run nginx --image=nginx --restart=Never -n 
+kubectl run nginx --image=nginx --restart=Never -n
 mynamespace                                         # Run pod nginx in a specific namespace
 kubectl run nginx --image=nginx --restart=Never     # Run pod nginx and write its spec into a file called pod.yaml
 --dry-run -o yaml > pod.yaml
@@ -322,7 +332,10 @@ kubectl taint nodes foo dedicated=special-user:NoSchedule
 
 ### Resource types
 
-List all supported resource types along with their shortnames, [API group](/docs/concepts/overview/kubernetes-api/#api-groups), whether they are [namespaced](/docs/concepts/overview/working-with-objects/namespaces), and [Kind](/docs/concepts/overview/working-with-objects/kubernetes-objects):
+List all supported resource types along with their shortnames,
+[API group](/docs/concepts/overview/kubernetes-api/#api-groups), whether they
+are [namespaced](/docs/concepts/overview/working-with-objects/namespaces), and
+[Kind](/docs/concepts/overview/working-with-objects/kubernetes-objects):
 
 ```bash
 kubectl api-resources
@@ -341,45 +354,51 @@ kubectl api-resources --api-group=extensions # All resources in the "extensions"
 
 ### Formatting output
 
-To output details to your terminal window in a specific format, add the `-o` (or `--output`) flag to a supported `kubectl` command.
+To output details to your terminal window in a specific format, add the `-o` (or
+`--output`) flag to a supported `kubectl` command.
 
-Output format | Description
---------------| -----------
-`-o=custom-columns=<spec>` | Print a table using a comma separated list of custom columns
-`-o=custom-columns-file=<filename>` | Print a table using the custom columns template in the `<filename>` file
-`-o=json`     | Output a JSON formatted API object
-`-o=jsonpath=<template>` | Print the fields defined in a [jsonpath](/docs/reference/kubectl/jsonpath) expression
-`-o=jsonpath-file=<filename>` | Print the fields defined by the [jsonpath](/docs/reference/kubectl/jsonpath) expression in the `<filename>` file
-`-o=name`     | Print only the resource name and nothing else
-`-o=wide`     | Output in the plain-text format with any additional information, and for pods, the node name is included
-`-o=yaml`     | Output a YAML formatted API object
+| Output format                       | Description                                                                                                      |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `-o=custom-columns=<spec>`          | Print a table using a comma separated list of custom columns                                                     |
+| `-o=custom-columns-file=<filename>` | Print a table using the custom columns template in the `<filename>` file                                         |
+| `-o=json`                           | Output a JSON formatted API object                                                                               |
+| `-o=jsonpath=<template>`            | Print the fields defined in a [jsonpath](/docs/reference/kubectl/jsonpath) expression                            |
+| `-o=jsonpath-file=<filename>`       | Print the fields defined by the [jsonpath](/docs/reference/kubectl/jsonpath) expression in the `<filename>` file |
+| `-o=name`                           | Print only the resource name and nothing else                                                                    |
+| `-o=wide`                           | Output in the plain-text format with any additional information, and for pods, the node name is included         |
+| `-o=yaml`                           | Output a YAML formatted API object                                                                               |
 
 ### Kubectl output verbosity and debugging
 
-Kubectl verbosity is controlled with the `-v` or `--v` flags followed by an integer representing the log level. General Kubernetes logging conventions and the associated log levels are described [here](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md).
+Kubectl verbosity is controlled with the `-v` or `--v` flags followed by an
+integer representing the log level. General Kubernetes logging conventions and
+the associated log levels are described
+[here](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md).
 
-Verbosity | Description
---------------| -----------
-`--v=0` | Generally useful for this to *always* be visible to a cluster operator.
-`--v=1` | A reasonable default log level if you don't want verbosity.
-`--v=2` | Useful steady state information about the service and important log messages that may correlate to significant changes in the system. This is the recommended default log level for most systems.
-`--v=3` | Extended information about changes.
-`--v=4` | Debug level verbosity.
-`--v=6` | Display requested resources.
-`--v=7` | Display HTTP request headers.
-`--v=8` | Display HTTP request contents.
-`--v=9` | Display HTTP request contents without truncation of contents.
+| Verbosity | Description                                                                                                                                                                                       |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--v=0`   | Generally useful for this to _always_ be visible to a cluster operator.                                                                                                                           |
+| `--v=1`   | A reasonable default log level if you don't want verbosity.                                                                                                                                       |
+| `--v=2`   | Useful steady state information about the service and important log messages that may correlate to significant changes in the system. This is the recommended default log level for most systems. |
+| `--v=3`   | Extended information about changes.                                                                                                                                                               |
+| `--v=4`   | Debug level verbosity.                                                                                                                                                                            |
+| `--v=6`   | Display requested resources.                                                                                                                                                                      |
+| `--v=7`   | Display HTTP request headers.                                                                                                                                                                     |
+| `--v=8`   | Display HTTP request contents.                                                                                                                                                                    |
+| `--v=9`   | Display HTTP request contents without truncation of contents.                                                                                                                                     |
 
 {{% /capture %}}
 
 {{% capture whatsnext %}}
 
-* Learn more about [Overview of kubectl](/docs/reference/kubectl/overview/).
+- Learn more about [Overview of kubectl](/docs/reference/kubectl/overview/).
 
-* See [kubectl](/docs/reference/kubectl/kubectl/) options.
+- See [kubectl](/docs/reference/kubectl/kubectl/) options.
 
-* Also [kubectl Usage Conventions](/docs/reference/kubectl/conventions/) to understand how to use it in reusable scripts.
+- Also [kubectl Usage Conventions](/docs/reference/kubectl/conventions/) to
+  understand how to use it in reusable scripts.
 
-* See more community [kubectl cheatsheets](https://github.com/dennyzhang/cheatsheet-kubernetes-A4).
+- See more community
+  [kubectl cheatsheets](https://github.com/dennyzhang/cheatsheet-kubernetes-A4).
 
 {{% /capture %}}

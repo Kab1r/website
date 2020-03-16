@@ -6,15 +6,21 @@ full_link: /docs/concepts/storage/volumes/
 short_description: >
   A directory containing data, accessible to the containers in a pod.
 
-aka: 
+aka:
 tags:
-- core-object
-- fundamental
+  - core-object
+  - fundamental
 ---
- A directory containing data, accessible to the {{< glossary_tooltip text="containers" term_id="container" >}} in a {{< glossary_tooltip term_id="pod" >}}.
 
-<!--more--> 
+A directory containing data, accessible to the
+{{< glossary_tooltip text="containers" term_id="container" >}} in a
+{{< glossary_tooltip term_id="pod" >}}.
 
-A Kubernetes volume lives as long as the Pod that encloses it. Consequently, a volume outlives any containers that run within the Pod, and data in the volume is preserved across container restarts.
+<!--more-->
 
-See [storage](https://kubernetes.io/docs/concepts/storage/) for more information.
+A Kubernetes volume lives as long as the Pod that encloses it. Consequently, a
+volume outlives any containers that run within the Pod, and data in the volume
+is preserved across container restarts.
+
+See [storage](https://kubernetes.io/docs/concepts/storage/) for more
+information.

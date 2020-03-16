@@ -1,6 +1,6 @@
 ---
 reviewers:
-- jessfraz
+  - jessfraz
 title: Inject Information into Pods Using a PodPreset
 min-kubernetes-server-version: v1.10
 content_template: templates/task
@@ -9,7 +9,10 @@ weight: 60
 
 {{% capture overview %}}
 
-This page shows how to use PodPreset objects to inject information like {{< glossary_tooltip text="Secrets" term_id="secret" >}}, volume mounts, and {{< glossary_tooltip text="environment variables" term_id="container-env-variables" >}} into Pods at creation time.
+This page shows how to use PodPreset objects to inject information like
+{{< glossary_tooltip text="Secrets" term_id="secret" >}}, volume mounts, and
+{{< glossary_tooltip text="environment variables" term_id="container-env-variables" >}}
+into Pods at creation time.
 
 {{% /capture %}}
 
@@ -21,20 +24,21 @@ This page shows how to use PodPreset objects to inject information like {{< glos
 
 {{% capture steps %}}
 
-
 ## Use Pod presets to inject environment variables and volumes
 
-In this step, you create a preset that has a volume mount and one environment variable.
-Here is the manifest for the PodPreset:
+In this step, you create a preset that has a volume mount and one environment
+variable. Here is the manifest for the PodPreset:
 
 {{< codenew file="podpreset/preset.yaml" >}}
 
 The name of a PodPreset object must be a valid
 [DNS subdomain name](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
-In the manifest, you can see that the preset has an environment variable definition called `DB_PORT`
-and a volume mount definition called `cache-volume` which is mounted under `/cache`. The {{< glossary_tooltip text="selector" term_id="selector" >}} specifies that
-the preset will act upon any Pod that is labeled `role:frontend`.
+In the manifest, you can see that the preset has an environment variable
+definition called `DB_PORT` and a volume mount definition called `cache-volume`
+which is mounted under `/cache`. The
+{{< glossary_tooltip text="selector" term_id="selector" >}} specifies that the
+preset will act upon any Pod that is labeled `role:frontend`.
 
 Create the PodPreset:
 
@@ -47,12 +51,14 @@ Verify that the PodPreset has been created:
 ```shell
 kubectl get podpreset
 ```
+
 ```
 NAME             CREATED AT
 allow-database   2020-01-24T08:54:29Z
 ```
 
-This manifest defines a Pod labelled `role: frontend` (matching the PodPreset's selector):
+This manifest defines a Pod labelled `role: frontend` (matching the PodPreset's
+selector):
 
 {{< codenew file="podpreset/pod.yaml" >}}
 
@@ -75,8 +81,8 @@ NAME      READY     STATUS    RESTARTS   AGE
 website   1/1       Running   0          4m
 ```
 
-View the Pod spec altered by the admission controller in order to see the effects of the preset
-having been applied:
+View the Pod spec altered by the admission controller in order to see the
+effects of the preset having been applied:
 
 ```shell
 kubectl get pod website -o yaml
@@ -84,13 +90,14 @@ kubectl get pod website -o yaml
 
 {{< codenew file="podpreset/merged.yaml" >}}
 
-The `DB_PORT` environment variable, the `volumeMount` and the `podpreset.admission.kubernetes.io` annotation
-of the Pod verify that the preset has been applied.
+The `DB_PORT` environment variable, the `volumeMount` and the
+`podpreset.admission.kubernetes.io` annotation of the Pod verify that the preset
+has been applied.
 
 ## Pod spec with ConfigMap example
 
-This is an example to show how a Pod spec is modified by a Pod preset
-that references a ConfigMap containing environment variables.
+This is an example to show how a Pod spec is modified by a Pod preset that
+references a ConfigMap containing environment variables.
 
 Here is the manifest containing the definition of the ConfigMap:
 
@@ -122,8 +129,8 @@ Create the Pod:
 kubectl create -f https://k8s.io/examples/podpreset/pod.yaml
 ```
 
-View the Pod spec altered by the admission controller in order to see the effects of the preset
-having been applied:
+View the Pod spec altered by the admission controller in order to see the
+effects of the preset having been applied:
 
 ```shell
 kubectl get pod website -o yaml
@@ -131,13 +138,13 @@ kubectl get pod website -o yaml
 
 {{< codenew file="podpreset/allow-db-merged.yaml" >}}
 
-The `DB_PORT` environment variable and the `podpreset.admission.kubernetes.io` annotation of the Pod
-verify that the preset has been applied.
+The `DB_PORT` environment variable and the `podpreset.admission.kubernetes.io`
+annotation of the Pod verify that the preset has been applied.
 
 ## ReplicaSet with Pod spec example
 
-This is an example to show that only Pod specs are modified by Pod presets. Other workload types 
-like ReplicaSets or Deployments are unaffected.
+This is an example to show that only Pod specs are modified by Pod presets.
+Other workload types like ReplicaSets or Deployments are unaffected.
 
 Here is the manifest for the PodPreset for this example:
 
@@ -180,13 +187,12 @@ View the `spec` of the ReplicaSet:
 kubectl get replicasets frontend -o yaml
 ```
 
-{{< note >}}
-The ReplicaSet object's `spec` was not changed, nor does the ReplicaSet contain a
-`podpreset.admission.kubernetes.io` annotation. This is because a PodPreset only
-applies to Pod objects.
+{{< note >}} The ReplicaSet object's `spec` was not changed, nor does the
+ReplicaSet contain a `podpreset.admission.kubernetes.io` annotation. This is
+because a PodPreset only applies to Pod objects.
 
-To see the effects of the preset having been applied, you need to look at individual Pods.
-{{< /note >}}
+To see the effects of the preset having been applied, you need to look at
+individual Pods. {{< /note >}}
 
 The command to view the specs of the affected Pods is:
 
@@ -196,13 +202,12 @@ kubectl get pod --selector=role=frontend -o yaml
 
 {{< codenew file="podpreset/replicaset-merged.yaml" >}}
 
-Again the `podpreset.admission.kubernetes.io` annotation of the Pods
-verifies that the preset has been applied.
+Again the `podpreset.admission.kubernetes.io` annotation of the Pods verifies
+that the preset has been applied.
 
 ## Multiple Pod presets example
 
 This is an example to show how a Pod spec is modified by multiple Pod presets.
-
 
 Here is the manifest for the first PodPreset:
 
@@ -224,7 +229,8 @@ Create the second preset:
 kubectl apply -f https://k8s.io/examples/podpreset/proxy.yaml
 ```
 
-Here's a manifest containing the definition of an applicable Pod (matched by two PodPresets):
+Here's a manifest containing the definition of an applicable Pod (matched by two
+PodPresets):
 
 {{< codenew file="podpreset/pod.yaml" >}}
 
@@ -234,8 +240,8 @@ Create the Pod:
 kubectl create -f https://k8s.io/examples/podpreset/pod.yaml
 ```
 
-View the Pod spec altered by the admission controller in order to see the effects of both presets
-having been applied:
+View the Pod spec altered by the admission controller in order to see the
+effects of both presets having been applied:
 
 ```shell
 kubectl get pod website -o yaml
@@ -243,13 +249,15 @@ kubectl get pod website -o yaml
 
 {{< codenew file="podpreset/multi-merged.yaml" >}}
 
-The `DB_PORT` environment variable, the `proxy-volume` VolumeMount and the two `podpreset.admission.kubernetes.io`
-annotations of the Pod verify that both presets have been applied.
+The `DB_PORT` environment variable, the `proxy-volume` VolumeMount and the two
+`podpreset.admission.kubernetes.io` annotations of the Pod verify that both
+presets have been applied.
 
 ## Conflict example
 
-This is an example to show how a Pod spec is not modified by a Pod preset when there is a conflict.
-The conflict in this example consists of a `VolumeMount` in the PodPreset conflicting with a Pod that defines the same `mountPath`.
+This is an example to show how a Pod spec is not modified by a Pod preset when
+there is a conflict. The conflict in this example consists of a `VolumeMount` in
+the PodPreset conflicting with a Pod that defines the same `mountPath`.
 
 Here is the manifest for the PodPreset:
 
@@ -283,12 +291,13 @@ kubectl get pod website -o yaml
 
 {{< codenew file="podpreset/conflict-pod.yaml" >}}
 
-You can see there is no preset annotation (`podpreset.admission.kubernetes.io`). Seeing no annotation tells you that no preset has not been applied to the Pod.
+You can see there is no preset annotation (`podpreset.admission.kubernetes.io`).
+Seeing no annotation tells you that no preset has not been applied to the Pod.
 
 However, the
 [PodPreset admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#podpreset)
-logs a warning containing details of the conflict.
-You can view the warning using `kubectl`:
+logs a warning containing details of the conflict. You can view the warning
+using `kubectl`:
 
 ```shell
 kubectl -n kube-system logs -l=component=kube-apiserver
@@ -297,7 +306,7 @@ kubectl -n kube-system logs -l=component=kube-apiserver
 The output should look similar to:
 
 ```
-W1214 13:00:12.987884       1 admission.go:147] conflict occurred while applying podpresets: allow-database on pod:  err: merging volume mounts for allow-database has a conflict on mount path /cache: 
+W1214 13:00:12.987884       1 admission.go:147] conflict occurred while applying podpresets: allow-database on pod:  err: merging volume mounts for allow-database has a conflict on mount path /cache:
 v1.VolumeMount{Name:"other-volume", ReadOnly:false, MountPath:"/cache", SubPath:"", MountPropagation:(*v1.MountPropagationMode)(nil), SubPathExpr:""}
 does not match
 core.VolumeMount{Name:"cache-volume", ReadOnly:false, MountPath:"/cache", SubPath:"", MountPropagation:(*core.MountPropagationMode)(nil), SubPathExpr:""}
@@ -313,7 +322,9 @@ Once you don't need a PodPreset anymore, you can delete it with `kubectl`:
 ```shell
 kubectl delete podpreset allow-database
 ```
+
 The output shows that the PodPreset was deleted:
+
 ```
 podpreset "allow-database" deleted
 ```

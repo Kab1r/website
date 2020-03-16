@@ -2,17 +2,22 @@
 title: PodPreset
 id: podpreset
 date: 2018-04-12
-full_link: 
+full_link:
 short_description: >
-  An API object that injects information such as secrets, volume mounts, and environment variables into pods at creation time.
+  An API object that injects information such as secrets, volume mounts, and
+  environment variables into pods at creation time.
 
-aka: 
+aka:
 tags:
-- operation
+  - operation
 ---
- An API object that injects information such as secrets, volume mounts, and environment variables into {{< glossary_tooltip text="Pods" term_id="pod" >}} at creation time.
 
-<!--more--> 
+An API object that injects information such as secrets, volume mounts, and
+environment variables into {{< glossary_tooltip text="Pods" term_id="pod" >}} at
+creation time.
 
-This object chooses the Pods to inject information into using standard selectors. This allows the podspec definitions to be nonspecific, decoupling the podspec from environment specific configuration.
+<!--more-->
 
+This object chooses the Pods to inject information into using standard
+selectors. This allows the podspec definitions to be nonspecific, decoupling the
+podspec from environment specific configuration.
