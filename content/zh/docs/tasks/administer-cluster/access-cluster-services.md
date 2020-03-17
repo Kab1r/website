@@ -111,7 +111,7 @@ URL。为了创建包含 service endpoints、suffixes 和 parameters 的代理 U
 
 - Web 服务器不总是能够传递令牌，所以你可能需要使用基本（密码）认证。 Apiserver
   可以配置为接受基本认证，但你的集群可能并没有这样配置。
-- 某些 web 应用可能不能工作，特别是那些使用客户端侧 javascript 的应用，它们构造
+- 某些 web 应用可能不能工作，特别是那些使用客户端侧 javascript 的应用，它们构�
   url 的方式可能不能理解代理路径前缀。
 
 {{% /capture %}}
