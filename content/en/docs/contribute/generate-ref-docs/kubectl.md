@@ -8,16 +8,13 @@ weight: 90
 
 This page shows how to generate the `kubectl` command reference.
 
-{{< note >}}
-This topic shows how to generate reference documentation for
-[kubectl commands](/docs/reference/generated/kubectl/kubectl-commands)
-like
+{{< note >}} This topic shows how to generate reference documentation for
+[kubectl commands](/docs/reference/generated/kubectl/kubectl-commands) like
 [kubectl apply](/docs/reference/generated/kubectl/kubectl-commands#apply) and
-[kubectl taint](/docs/reference/generated/kubectl/kubectl-commands#taint).
-This topic does not show how to generate the
-[kubectl](/docs/reference/generated/kubectl/kubectl/)
-options reference page. For instructions on how to generate the kubectl options
-reference page, see
+[kubectl taint](/docs/reference/generated/kubectl/kubectl-commands#taint). This
+topic does not show how to generate the
+[kubectl](/docs/reference/generated/kubectl/kubectl/) options reference page.
+For instructions on how to generate the kubectl options reference page, see
 [Generating Reference Pages for Kubernetes Components and Tools](/docs/home/contribute/generated-reference/kubernetes-components/).
 {{< /note >}}
 
@@ -68,25 +65,27 @@ Remove the spf13 package from `$GOPATH/src/k8s.io/kubernetes/vendor/github.com`.
 rm -rf $GOPATH/src/k8s.io/kubernetes/vendor/github.com/spf13
 ```
 
-The kubernetes/kubernetes repository provides the `kubectl` and `kustomize` source code.
+The kubernetes/kubernetes repository provides the `kubectl` and `kustomize`
+source code.
 
-* Determine the base directory of your clone of the
-[kubernetes/kubernetes](https://github.com/kubernetes/kubernetes) repository.
-For example, if you followed the preceding step to get the repository, your
-base directory is `$GOPATH/src/k8s.io/kubernetes.`
-The remaining steps refer to your base directory as `<k8s-base>`.
+- Determine the base directory of your clone of the
+  [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes) repository.
+  For example, if you followed the preceding step to get the repository, your
+  base directory is `$GOPATH/src/k8s.io/kubernetes.` The remaining steps refer
+  to your base directory as `<k8s-base>`.
 
-* Determine the base directory of your clone of the
-[kubernetes/website](https://github.com/kubernetes/website) repository.
-For example, if you followed the preceding step to get the repository, your
-base directory is `$GOPATH/src/github.com/<your-username>/website.`
-The remaining steps refer to your base directory as `<web-base>`.
+- Determine the base directory of your clone of the
+  [kubernetes/website](https://github.com/kubernetes/website) repository. For
+  example, if you followed the preceding step to get the repository, your base
+  directory is `$GOPATH/src/github.com/<your-username>/website.` The remaining
+  steps refer to your base directory as `<web-base>`.
 
-* Determine the base directory of your clone of the
-[kubernetes-sigs/reference-docs](https://github.com/kubernetes-sigs/reference-docs) repository.
-For example, if you followed the preceding step to get the repository, your
-base directory is `$GOPATH/src/github.com/kubernetes-sigs/reference-docs.`
-The remaining steps refer to your base directory as `<rdocs-base>`.
+- Determine the base directory of your clone of the
+  [kubernetes-sigs/reference-docs](https://github.com/kubernetes-sigs/reference-docs)
+  repository. For example, if you followed the preceding step to get the
+  repository, your base directory is
+  `$GOPATH/src/github.com/kubernetes-sigs/reference-docs.` The remaining steps
+  refer to your base directory as `<rdocs-base>`.
 
 In your local k8s.io/kubernetes repository, check out the branch of interest,
 and make sure it is up to date. For example, if you want to generate docs for
@@ -98,51 +97,54 @@ git checkout v1.17.0
 git pull https://github.com/kubernetes/kubernetes v1.17.0
 ```
 
-If you do not need to edit the `kubectl` source code, follow the instructions for
-[Setting build variables](#setting-build-variables).
+If you do not need to edit the `kubectl` source code, follow the instructions
+for [Setting build variables](#setting-build-variables).
 
 ## Editing the kubectl source code
 
-The kubectl command reference documentation is automatically generated from
-the kubectl source code. If you want to change the reference documentation, the first step
-is to change one or more comments in the kubectl source code. Make the change in your
-local kubernetes/kubernetes repository, and then submit a pull request to the master branch of
+The kubectl command reference documentation is automatically generated from the
+kubectl source code. If you want to change the reference documentation, the
+first step is to change one or more comments in the kubectl source code. Make
+the change in your local kubernetes/kubernetes repository, and then submit a
+pull request to the master branch of
 [github.com/kubernetes/kubernetes](https://github.com/kubernetes/kubernetes).
 
-[PR 56673](https://github.com/kubernetes/kubernetes/pull/56673/files)
-is an example of a pull request that fixes a typo in the kubectl source code.
+[PR 56673](https://github.com/kubernetes/kubernetes/pull/56673/files) is an
+example of a pull request that fixes a typo in the kubectl source code.
 
-Monitor your pull request, and respond to reviewer comments. Continue to monitor your
-pull request until it is merged into the master branch of the kubernetes/kubernetes repository.
+Monitor your pull request, and respond to reviewer comments. Continue to monitor
+your pull request until it is merged into the master branch of the
+kubernetes/kubernetes repository.
 
 ## Cherry picking your change into a release branch
 
-Your change is now in the master branch, which is used for development of the next
-Kubernetes release. If you want your change to appear in the docs for a Kubernetes
-version that has already been released, you need to propose that your change be
-cherry picked into the release branch.
+Your change is now in the master branch, which is used for development of the
+next Kubernetes release. If you want your change to appear in the docs for a
+Kubernetes version that has already been released, you need to propose that your
+change be cherry picked into the release branch.
 
 For example, suppose the master branch is being used to develop Kubernetes 1.10,
-and you want to backport your change to the release-1.15 branch. For instructions
-on how to do this, see
+and you want to backport your change to the release-1.15 branch. For
+instructions on how to do this, see
 [Propose a Cherry Pick](https://git.k8s.io/community/contributors/devel/sig-release/cherry-picks.md).
 
-Monitor your cherry-pick pull request until it is merged into the release branch.
+Monitor your cherry-pick pull request until it is merged into the release
+branch.
 
-{{< note >}}
-Proposing a cherry pick requires that you have permission to set a label and a
-milestone in your pull request. If you don’t have those permissions, you will
-need to work with someone who can set the label and milestone for you.
+{{< note >}} Proposing a cherry pick requires that you have permission to set a
+label and a milestone in your pull request. If you don’t have those permissions,
+you will need to work with someone who can set the label and milestone for you.
 {{< /note >}}
 
 ## Setting build variables
 
-Go to `<rdocs-base>`. On you command line, set the following environment variables.
+Go to `<rdocs-base>`. On you command line, set the following environment
+variables.
 
-* Set `K8S_ROOT` to `<k8s-base>`.
-* Set `K8S_WEBROOT` to `<web-base>`.
-* Set `K8S_RELEASE` to the version of the docs you want to build.
-  For example, if you want to build docs for Kubernetes 1.17, set `K8S_RELEASE` to 1.17.
+- Set `K8S_ROOT` to `<k8s-base>`.
+- Set `K8S_WEBROOT` to `<web-base>`.
+- Set `K8S_RELEASE` to the version of the docs you want to build. For example,
+  if you want to build docs for Kubernetes 1.17, set `K8S_RELEASE` to 1.17.
 
 For example:
 
@@ -154,9 +156,9 @@ export K8S_RELEASE=1.17
 
 ## Creating a versioned directory
 
-The `createversiondirs` build target creates a versioned directory
-and copies the kubectl reference configuration files to the versioned directory.
-The versioned directory name follows the pattern of `v<major>_<minor>`.
+The `createversiondirs` build target creates a versioned directory and copies
+the kubectl reference configuration files to the versioned directory. The
+versioned directory name follows the pattern of `v<major>_<minor>`.
 
 In the `<rdocs-base>` directory, run the following build target:
 
@@ -167,10 +169,10 @@ make createversiondirs
 
 ## Checking out a release tag in k8s.io/kubernetes
 
-In your local `<k8s-base>` repository, checkout the branch that has
-the version of Kubernetes that you want to document. For example, if you want
-to generate docs for Kubernetes 1.17, checkout the `v1.17.0` tag. Make sure
-you local branch is up to date.
+In your local `<k8s-base>` repository, checkout the branch that has the version
+of Kubernetes that you want to document. For example, if you want to generate
+docs for Kubernetes 1.17, checkout the `v1.17.0` tag. Make sure you local branch
+is up to date.
 
 ```shell
 cd <k8s-base>
@@ -180,15 +182,17 @@ git pull https://github.com/kubernetes/kubernetes v1.17.0
 
 ## Running the doc generation code
 
-In your local `<rdocs-base>`, run the `copycli` build target. The command runs as `root`:
+In your local `<rdocs-base>`, run the `copycli` build target. The command runs
+as `root`:
 
 ```shell
 cd <rdocs-base>
 make copycli
 ```
 
-The `copycli` command cleans the temporary build directory, generates the kubectl command files,
-and copies the collated kubectl command reference HTML page and assets to `<web-base>`.
+The `copycli` command cleans the temporary build directory, generates the
+kubectl command files, and copies the collated kubectl command reference HTML
+page and assets to `<web-base>`.
 
 ## Locate the generated files
 
@@ -237,7 +241,8 @@ cd <web-base>
 make docker-serve
 ```
 
-View the [local preview](https://localhost:1313/docs/reference/generated/kubectl/kubectl-commands/).
+View the
+[local preview](https://localhost:1313/docs/reference/generated/kubectl/kubectl-commands/).
 
 ## Adding and committing changes in kubernetes/website
 
@@ -245,20 +250,19 @@ Run `git add` and `git commit` to commit the files.
 
 ## Creating a pull request
 
-Create a pull request to the `kubernetes/website` repository. Monitor your
-pull request, and respond to review comments as needed. Continue to monitor
-your pull request until it is merged.
+Create a pull request to the `kubernetes/website` repository. Monitor your pull
+request, and respond to review comments as needed. Continue to monitor your pull
+request until it is merged.
 
-A few minutes after your pull request is merged, your updated reference
-topics will be visible in the
-[published documentation](/docs/home).
+A few minutes after your pull request is merged, your updated reference topics
+will be visible in the [published documentation](/docs/home).
 
 {{% /capture %}}
 
 {{% capture whatsnext %}}
 
-* [Generating Reference Documentation Quickstart](/docs/contribute/generate-ref-docs/quickstart/)
-* [Generating Reference Documentation for Kubernetes Components and Tools](/docs/contribute/generate-ref-docs/kubernetes-components/)
-* [Generating Reference Documentation for the Kubernetes API](/docs/contribute/generate-ref-docs/kubernetes-api/)
+- [Generating Reference Documentation Quickstart](/docs/contribute/generate-ref-docs/quickstart/)
+- [Generating Reference Documentation for Kubernetes Components and Tools](/docs/contribute/generate-ref-docs/kubernetes-components/)
+- [Generating Reference Documentation for the Kubernetes API](/docs/contribute/generate-ref-docs/kubernetes-api/)
 
 {{% /capture %}}
