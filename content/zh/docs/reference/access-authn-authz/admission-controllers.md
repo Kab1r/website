@@ -1333,7 +1333,7 @@ If a webhook called by this has side effects (for example, decrementing quota) i
 webhooks or other validating admission controllers will permit the request to finish.
 -->
 
-如果以此方式调用的 webhook 有其它作用（如，配额递减），则它必须具有协调系统，因
+如果以此方式调用的 webhook 有其它作用（如，配额递减），则它必须具有协调系统，�
 为不能保证后续的 webhook 或其他有效的准入控制器都允许请求完成。
 
 <!- If you disable the ValidatingAdmissionWebhook, you must also disable the

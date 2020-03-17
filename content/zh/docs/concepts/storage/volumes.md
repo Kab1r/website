@@ -270,7 +270,7 @@ must be installed on the cluster and the `CSIMigration` and `CSIMigrationAzureDi
 Alpha features must be enabled.
 -->
 
-启用 azureDisk 的 CSI 迁移功能后，它会将所有插件操作从现有的内建插件填添加
+启用 azureDisk 的 CSI 迁移功能后，它会将所有插件操作从现有的内建插件填添�
 disk.csi.azure.com 容器存储接口（CSI）驱动程序中。为了使用此功能，必须在群集上安
 装
 [Azure 磁盘 CSI 驱动程序](https://github.com/kubernetes-sigs/azuredisk-csi-driver)，
@@ -306,7 +306,7 @@ must be installed on the cluster and the `CSIMigration` and `CSIMigrationAzureFi
 Alpha features must be enabled.
 -->
 
-启用 azureFile 的 CSI 迁移功能后，它会将所有插件操作从现有的内建插件填添加
+启用 azureFile 的 CSI 迁移功能后，它会将所有插件操作从现有的内建插件填添�
 file.csi.azure.com 容器存储接口（CSI）驱动程序中。为了使用此功能，必须在群集上安
 装
 [Azure 文件 CSI 驱动程序](https://github.com/kubernetes-sigs/azurefile-csi-driver)，
@@ -406,7 +406,7 @@ must be installed on the cluster and the `CSIMigration` and `CSIMigrationOpenSta
 Alpha features must be enabled.
 -->
 
-启用 Cinder 的 CSI 迁移功能后，它会将所有插件操作从现有的内建插件填添加
+启用 Cinder 的 CSI 迁移功能后，它会将所有插件操作从现有的内建插件填添�
 `cinder.csi.openstack.org` 容器存储接口（CSI）驱动程序中。为了使用此功能，必须在
 群集上安装
 [Openstack Cinder CSI 驱动程序](https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/using-cinder-csi-plugin.md)，
@@ -529,7 +529,7 @@ any reason, the data in the `emptyDir` is deleted forever.
 当 Pod 指定到某个节点上时，首先创建的是一个 `emptyDir` 卷，并且只要 Pod 在该节点
 上运行，卷就一直存在。就像它的名称表示的那样，卷最初是空的。尽管 Pod 中的容器挂
 载 `emptyDir` 卷的路径可能相同也可能不同，但是这些容器都可以读写 `emptyDir` 卷中
-相同的文件。当 Pod 因为某些原因被从节点上删除时，`emptyDir` 卷中的数据也会永久删
+相同的文件。当 Pod 因为某些原因被从节点上删除时，`emptyDir` 卷中的数据也会永久�
 除。
 
 {{< note >}}
@@ -837,7 +837,7 @@ must be installed on the cluster and the `CSIMigration` and `CSIMigrationGCE`
 Alpha features must be enabled.
 -->
 
-启用 GCE PD 的 CSI 迁移功能后，它会将所有插件操作从现有的内建插件填添加
+启用 GCE PD 的 CSI 迁移功能后，它会将所有插件操作从现有的内建插件填添�
 `pd.csi.storage.gke.io` 容器存储接口（ CSI ）驱动程序中。为了使用此功能，必须在
 群集上安装
 [GCE PD CSI 驱动程序](https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver)，

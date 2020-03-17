@@ -374,7 +374,7 @@ choco install minikube
 After Minikube has finished installing, close the current CLI session and restart. Minikube should have been added to your path automatically.
 -->
 
-完成 Minikube 的安装后，关闭当前 CLI 界面再重新打开。 Minikube 应该已经自动添加
+完成 Minikube 的安装后，关闭当前 CLI 界面再重新打开。 Minikube 应该已经自动添�
 至 path 中。
 
 <!--
