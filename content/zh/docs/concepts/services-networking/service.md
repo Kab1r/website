@@ -496,7 +496,7 @@ backend 中的某个上面。对于每个 `Endpoints` 对象，它也会安装 i
 
 默认的策略是，kube-proxy 在 iptables 模式下随机选择一个 backend。
 
-使用 iptables 处理流量具有较低的系统开销，因为流量由 Linux netfilter 处理，而无
+使用 iptables 处理流量具有较低的系统开销，因为流量由 Linux netfilter 处理，而�
 需在用户空间和内核空间之间切换。 这种方法也可能更可靠。
 
 如果 kube-proxy 在 iptable s 模式下运行，并且所选的第一个 Pod 没有响应，则连接失
@@ -1206,7 +1206,7 @@ In a mixed-use environment where some ports are secured and others are left unen
 you can use the following annotations:
 -->
 
-第二个注释指定 Pod 使用哪种协议。 对于 HTTPS 和 SSL，ELB 希望 Pod 使用证书通过加
+第二个注释指定 Pod 使用哪种协议。 对于 HTTPS 和 SSL，ELB 希望 Pod 使用证书通过�
 密连接对自己进行身份验证。
 
 HTTP 和 HTTPS 选择第 7 层代理：ELB 终止与用户的连接，解析标头，并在转发请求时向
@@ -1603,7 +1603,7 @@ This section is indebted to the [Kubernetes Tips - Part
 -->
 
 本部分感谢 [Alen Komljen](https://akomljen.com/)的
-[Kubernetes Tips - Part1](https://akomljen.com/kubernetes-tips-part-1/) 博客文章
+[Kubernetes Tips - Part1](https://akomljen.com/kubernetes-tips-part-1/) 博客文�
 。 {{< /note >}}
 
 <!--
