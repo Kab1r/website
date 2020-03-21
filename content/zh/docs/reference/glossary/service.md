@@ -27,6 +27,6 @@ An abstract way to expose an application running on a set of {{< glossary_toolti
 -->
 
 服务所针对的 Pod 集（通常）由
-{{< glossary_tooltip text="selector" term_id="selector" >}} 确定。 如果添加或删
+{{< glossary_tooltip text="selector" term_id="selector" >}} 确定。 如果添加或�
 除了更多 Pod，则与选择器匹配的 Pod 集将发生变化。 该服务确保可以将网络流量定向到
 该工作负载的当前 Pod 集。
