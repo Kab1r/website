@@ -19,9 +19,9 @@ roleRef:
   kind: ClusterRole
   name: cluster-admin
 subjects:
-- kind: ServiceAccount
-  name: cloud-controller-manager
-  namespace: kube-system
+  - kind: ServiceAccount
+    name: cloud-controller-manager
+    namespace: kube-system
 ---
 apiVersion: apps/v1
 kind: DaemonSet
@@ -41,28 +41,28 @@ spec:
     spec:
       serviceAccountName: cloud-controller-manager
       containers:
-      - name: cloud-controller-manager
-        # for in-tree providers we use k8s.gcr.io/cloud-controller-manager
-        # this can be replaced with any other image for out-of-tree providers
-        image: k8s.gcr.io/cloud-controller-manager:v1.8.0
-        command:
-        - /usr/local/bin/cloud-controller-manager
-        - --cloud-provider=[YOUR_CLOUD_PROVIDER]  # Add your own cloud provider here!
-        - --leader-elect=true
-        - --use-service-account-credentials
-        # these flags will vary for every cloud provider
-        - --allocate-node-cidrs=true
-        - --configure-cloud-routes=true
-        - --cluster-cidr=172.17.0.0/16
+        - name: cloud-controller-manager
+          # for in-tree providers we use k8s.gcr.io/cloud-controller-manager
+          # this can be replaced with any other image for out-of-tree providers
+          image: k8s.gcr.io/cloud-controller-manager:v1.8.0
+          command:
+            - /usr/local/bin/cloud-controller-manager
+            - --cloud-provider=[YOUR_CLOUD_PROVIDER] # Add your own cloud provider here!
+            - --leader-elect=true
+            - --use-service-account-credentials
+            # these flags will vary for every cloud provider
+            - --allocate-node-cidrs=true
+            - --configure-cloud-routes=true
+            - --cluster-cidr=172.17.0.0/16
       tolerations:
-      # this is required so CCM can bootstrap itself
-      - key: node.cloudprovider.kubernetes.io/uninitialized
-        value: "true"
-        effect: NoSchedule
-      # this is to have the daemonset runnable on master nodes
-      # the taint may vary depending on your cluster setup
-      - key: node-role.kubernetes.io/master
-        effect: NoSchedule
+        # this is required so CCM can bootstrap itself
+        - key: node.cloudprovider.kubernetes.io/uninitialized
+          value: "true"
+          effect: NoSchedule
+        # this is to have the daemonset runnable on master nodes
+        # the taint may vary depending on your cluster setup
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
       # this is to restrict CCM to only run on master nodes
       # the node selector may vary depending on your cluster setup
       nodeSelector:

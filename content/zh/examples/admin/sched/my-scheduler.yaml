@@ -9,9 +9,9 @@ kind: ClusterRoleBinding
 metadata:
   name: my-scheduler-as-kube-scheduler
 subjects:
-- kind: ServiceAccount
-  name: my-scheduler
-  namespace: kube-system
+  - kind: ServiceAccount
+    name: my-scheduler
+    namespace: kube-system
 roleRef:
   kind: ClusterRole
   name: system:kube-scheduler
@@ -40,28 +40,28 @@ spec:
     spec:
       serviceAccountName: my-scheduler
       containers:
-      - command:
-        - /usr/local/bin/kube-scheduler
-        - --address=0.0.0.0
-        - --leader-elect=false
-        - --scheduler-name=my-scheduler
-        image: gcr.io/my-gcp-project/my-kube-scheduler:1.0
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 10251
-          initialDelaySeconds: 15
-        name: kube-second-scheduler
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: 10251
-        resources:
-          requests:
-            cpu: '0.1'
-        securityContext:
-          privileged: false
-        volumeMounts: []
+        - command:
+            - /usr/local/bin/kube-scheduler
+            - --address=0.0.0.0
+            - --leader-elect=false
+            - --scheduler-name=my-scheduler
+          image: gcr.io/my-gcp-project/my-kube-scheduler:1.0
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 10251
+            initialDelaySeconds: 15
+          name: kube-second-scheduler
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 10251
+          resources:
+            requests:
+              cpu: "0.1"
+          securityContext:
+            privileged: false
+          volumeMounts: []
       hostNetwork: false
       hostPID: false
       volumes: []
