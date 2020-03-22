@@ -4,10 +4,10 @@ metadata:
   name: constraints-cpu-demo-3
 spec:
   containers:
-  - name: constraints-cpu-demo-3-ctr
-    image: nginx
-    resources:
-      limits:
-        cpu: "800m"
-      requests:
-        cpu: "100m"
+    - name: constraints-cpu-demo-3-ctr
+      image: nginx
+      resources:
+        limits:
+          cpu: "800m"
+        requests:
+          cpu: "100m"
