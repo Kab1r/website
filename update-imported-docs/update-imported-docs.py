@@ -52,7 +52,8 @@ else:
     import yaml
 
 if not shutil.which("go"):
-    error_msgs.append("Go must be installed. See https://golang.org/doc/install")
+    error_msgs.append(
+        "Go must be installed. See https://golang.org/doc/install")
 
 
 def process_links(content, remote_prefix, sub_path):
@@ -61,11 +62,8 @@ def process_links(content, remote_prefix, sub_path):
     def analyze(match_obj):
         ankor = match_obj.group("ankor")
         target = match_obj.group("target")
-        if not (
-            target.startswith("https://")
-            or target.startswith("mailto:")
-            or target.startswith("#")
-        ):
+        if not (target.startswith("https://") or target.startswith("mailto:")
+                or target.startswith("#")):
             if target.startswith("/"):
                 target_list = remote_prefix, target[1:]
                 target = "/".join(target_list)
@@ -95,11 +93,8 @@ def process_kubectl_links(content):
         target = match_obj.group("target")
         if target.endswith(".md") and target.startswith("kubectl"):
             ankor_list = ankor.split("kubectl ")
-            target = (
-                "/docs/reference/generated/kubectl/kubectl-commands"
-                + "#"
-                + ankor_list[1]
-            )
+            target = ("/docs/reference/generated/kubectl/kubectl-commands" +
+                      "#" + ankor_list[1])
         return "[%s](%s)" % (ankor, target)
 
     # Links are in the form '[text](url)'
@@ -155,7 +150,8 @@ def process_file(src, dst, repo_path, repo_dir, root_dir, gen_absolute_links):
                     content = process_kubectl_links(content)
                 dstFile.write(content)
         except Exception as ex:
-            print("[Error] failed in writing target file {}: {}".format(dst, ex))
+            print("[Error] failed in writing target file {}: {}".format(
+                dst, ex))
             continue
 
 
@@ -174,7 +170,9 @@ def parse_input_args():
         help="reference.yml to generate reference docs; "
         "release.yml to generate release notes",
     )
-    parser.add_argument("k8s_release", type=str, help="k8s release version, ex: 1.17")
+    parser.add_argument("k8s_release",
+                        type=str,
+                        help="k8s release version, ex: 1.17")
     return parser.parse_args()
 
 
@@ -211,13 +209,11 @@ def main():
     # create the temp work_dir
     try:
         print("Making temp work_dir")
-        work_dir = tempfile.mkdtemp(
-            dir="/tmp" if platform.system() == "Darwin" else tempfile.gettempdir()
-        )
+        work_dir = tempfile.mkdtemp(dir="/tmp" if platform.system() ==
+                                    "Darwin" else tempfile.gettempdir())
     except OSError as ose:
-        print(
-            "[Error] Unable to create temp work_dir {}; error: {}".format(work_dir, ose)
-        )
+        print("[Error] Unable to create temp work_dir {}; error: {}".format(
+            work_dir, ose))
         return -2
 
     print("Working dir {}".format(work_dir))
@@ -244,8 +240,7 @@ def main():
         os.chdir(work_dir)
         print("Cloning repo {}".format(repo_name))
         cmd = "git clone --depth=1 -b {0} {1} {2}".format(
-            repo["branch"], repo_remote, repo_path
-        )
+            repo["branch"], repo_remote, repo_path)
         res = subprocess.call(cmd, shell=True)
         if res != 0:
             print("[Error] failed in cloning repo {}".format(repo_name))
@@ -254,26 +249,16 @@ def main():
         os.chdir(repo_path)
         if "generate-command" in repo:
             gen_cmd = repo["generate-command"]
-            gen_cmd = (
-                "export K8S_RELEASE="
-                + k8s_release
-                + "\n"
-                + "export GOPATH="
-                + work_dir
-                + "\n"
-                + "export K8S_ROOT="
-                + work_dir
-                + "/src/k8s.io/kubernetes"
-                + "\n"
-                + "export K8S_WEBROOT="
-                + root_dir
-                + "\n"
-                + gen_cmd
-            )
+            gen_cmd = ("export K8S_RELEASE=" + k8s_release + "\n" +
+                       "export GOPATH=" + work_dir + "\n" +
+                       "export K8S_ROOT=" + work_dir +
+                       "/src/k8s.io/kubernetes" + "\n" +
+                       "export K8S_WEBROOT=" + root_dir + "\n" + gen_cmd)
             print("Generating docs for {} with {}".format(repo_name, gen_cmd))
             res = subprocess.call(gen_cmd, shell=True)
             if res != 0:
-                print("[Error] failed in generating docs for {}".format(repo_name))
+                print("[Error] failed in generating docs for {}".format(
+                    repo_name))
                 continue
 
         os.chdir(root_dir)
@@ -287,13 +272,11 @@ def main():
                 "gen-absolute-links" in repo,
             )
 
-    print(
-        "Completed docs update. Now run the following command to commit:\n\n"
-        " git add .\n"
-        " git commit -m <comment>\n"
-        " git push\n"
-        " delete temp dir {} when done ".format(work_dir)
-    )
+    print("Completed docs update. Now run the following command to commit:\n\n"
+          " git add .\n"
+          " git commit -m <comment>\n"
+          " git push\n"
+          " delete temp dir {} when done ".format(work_dir))
 
 
 if __name__ == "__main__":
