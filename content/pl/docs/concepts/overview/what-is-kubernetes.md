@@ -44,7 +44,7 @@ aplikacji na osobnej maszynie. Niestety, takie podejście ograniczało skalowani
 ponieważ większość zasobów nie była w pełni wykorzystywana, a utrzymanie wielu
 fizycznych maszyn było kosztowne.
 
-**Era wdrożeń w środowiskach wirtualnych:**  
+**Era wdrożeń w środowiskach wirtualnych:**
 Jako rozwiązanie zaproponowano wirtualizację, która umożliwiała uruchamianie
 wielu maszyn wirtualnych (VM) na jednym procesorze fizycznego serwera.
 Wirtualizacja pozwalała izolować aplikacje pomiędzy maszynami wirtualnymi i
@@ -112,15 +112,15 @@ wdrożeniem nowej wersji oprogramowania zgodnie z metodyką _canary deployments_
 
 Kubernetes zapewnia:
 
-- **Detekcję nowych serwisów i balansowanie ruchu**  
+- **Detekcję nowych serwisów i balansowanie ruchu**
   Kubernetes może udostępnić kontener używając nazwy DNS lub swojego własnego
   adresu IP. Jeśli ruch przychodzący do kontenera jest duży, Kubernetes może
   balansować obciążenie i przekierować ruch sieciowy, aby zapewnić stabilność
   całej instalacji.
-- **Zarządzanie obsługą składowania danych**  
+- **Zarządzanie obsługą składowania danych**
   Kubernetes umożliwia automatyczne montowanie systemów składowania danych
   dowolnego typu — lokalnych, od dostawców chmurowych i innych.
-- **Automatyczne wdrożenia i wycofywanie zmian**  
+- **Automatyczne wdrożenia i wycofywanie zmian**
   Możesz opisać oczekiwany stan instalacji za pomocą Kubernetesa, który zajmie
   się doprowadzeniem w sposób kontrolowany stanu faktycznego do stanu
   oczekiwanego. Przykładowo, przy pomocy Kubernetesa możesz zautomatyzować
@@ -131,12 +131,12 @@ Kubernetes zapewnia:
   zadań w kontenerach. Określasz zapotrzebowanie na moc procesora i pamięć RAM
   dla każdego z kontenerów. Kubernetes rozmieszcza kontenery na maszynach w taki
   sposób, aby jak najlepiej wykorzystać dostarczone zasoby.
-- **Samoczynne naprawianie**  
+- **Samoczynne naprawianie**
   Kubernetes restartuje kontenery, które przestały działać, wymienia je na nowe,
   wymusza wyłączenie kontenerów, które nie odpowiadają na określone zapytania o
   stan i nie rozgłasza powiadomień o ich dostępności tak długo, dopóki nie są
   gotowe do działania.
-- **Zarządzanie informacjami poufnymi i konfiguracją**  
+- **Zarządzanie informacjami poufnymi i konfiguracją**
   Kubernetes pozwala składować i zarządzać informacjami poufnymi, takimi jak
   hasła, tokeny OAuth i klucze SSH. Informacje poufne i zawierające konfigurację
   aplikacji mogą być dostarczane i zmieniane bez konieczności ponownego
