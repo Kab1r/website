@@ -4,13 +4,13 @@ metadata:
   name: shell-demo
 spec:
   volumes:
-  - name: shared-data
-    emptyDir: {}
-  containers:
-  - name: nginx
-    image: nginx
-    volumeMounts:
     - name: shared-data
-      mountPath: /usr/share/nginx/html
+      emptyDir: {}
+  containers:
+    - name: nginx
+      image: nginx
+      volumeMounts:
+        - name: shared-data
+          mountPath: /usr/share/nginx/html
   hostNetwork: true
   dnsPolicy: Default

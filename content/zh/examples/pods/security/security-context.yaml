@@ -8,14 +8,14 @@ spec:
     runAsGroup: 3000
     fsGroup: 2000
   volumes:
-  - name: sec-ctx-vol
-    emptyDir: {}
-  containers:
-  - name: sec-ctx-demo
-    image: busybox
-    command: [ "sh", "-c", "sleep 1h" ]
-    volumeMounts:
     - name: sec-ctx-vol
-      mountPath: /data/demo
-    securityContext:
-      allowPrivilegeEscalation: false
+      emptyDir: {}
+  containers:
+    - name: sec-ctx-demo
+      image: busybox
+      command: ["sh", "-c", "sleep 1h"]
+      volumeMounts:
+        - name: sec-ctx-vol
+          mountPath: /data/demo
+      securityContext:
+        allowPrivilegeEscalation: false
