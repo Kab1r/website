@@ -24,16 +24,15 @@
 #     release.yml    use this to auto-generate/import release notes
 # K8S_RELEASE: provide the release version such as, 1.17
 ##
-
 import argparse
 import glob
 import os
+import platform
 import re
 import shutil
 import subprocess
 import sys
 import tempfile
-import platform
 
 error_msgs = []
 
