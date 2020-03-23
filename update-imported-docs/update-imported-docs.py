@@ -24,33 +24,34 @@
 #     release.yml    use this to auto-generate/import release notes
 # K8S_RELEASE: provide the release version such as, 1.17
 ##
-
 import argparse
 import glob
 import os
+import platform
 import re
 import shutil
 import subprocess
 import sys
 import tempfile
-import platform
 
 error_msgs = []
 
 # pip should be installed when Python is installed, but just in case...
-if not (shutil.which('pip') or shutil.which('pip3')):
+if not (shutil.which("pip") or shutil.which("pip3")):
     error_msgs.append(
-        "Install pip so you can install PyYAML. https://pip.pypa.io/en/stable/installing")
+        "Install pip so you can install PyYAML. https://pip.pypa.io/en/stable/installing"
+    )
 
-reqs = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
-installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
-if 'PyYAML' not in installed_packages:
+reqs = subprocess.check_output([sys.executable, "-m", "pip", "freeze"])
+installed_packages = [r.decode().split("==")[0] for r in reqs.split()]
+if "PyYAML" not in installed_packages:
     error_msgs.append(
-        "Please ensure the PyYAML package is installed; see https://pypi.org/project/PyYAML")
+        "Please ensure the PyYAML package is installed; see https://pypi.org/project/PyYAML"
+    )
 else:
     import yaml
 
-if not shutil.which('go'):
+if not shutil.which("go"):
     error_msgs.append(
         "Go must be installed. See https://golang.org/doc/install")
 
@@ -59,11 +60,10 @@ def process_links(content, remote_prefix, sub_path):
     """Process markdown links found in the docs."""
 
     def analyze(match_obj):
-        ankor = match_obj.group('ankor')
-        target = match_obj.group('target')
-        if not (target.startswith("https://") or
-                target.startswith("mailto:") or
-                target.startswith("#")):
+        ankor = match_obj.group("ankor")
+        target = match_obj.group("target")
+        if not (target.startswith("https://") or target.startswith("mailto:")
+                or target.startswith("#")):
             if target.startswith("/"):
                 target_list = remote_prefix, target[1:]
                 target = "/".join(target_list)
@@ -89,12 +89,12 @@ def process_kubectl_links(content):
     """
 
     def analyze(match_obj):
-        ankor = match_obj.group('ankor')
-        target = match_obj.group('target')
+        ankor = match_obj.group("ankor")
+        target = match_obj.group("target")
         if target.endswith(".md") and target.startswith("kubectl"):
             ankor_list = ankor.split("kubectl ")
-            target = "/docs/reference/generated/kubectl/kubectl-commands" + "#" + \
-                     ankor_list[1]
+            target = ("/docs/reference/generated/kubectl/kubectl-commands" +
+                      "#" + ankor_list[1])
         return "[%s](%s)" % (ankor, target)
 
     # Links are in the form '[text](url)'
@@ -150,7 +150,8 @@ def process_file(src, dst, repo_path, repo_dir, root_dir, gen_absolute_links):
                     content = process_kubectl_links(content)
                 dstFile.write(content)
         except Exception as ex:
-            print("[Error] failed in writing target file {}: {}".format(dst, ex))
+            print("[Error] failed in writing target file {}: {}".format(
+                dst, ex))
             continue
 
 
@@ -163,12 +164,15 @@ def parse_input_args():
     :return: parsed argument
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument('config_file', type=str,
-                        help="reference.yml to generate reference docs; "
-                             "release.yml to generate release notes")
-    parser.add_argument('k8s_release', type=str,
-                        help="k8s release version, ex: 1.17"
-                        )
+    parser.add_argument(
+        "config_file",
+        type=str,
+        help="reference.yml to generate reference docs; "
+        "release.yml to generate release notes",
+    )
+    parser.add_argument("k8s_release",
+                        type=str,
+                        help="k8s release version, ex: 1.17")
     return parser.parse_args()
 
 
@@ -190,11 +194,11 @@ def main():
 
     curr_dir = os.path.dirname(os.path.abspath(__file__))
     print("curr_dir {}".format(curr_dir))
-    root_dir = os.path.realpath(os.path.join(curr_dir, '..'))
+    root_dir = os.path.realpath(os.path.join(curr_dir, ".."))
     print("root_dir {}".format(root_dir))
 
     try:
-        config_data = yaml.full_load(open(config_file, 'r'))
+        config_data = yaml.full_load(open(config_file, "r"))
     except Exception as ex:
         # to catch when a user specifies a file that does not exist
         print("[Error] failed in loading config file - {}".format(str(ex)))
@@ -205,12 +209,11 @@ def main():
     # create the temp work_dir
     try:
         print("Making temp work_dir")
-        work_dir = tempfile.mkdtemp(
-            dir='/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
-        )
+        work_dir = tempfile.mkdtemp(dir="/tmp" if platform.system() ==
+                                    "Darwin" else tempfile.gettempdir())
     except OSError as ose:
-        print("[Error] Unable to create temp work_dir {}; error: {}"
-              .format(work_dir, ose))
+        print("[Error] Unable to create temp work_dir {}; error: {}".format(
+            work_dir, ose))
         return -2
 
     print("Working dir {}".format(work_dir))
@@ -232,7 +235,7 @@ def main():
             print("[Error] repo path for {} is invalid".format(repo_name))
             continue
 
-        repo_path = os.path.join("src", matches.group('prefix'))
+        repo_path = os.path.join("src", matches.group("prefix"))
 
         os.chdir(work_dir)
         print("Cloning repo {}".format(repo_name))
@@ -246,11 +249,11 @@ def main():
         os.chdir(repo_path)
         if "generate-command" in repo:
             gen_cmd = repo["generate-command"]
-            gen_cmd = "export K8S_RELEASE=" + k8s_release + "\n" + \
-                "export GOPATH=" + work_dir + "\n" + \
-                "export K8S_ROOT=" + work_dir + \
-                "/src/k8s.io/kubernetes" + "\n" + \
-                "export K8S_WEBROOT=" + root_dir + "\n" + gen_cmd
+            gen_cmd = ("export K8S_RELEASE=" + k8s_release + "\n" +
+                       "export GOPATH=" + work_dir + "\n" +
+                       "export K8S_ROOT=" + work_dir +
+                       "/src/k8s.io/kubernetes" + "\n" +
+                       "export K8S_WEBROOT=" + root_dir + "\n" + gen_cmd)
             print("Generating docs for {} with {}".format(repo_name, gen_cmd))
             res = subprocess.call(gen_cmd, shell=True)
             if res != 0:
@@ -260,8 +263,14 @@ def main():
 
         os.chdir(root_dir)
         for f in repo["files"]:
-            process_file(f['src'], f['dst'], repo_path, work_dir, root_dir,
-                         "gen-absolute-links" in repo)
+            process_file(
+                f["src"],
+                f["dst"],
+                repo_path,
+                work_dir,
+                root_dir,
+                "gen-absolute-links" in repo,
+            )
 
     print("Completed docs update. Now run the following command to commit:\n\n"
           " git add .\n"
@@ -270,5 +279,5 @@ def main():
           " delete temp dir {} when done ".format(work_dir))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main())
