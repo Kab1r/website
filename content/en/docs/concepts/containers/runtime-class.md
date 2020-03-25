@@ -182,7 +182,7 @@ To learn more about configuring the node selector and tolerations, see
 
 You can specify _overhead_ resources that are associated with running a Pod.
 Declaring overhead allows the cluster (including the scheduler) to account for
-it when making decisions about Pods and resources.  
+it when making decisions about Pods and resources.
 To use Pod overhead, you must have the PodOverhead
 [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
 enabled (it is on by default).

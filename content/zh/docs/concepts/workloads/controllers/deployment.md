@@ -2248,7 +2248,7 @@ Deployment 的 ReplicaSets。其余的将在后台进行垃圾回收。默认情
 thus that Deployment will not be able to roll back.
 -->
 
-显式将此字段设置为 0 将导致清理 Deployment 的所有历史记录，因此 Deployment 将无
+显式将此字段设置为 0 将导致清理 Deployment 的所有历史记录，因此 Deployment 将�
 法回滚。 {{< /note >}}
 
 <!--

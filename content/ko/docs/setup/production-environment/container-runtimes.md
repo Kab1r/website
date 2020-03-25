@@ -147,7 +147,7 @@ mkdir -p /etc/systemd/system/docker.service.d
 systemctl daemon-reload systemctl restart docker {{< /tab >}} {{< /tabs >}}
 
 자세한 내용은
-[공식 Docker 설치 가이드](https://docs.docker.com/engine/installation/) 를 참고
+[공식 Docker 설치 가이드](https://docs.docker.com/engine/installation/) 를 참�
 한다.
 
 ## CRI-O
