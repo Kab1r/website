@@ -33,7 +33,7 @@ cache misses of cluster hostnames(cluster.local suffix by default).
 
 - With the current DNS architecture, it is possible that Pods with the highest
   DNS QPS have to reach out to a different node, if there is no local
-  kube-dns/CoreDNS instance.  
+  kube-dns/CoreDNS instance.
   Having a local cache will help improve the latency in such scenarios.
 
 - Skipping iptables DNAT and connection tracking will help reduce
@@ -92,7 +92,7 @@ This feature can be enabled using the following steps:
     ```
 
     `__PILLAR__CLUSTER__DNS__` and `__PILLAR__UPSTREAM__SERVERS__` will be
-    populated by the node-local-dns pods.  
+    populated by the node-local-dns pods.
     In this mode, node-local-dns pods listen on both the kube-dns service IP as
     well as `<node-local-address>`, so pods can lookup DNS records using either
     IP address.
@@ -105,7 +105,7 @@ This feature can be enabled using the following steps:
 
     In this mode, node-local-dns pods listen only on `<node-local-address>`. The
     node-local-dns interface cannot bind the kube-dns cluster IP since the
-    interface used for IPVS loadbalancing already uses this address.  
+    interface used for IPVS loadbalancing already uses this address.
      `__PILLAR__UPSTREAM__SERVERS__` will be populated by the node-local-dns pods.
 
 - Run `kubectl create -f nodelocaldns.yaml`
