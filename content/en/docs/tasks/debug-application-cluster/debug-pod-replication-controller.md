@@ -1,6 +1,6 @@
 ---
 reviewers:
-- bprashanth
+  - bprashanth
 title: Debug Pods and ReplicationControllers
 content_template: templates/task
 ---
@@ -15,8 +15,9 @@ This page shows how to debug Pods and ReplicationControllers.
 
 {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
 
-* You should be familiar with the basics of
-  [Pods](/docs/concepts/workloads/pods/pod/) and [Pod Lifecycle](/docs/concepts/workloads/pods/pod-lifecycle/).
+- You should be familiar with the basics of
+  [Pods](/docs/concepts/workloads/pods/pod/) and
+  [Pod Lifecycle](/docs/concepts/workloads/pods/pod-lifecycle/).
 
 {{% /capture %}}
 
@@ -31,7 +32,7 @@ state of the pod and recent events with the following command:
 kubectl describe pods ${POD_NAME}
 ```
 
-Look at the state of the containers in the pod. Are they all `Running`?  Have
+Look at the state of the containers in the pod. Are they all `Running`? Have
 there been recent restarts?
 
 Continue debugging depending on the state of the pods.
@@ -40,37 +41,38 @@ Continue debugging depending on the state of the pods.
 
 If a pod is stuck in `Pending` it means that it can not be scheduled onto a
 node. Generally this is because there are insufficient resources of one type or
-another that prevent scheduling. Look at the output of the `kubectl describe
-...` command above. There should be messages from the scheduler about why it
-can not schedule your pod. Reasons include:
+another that prevent scheduling. Look at the output of the
+`kubectl describe ...` command above. There should be messages from the
+scheduler about why it can not schedule your pod. Reasons include:
 
 #### Insufficient resources
 
-You may have exhausted the supply of CPU or Memory in your cluster. In this
-case you can try several things:
+You may have exhausted the supply of CPU or Memory in your cluster. In this case
+you can try several things:
 
-* [Add more nodes](/docs/admin/cluster-management/#resizing-a-cluster) to the cluster.
+- [Add more nodes](/docs/admin/cluster-management/#resizing-a-cluster) to the
+  cluster.
 
-* [Terminate unneeded pods](/docs/user-guide/pods/single-container/#deleting_a_pod)
+- [Terminate unneeded pods](/docs/user-guide/pods/single-container/#deleting_a_pod)
   to make room for pending pods.
 
-* Check that the pod is not larger than your nodes. For example, if all
-  nodes have a capacity of `cpu:1`, then a pod with a request of `cpu: 1.1`
-  will never be scheduled.
+- Check that the pod is not larger than your nodes. For example, if all nodes
+  have a capacity of `cpu:1`, then a pod with a request of `cpu: 1.1` will never
+  be scheduled.
 
-    You can check node capacities with the `kubectl get nodes -o <format>`
-    command. Here are some example command lines that extract just the necessary
-    information:
+  You can check node capacities with the `kubectl get nodes -o <format>`
+  command. Here are some example command lines that extract just the necessary
+  information:
 
-    ```shell
-    kubectl get nodes -o yaml | egrep '\sname:|cpu:|memory:'
-    kubectl get nodes -o json | jq '.items[] | {name: .metadata.name, cap: .status.capacity}'
-    ```
+  ```shell
+  kubectl get nodes -o yaml | egrep '\sname:|cpu:|memory:'
+  kubectl get nodes -o json | jq '.items[] | {name: .metadata.name, cap: .status.capacity}'
+  ```
 
-  The [resource quota](/docs/concepts/policy/resource-quotas/)
-  feature can be configured to limit the total amount of
-  resources that can be consumed. If used in conjunction with namespaces, it can
-  prevent one team from hogging all the resources.
+  The [resource quota](/docs/concepts/policy/resource-quotas/) feature can be
+  configured to limit the total amount of resources that can be consumed. If
+  used in conjunction with namespaces, it can prevent one team from hogging all
+  the resources.
 
 #### Using hostPort
 
@@ -81,21 +83,21 @@ only schedule as many pods as there are nodes in your container cluster.
 
 ### My pod stays waiting
 
-If a pod is stuck in the `Waiting` state, then it has been scheduled to a
-worker node, but it can't run on that machine. Again, the information from
-`kubectl describe ...` should be informative. The most common cause of
-`Waiting` pods is a failure to pull the image. There are three things to check:
+If a pod is stuck in the `Waiting` state, then it has been scheduled to a worker
+node, but it can't run on that machine. Again, the information from
+`kubectl describe ...` should be informative. The most common cause of `Waiting`
+pods is a failure to pull the image. There are three things to check:
 
-* Make sure that you have the name of the image correct.
-* Have you pushed the image to the repository?
-* Run a manual `docker pull <image>` on your machine to see if the image can be
+- Make sure that you have the name of the image correct.
+- Have you pushed the image to the repository?
+- Run a manual `docker pull <image>` on your machine to see if the image can be
   pulled.
 
 ### My pod is crashing or otherwise unhealthy
 
-Once your pod has been scheduled, the methods described in [Debug Running Pods](
-/docs/tasks/debug-application-cluster/debug-running-pods/) are available for debugging.
-
+Once your pod has been scheduled, the methods described in
+[Debug Running Pods](/docs/tasks/debug-application-cluster/debug-running-pods/)
+are available for debugging.
 
 ## Debugging ReplicationControllers
 

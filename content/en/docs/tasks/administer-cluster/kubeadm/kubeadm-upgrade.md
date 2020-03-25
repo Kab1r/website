@@ -1,6 +1,6 @@
 ---
 reviewers:
-- sig-cluster-lifecycle
+  - sig-cluster-lifecycle
 title: Upgrading kubeadm clusters
 content_template: templates/task
 weight: 20
@@ -9,11 +9,12 @@ min-kubernetes-server-version: 1.18
 
 {{% capture overview %}}
 
-This page explains how to upgrade a Kubernetes cluster created with kubeadm from version
-1.17.x to version 1.18.x, and from version 1.18.x to 1.18.y (where `y > x`).
+This page explains how to upgrade a Kubernetes cluster created with kubeadm from
+version 1.17.x to version 1.18.x, and from version 1.18.x to 1.18.y (where
+`y > x`).
 
-To see information about upgrading clusters created using older versions of kubeadm,
-please refer to following pages instead:
+To see information about upgrading clusters created using older versions of
+kubeadm, please refer to following pages instead:
 
 - [Upgrading kubeadm cluster from 1.16 to 1.17](https://v1-17.docs.kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/)
 - [Upgrading kubeadm cluster from 1.15 to 1.16](https://v1-16.docs.kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/)
@@ -33,16 +34,20 @@ The upgrade workflow at high level is the following:
 - You need to have a kubeadm Kubernetes cluster running version 1.17.0 or later.
 - [Swap must be disabled](https://serverfault.com/questions/684771/best-way-to-disable-swap-in-linux).
 - The cluster should use a static control plane and etcd pods or external etcd.
-- Make sure you read the [release notes]({{< latest-release-notes >}}) carefully.
-- Make sure to back up any important components, such as app-level state stored in a database.
-  `kubeadm upgrade` does not touch your workloads, only components internal to Kubernetes, but backups are always a best practice.
+- Make sure you read the [release notes]({{< latest-release-notes >}})
+  carefully.
+- Make sure to back up any important components, such as app-level state stored
+  in a database. `kubeadm upgrade` does not touch your workloads, only
+  components internal to Kubernetes, but backups are always a best practice.
 
 ### Additional information
 
-- All containers are restarted after upgrade, because the container spec hash value is changed.
-- You only can upgrade from one MINOR version to the next MINOR version,
-  or between PATCH versions of the same MINOR. That is, you cannot skip MINOR versions when you upgrade.
-  For example, you can upgrade from 1.y to 1.y+1, but not from 1.y to 1.y+2.
+- All containers are restarted after upgrade, because the container spec hash
+  value is changed.
+- You only can upgrade from one MINOR version to the next MINOR version, or
+  between PATCH versions of the same MINOR. That is, you cannot skip MINOR
+  versions when you upgrade. For example, you can upgrade from 1.y to 1.y+1, but
+  not from 1.y to 1.y+2.
 
 {{% /capture %}}
 
@@ -53,18 +58,21 @@ The upgrade workflow at high level is the following:
 1.  Find the latest stable 1.17 version:
 
     {{< tabs name="k8s_install_versions" >}}
-    {{% tab name="Ubuntu, Debian or HypriotOS" %}}
-    apt update
-    apt-cache madison kubeadm
+    {{% tab name="Ubuntu, Debian or HypriotOS" %}} apt update apt-cache madison
+    kubeadm
+
     # find the latest 1.17 version in the list
+
     # it should look like 1.18.x-00, where x is the latest patch
-    {{% /tab %}}
-    {{% tab name="CentOS, RHEL or Fedora" %}}
-    yum list --showduplicates kubeadm --disableexcludes=kubernetes
+
+    {{% /tab %}} {{% tab name="CentOS, RHEL or Fedora" %}} yum list
+    --showduplicates kubeadm --disableexcludes=kubernetes
+
     # find the latest 1.17 version in the list
+
     # it should look like 1.18.x-0, where x is the latest patch
-    {{% /tab %}}
-    {{< /tabs >}}
+
+    {{% /tab %}} {{< /tabs >}}
 
 ## Upgrading control plane nodes
 
@@ -74,19 +82,22 @@ The upgrade workflow at high level is the following:
 
     {{< tabs name="k8s_install_kubeadm_first_cp" >}}
     {{% tab name="Ubuntu, Debian or HypriotOS" %}}
+
     # replace x in 1.18.x-00 with the latest patch version
+
     apt-mark unhold kubeadm && \
     apt-get update && apt-get install -y kubeadm=1.18.x-00 && \
     apt-mark hold kubeadm
 
     # since apt-get version 1.1 you can also use the following method
+
     apt-get update && \
-    apt-get install -y --allow-change-held-packages kubeadm=1.18.x-00
-    {{% /tab %}}
+    apt-get install -y --allow-change-held-packages kubeadm=1.18.x-00 {{% /tab %}}
     {{% tab name="CentOS, RHEL or Fedora" %}}
+
     # replace x in 1.18.x-0 with the latest patch version
-    yum install -y kubeadm-1.18.x-0 --disableexcludes=kubernetes
-    {{% /tab %}}
+
+    yum install -y kubeadm-1.18.x-0 --disableexcludes=kubernetes {{% /tab %}}
     {{< /tabs >}}
 
 1.  Verify that the download works and has the expected version:
@@ -143,15 +154,17 @@ The upgrade workflow at high level is the following:
     _____________________________________________________________________
     ```
 
-    This command checks that your cluster can be upgraded, and fetches the versions you can upgrade to.
+    This command checks that your cluster can be upgraded, and fetches the
+    versions you can upgrade to.
 
-    {{< note >}}
-    `kubeadm upgrade` also automatically renews the certificates that it manages on this node.
-    To opt-out of certificate renewal the flag `--certificate-renewal=false` can be used.
-    For more information see the [certificate management guide](/docs/tasks/administer-cluster/kubeadm/kubeadm-certs).
+    {{< note >}} `kubeadm upgrade` also automatically renews the certificates
+    that it manages on this node. To opt-out of certificate renewal the flag
+    `--certificate-renewal=false` can be used. For more information see the
+    [certificate management guide](/docs/tasks/administer-cluster/kubeadm/kubeadm-certs).
     {{</ note >}}
 
-1.  Choose a version to upgrade to, and run the appropriate command. For example:
+1.  Choose a version to upgrade to, and run the appropriate command. For
+    example:
 
     ```shell
     # replace x with the patch version you picked for this upgrade
@@ -242,11 +255,13 @@ The upgrade workflow at high level is the following:
 
 1.  Manually upgrade your CNI provider plugin.
 
-    Your Container Network Interface (CNI) provider may have its own upgrade instructions to follow.
-    Check the [addons](/docs/concepts/cluster-administration/addons/) page to
-    find your CNI provider and see whether additional upgrade steps are required.
+    Your Container Network Interface (CNI) provider may have its own upgrade
+    instructions to follow. Check the
+    [addons](/docs/concepts/cluster-administration/addons/) page to find your
+    CNI provider and see whether additional upgrade steps are required.
 
-    This step is not required on additional control plane nodes if the CNI provider runs as a DaemonSet.
+    This step is not required on additional control plane nodes if the CNI
+    provider runs as a DaemonSet.
 
 1.  Uncordon the control plane node:
 
@@ -277,22 +292,25 @@ Also `sudo kubeadm upgrade plan` is not needed.
 
     {{< tabs name="k8s_install_kubelet" >}}
     {{% tab name="Ubuntu, Debian or HypriotOS" %}}
+
     # replace x in 1.18.x-00 with the latest patch version
+
     apt-mark unhold kubelet kubectl && \
     apt-get update && apt-get install -y kubelet=1.18.x-00 kubectl=1.18.x-00 && \
     apt-mark hold kubelet kubectl
 
     # since apt-get version 1.1 you can also use the following method
+
     apt-get update && \
     apt-get install -y --allow-change-held-packages kubelet=1.18.x-00 kubectl=1.18.x-00
-    {{% /tab %}}
-    {{% tab name="CentOS, RHEL or Fedora" %}}
-    # replace x in 1.18.x-0 with the latest patch version
-    yum install -y kubelet-1.18.x-0 kubectl-1.18.x-0 --disableexcludes=kubernetes
-    {{% /tab %}}
-    {{< /tabs >}}
+    {{% /tab %}} {{% tab name="CentOS, RHEL or Fedora" %}}
 
-1. Restart the kubelet
+    # replace x in 1.18.x-0 with the latest patch version
+
+    yum install -y kubelet-1.18.x-0 kubectl-1.18.x-0
+    --disableexcludes=kubernetes {{% /tab %}} {{< /tabs >}}
+
+1.  Restart the kubelet
 
     ```shell
     sudo systemctl restart kubelet
@@ -300,8 +318,9 @@ Also `sudo kubeadm upgrade plan` is not needed.
 
 ## Upgrade worker nodes
 
-The upgrade procedure on worker nodes should be executed one node at a time or few nodes at a time,
-without compromising the minimum required capacity for running your workloads.
+The upgrade procedure on worker nodes should be executed one node at a time or
+few nodes at a time, without compromising the minimum required capacity for
+running your workloads.
 
 ### Upgrade kubeadm
 
@@ -309,24 +328,28 @@ without compromising the minimum required capacity for running your workloads.
 
     {{< tabs name="k8s_install_kubeadm_worker_nodes" >}}
     {{% tab name="Ubuntu, Debian or HypriotOS" %}}
+
     # replace x in 1.18.x-00 with the latest patch version
+
     apt-mark unhold kubeadm && \
     apt-get update && apt-get install -y kubeadm=1.18.x-00 && \
     apt-mark hold kubeadm
 
     # since apt-get version 1.1 you can also use the following method
+
     apt-get update && \
-    apt-get install -y --allow-change-held-packages kubeadm=1.18.x-00
-    {{% /tab %}}
+    apt-get install -y --allow-change-held-packages kubeadm=1.18.x-00 {{% /tab %}}
     {{% tab name="CentOS, RHEL or Fedora" %}}
+
     # replace x in 1.18.x-0 with the latest patch version
-    yum install -y kubeadm-1.18.x-0 --disableexcludes=kubernetes
-    {{% /tab %}}
+
+    yum install -y kubeadm-1.18.x-0 --disableexcludes=kubernetes {{% /tab %}}
     {{< /tabs >}}
 
 ### Drain the node
 
-1.  Prepare the node for maintenance by marking it unschedulable and evicting the workloads:
+1.  Prepare the node for maintenance by marking it unschedulable and evicting
+    the workloads:
 
     ```shell
     # replace <node-to-drain> with the name of your node you are draining
@@ -355,22 +378,25 @@ without compromising the minimum required capacity for running your workloads.
 
     {{< tabs name="k8s_kubelet_and_kubectl" >}}
     {{% tab name="Ubuntu, Debian or HypriotOS" %}}
+
     # replace x in 1.18.x-00 with the latest patch version
+
     apt-mark unhold kubelet kubectl && \
     apt-get update && apt-get install -y kubelet=1.18.x-00 kubectl=1.18.x-00 && \
     apt-mark hold kubelet kubectl
 
     # since apt-get version 1.1 you can also use the following method
+
     apt-get update && \
     apt-get install -y --allow-change-held-packages kubelet=1.18.x-00 kubectl=1.18.x-00
-    {{% /tab %}}
-    {{% tab name="CentOS, RHEL or Fedora" %}}
-    # replace x in 1.18.x-0 with the latest patch version
-    yum install -y kubelet-1.18.x-0 kubectl-1.18.x-0 --disableexcludes=kubernetes
-    {{% /tab %}}
-    {{< /tabs >}}
+    {{% /tab %}} {{% tab name="CentOS, RHEL or Fedora" %}}
 
-1. Restart the kubelet
+    # replace x in 1.18.x-0 with the latest patch version
+
+    yum install -y kubelet-1.18.x-0 kubectl-1.18.x-0
+    --disableexcludes=kubernetes {{% /tab %}} {{< /tabs >}}
+
+1.  Restart the kubelet
 
     ```shell
     sudo systemctl restart kubelet
@@ -387,35 +413,46 @@ without compromising the minimum required capacity for running your workloads.
 
 ## Verify the status of the cluster
 
-After the kubelet is upgraded on all nodes verify that all nodes are available again by running the following command from anywhere kubectl can access the cluster:
+After the kubelet is upgraded on all nodes verify that all nodes are available
+again by running the following command from anywhere kubectl can access the
+cluster:
 
 ```shell
 kubectl get nodes
 ```
 
-The `STATUS` column should show `Ready` for all your nodes, and the version number should be updated.
+The `STATUS` column should show `Ready` for all your nodes, and the version
+number should be updated.
 
 {{% /capture %}}
 
 ## Recovering from a failure state
 
-If `kubeadm upgrade` fails and does not roll back, for example because of an unexpected shutdown during execution, you can run `kubeadm upgrade` again.
-This command is idempotent and eventually makes sure that the actual state is the desired state you declare.
+If `kubeadm upgrade` fails and does not roll back, for example because of an
+unexpected shutdown during execution, you can run `kubeadm upgrade` again. This
+command is idempotent and eventually makes sure that the actual state is the
+desired state you declare.
 
-To recover from a bad state, you can also run `kubeadm upgrade apply --force` without changing the version that your cluster is running.
+To recover from a bad state, you can also run `kubeadm upgrade apply --force`
+without changing the version that your cluster is running.
 
-During upgrade kubeadm writes the following backup folders under `/etc/kubernetes/tmp`:
+During upgrade kubeadm writes the following backup folders under
+`/etc/kubernetes/tmp`:
+
 - `kubeadm-backup-etcd-<date>-<time>`
 - `kubeadm-backup-manifests-<date>-<time>`
 
-`kubeadm-backup-etcd` contains a backup of the local etcd member data for this control-plane Node.
-In case of an etcd upgrade failure and if the automatic rollback does not work, the contents of this folder
-can be manually restored in `/var/lib/etcd`. In case external etcd is used this backup folder will be empty.
+`kubeadm-backup-etcd` contains a backup of the local etcd member data for this
+control-plane Node. In case of an etcd upgrade failure and if the automatic
+rollback does not work, the contents of this folder can be manually restored in
+`/var/lib/etcd`. In case external etcd is used this backup folder will be empty.
 
-`kubeadm-backup-manifests` contains a backup of the static Pod manifest files for this control-plane Node.
-In case of a upgrade failure and if the automatic rollback does not work, the contents of this folder can be
-manually restored in `/etc/kubernetes/manifests`. If for some reason there is no difference between a pre-upgrade
-and post-upgrade manifest file for a certain component, a backup file for it will not be written.
+`kubeadm-backup-manifests` contains a backup of the static Pod manifest files
+for this control-plane Node. In case of a upgrade failure and if the automatic
+rollback does not work, the contents of this folder can be manually restored in
+`/etc/kubernetes/manifests`. If for some reason there is no difference between a
+pre-upgrade and post-upgrade manifest file for a certain component, a backup
+file for it will not be written.
 
 ## How it works
 
@@ -426,10 +463,14 @@ and post-upgrade manifest file for a certain component, a backup file for it wil
   - All nodes are in the `Ready` state
   - The control plane is healthy
 - Enforces the version skew policies.
-- Makes sure the control plane images are available or available to pull to the machine.
-- Upgrades the control plane components or rollbacks if any of them fails to come up.
-- Applies the new `kube-dns` and `kube-proxy` manifests and makes sure that all necessary RBAC rules are created.
-- Creates new certificate and key files of the API server and backs up old files if they're about to expire in 180 days.
+- Makes sure the control plane images are available or available to pull to the
+  machine.
+- Upgrades the control plane components or rollbacks if any of them fails to
+  come up.
+- Applies the new `kube-dns` and `kube-proxy` manifests and makes sure that all
+  necessary RBAC rules are created.
+- Creates new certificate and key files of the API server and backs up old files
+  if they're about to expire in 180 days.
 
 `kubeadm upgrade node` does the following on additional control plane nodes:
 

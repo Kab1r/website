@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Generates the kube-apiserver static Pod manifest
 
@@ -104,8 +102,6 @@ kubeadm init phase control-plane apiserver [flags]
   </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
 <table style="width: 100%; table-layout: fixed;">
@@ -124,6 +120,3 @@ kubeadm init phase control-plane apiserver [flags]
 
   </tbody>
 </table>
-
-
-

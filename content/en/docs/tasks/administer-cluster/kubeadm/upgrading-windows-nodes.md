@@ -9,19 +9,20 @@ weight: 40
 
 {{< feature-state for_k8s_version="v1.18" state="beta" >}}
 
-This page explains how to upgrade a Windows node [created with kubeadm](/docs/tasks/administer-cluster/kubeadm/adding-windows-nodes).
+This page explains how to upgrade a Windows node
+[created with kubeadm](/docs/tasks/administer-cluster/kubeadm/adding-windows-nodes).
 
 {{% /capture %}}
 
+{{% capture prerequisites %}} {{< include "task-tutorial-prereqs.md" >}}
+{{< version-check >}}
 
-{{% capture prerequisites %}} 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
-* Familiarize yourself with [the process for upgrading the rest of your kubeadm
-cluster](/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade). You will want to
-upgrade the control plane nodes before upgrading your Windows nodes.
+- Familiarize yourself with
+  [the process for upgrading the rest of your kubeadm cluster](/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade).
+  You will want to upgrade the control plane nodes before upgrading your Windows
+  nodes.
 
 {{% /capture %}}
-
 
 {{% capture steps %}}
 
@@ -38,8 +39,8 @@ upgrade the control plane nodes before upgrading your Windows nodes.
 
 ### Drain the node
 
-1.  From a machine with access to the Kubernetes API,
-    prepare the node for maintenance by marking it unschedulable and evicting the workloads:
+1.  From a machine with access to the Kubernetes API, prepare the node for
+    maintenance by marking it unschedulable and evicting the workloads:
 
     ```shell
     # replace <node-to-drain> with the name of your node you are draining
@@ -55,7 +56,8 @@ upgrade the control plane nodes before upgrading your Windows nodes.
 
 ### Upgrade the kubelet configuration
 
-1.  From the Windows node, call the following command to sync new kubelet configuration:
+1.  From the Windows node, call the following command to sync new kubelet
+    configuration:
 
     ```powershell
     kubeadm upgrade node
@@ -73,21 +75,21 @@ upgrade the control plane nodes before upgrading your Windows nodes.
 
 ### Uncordon the node
 
-1.  From a machine with access to the Kubernetes API,
-bring the node back online by marking it schedulable:
+1.  From a machine with access to the Kubernetes API, bring the node back online
+    by marking it schedulable:
 
-    ```shell
-    # replace <node-to-drain> with the name of your node
-    kubectl uncordon <node-to-drain>
-    ```
+        ```shell
+        # replace <node-to-drain> with the name of your node
+        kubectl uncordon <node-to-drain>
+        ```
+
 ### Upgrade kube-proxy
 
-1. From a machine with access to the Kubernetes API, run the following,
-again replacing {{< param "fullversion" >}} with your desired version:
+1.  From a machine with access to the Kubernetes API, run the following, again
+    replacing {{< param "fullversion" >}} with your desired version:
 
-    ```shell
-    curl -L https://github.com/kubernetes-sigs/sig-windows-tools/releases/latest/download/kube-proxy.yml | sed 's/VERSION/{{< param "fullversion" >}}/g' | kubectl apply -f -
-    ```
-
+        ```shell
+        curl -L https://github.com/kubernetes-sigs/sig-windows-tools/releases/latest/download/kube-proxy.yml | sed 's/VERSION/{{< param "fullversion" >}}/g' | kubectl apply -f -
+        ```
 
 {{% /capture %}}
