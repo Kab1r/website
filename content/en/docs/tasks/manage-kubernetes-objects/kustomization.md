@@ -7,12 +7,12 @@ weight: 20
 {{% capture overview %}}
 
 [Kustomize](https://github.com/kubernetes-sigs/kustomize) is a standalone tool
-to customize Kubernetes objects
-through a [kustomization file](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/glossary.md#kustomization).
+to customize Kubernetes objects through a
+[kustomization file](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/glossary.md#kustomization).
 
-Since 1.14, Kubectl also
-supports the management of Kubernetes objects using a kustomization file.
-To view Resources found in a directory containing a kustomization file, run the following command:
+Since 1.14, Kubectl also supports the management of Kubernetes objects using a
+kustomization file. To view Resources found in a directory containing a
+kustomization file, run the following command:
 
 ```shell
 kubectl kustomize <kustomization_directory>
@@ -38,21 +38,26 @@ Install [`kubectl`](/docs/tasks/tools/install-kubectl/).
 
 ## Overview of Kustomize
 
-Kustomize is a tool for customizing Kubernetes configurations. It has the following features to manage application configuration files:
+Kustomize is a tool for customizing Kubernetes configurations. It has the
+following features to manage application configuration files:
 
-* generating resources from other sources
-* setting cross-cutting fields for resources
-* composing and customizing collections of resources
+- generating resources from other sources
+- setting cross-cutting fields for resources
+- composing and customizing collections of resources
 
 ### Generating Resources
 
-ConfigMap and Secret hold config or sensitive data that are used by other Kubernetes objects, such as Pods. The source
-of truth of ConfigMap or Secret are usually from somewhere else, such as a `.properties` file or a ssh key file.
-Kustomize has `secretGenerator` and `configMapGenerator`, which generate Secret and ConfigMap from files or literals.
+ConfigMap and Secret hold config or sensitive data that are used by other
+Kubernetes objects, such as Pods. The source of truth of ConfigMap or Secret are
+usually from somewhere else, such as a `.properties` file or a ssh key file.
+Kustomize has `secretGenerator` and `configMapGenerator`, which generate Secret
+and ConfigMap from files or literals.
 
 #### configMapGenerator
 
-To generate a ConfigMap from a file, add an entry to `files` list in `configMapGenerator`. Here is an example of generating a ConfigMap with a data item from a file content.
+To generate a ConfigMap from a file, add an entry to `files` list in
+`configMapGenerator`. Here is an example of generating a ConfigMap with a data
+item from a file content.
 
 ```shell
 # Create a application.properties file
@@ -86,7 +91,10 @@ metadata:
   name: example-configmap-1-8mbdf7882g
 ```
 
-ConfigMap can also be generated from literal key-value pairs. To generate a ConfigMap from a literal key-value pair, add an entry to `literals` list in configMapGenerator. Here is an example of generating a ConfigMap with a data item from a key-value pair.
+ConfigMap can also be generated from literal key-value pairs. To generate a
+ConfigMap from a literal key-value pair, add an entry to `literals` list in
+configMapGenerator. Here is an example of generating a ConfigMap with a data
+item from a key-value pair.
 
 ```shell
 cat <<EOF >./kustomization.yaml
@@ -116,7 +124,9 @@ metadata:
 
 #### secretGenerator
 
-You can generate Secrets from files or literal key-value pairs. To generate a Secret from a file, add an entry to `files` list in `secretGenerator`. Here is an example of generating a Secret with a data item from a file.
+You can generate Secrets from files or literal key-value pairs. To generate a
+Secret from a file, add an entry to `files` list in `secretGenerator`. Here is
+an example of generating a Secret with a data item from a file.
 
 ```shell
 # Create a password.txt file
@@ -145,7 +155,9 @@ metadata:
 type: Opaque
 ```
 
-To generate a Secret from a literal key-value pair, add an entry to `literals` list in `secretGenerator`. Here is an example of generating a Secret with a data item from a key-value pair.
+To generate a Secret from a literal key-value pair, add an entry to `literals`
+list in `secretGenerator`. Here is an example of generating a Secret with a data
+item from a key-value pair.
 
 ```shell
 cat <<EOF >./kustomization.yaml
@@ -172,7 +184,11 @@ type: Opaque
 
 #### generatorOptions
 
-The generated ConfigMaps and Secrets have a suffix appended by hashing the contents. This ensures that a new ConfigMap or Secret is generated when the content is changed. To disable the behavior of appending a suffix, one can use `generatorOptions`. Besides that, it is also possible to specify cross-cutting options for generated ConfigMaps and Secrets.
+The generated ConfigMaps and Secrets have a suffix appended by hashing the
+contents. This ensures that a new ConfigMap or Secret is generated when the
+content is changed. To disable the behavior of appending a suffix, one can use
+`generatorOptions`. Besides that, it is also possible to specify cross-cutting
+options for generated ConfigMaps and Secrets.
 
 ```shell
 cat <<EOF >./kustomization.yaml
@@ -206,13 +222,13 @@ metadata:
 
 ### Setting cross-cutting fields
 
-It is quite common to set cross-cutting fields for all Kubernetes resources in a project.
-Some use cases for setting cross-cutting fields:
+It is quite common to set cross-cutting fields for all Kubernetes resources in a
+project. Some use cases for setting cross-cutting fields:
 
-* setting the same namespace for all Resource
-* adding the same name prefix or suffix
-* adding the same set of labels
-* adding the same set of annotations
+- setting the same namespace for all Resource
+- adding the same name prefix or suffix
+- adding the same set of labels
+- adding the same set of annotations
 
 Here is an example:
 
@@ -252,7 +268,8 @@ resources:
 EOF
 ```
 
-Run `kubectl kustomize ./` to view those fields are all set in the Deployment Resource:
+Run `kubectl kustomize ./` to view those fields are all set in the Deployment
+Resource:
 
 ```yaml
 apiVersion: apps/v1
@@ -276,20 +293,23 @@ spec:
         app: bingo
     spec:
       containers:
-      - image: nginx
-        name: nginx
+        - image: nginx
+          name: nginx
 ```
 
 ### Composing and Customizing Resources
 
 It is common to compose a set of Resources in a project and manage them inside
-the same file or directory.
-Kustomize offers composing Resources from different files and applying patches or other customization to them.
+the same file or directory. Kustomize offers composing Resources from different
+files and applying patches or other customization to them.
 
 #### Composing
 
-Kustomize supports composition of different resources. The `resources` field, in the `kustomization.yaml` file, defines the list of resources to include in a configuration. Set the path to a resource's configuration file in the `resources` list.
-Here is an example for an nginx application with a Deployment and a Service.
+Kustomize supports composition of different resources. The `resources` field, in
+the `kustomization.yaml` file, defines the list of resources to include in a
+configuration. Set the path to a resource's configuration file in the
+`resources` list. Here is an example for an nginx application with a Deployment
+and a Service.
 
 ```shell
 # Create a deployment.yaml file
@@ -339,12 +359,20 @@ resources:
 EOF
 ```
 
-The Resources from `kubectl kustomize ./` contains both the Deployment and the Service objects.
+The Resources from `kubectl kustomize ./` contains both the Deployment and the
+Service objects.
 
 #### Customizing
 
-On top of Resources, one can apply different customizations by applying patches. Kustomize supports different patching
-mechanisms through `patchesStrategicMerge` and `patchesJson6902`. `patchesStrategicMerge` is a list of file paths. Each file should be resolved to a [strategic merge patch](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-api-machinery/strategic-merge-patch.md). The names inside the patches must match Resource names that are already loaded. Small patches that do one thing are recommended. For example, create one patch for increasing the deployment replica number and another patch for setting the memory limit.
+On top of Resources, one can apply different customizations by applying patches.
+Kustomize supports different patching mechanisms through `patchesStrategicMerge`
+and `patchesJson6902`. `patchesStrategicMerge` is a list of file paths. Each
+file should be resolved to a
+[strategic merge patch](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-api-machinery/strategic-merge-patch.md).
+The names inside the patches must match Resource names that are already loaded.
+Small patches that do one thing are recommended. For example, create one patch
+for increasing the deployment replica number and another patch for setting the
+memory limit.
 
 ```shell
 # Create a deployment.yaml file
@@ -423,19 +451,21 @@ spec:
         run: my-nginx
     spec:
       containers:
-      - image: nginx
-        limits:
-          memory: 512Mi
-        name: my-nginx
-        ports:
-        - containerPort: 80
+        - image: nginx
+          limits:
+            memory: 512Mi
+          name: my-nginx
+          ports:
+            - containerPort: 80
 ```
 
-Not all Resources or fields support strategic merge patches. To support modifying arbitrary fields in arbitrary Resources,
-Kustomize offers applying [JSON patch](https://tools.ietf.org/html/rfc6902) through `patchesJson6902`.
-To find the correct Resource for a Json patch, the group, version, kind and name of that Resource need to be
-specified in `kustomization.yaml`. For example, increasing the replica number of a Deployment object can also be done
-through `patchesJson6902`.
+Not all Resources or fields support strategic merge patches. To support
+modifying arbitrary fields in arbitrary Resources, Kustomize offers applying
+[JSON patch](https://tools.ietf.org/html/rfc6902) through `patchesJson6902`. To
+find the correct Resource for a Json patch, the group, version, kind and name of
+that Resource need to be specified in `kustomization.yaml`. For example,
+increasing the replica number of a Deployment object can also be done through
+`patchesJson6902`.
 
 ```shell
 # Create a deployment.yaml file
@@ -501,14 +531,16 @@ spec:
         run: my-nginx
     spec:
       containers:
-      - image: nginx
-        name: my-nginx
-        ports:
-        - containerPort: 80
+        - image: nginx
+          name: my-nginx
+          ports:
+            - containerPort: 80
 ```
 
-In addition to patches, Kustomize also offers customizing container images or injecting field values from other objects into containers
-without creating patches. For example, you can change the image used inside containers by specifying the new image in `images` field in `kustomization.yaml`.
+In addition to patches, Kustomize also offers customizing container images or
+injecting field values from other objects into containers without creating
+patches. For example, you can change the image used inside containers by
+specifying the new image in `images` field in `kustomization.yaml`.
 
 ```shell
 cat <<EOF > deployment.yaml
@@ -542,7 +574,9 @@ images:
   newTag: 1.4.0
 EOF
 ```
+
 Run `kubectl kustomize ./` to see that the image being used is updated:
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -559,16 +593,19 @@ spec:
         run: my-nginx
     spec:
       containers:
-      - image: my.image.registry/nginx:1.4.0
-        name: my-nginx
-        ports:
-        - containerPort: 80
+        - image: my.image.registry/nginx:1.4.0
+          name: my-nginx
+          ports:
+            - containerPort: 80
 ```
 
-Sometimes, the application running in a Pod may need to use configuration values from other objects. For example,
-a Pod from a Deployment object need to read the corresponding Service name from Env or as a command argument.
-Since the Service name may change as `namePrefix` or `nameSuffix` is added in the `kustomization.yaml` file. It is
-not recommended to hard code the Service name in the command argument. For this usage, Kustomize can inject the Service name into containers through `vars`.
+Sometimes, the application running in a Pod may need to use configuration values
+from other objects. For example, a Pod from a Deployment object need to read the
+corresponding Service name from Env or as a command argument. Since the Service
+name may change as `namePrefix` or `nameSuffix` is added in the
+`kustomization.yaml` file. It is not recommended to hard code the Service name
+in the command argument. For this usage, Kustomize can inject the Service name
+into containers through `vars`.
 
 ```shell
 # Create a deployment.yaml file
@@ -626,7 +663,8 @@ vars:
 EOF
 ```
 
-Run `kubectl kustomize ./` to see that the Service name injected into containers is `dev-my-nginx-001`:
+Run `kubectl kustomize ./` to see that the Service name injected into containers
+is `dev-my-nginx-001`:
 
 ```yaml
 apiVersion: apps/v1
@@ -644,22 +682,25 @@ spec:
         run: my-nginx
     spec:
       containers:
-      - command:
-        - start
-        - --host
-        - dev-my-nginx-001
-        image: nginx
-        name: my-nginx
+        - command:
+            - start
+            - --host
+            - dev-my-nginx-001
+          image: nginx
+          name: my-nginx
 ```
 
 ## Bases and Overlays
 
-Kustomize has the concepts of **bases** and **overlays**. A **base** is a directory with a `kustomization.yaml`, which contains a
-set of resources and associated customization. A base could be either a local directory or a directory from a remote repo,
-as long as a `kustomization.yaml` is present inside. An **overlay** is a directory with a `kustomization.yaml` that refers to other
-kustomization directories as its `bases`. A **base** has no knowledge of an overlay and can be used in multiple overlays.
-An overlay may have multiple bases and it composes all resources
-from bases and may also have customization on top of them.
+Kustomize has the concepts of **bases** and **overlays**. A **base** is a
+directory with a `kustomization.yaml`, which contains a set of resources and
+associated customization. A base could be either a local directory or a
+directory from a remote repo, as long as a `kustomization.yaml` is present
+inside. An **overlay** is a directory with a `kustomization.yaml` that refers to
+other kustomization directories as its `bases`. A **base** has no knowledge of
+an overlay and can be used in multiple overlays. An overlay may have multiple
+bases and it composes all resources from bases and may also have customization
+on top of them.
 
 Here is an example of a base:
 
@@ -710,8 +751,9 @@ resources:
 EOF
 ```
 
-This base can be used in multiple overlays. You can add different `namePrefix` or other cross-cutting fields
-in different overlays. Here are two overlays using the same base.
+This base can be used in multiple overlays. You can add different `namePrefix`
+or other cross-cutting fields in different overlays. Here are two overlays using
+the same base.
 
 ```shell
 mkdir dev
@@ -731,8 +773,9 @@ EOF
 
 ## How to apply/view/delete objects using Kustomize
 
-Use `--kustomize` or `-k` in `kubectl` commands to recognize Resources managed by `kustomization.yaml`.
-Note that `-k` should point to a kustomization directory, such as
+Use `--kustomize` or `-k` in `kubectl` commands to recognize Resources managed
+by `kustomization.yaml`. Note that `-k` should point to a kustomization
+directory, such as
 
 ```shell
 kubectl apply -k <kustomization directory>/
@@ -791,7 +834,8 @@ kubectl get -k ./
 kubectl describe -k ./
 ```
 
-Run the following command to compare the Deployment object `dev-my-nginx` against the state that the cluster would be in if the manifest was applied:
+Run the following command to compare the Deployment object `dev-my-nginx`
+against the state that the cluster would be in if the manifest was applied:
 
 ```shell
 kubectl diff -k ./
@@ -806,32 +850,33 @@ deployment.apps "dev-my-nginx" deleted
 
 ## Kustomize Feature List
 
-| Field                 | Type                                                                                                         | Explanation                                                                        |
-|-----------------------|--------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
-| namespace             | string                                                                                                       | add namespace to all resources                                                     |
-| namePrefix            | string                                                                                                       | value of this field is prepended to the names of all resources                     |
-| nameSuffix            | string                                                                                                       | value of this field is appended to the names of all resources                      |
-| commonLabels          | map[string]string                                                                                            | labels to add to all resources and selectors                                       |
-| commonAnnotations     | map[string]string                                                                                            | annotations to add to all resources                                                |
-| resources             | []string                                                                                                     | each entry in this list must resolve to an existing resource configuration file    |
-| configmapGenerator    | [][ConfigMapArgs](https://github.com/kubernetes-sigs/kustomize/blob/release-kustomize-v4.0/api/types/kustomization.go#L99)  | Each entry in this list generates a ConfigMap                                      |
-| secretGenerator       | [][SecretArgs](https://github.com/kubernetes-sigs/kustomize/blob/release-kustomize-v4.0/api/types/kustomization.go#L106)     | Each entry in this list generates a Secret                                         |
-| generatorOptions      | [GeneratorOptions](https://github.com/kubernetes-sigs/kustomize/blob/release-kustomize-v4.0/api/types/kustomization.go#L109) | Modify behaviors of all ConfigMap and Secret generator                             |
-| bases                 | []string                                                                                                     | Each entry in this list should resolve to a directory containing a kustomization.yaml file |
-| patchesStrategicMerge | []string                                                                                                     | Each entry in this list should resolve a strategic merge patch of a Kubernetes object |
-| patchesJson6902       | [][Json6902](https://github.com/kubernetes-sigs/kustomize/blob/release-kustomize-v4.0/api/types/patchjson6902.go#L8)             | Each entry in this list should resolve to a Kubernetes object and a Json Patch     |
-| vars                  | [][Var](https://github.com/kubernetes-sigs/kustomize/blob/master/api/types/var.go#L31)                       | Each entry is to capture text from one resource's field                            |
-| images                | [][Image](https://github.com/kubernetes-sigs/kustomize/tree/master/api/types/image.go#L23)                   | Each entry is to modify the name, tags and/or digest for one image without creating patches |
-| configurations        | []string                                                                                                     | Each entry in this list should resolve to a file containing [Kustomize transformer configurations](https://github.com/kubernetes-sigs/kustomize/tree/master/examples/transformerconfigs) |
-| crds                  | []string                                                                                                     | Each entry in this list should resolve to an OpenAPI definition file for Kubernetes types |
+| Field                 | Type                                                                                                                         | Explanation                                                                                                                                                                              |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| namespace             | string                                                                                                                       | add namespace to all resources                                                                                                                                                           |
+| namePrefix            | string                                                                                                                       | value of this field is prepended to the names of all resources                                                                                                                           |
+| nameSuffix            | string                                                                                                                       | value of this field is appended to the names of all resources                                                                                                                            |
+| commonLabels          | map[string]string                                                                                                            | labels to add to all resources and selectors                                                                                                                                             |
+| commonAnnotations     | map[string]string                                                                                                            | annotations to add to all resources                                                                                                                                                      |
+| resources             | []string                                                                                                                     | each entry in this list must resolve to an existing resource configuration file                                                                                                          |
+| configmapGenerator    | [][configmapargs](https://github.com/kubernetes-sigs/kustomize/blob/release-kustomize-v4.0/api/types/kustomization.go#L99)   | Each entry in this list generates a ConfigMap                                                                                                                                            |
+| secretGenerator       | [][secretargs](https://github.com/kubernetes-sigs/kustomize/blob/release-kustomize-v4.0/api/types/kustomization.go#L106)     | Each entry in this list generates a Secret                                                                                                                                               |
+| generatorOptions      | [GeneratorOptions](https://github.com/kubernetes-sigs/kustomize/blob/release-kustomize-v4.0/api/types/kustomization.go#L109) | Modify behaviors of all ConfigMap and Secret generator                                                                                                                                   |
+| bases                 | []string                                                                                                                     | Each entry in this list should resolve to a directory containing a kustomization.yaml file                                                                                               |
+| patchesStrategicMerge | []string                                                                                                                     | Each entry in this list should resolve a strategic merge patch of a Kubernetes object                                                                                                    |
+| patchesJson6902       | [][json6902](https://github.com/kubernetes-sigs/kustomize/blob/release-kustomize-v4.0/api/types/patchjson6902.go#L8)         | Each entry in this list should resolve to a Kubernetes object and a Json Patch                                                                                                           |
+| vars                  | [][var](https://github.com/kubernetes-sigs/kustomize/blob/master/api/types/var.go#L31)                                       | Each entry is to capture text from one resource's field                                                                                                                                  |
+| images                | [][image](https://github.com/kubernetes-sigs/kustomize/tree/master/api/types/image.go#L23)                                   | Each entry is to modify the name, tags and/or digest for one image without creating patches                                                                                              |
+| configurations        | []string                                                                                                                     | Each entry in this list should resolve to a file containing [Kustomize transformer configurations](https://github.com/kubernetes-sigs/kustomize/tree/master/examples/transformerconfigs) |
+| crds                  | []string                                                                                                                     | Each entry in this list should resolve to an OpenAPI definition file for Kubernetes types                                                                                                |
 
 {{% /capture %}}
 
 {{% capture whatsnext %}}
 
-* [Kustomize](https://github.com/kubernetes-sigs/kustomize)
-* [Kubectl Book](https://kubectl.docs.kubernetes.io)
-* [Kubectl Command Reference](/docs/reference/generated/kubectl/kubectl/)
-* [Kubernetes API Reference](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
+- [Kustomize](https://github.com/kubernetes-sigs/kustomize)
+- [Kubectl Book](https://kubectl.docs.kubernetes.io)
+- [Kubectl Command Reference](/docs/reference/generated/kubectl/kubectl/)
+- [Kubernetes API
+  Reference](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
 
 {{% /capture %}}

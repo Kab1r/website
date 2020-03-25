@@ -1,10 +1,9 @@
-
 ### Synopsis
-
 
 Run this command in order to set up the Kubernetes control plane
 
 The "init" command executes the following phases:
+
 ```
 preflight                    Run pre-flight checks
 kubelet-start                Write kubelet settings and (re)start the kubelet
@@ -43,7 +42,6 @@ addon                        Install required addons for passing Conformance tes
   /coredns                     Install the CoreDNS addon to a Kubernetes cluster
   /kube-proxy                  Install the kube-proxy addon to a Kubernetes cluster
 ```
-
 
 ```
 kubeadm init [flags]
@@ -236,8 +234,6 @@ kubeadm init [flags]
   </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
 <table style="width: 100%; table-layout: fixed;">
@@ -256,6 +252,3 @@ kubeadm init [flags]
 
   </tbody>
 </table>
-
-
-

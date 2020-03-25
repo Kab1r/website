@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Pull images used by kubeadm
 
@@ -62,8 +60,6 @@ kubeadm config images pull [flags]
   </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
 <table style="width: 100%; table-layout: fixed;">
@@ -89,6 +85,3 @@ kubeadm config images pull [flags]
 
   </tbody>
 </table>
-
-
-

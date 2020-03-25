@@ -1,8 +1,8 @@
-
 ### Synopsis
 
-
-Check which versions are available to upgrade to and validate whether your current cluster is upgradeable. To skip the internet check, pass in the optional [version] parameter
+Check which versions are available to upgrade to and validate whether your
+current cluster is upgradeable. To skip the internet check, pass in the optional
+[version] parameter
 
 ```
 kubeadm upgrade plan [version] [flags]
@@ -76,8 +76,6 @@ kubeadm upgrade plan [version] [flags]
   </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
 <table style="width: 100%; table-layout: fixed;">
@@ -96,6 +94,3 @@ kubeadm upgrade plan [version] [flags]
 
   </tbody>
 </table>
-
-
-

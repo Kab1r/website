@@ -1,7 +1,7 @@
 ---
 reviewers:
-- verb
-- yujuhong
+  - verb
+  - yujuhong
 title: Ephemeral Containers
 content_template: templates/concept
 weight: 80
@@ -11,17 +11,17 @@ weight: 80
 
 {{< feature-state state="alpha" for_k8s_version="v1.16" >}}
 
-This page provides an overview of ephemeral containers: a special type of container
-that runs temporarily in an existing {{< glossary_tooltip term_id="pod" >}} to
-accomplish user-initiated actions such as troubleshooting. You use ephemeral
-containers to inspect services rather than to build applications.
+This page provides an overview of ephemeral containers: a special type of
+container that runs temporarily in an existing
+{{< glossary_tooltip term_id="pod" >}} to accomplish user-initiated actions such
+as troubleshooting. You use ephemeral containers to inspect services rather than
+to build applications.
 
-{{< warning >}}
-Ephemeral containers are in early alpha state and are not suitable for production
-clusters. In accordance with the [Kubernetes Deprecation Policy](
-/docs/reference/using-api/deprecation-policy/), this alpha feature could change
-significantly in the future or be removed entirely.
-{{< /warning >}}
+{{< warning >}} Ephemeral containers are in early alpha state and are not
+suitable for production clusters. In accordance with the
+[Kubernetes Deprecation Policy](/docs/reference/using-api/deprecation-policy/),
+this alpha feature could change significantly in the future or be removed
+entirely. {{< /warning >}}
 
 {{% /capture %}}
 
@@ -36,15 +36,15 @@ Instead, you usually delete and replace Pods in a controlled fashion using
 {{< glossary_tooltip text="deployments" term_id="deployment" >}}.
 
 Sometimes it's necessary to inspect the state of an existing Pod, however, for
-example to troubleshoot a hard-to-reproduce bug. In these cases you can run
-an ephemeral container in an existing Pod to inspect its state and run
-arbitrary commands.
+example to troubleshoot a hard-to-reproduce bug. In these cases you can run an
+ephemeral container in an existing Pod to inspect its state and run arbitrary
+commands.
 
 ### What is an ephemeral container?
 
 Ephemeral containers differ from other containers in that they lack guarantees
 for resources or execution, and they will never be automatically restarted, so
-they are not appropriate for building applications.  Ephemeral containers are
+they are not appropriate for building applications. Ephemeral containers are
 described using the same `ContainerSpec` as regular containers, but many fields
 are incompatible and disallowed for ephemeral containers.
 
@@ -63,59 +63,59 @@ after you have added it to a Pod.
 
 ## Uses for ephemeral containers
 
-Ephemeral containers are useful for interactive troubleshooting when `kubectl
-exec` is insufficient because a container has crashed or a container image
-doesn't include debugging utilities.
+Ephemeral containers are useful for interactive troubleshooting when
+`kubectl exec` is insufficient because a container has crashed or a container
+image doesn't include debugging utilities.
 
-In particular, [distroless images](https://github.com/GoogleContainerTools/distroless)
-enable you to deploy minimal container images that reduce attack surface
-and exposure to bugs and vulnerabilities. Since distroless images do not include a
-shell or any debugging utilities, it's difficult to troubleshoot distroless
-images using `kubectl exec` alone.
+In particular,
+[distroless images](https://github.com/GoogleContainerTools/distroless) enable
+you to deploy minimal container images that reduce attack surface and exposure
+to bugs and vulnerabilities. Since distroless images do not include a shell or
+any debugging utilities, it's difficult to troubleshoot distroless images using
+`kubectl exec` alone.
 
-When using ephemeral containers, it's helpful to enable [process namespace
-sharing](/docs/tasks/configure-pod-container/share-process-namespace/) so
-you can view processes in other containers.
+When using ephemeral containers, it's helpful to enable
+[process namespace sharing](/docs/tasks/configure-pod-container/share-process-namespace/)
+so you can view processes in other containers.
 
-See [Debugging with Ephemeral Debug Container](
-/docs/tasks/debug-application-cluster/debug-running-pod/#debugging-with-ephemeral-debug-container)
+See
+[Debugging with Ephemeral Debug Container](/docs/tasks/debug-application-cluster/debug-running-pod/#debugging-with-ephemeral-debug-container)
 for examples of troubleshooting using ephemeral containers.
 
 ## Ephemeral containers API
 
-{{< note >}}
-The examples in this section require the `EphemeralContainers` [feature
-gate](/docs/reference/command-line-tools-reference/feature-gates/) to be
-enabled, and Kubernetes client and server version v1.16 or later.
+{{< note >}} The examples in this section require the `EphemeralContainers`
+[feature gate](/docs/reference/command-line-tools-reference/feature-gates/) to
+be enabled, and Kubernetes client and server version v1.16 or later.
 {{< /note >}}
 
-The examples in this section demonstrate how ephemeral containers appear in
-the API. You would normally use `kubectl alpha debug` or another `kubectl`
+The examples in this section demonstrate how ephemeral containers appear in the
+API. You would normally use `kubectl alpha debug` or another `kubectl`
 [plugin](/docs/tasks/extend-kubectl/kubectl-plugins/) to automate these steps
 rather than invoking the API directly.
 
-Ephemeral containers are created using the `ephemeralcontainers` subresource
-of Pod, which can be demonstrated using `kubectl --raw`. First describe
-the ephemeral container to add as an `EphemeralContainers` list:
+Ephemeral containers are created using the `ephemeralcontainers` subresource of
+Pod, which can be demonstrated using `kubectl --raw`. First describe the
+ephemeral container to add as an `EphemeralContainers` list:
 
 ```json
 {
-    "apiVersion": "v1",
-    "kind": "EphemeralContainers",
-    "metadata": {
-            "name": "example-pod"
-    },
-    "ephemeralContainers": [{
-        "command": [
-            "sh"
-        ],
-        "image": "busybox",
-        "imagePullPolicy": "IfNotPresent",
-        "name": "debugger",
-        "stdin": true,
-        "tty": true,
-        "terminationMessagePolicy": "File"
-    }]
+  "apiVersion": "v1",
+  "kind": "EphemeralContainers",
+  "metadata": {
+    "name": "example-pod"
+  },
+  "ephemeralContainers": [
+    {
+      "command": ["sh"],
+      "image": "busybox",
+      "imagePullPolicy": "IfNotPresent",
+      "name": "debugger",
+      "stdin": true,
+      "tty": true,
+      "terminationMessagePolicy": "File"
+    }
+  ]
 }
 ```
 
@@ -129,36 +129,33 @@ This will return the new list of ephemeral containers:
 
 ```json
 {
-   "kind":"EphemeralContainers",
-   "apiVersion":"v1",
-   "metadata":{
-      "name":"example-pod",
-      "namespace":"default",
-      "selfLink":"/api/v1/namespaces/default/pods/example-pod/ephemeralcontainers",
-      "uid":"a14a6d9b-62f2-4119-9d8e-e2ed6bc3a47c",
-      "resourceVersion":"15886",
-      "creationTimestamp":"2019-08-29T06:41:42Z"
-   },
-   "ephemeralContainers":[
-      {
-         "name":"debugger",
-         "image":"busybox",
-         "command":[
-            "sh"
-         ],
-         "resources":{
-
-         },
-         "terminationMessagePolicy":"File",
-         "imagePullPolicy":"IfNotPresent",
-         "stdin":true,
-         "tty":true
-      }
-   ]
+  "kind": "EphemeralContainers",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "example-pod",
+    "namespace": "default",
+    "selfLink": "/api/v1/namespaces/default/pods/example-pod/ephemeralcontainers",
+    "uid": "a14a6d9b-62f2-4119-9d8e-e2ed6bc3a47c",
+    "resourceVersion": "15886",
+    "creationTimestamp": "2019-08-29T06:41:42Z"
+  },
+  "ephemeralContainers": [
+    {
+      "name": "debugger",
+      "image": "busybox",
+      "command": ["sh"],
+      "resources": {},
+      "terminationMessagePolicy": "File",
+      "imagePullPolicy": "IfNotPresent",
+      "stdin": true,
+      "tty": true
+    }
+  ]
 }
 ```
 
-You can view the state of the newly created ephemeral container using `kubectl describe`:
+You can view the state of the newly created ephemeral container using
+`kubectl describe`:
 
 ```shell
 kubectl describe pod example-pod

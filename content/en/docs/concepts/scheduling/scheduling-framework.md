@@ -1,6 +1,6 @@
 ---
 reviewers:
-- ahg-g
+  - ahg-g
 title: Scheduling Framework
 content_template: templates/concept
 weight: 60
@@ -12,13 +12,14 @@ weight: 60
 
 The scheduling framework is a pluggable architecture for Kubernetes Scheduler
 that makes scheduler customizations easy. It adds a new set of "plugin" APIs to
-the existing scheduler. Plugins are compiled into the scheduler. The APIs
-allow most scheduling features to be implemented as plugins, while keeping the
+the existing scheduler. Plugins are compiled into the scheduler. The APIs allow
+most scheduling features to be implemented as plugins, while keeping the
 scheduling "core" simple and maintainable. Refer to the [design proposal of the
 scheduling framework][kep] for more technical information on the design of the
 framework.
 
-[kep]: https://github.com/kubernetes/enhancements/blob/master/keps/sig-scheduling/20180409-scheduling-framework.md
+[kep]:
+  https://github.com/kubernetes/enhancements/blob/master/keps/sig-scheduling/20180409-scheduling-framework.md
 
 {{% /capture %}}
 
@@ -41,9 +42,9 @@ referred to as a "scheduling context".
 
 Scheduling cycles are run serially, while binding cycles may run concurrently.
 
-A scheduling or binding cycle can be aborted if the Pod is determined to
-be unschedulable or if there is an internal error. The Pod will be returned to
-the queue and retried.
+A scheduling or binding cycle can be aborted if the Pod is determined to be
+unschedulable or if there is an internal error. The Pod will be returned to the
+queue and retried.
 
 ## Extension points
 
@@ -59,8 +60,8 @@ stateful tasks.
 ### QueueSort {#queue-sort}
 
 These plugins are used to sort Pods in the scheduling queue. A queue sort plugin
-essentially provides a `Less(Pod1, Pod2)` function. Only one queue sort
-plugin may be enabled at a time.
+essentially provides a `Less(Pod1, Pod2)` function. Only one queue sort plugin
+may be enabled at a time.
 
 ### PreFilter {#pre-filter}
 
@@ -121,13 +122,10 @@ func NormalizeScores(scores map[string]int) {
 }
 ```
 
-If any NormalizeScore plugin returns an error, the scheduling cycle is
-aborted.
+If any NormalizeScore plugin returns an error, the scheduling cycle is aborted.
 
-{{< note >}}
-Plugins wishing to perform "pre-reserve" work should use the
-NormalizeScore extension point.
-{{< /note >}}
+{{< note >}} Plugins wishing to perform "pre-reserve" work should use the
+NormalizeScore extension point. {{< /note >}}
 
 ### Reserve
 
@@ -144,29 +142,27 @@ state, it will either trigger [Unreserve](#unreserve) plugins (on failure) or
 ### Permit
 
 _Permit_ plugins are invoked at the end of the scheduling cycle for each Pod, to
-prevent or delay the binding to the candidate node. A permit plugin can do one of
-the three things:
+prevent or delay the binding to the candidate node. A permit plugin can do one
+of the three things:
 
 1.  **approve** \
     Once all Permit plugins approve a Pod, it is sent for binding.
 
 1.  **deny** \
-    If any Permit plugin denies a Pod, it is returned to the scheduling queue.
-    This will trigger [Unreserve](#unreserve) plugins.
+    If any Permit plugin denies a Pod, it is returned to the scheduling queue. This
+    will trigger [Unreserve](#unreserve) plugins.
 
 1.  **wait** (with a timeout) \
     If a Permit plugin returns "wait", then the Pod is kept in an internal "waiting"
-    Pods list, and the binding cycle of this Pod starts but directly blocks until it
-    gets [approved](#frameworkhandle). If a timeout occurs, **wait** becomes **deny**
+    Pods list, and the binding cycle of this Pod starts but directly blocks until
+    it gets [approved](#frameworkhandle). If a timeout occurs, **wait** becomes **deny**
     and the Pod is returned to the scheduling queue, triggering [Unreserve](#unreserve)
     plugins.
 
-{{< note >}}
-While any plugin can access the list of "waiting" Pods and approve them
-(see [`FrameworkHandle`](#frameworkhandle)), we expect only the permit
-plugins to approve binding of reserved Pods that are in "waiting" state. Once a Pod
-is approved, it is sent to the [PreBind](#pre-bind) phase.
-{{< /note >}}
+{{< note >}} While any plugin can access the list of "waiting" Pods and approve
+them (see [`FrameworkHandle`](#frameworkhandle)), we expect only the permit
+plugins to approve binding of reserved Pods that are in "waiting" state. Once a
+Pod is approved, it is sent to the [PreBind](#pre-bind) phase. {{< /note >}}
 
 ### PreBind {#pre-bind}
 
@@ -226,17 +222,19 @@ type PreFilterPlugin interface {
 
 ## Plugin configuration
 
-You can enable or disable plugins in the scheduler configuration. If you are using
-Kubernetes v1.18 or later, most scheduling
-[plugins](/docs/reference/scheduling/profiles/#scheduling-plugins) are in use and
-enabled by default.
+You can enable or disable plugins in the scheduler configuration. If you are
+using Kubernetes v1.18 or later, most scheduling
+[plugins](/docs/reference/scheduling/profiles/#scheduling-plugins) are in use
+and enabled by default.
 
 In addition to default plugins, you can also implement your own scheduling
 plugins and get them configured along with default plugins. You can visit
-[scheduler-plugins](https://github.com/kubernetes-sigs/scheduler-plugins) for more details.
+[scheduler-plugins](https://github.com/kubernetes-sigs/scheduler-plugins) for
+more details.
 
-If you are using Kubernetes v1.18 or later, you can configure a set of plugins as
-a scheduler profile and then define multiple profiles to fit various kinds of workload.
-Learn more at [multiple profiles](/docs/reference/scheduling/profiles/#multiple-profiles).
+If you are using Kubernetes v1.18 or later, you can configure a set of plugins
+as a scheduler profile and then define multiple profiles to fit various kinds of
+workload. Learn more at
+[multiple profiles](/docs/reference/scheduling/profiles/#multiple-profiles).
 
 {{% /capture %}}

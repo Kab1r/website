@@ -1,8 +1,8 @@
-
 ### Synopsis
 
-
-Install the CoreDNS addon components via the API server. Please note that although the DNS server is deployed, it will not be scheduled until CNI is installed.
+Install the CoreDNS addon components via the API server. Please note that
+although the DNS server is deployed, it will not be scheduled until CNI is
+installed.
 
 ```
 kubeadm init phase addon coredns [flags]
@@ -76,8 +76,6 @@ kubeadm init phase addon coredns [flags]
   </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
 <table style="width: 100%; table-layout: fixed;">
@@ -96,6 +94,3 @@ kubeadm init phase addon coredns [flags]
 
   </tbody>
 </table>
-
-
-
