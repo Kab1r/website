@@ -10,12 +10,12 @@ $(document).ready(function() {
   function collectNodes(tocMap) {
     var tocNodes = {};
     tocMap.map(function(node, index) {
-      var sectionNode = $('#' + node.section);
+      var sectionNode = $("#" + node.section);
       var tocSubsections = {};
-      tocItem = {section : sectionNode};
+      tocItem = { section: sectionNode };
       var subsectionNodes;
       if (node.subsections) {
-        subsectionNodes = (collectNodes(node.subsections));
+        subsectionNodes = collectNodes(node.subsections);
         tocItem.subsections = subsectionNodes;
       }
       tocNodes[node.section] = tocItem;
@@ -27,10 +27,10 @@ $(document).ready(function() {
   function collectNodesFlat(tocMap, obj) {
     var collect = obj || {};
     tocMap.map(function(node, index) {
-      var sectionNode = $('#' + node.section);
-      tocItem = {section : sectionNode};
+      var sectionNode = $("#" + node.section);
+      tocItem = { section: sectionNode };
       if (node.subsections) {
-        subsectionNodes = (collectNodesFlat(node.subsections, collect));
+        subsectionNodes = collectNodesFlat(node.subsections, collect);
       }
       collect[node.section] = sectionNode;
     });
@@ -59,15 +59,15 @@ $(document).ready(function() {
     if (!prevSectionToken) {
       prevSectionToken = activeSection.token;
       currL1Nav = getNavNode(activeSection.token);
-      currL1Nav.show('fast');
+      currL1Nav.show("fast");
     }
     // If active is not the same as previous, hide previous L1Nav and show
     // current L1Nav; set previous to current
     else if (activeSection.token !== prevSectionToken) {
       prevL1Nav = getNavNode(prevSectionToken);
       currL1Nav = getNavNode(activeSection.token);
-      prevL1Nav.hide('fast');
-      currL1Nav.show('fast');
+      prevL1Nav.hide("fast");
+      currL1Nav.show("fast");
       prevSectionToken = activeSection.token;
     }
 
@@ -78,23 +78,26 @@ $(document).ready(function() {
     // If there is a subsections array and it has a non-zero length, set active
     // subsection
     if (activeSection.subsections && activeSection.subsections.length !== 0) {
-      activeSubSection = checkNodePositions(activeSection.subsections, tocFlat,
-                                            scrollPosition);
+      activeSubSection = checkNodePositions(
+        activeSection.subsections,
+        tocFlat,
+        scrollPosition
+      );
       if (activeSubSection) {
         if (!prevSubsectionToken) {
           prevSubsectionToken = activeSubSection.token;
           currL2Nav = getNavNode(activeSubSection.token);
-          currL2Nav.show('fast');
+          currL2Nav.show("fast");
         } else if (activeSubSection.token !== prevSubsectionToken) {
           prevL2Nav = getNavNode(prevSubsectionToken);
           currL2Nav = getNavNode(activeSubSection.token);
-          prevL2Nav.hide('fast');
-          currL2Nav.show('fast');
+          prevL2Nav.hide("fast");
+          currL2Nav.show("fast");
           prevSubsectionToken = activeSubSection.token;
         }
       } else {
         prevL2Nav = getNavNode(prevSubsectionToken);
-        prevL2Nav.hide('fast');
+        prevL2Nav.hide("fast");
         prevSubsectionToken = null;
       }
     }
@@ -122,21 +125,25 @@ $(document).ready(function() {
       }
     }
     if (!prevElemToken) {
-      getNavElemNode(activeElemToken).addClass('selected');
+      getNavElemNode(activeElemToken).addClass("selected");
       prevElemToken = activeElemToken;
       return;
     }
     if (activeElemToken !== prevElemToken) {
-      getNavElemNode(prevElemToken).removeClass('selected');
-      getNavElemNode(activeElemToken).addClass('selected');
+      getNavElemNode(prevElemToken).removeClass("selected");
+      getNavElemNode(activeElemToken).addClass("selected");
       prevElemToken = activeElemToken;
     }
     return activeElemToken;
   }
 
-  function getHeadingNode(token) { return $('#' + token); }
+  function getHeadingNode(token) {
+    return $("#" + token);
+  }
 
-  function getNavNode(token) { return $('#' + token + '-nav'); }
+  function getNavNode(token) {
+    return $("#" + token + "-nav");
+  }
 
   function getNavElemNode(token) {
     return $('#sidebar-wrapper > ul a[href="#' + token + '"]');
@@ -149,7 +156,7 @@ $(document).ready(function() {
       var node = flatNodeMap[item.section];
       var nodeTop = node.offset().top - 50;
       if (scrollPosition >= nodeTop) {
-        activeNode = {token : item.section, node : node};
+        activeNode = { token: item.section, node: node };
 
         if (item.subsections) {
           activeNode.subsections = item.subsections;
@@ -166,16 +173,17 @@ $(document).ready(function() {
       var activeSectionTokens = scrollActions(scrollPosition);
       var activeElemToken = checkActiveElement(flatToc, scrollPosition);
       var navNode = $('#sidebar-wrapper > ul a[href="#' + token + '"]');
-      $('#sidebar-wrapper').scrollTo(navNode, {duration : 'fast', axis : 'y'});
+      $("#sidebar-wrapper").scrollTo(navNode, { duration: "fast", axis: "y" });
     }, 200);
   }
 
-  $(window).on('hashchange', function(event) {
+  $(window).on("hashchange", function(event) {
     var scrollPosition = $(window).scrollTop();
     var activeSectionTokens = scrollActions(scrollPosition);
     var activeElemToken = checkActiveElement(flatToc, scrollPosition);
-    var scrollToken = activeSectionTokens.L2 ? activeSectionTokens.L2
-                                             : activeSectionTokens.L1;
+    var scrollToken = activeSectionTokens.L2
+      ? activeSectionTokens.L2
+      : activeSectionTokens.L1;
     scrollToNav(scrollToken);
     var token = location.hash.slice(1);
   });
@@ -184,7 +192,7 @@ $(document).ready(function() {
   scrollActions(scrollPosition);
   checkActiveElement(flatToc, scrollPosition);
   // TODO: prevent scroll on sidebar from propogating to window
-  $(window).on('scroll', function(event) {
+  $(window).on("scroll", function(event) {
     var scrollPosition = $(window).scrollTop();
     var activeSectionTokens = scrollActions(scrollPosition);
     var activeElemToken = checkActiveElement(flatToc, scrollPosition);
