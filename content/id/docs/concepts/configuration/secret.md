@@ -1065,7 +1065,7 @@ dilakukan haruslah dibatasi menggunakan
 
 Secret seringkali menyimpan _value_ yang memiliki jangkauan spektrum
 kepentingan, yang mungkin saja dapat menyebabkan terjadinya eskalasi baik di
-dalam Kubernetes (misalnya saja token dari sebuah _service account_) maupun  
+dalam Kubernetes (misalnya saja token dari sebuah _service account_) maupun
 sistem eksternal. Bahkan apabila setiap aplikasi secara individual memiliki
 kapabilitas untuk memahami tingkatan yang dimilikinya untuk berinteraksi dengan
 secret tertentu, aplikasi lain dalam namespace itu bisa saja menyebabkan asumsi
@@ -1157,7 +1157,7 @@ secret, sehingga secret yang ada tidak akan ditulis ke dalam
   memberikan kapabilitas untuk membaca objek secret, pengguna dapat menjalankan
   pod yang mengekspos secret.
 - Saat ini, semua orang dengan akses _root_ pada node dapat membaca secret
-  _apapun_ dari apiserver,  
+  _apapun_ dari apiserver,
   dengan cara meniru kubelet. Meskipun begitu, terdapat fitur yang direncanakan
   pada rilis selanjutnya yang memungkinkan pengiriman secret hanya dapat
   mengirimkan secret pada node yang membutuhkan secret tersebut untuk membatasi
