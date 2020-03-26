@@ -159,7 +159,7 @@ If the Status of the Ready condition remains `Unknown` or `False` for longer tha
 `pod-eviction-timeout`（一个传递给
 [kube-controller-manager](/docs/admin/kube-controller-manager/) 的参数），节点上
 的所有 Pods 都会被节点控制器计划删除。默认的删除超时时长为**5 分钟**。某些情况下
-，当节点不可访问时，apiserver 不能和其上的 kubelet 通信。删除 pods 的决定不能传
+，当节点不可访问时，apiserver 不能和其上的 kubelet 通信。删除 pods 的决定不能�
 达给 kubelet，直到它重新建立和 apiserver 的连接为止。与此同时，被计划删除的 pods
 可能会继续在分区节点上运行。
 
