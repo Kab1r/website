@@ -13,7 +13,7 @@ tags:
 ---
 
 {{< glossary_tooltip term_id="node" text="노드" >}}가 배정되지 않은 새로 생성된
-{{< glossary_tooltip term_id="pod" text="파드" >}} 를 감지하고, 실행할 노드를 선
+{{< glossary_tooltip term_id="pod" text="파드" >}} 를 감지하고, 실행할 노드를 �
 택하는 컨트롤 플레인 컴포넌트.
 
 <!--more-->

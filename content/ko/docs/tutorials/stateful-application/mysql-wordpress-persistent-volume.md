@@ -82,7 +82,7 @@ MySQL과 Wordpress는 각각 데이터를 저장할 퍼시스턴트볼륨이 필
 `--enable-hostpath-provisioner` 플래그를 `controller-manager` 컴포넌트에 꼭 설정
 해야 한다. {{< /note >}}
 
-{{< note >}} 만약 구글 쿠버네티스 엔진으로 운영하는 쿠버네티스 클러스터를 가지고
+{{< note >}} 만약 구글 쿠버네티스 엔진으로 운영하는 쿠버네티스 클러스터를 가지�
 있다면
 [가이드](https://cloud.google.com/kubernetes-engine/docs/tutorials/persistent-disk)를
 따르도록 한다. {{< /note >}}
@@ -92,7 +92,7 @@ MySQL과 Wordpress는 각각 데이터를 저장할 퍼시스턴트볼륨이 필
 ### 시크릿 생성자 추가
 
 [시크릿](/docs/concepts/configuration/secret/)은 암호나 키 같은 민감한 데이터들
-을 저장하는 개체이다. 1.14 버전부터 `kubectl`은 kustomization 파일을 이용해서 쿠
+을 저장하는 개체이다. 1.14 버전부터 `kubectl`은 kustomization 파일을 이용해서 �
 버네티스 개체를 관리한다. `kustomization.yaml`의 제네레니터로 시크릿을 생성할 수
 있다.
 

@@ -23,7 +23,7 @@ weight: 60
 
 - 노드를 지원하는 물리 머신의 하드웨어 오류
 - 클러스터 관리자의 실수로 VM(인스턴스) 삭제
-- 클라우드 공급자 또는 하이퍼바이저의 오류로 인한 VM 장애
+- 클라우드 공급자 또는 하이퍼바이저의 오류로 인한 VM 장�
 - 커널 패닉
 - 클러스터 네트워크 파티션의 발생으로 클러스터에서 노드가 사라짐
 - 노드의 [리소스 부족](/docs/tasks/administer-cluster/out-of-resource/)으로 파드
@@ -33,7 +33,7 @@ weight: 60
 조건은 쿠버네티스에 국한되지 않기 때문이다.
 
 우리는 다른 상황을 _자발적인 중단_ 으로 부른다. 여기에는 애플리케이션 소유자의
-작업과 클러스터 관리자의 작업이 모두 포함된다. 다음은 대표적인 애플리케이션 소유
+작업과 클러스터 관리자의 작업이 모두 포함된다. 다음은 대표적인 애플리케이션 소�
 자의 작업이다.
 
 - 디플로이먼트 제거 또는 다른 파드를 관리하는 컨트롤러의 제거
@@ -71,7 +71,7 @@ weight: 60
 - 고가용성이 필요한 경우 애플리케이션을 복제한다. (복제된
   [스테이트리스](/docs/tasks/run-application/run-stateless-application-deployment/)
   및
-  [스테이트풀](/docs/tasks/run-application/run-replicated-stateful-application/)애
+  [스테이트풀](/docs/tasks/run-application/run-replicated-stateful-application/)�
   플리케이션에 대해 알아보기.)
 - 복제된 애플리케이션의 구동 시 훨씬 더 높은 가용성을 위해 랙 전체
   ([안티-어피니티](/docs/user-guide/node-selection/#inter-pod-affinity-and-anti-affinity-beta-feature)
@@ -98,7 +98,7 @@ weight: 60
 가 정족수 이하로 떨어지지 않도록 한다. 웹 프런트 엔드는 부하를 처리하는 레플리카
 의 수가 일정 비율 이하로 떨어지지 않도록 보장할 수 있다.
 
-클러스터 관리자와 호스팅 공급자는 직접적으로 파드나 디플로이먼트를 제거하는 대신
+클러스터 관리자와 호스팅 공급자는 직접적으로 파드나 디플로이먼트를 제거하는 대�
 [Eviction API](/docs/tasks/administer-cluster/safely-drain-node/#the-eviction-api)로
 불리는 Pod Disruption Budgets를 준수하는 도구를 이용해야 한다. 예를 들어
 `kubectl drain` 명령어나 Kubernetes-on-GCE 클러스터 업그레이드 스크립트
@@ -224,7 +224,7 @@ available 상태가 된다.
 ## 클러스터 소유자와 애플리케이션 소유자의 역할 분리
 
 보통 클러스터 매니저와 애플리케이션 소유자는 서로에 대한 지식이 부족한 별도의 역
-할로 생각하는 것이 유용하다. 이와 같은 책임의 분리는 다음의 시나리오에서 타당할
+할로 생각하는 것이 유용하다. 이와 같은 책임의 분리는 다음의 시나리오에서 타당�
 수 있다.
 
 - 쿠버네티스 클러스터를 공유하는 애플리케이션 팀이 많고, 자연스럽게 역할이 나누

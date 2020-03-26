@@ -53,7 +53,7 @@ card:
 
 이 튜토리얼은 [Redis를 이용한 PHP 방명록](../guestbook)을 기반으로 한다. 방명록
 애플리케이션을 실행 중이라면, 이를 모니터링할 수 있다. 실행되지 않은 경우라면 지
-침을 따라 방명록을 배포하고 **정리하기** 단계는 수행하지 말자. 방명록을 실행할
+침을 따라 방명록을 배포하고 **정리하기** 단계는 수행하지 말자. 방명록을 실행�
 때 이 페이지로 돌아오자.
 
 ## 클러스터 롤 바인딩 추가
@@ -125,7 +125,7 @@ cd examples/beats-k8s-send-anywhere
 {{< note >}} 여기에는 방식이 나뉘는데, 하나는 _자체 관리(Self managed)_ 로
 Elasticsearch와 Kibana(Elastic의 Helm 차트를 이용하여 사용자 서버를 구동하는)를
 사용하는 경우이고 다른 경우는 Elastic Cloud의 Elasticsearch 서비스의 _관리 서비
-스(Managed service)_ 를 사용하는 방식이다. 이 튜토리얼에서는 사용할
+스(Managed service)_ 를 사용하는 방식이다. 이 튜토리얼에서는 사용�
 Elasticsearch와 Kibana 시스템의 종류에 따라 시크릿을 만들어야 한다.
 {{< /note >}}
 

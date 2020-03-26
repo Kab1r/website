@@ -54,10 +54,10 @@ kubectl apply -f https://k8s.io/examples/controllers/daemonset.yaml
 
 ### 필수 필드
 
-다른 모든 쿠버네티스 설정과 마찬가지로 데몬셋에는 `apiVersion`, `kind` 그리고
+다른 모든 쿠버네티스 설정과 마찬가지로 데몬셋에는 `apiVersion`, `kind` 그리�
 `metadata` 필드가 필요하다. 일반적인 설정파일 작업에 대한 정보는
 [애플리케이션 배포하기](/docs/tasks/run-application/run-stateless-application-deployment/),
-[컨테이너 구성하기](/ko/docs/tasks/) 그리고
+[컨테이너 구성하기](/ko/docs/tasks/) 그리�
 [kubectl을 사용한 오브젝트 관리](/ko/docs/concepts/overview/working-with-objects/object-management/)
 문서를 참고한다.
 
@@ -142,7 +142,7 @@ kubectl apply -f https://k8s.io/examples/controllers/daemonset.yaml
   케줄러에서 처리한다. 선점이 활성화되면 데몬셋 컨트롤러는 파드 우선순위와 선점
   을 고려하지 않고 스케줄 한다.
 
-`ScheduleDaemonSetPods` 로 데몬셋 파드에 `.spec.nodeName` 용어 대신
+`ScheduleDaemonSetPods` 로 데몬셋 파드에 `.spec.nodeName` 용어 대�
 `NodeAffinity` 용어를 추가해서 데몬셋 컨트롤러 대신 기본 스케줄러를 사용해서 데
 몬셋을 스케줄할 수 있다. 이후에 기본 스케줄러를 사용해서 대상 호스트에 파드를 바
 인딩 한다. 만약 데몬셋 파드에 이미 노드 선호도가 존재한다면 교체한다. 데몬셋 컨
@@ -180,7 +180,7 @@ nodeAffinity:
 | `node.kubernetes.io/unschedulable`       | NoSchedule | 1.12+ | 데몬셋 파드는 기본 스케줄러의 스케줄할 수 없는(unschedulable) 속성을 극복한다.                                              |
 | `node.kubernetes.io/network-unavailable` | NoSchedule | 1.12+ | 호스트 네트워크를 사용하는 데몬셋 파드는 기본 스케줄러에 의해 이용할 수 없는 네트워크(network-unavailable) 속성을 극복한다. |
 
-## 데몬 파드와 통신
+## 데몬 파드와 통�
 
 데몬셋의 파드와 통신할 수 있는 몇 가지 패턴은 다음과 같다.
 
@@ -238,7 +238,7 @@ nodeAffinity:
 
 Kubelet이 감시하는 특정 디렉토리에 파일을 작성하는 파드를 생성할 수 있다. 이것을
 [스태틱 파드](/docs/tasks/configure-pod-container/static-pod/)라고 부른다. 데몬
-셋과는 다르게 스태틱 파드는 kubectl 또는 다른 쿠버네티스 API 클라이언트로 관리할
+셋과는 다르게 스태틱 파드는 kubectl 또는 다른 쿠버네티스 API 클라이언트로 관리�
 수 없다. 스태틱 파드는 API 서버에 의존하지 않기 때문에 클러스터 부트스트랩
 (bootstraping)하는 경우에 유용하다. 또한 스태틱 파드는 향후에 사용 중단
 (deprecated)될 수 있다.

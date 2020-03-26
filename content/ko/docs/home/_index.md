@@ -65,7 +65,7 @@ cards:
   - name: contribute
     title: 문서에 기여하기
     description:
-      이 프로젝트가 처음인 사람이든, 오래 활동한 사람이든 상관없이 누구나 기여할
+      이 프로젝트가 처음인 사람이든, 오래 활동한 사람이든 상관없이 누구나 기여�
       수 있다.
     button: 문서에 기여하기
     button_path: "/ko/docs/contribute"

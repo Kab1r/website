@@ -35,9 +35,9 @@ kops는 자동화된 프로비저닝 시스템인데,
 - 반드시 64-bit (AMD64 그리고 Intel 64)디바이스 아키텍쳐 위에서 `kops` 를
   [설치](https://github.com/kubernetes/kops#installing) 한다.
 
-- [AWS 계정](https://docs.aws.amazon.com/polly/latest/dg/setting-up.html)이 있고
+- [AWS 계정](https://docs.aws.amazon.com/polly/latest/dg/setting-up.html)이 있�
   [IAM 키](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys)를
-  생성하고
+  생성하�
   [구성](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html#cli-quick-configuration)
   해야 한다.
 
@@ -149,7 +149,7 @@ kops는 클러스터 내부와 외부 모두에서 검색을 위해 DNS을 사�
 `api.useast1.dev.example.com`가 될 것이다.
 
 Route53 hosted zone은 서브도메인도 지원한다. 여러분의 hosted zone은
-`useast1.dev.example.com`, `dev.example.com` 그리고 `example.com` 같은 것도 될
+`useast1.dev.example.com`, `dev.example.com` 그리고 `example.com` 같은 것도 �
 수 있다. kops는 이것들 모두와 잘 동작하며, 사용자는 보통 조직적인 부분을 고려해
 결정한다(예를 들어, 사용자가 `dev.example.com`하위에 레코드를 생성하는것은 허용
 되지만, `example.com`하위에는 그렇지 않을 수 있다).
@@ -219,7 +219,7 @@ kops는 클러스터에 사용될 설정을 생성할것이다. 여기서 주의
 
 만약 kops사용이 처음이라면, 얼마 걸리지 않으니 이들을 시험해 본다. 인스턴스 그룹
 은쿠버네티스 노드로 등록된 인스턴스의 집합을 말한다. AWS상에서는
-auto-scaling-groups를통해 만들어진다. 사용자는 여러개의 인스턴스 그룹을 관리할
+auto-scaling-groups를통해 만들어진다. 사용자는 여러개의 인스턴스 그룹을 관리�
 수 있는데, 예를 들어, spot과 on-demand 인스턴스 조합 또는 GPU 와 non-GPU 인스턴
 스의 조합으로 구성할 수 있다.
 
@@ -243,7 +243,7 @@ auto-scaling-groups를통해 만들어진다. 사용자는 여러개의 인스�
 ### 다른 애드온 탐험
 
 [애드온 리스트](/docs/concepts/cluster-administration/addons/) 에서 쿠버네티스
-클러스터용 로깅, 모니터링, 네트워크 정책, 시각화 &amp; 제어 등을 포함한 다른 애
+클러스터용 로깅, 모니터링, 네트워크 정책, 시각화 &amp; 제어 등을 포함한 다른 �
 드온을 확인해본다.
 
 ## 정리하기

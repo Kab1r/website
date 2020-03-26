@@ -65,7 +65,7 @@ moved to Concepts section: 2/2/17{{< /comment >}}
   - `PodScheduled`: 파드가 하나의 노드로 스케줄 완료되었음.
   - `Ready`: 파드는 요청들을 수행할 수 있으며모든 매칭 서비스들의 로드밸런싱 풀
     에 추가되어야 함.
-  - `Initialized`: 모든
+  - `Initialized`: 모�
     [초기화 컨테이너](/ko/docs/concepts/workloads/pods/init-containers)가성공적
     으로 시작 완료되었음.
   - `ContainersReady`: 파드 내의 모든 컨테이너가 준비 상태임.
@@ -175,7 +175,7 @@ kubelet은 실행 중인 컨테이너들에 대해서 선택적으로 세 가지
 ## 컨테이너 상태
 
 일단 스케줄러가 파드를 노드에 할당하면, kubelet이 컨테이너 런타임으로 컨테이너를
-만들기 시작한다. 컨테이너에 세 가지 상태가 있는데, Waiting, Running, 그리고
+만들기 시작한다. 컨테이너에 세 가지 상태가 있는데, Waiting, Running, 그리�
 Terminated이다. 컨테이너의 상태를 체크하려면 `kubectl describe pod [POD_NAME]`
 명령을 사용할 수 있다. 상태는 파드 안에 있는 컨테이너 각각에 대해 출력된다.
 
@@ -386,7 +386,7 @@ spec:
   - 만약 컨테이너 1이 동작 중이 아니고, 컨테이너 2가 종료됐다면 :
     - 실패 이벤트를 기록한다.
     - 만약 `restartPolicy`가 :
-      - 항상(Always)이면: 컨테이너는 재시작되고, 파드의 `phase`는 Running으로 유
+      - 항상(Always)이면: 컨테이너는 재시작되고, 파드의 `phase`는 Running으로 �
         지된다.
       - 실패 시(OnFailure)이면: 컨테이너는 재시작되고, 파드의 `phase`는 Running
         으로 유지된다.

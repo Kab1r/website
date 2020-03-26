@@ -380,7 +380,7 @@ kubectl autoscale rs frontend --max=10
 
 ### 잡
 
-스스로 종료되는 것이 예상되는 파드의 경우에는 레플리카셋 대신
+스스로 종료되는 것이 예상되는 파드의 경우에는 레플리카셋 대�
 [`잡`](/docs/concepts/jobs/run-to-completion-finite-workloads/)을 이용한다 (즉,
 배치 잡).
 

@@ -25,7 +25,7 @@ weight: 20
 히
 [익명의 요청](/docs/reference/access-authn-authz/authentication/#anonymous-requests)
 또는
-[서비스 계정 토큰](/docs/reference/access-authn-authz/authentication/#service-account-tokens)이  
+[서비스 계정 토큰](/docs/reference/access-authn-authz/authentication/#service-account-tokens)이
 허용된 경우에는 하나 또는 그 이상의
 [인가](/docs/reference/access-authn-authz/authorization/) 형태가 사용 가능해야만
 한다.
@@ -38,9 +38,9 @@ weight: 20
 참고한다.
 
 apiserver에 접속하려는 파드는 서비스 계정에 영향력을 발휘함으로써 안전하게그리
-행할 수 있으며 따라서 쿠버네티스는 인스턴스화 될 때 공인 루트 인증서와유효한 베
+행할 수 있으며 따라서 쿠버네티스는 인스턴스화 될 때 공인 루트 인증서와유효한 �
 어러 토큰을 파드 속으로 자동 주입할 수 있게 된다. (모든 네임스페이스 내)
-`kubernetes` 서비스는 apiserver 상의 HTTPS 엔드포인트로  
+`kubernetes` 서비스는 apiserver 상의 HTTPS 엔드포인트로
 (kube-proxy를 통해) 리다이렉트 되는 가상 IP 주소를가지고 구성된다.
 
 마스터 컴포넌트는 또한 신뢰할 수 있는 포트를 통해 클러스터 apiserver와 소통한다.
@@ -65,7 +65,7 @@ apiserver에서 kubelet으로의 연결은 다음을 위해 이용된다.
 - kubelet의 포트 포워딩 기능 제공하기
 
 이 연결은 kubelet의 HTTPS 엔드포인트에서 끝난다. 기본적으로, apiserver는 kubelet
-의 제공 인증서를 확인하지 않는데, 이는 연결에 대한 중간자 공격을 당하게 하고, 신
+의 제공 인증서를 확인하지 않는데, 이는 연결에 대한 중간자 공격을 당하게 하고, �
 뢰할 수 없는그리고/또는 공인 네트워크에서 운영하기에는 **불안** 하게 만든다.
 
 이 연결을 확인하려면, apiserver에 kubelet의 제공 인증서 확인을위해 사용하는 루트
