@@ -8,7 +8,8 @@ card:
 
 {{% capture overview %}}
 
-참고 항목: [Kubectl 개요](/docs/reference/kubectl/overview/)와 [JsonPath 가이드](/docs/reference/kubectl/jsonpath).
+참고 항목: [Kubectl 개요](/docs/reference/kubectl/overview/)와
+[JsonPath 가이드](/docs/reference/kubectl/jsonpath).
 
 이 페이지는 `kubectl` 커맨드의 개요이다.
 
@@ -43,9 +44,10 @@ echo "[[ $commands[kubectl] ]] && source <(kubectl completion zsh)" >> ~/.zshrc 
 
 ## Kubectl 컨텍스트와 설정
 
-`kubectl`이 통신하고 설정 정보를 수정하는 쿠버네티스 클러스터를
-지정한다. 설정 파일에 대한 자세한 정보는 [kubeconfig를 이용한 클러스터 간 인증](/ko/docs/tasks/access-application-cluster/configure-access-multiple-clusters/) 문서를
-참고한다.
+`kubectl`이 통신하고 설정 정보를 수정하는 쿠버네티스 클러스터를지정한다. 설정 파
+일에 대한 자세한 정보는
+[kubeconfig를 이용한 클러스터 간 인증](/ko/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)
+문서를참고한다.
 
 ```bash
 kubectl config view # 병합된 kubeconfig 설정을 표시한다.
@@ -78,12 +80,16 @@ kubectl config unset users.foo                       # foo 사용자 삭제
 ```
 
 ## Apply
-`apply`는 쿠버네티스 리소스를 정의하는 파일을 통해 애플리케이션을 관리한다. `kubectl apply`를 실행하여 클러스터에 리소스를 생성하고 업데이트한다. 이것은 프로덕션 환경에서 쿠버네티스 애플리케이션을 관리할 때 권장된다. [Kubectl Book](https://kubectl.docs.kubernetes.io)을 참고한다.
+
+`apply`는 쿠버네티스 리소스를 정의하는 파일을 통해 애플리케이션을 관리한다.
+`kubectl apply`를 실행하여 클러스터에 리소스를 생성하고 업데이트한다. 이것은 프
+로덕션 환경에서 쿠버네티스 애플리케이션을 관리할 때 권장된다.
+[Kubectl Book](https://kubectl.docs.kubernetes.io)을 참고한다.
 
 ## 오브젝트 생성
 
-쿠버네티스 매니페스트는 JSON이나 YAML로 정의된다. 파일 확장자는 `.yaml`
-, `.yml`, `.json` 이 사용된다.
+쿠버네티스 매니페스트는 JSON이나 YAML로 정의된다. 파일 확장자는 `.yaml` ,
+`.yml`, `.json` 이 사용된다.
 
 ```bash
 kubectl apply -f ./my-manifest.yaml            # 리소스(들) 생성
@@ -200,11 +206,13 @@ kubectl diff -f ./my-manifest.yaml
 
 ## 리소스 업데이트
 
-1.11 버전에서 `rolling-update`는 사용 중단(deprecated)되었다. ([CHANGELOG-1.11.md](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.11.md) 참고) 대신 `rollout`를 사용한다.
+1.11 버전에서 `rolling-update`는 사용 중단(deprecated)되었다.
+([CHANGELOG-1.11.md](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.11.md)
+참고) 대신 `rollout`를 사용한다.
 
 ```bash
 kubectl set image deployment/frontend www=image:v2               # "frontend" 디플로이먼트의 "www" 컨테이너 이미지를 업데이트하는 롤링 업데이트
-kubectl rollout history deployment/frontend                      # 현 리비전을 포함한 디플로이먼트의 이력을 체크 
+kubectl rollout history deployment/frontend                      # 현 리비전을 포함한 디플로이먼트의 이력을 체크
 kubectl rollout undo deployment/frontend                         # 이전 디플로이먼트로 롤백
 kubectl rollout undo deployment/frontend --to-revision=2         # 특정 리비전으로 롤백
 kubectl rollout status -w deployment/frontend                    # 완료될 때까지 "frontend" 디플로이먼트의 롤링 업데이트 상태를 감시
@@ -252,6 +260,7 @@ kubectl patch sa default --type='json' -p='[{"op": "add", "path": "/secrets/1", 
 ```
 
 ## 리소스 편집
+
 편집기로 모든 API 리소스를 편집.
 
 ```bash
@@ -317,7 +326,11 @@ kubectl taint nodes foo dedicated=special-user:NoSchedule
 
 ### 리소스 타입
 
-단축명, [API 그룹](/ko/docs/concepts/overview/kubernetes-api/#api-groups)과 함께 지원되는 모든 리소스 유형들, 그것들의 [네임스페이스](/ko/docs/concepts/overview/working-with-objects/namespaces)와 [종류(Kind)](/ko/docs/concepts/overview/working-with-objects/kubernetes-objects)를 나열:
+단축명, [API 그룹](/ko/docs/concepts/overview/kubernetes-api/#api-groups)과 함께
+지원되는 모든 리소스 유형들, 그것들의
+[네임스페이스](/ko/docs/concepts/overview/working-with-objects/namespaces)와
+[종류(Kind)](/ko/docs/concepts/overview/working-with-objects/kubernetes-objects)를
+나열:
 
 ```bash
 kubectl api-resources
@@ -336,45 +349,52 @@ kubectl api-resources --api-group=extensions # "extensions" API 그룹의 모든
 
 ### 출력 형식 지정
 
-특정 형식으로 터미널 창에 세부 사항을 출력하려면, 지원되는 `kubectl` 명령에 `-o` (또는 `--output`) 플래그를 추가한다.
+특정 형식으로 터미널 창에 세부 사항을 출력하려면, 지원되는 `kubectl` 명령에 `-o`
+(또는 `--output`) 플래그를 추가한다.
 
-출력 형식       | 세부 사항
---------------| -----------
-`-o=custom-columns=<명세>` | 쉼표로 구분된 사용자 정의 열 목록을 사용하여 테이블 출력
-`-o=custom-columns-file=<파일명>` | `<파일명>`파일에서 사용자 정의 열 템플릿을 사용하여 테이블 출력
-`-o=json`     | JSON 형식의 API 오브젝트 출력
-`-o=jsonpath=<템플릿>` | [jsonpath](/docs/reference/kubectl/jsonpath) 표현식에 정의된 필드 출력
-`-o=jsonpath-file=<파일명>` | <파일명> 파일에서 [jsonpath](/docs/reference/kubectl/jsonpath) 표현식에 정의된 필드 출력
-`-o=name`     | 리소스 명만 출력하고 그 외에는 출력하지 않음
-`-o=wide`     | 추가 정보가 포함된 일반-텍스트 형식으로 출력하고, 파드의 경우 노드 명이 포함
-`-o=yaml`     | YAML 형식의 API 오브젝트 출력
+| 출력 형식                         | 세부 사항                                                                                |
+| --------------------------------- | ---------------------------------------------------------------------------------------- |
+| `-o=custom-columns=<명세>`        | 쉼표로 구분된 사용자 정의 열 목록을 사용하여 테이블 출력                                 |
+| `-o=custom-columns-file=<파일명>` | `<파일명>`파일에서 사용자 정의 열 템플릿을 사용하여 테이블 출력                          |
+| `-o=json`                         | JSON 형식의 API 오브젝트 출력                                                            |
+| `-o=jsonpath=<템플릿>`            | [jsonpath](/docs/reference/kubectl/jsonpath) 표현식에 정의된 필드 출력                   |
+| `-o=jsonpath-file=<파일명>`       | <파일명> 파일에서 [jsonpath](/docs/reference/kubectl/jsonpath) 표현식에 정의된 필드 출력 |
+| `-o=name`                         | 리소스 명만 출력하고 그 외에는 출력하지 않음                                             |
+| `-o=wide`                         | 추가 정보가 포함된 일반-텍스트 형식으로 출력하고, 파드의 경우 노드 명이 포함             |
+| `-o=yaml`                         | YAML 형식의 API 오브젝트 출력                                                            |
 
 ### Kubectl 출력 로그 상세 레벨(verbosity)과 디버깅
 
-Kubectl 로그 상세 레벨(verbosity)은 `-v` 또는`--v` 플래그와 로그 레벨을 나타내는 정수로 제어된다. 일반적인 쿠버네티스 로깅 규칙과 관련 로그 레벨이 [여기](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md)에 설명되어 있다.
+Kubectl 로그 상세 레벨(verbosity)은 `-v` 또는`--v` 플래그와 로그 레벨을 나타내는
+정수로 제어된다. 일반적인 쿠버네티스 로깅 규칙과 관련 로그 레벨이
+[여기](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md)에
+설명되어 있다.
 
-로그 레벨 | 세부 사항
---------------| -----------
-`--v=0` | 일반적으로 클러스터 운영자(operator)에게 *항상* 보여지게 하기에는 유용함.
-`--v=1` | 자세한 정보를 원하지 않는 경우, 적절한 기본 로그 수준.
-`--v=2` | 서비스와 시스템의 중요한 변화와 관련이있는 중요한 로그 메시지에 대한 유용한 정상 상태 정보. 이는 대부분의 시스템에서 권장되는 기본 로그 수준이다.
-`--v=3` | 변경 사항에 대한 확장 정보.
-`--v=4` | 디버그 수준 상세화.
-`--v=6` | 요청한 리소스를 표시.
-`--v=7` | HTTP 요청 헤더를 표시.
-`--v=8` | HTTP 요청 내용을 표시.
-`--v=9` | 내용을 잘라 내지 않고 HTTP 요청 내용을 표시.
+| 로그 레벨 | 세부 사항                                                                                                                                         |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--v=0`   | 일반적으로 클러스터 운영자(operator)에게 _항상_ 보여지게 하기에는 유용함.                                                                         |
+| `--v=1`   | 자세한 정보를 원하지 않는 경우, 적절한 기본 로그 수준.                                                                                            |
+| `--v=2`   | 서비스와 시스템의 중요한 변화와 관련이있는 중요한 로그 메시지에 대한 유용한 정상 상태 정보. 이는 대부분의 시스템에서 권장되는 기본 로그 수준이다. |
+| `--v=3`   | 변경 사항에 대한 확장 정보.                                                                                                                       |
+| `--v=4`   | 디버그 수준 상세화.                                                                                                                               |
+| `--v=6`   | 요청한 리소스를 표시.                                                                                                                             |
+| `--v=7`   | HTTP 요청 헤더를 표시.                                                                                                                            |
+| `--v=8`   | HTTP 요청 내용을 표시.                                                                                                                            |
+| `--v=9`   | 내용을 잘라 내지 않고 HTTP 요청 내용을 표시.                                                                                                      |
 
 {{% /capture %}}
 
 {{% capture whatsnext %}}
 
-* [kubectl 개요](/docs/reference/kubectl/overview/)에 대해 더 배워보자.
+- [kubectl 개요](/docs/reference/kubectl/overview/)에 대해 더 배워보자.
 
-* [kubectl](/docs/reference/kubectl/kubectl/) 옵션을 참고한다.
+- [kubectl](/docs/reference/kubectl/kubectl/) 옵션을 참고한다.
 
-* 재사용 스크립트에서 kubectl 사용 방법을 이해하기 위해 [kubectl 사용법](/docs/reference/kubectl/conventions/)을 참고한다.
+- 재사용 스크립트에서 kubectl 사용 방법을 이해하기 위해
+  [kubectl 사용법](/docs/reference/kubectl/conventions/)을 참고한다.
 
-* 더 많은 [kubectl 치트 시트](https://github.com/dennyzhang/cheatsheet-kubernetes-A4) 커뮤니티 확인
+- 더 많은
+  [kubectl 치트 시트](https://github.com/dennyzhang/cheatsheet-kubernetes-A4) 커
+  뮤니티 확인
 
 {{% /capture %}}
