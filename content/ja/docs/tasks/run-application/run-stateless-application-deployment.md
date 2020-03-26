@@ -7,19 +7,18 @@ weight: 10
 
 {{% capture overview %}}
 
-このページでは、Kubernetes Deploymentオブジェクトを使用してアプリケーションを実行する方法を説明します。
+このページでは、Kubernetes Deployment オブジェクトを使用してアプリケーションを実
+行する方法を説明します。
 
 {{% /capture %}}
-
 
 {{% capture objectives %}}
 
-* nginx deploymentを作成します。
-* kubectlを使ってdeploymentに関する情報を一覧表示します。
-* deploymentを更新します。
+- nginx deployment を作成します。
+- kubectl を使って deployment に関する情報を一覧表示します。
+- deployment を更新します。
 
 {{% /capture %}}
-
 
 {{% capture prerequisites %}}
 
@@ -27,21 +26,21 @@ weight: 10
 
 {{% /capture %}}
 
-
 {{% capture lessoncontent %}}
 
-## nginx deploymentの作成と探検
+## nginx deployment の作成と探検
 
-Kubernetes Deploymentオブジェクトを作成することでアプリケーションを実行できます。また、YAMLファイルでDeploymentを記述できます。例えば、このYAMLファイルはnginx:1.14.2 Dockerイメージを実行するデプロイメントを記述しています:
+Kubernetes Deployment オブジェクトを作成することでアプリケーションを実行できます
+。また、YAML ファイルで Deployment を記述できます。例えば、この YAML ファイルは
+nginx:1.14.2 Docker イメージを実行するデプロイメントを記述しています:
 
 {{< codenew file="application/deployment.yaml" >}}
 
-
-1. YAMLファイルに基づいてDeploymentを作成します:
+1.  YAML ファイルに基づいて Deployment を作成します:
 
         kubectl apply -f https://k8s.io/examples/application/deployment.yaml
 
-1. Deploymentに関する情報を表示します:
+1.  Deployment に関する情報を表示します:
 
         kubectl describe deployment nginx-deployment
 
@@ -76,7 +75,7 @@ Kubernetes Deploymentオブジェクトを作成することでアプリケー�
         NewReplicaSet:    nginx-deployment-1771418926 (2/2 replicas created)
         No events.
 
-1. Deploymentによって作成されたPodを一覧表示します:
+1.  Deployment によって作成された Pod を一覧表示します:
 
         kubectl get pods -l app=nginx
 
@@ -86,37 +85,40 @@ Kubernetes Deploymentオブジェクトを作成することでアプリケー�
         nginx-deployment-1771418926-7o5ns   1/1       Running   0          16h
         nginx-deployment-1771418926-r18az   1/1       Running   0          16h
 
-1. Podに関する情報を表示します:
+1.  Pod に関する情報を表示します:
 
         kubectl describe pod <pod-name>
 
-    ここで`<pod-name>`はPodの1つの名前を指定します。
+    ここで`<pod-name>`は Pod の 1 つの名前を指定します。
 
-## Deploymentの更新
+## Deployment の更新
 
-新しいYAMLファイルを適用してDeploymentを更新できます。このYAMLファイルは、Deploymentを更新してnginx 1.8を使用するように指定しています。
+新しい YAML ファイルを適用して Deployment を更新できます。この YAML ファイルは
+、Deployment を更新して nginx 1.8 を使用するように指定しています。
 
 {{< codenew file="application/deployment-update.yaml" >}}
 
-1. 新しいYAMLファイルを適用します:
+1.  新しい YAML ファイルを適用します:
 
          kubectl apply -f https://k8s.io/examples/application/deployment-update.yaml
 
-1. Deploymentが新しい名前でPodを作成し、古いPodを削除するのを監視します:
+1.  Deployment が新しい名前で Pod を作成し、古い Pod を削除するのを監視します:
 
          kubectl get pods -l app=nginx
 
 ## レプリカ数を増やすことによるアプリケーションのスケール
 
-新しいYAMLファイルを適用することで、Deployment内のPodの数を増やすことができます。このYAMLファイルは`replicas`を4に設定します。これはDeploymentが4つのPodを持つべきであることを指定します:
+新しい YAML ファイルを適用することで、Deployment 内の Pod の数を増やすことができ
+ます。この YAML ファイルは`replicas`を 4 に設定します。これは Deployment が 4 つ
+の Pod を持つべきであることを指定します:
 
 {{< codenew file="application/deployment-scale.yaml" >}}
 
-1. 新しいYAMLファイルを適用します:
+1.  新しい YAML ファイルを適用します:
 
         kubectl apply -f https://k8s.io/examples/application/deployment-scale.yaml
 
-1. Deploymentに4つのPodがあることを確認します:
+1.  Deployment に 4 つの Pod があることを確認します:
 
         kubectl get pods -l app=nginx
 
@@ -128,23 +130,25 @@ Kubernetes Deploymentオブジェクトを作成することでアプリケー�
         nginx-deployment-148880595-fxcez   1/1       Running   0          2m
         nginx-deployment-148880595-rwovn   1/1       Running   0          2m
 
-## Deploymentの削除
+## Deployment の削除
 
-Deploymentを名前を指定して削除します:
+Deployment を名前を指定して削除します:
 
     kubectl delete deployment nginx-deployment
 
 ## ReplicationControllers -- 昔のやり方
 
-複製アプリケーションを作成するための好ましい方法はDeploymentを使用することです。そして、DeploymentはReplicaSetを使用します。 DeploymentとReplicaSetがKubernetesに追加される前は、[ReplicationController](/docs/concepts/workloads/controllers/replicationcontroller/)を使用して複製アプリケーションを構成していました。
+複製アプリケーションを作成するための好ましい方法は Deployment を使用することです
+。そして、Deployment は ReplicaSet を使用します。 Deployment と ReplicaSet が
+Kubernetes に追加される前は
+、[ReplicationController](/docs/concepts/workloads/controllers/replicationcontroller/)を
+使用して複製アプリケーションを構成していました。
 
 {{% /capture %}}
-
 
 {{% capture whatsnext %}}
 
-* [Deploymentオブジェクト](/docs/concepts/workloads/controllers/deployment/)の詳細
+- [Deployment オブジェクト](/docs/concepts/workloads/controllers/deployment/)の
+  詳細
 
 {{% /capture %}}
-
-
