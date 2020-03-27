@@ -57,20 +57,20 @@ class RedisWQ(object):
         """
         return self._main_qsize() == 0 and self._processing_qsize() == 0
 
-# TODO: implement this
-#    def check_expired_leases(self):
-#        """Return to the work queueReturn True if the queue is empty, False otherwise."""
-#        # Processing list should not be _too_ long since it is approximately as long
-#        # as the number of active and recently active workers.
-#        processing = self._db.lrange(self._processing_q_key, 0, -1)
-#        for item in processing:
-#          # If the lease key is not present for an item (it expired or was
-#          # never created because the client crashed before creating it)
-#          # then move the item back to the main queue so others can work on it.
-#          if not self._lease_exists(item):
-#            TODO: transactionally move the key from processing queue to
-#            to main queue, while detecting if a new lease is created
-#            or if either queue is modified.
+    # TODO: implement this
+    #    def check_expired_leases(self):
+    #        """Return to the work queueReturn True if the queue is empty, False otherwise."""
+    #        # Processing list should not be _too_ long since it is approximately as long
+    #        # as the number of active and recently active workers.
+    #        processing = self._db.lrange(self._processing_q_key, 0, -1)
+    #        for item in processing:
+    #          # If the lease key is not present for an item (it expired or was
+    #          # never created because the client crashed before creating it)
+    #          # then move the item back to the main queue so others can work on it.
+    #          if not self._lease_exists(item):
+    #            TODO: transactionally move the key from processing queue to
+    #            to main queue, while detecting if a new lease is created
+    #            or if either queue is modified.
 
     def _itemkey(self, item):
         """Returns a string that uniquely identifies an item (bytes)."""
@@ -91,7 +91,8 @@ class RedisWQ(object):
         if necessary until an item is available."""
         if block:
             item = self._db.brpoplpush(
-                self._main_q_key, self._processing_q_key, timeout=timeout)
+                self._main_q_key, self._processing_q_key, timeout=timeout
+            )
         else:
             item = self._db.rpoplpush(self._main_q_key, self._processing_q_key)
         if item:
@@ -100,8 +101,7 @@ class RedisWQ(object):
             # Note: if we crash at this line of the program, then GC will see no lease
             # for this item a later return it to the main queue.
             itemkey = self._itemkey(item)
-            self._db.setex(self._lease_key_prefix + itemkey,
-                           lease_secs, self._session)
+            self._db.setex(self._lease_key_prefix + itemkey, lease_secs, self._session)
         return item
 
     def complete(self, value):
@@ -116,6 +116,7 @@ class RedisWQ(object):
         # not be here, which is fine.  So this does not need to be a transaction.
         itemkey = self._itemkey(value)
         self._db.delete(self._lease_key_prefix + itemkey)
+
 
 # TODO: add functions to clean up all keys associated with "name" when
 # processing is complete.
