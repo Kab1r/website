@@ -1,13 +1,11 @@
 #!/usr/bin/env python
-
 # Based on http://peter-hoffmann.com/2012/python-simple-queue-redis-queue.html
 # and the suggestion in the redis documentation for RPOPLPUSH, at
 # http://redis.io/commands/rpoplpush, which suggests how to implement a work-queue.
-
+import hashlib
+import uuid
 
 import redis
-import uuid
-import hashlib
 
 
 class RedisWQ(object):

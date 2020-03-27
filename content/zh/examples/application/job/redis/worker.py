@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-
 import time
+
 import rediswq
 
 host = "redis"
