@@ -88,9 +88,9 @@ class RedisWQ(object):
         If optional args block is true and timeout is None (the default), block
         if necessary until an item is available."""
         if block:
-            item = self._db.brpoplpush(
-                self._main_q_key, self._processing_q_key, timeout=timeout
-            )
+            item = self._db.brpoplpush(self._main_q_key,
+                                       self._processing_q_key,
+                                       timeout=timeout)
         else:
             item = self._db.rpoplpush(self._main_q_key, self._processing_q_key)
         if item:
@@ -99,7 +99,8 @@ class RedisWQ(object):
             # Note: if we crash at this line of the program, then GC will see no lease
             # for this item a later return it to the main queue.
             itemkey = self._itemkey(item)
-            self._db.setex(self._lease_key_prefix + itemkey, lease_secs, self._session)
+            self._db.setex(self._lease_key_prefix + itemkey, lease_secs,
+                           self._session)
         return item
 
     def complete(self, value):
