@@ -7,11 +7,11 @@ spec:
     windowsOptions:
       runAsUserName: "ContainerUser"
   containers:
-  - name: run-as-username-demo
-    image: mcr.microsoft.com/windows/servercore:ltsc2019
-    command: ["ping", "-t", "localhost"]
-    securityContext:
+    - name: run-as-username-demo
+      image: mcr.microsoft.com/windows/servercore:ltsc2019
+      command: ["ping", "-t", "localhost"]
+      securityContext:
         windowsOptions:
-            runAsUserName: "ContainerAdministrator"
+          runAsUserName: "ContainerAdministrator"
   nodeSelector:
     kubernetes.io/os: windows

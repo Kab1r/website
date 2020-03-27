@@ -6,10 +6,10 @@ metadata:
     env: test
 spec:
   containers:
-  - name: nginx
-    image: nginx
-    imagePullPolicy: IfNotPresent
+    - name: nginx
+      image: nginx
+      imagePullPolicy: IfNotPresent
   tolerations:
-  - key: "example-key"
-    operator: "Exists"
-    effect: "NoSchedule"
+    - key: "example-key"
+      operator: "Exists"
+      effect: "NoSchedule"

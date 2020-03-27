@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: nginx
   ingress:
-  - from:
-    - podSelector:
-        matchLabels:
-          access: "true"
+    - from:
+        - podSelector:
+            matchLabels:
+              access: "true"

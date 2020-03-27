@@ -4,17 +4,17 @@ metadata:
   name: my-empty-dir-pod
 spec:
   containers:
-  - image: microsoft/windowsservercore:1709
-    name: my-empty-dir-pod
-    volumeMounts:
-    - mountPath: /cache
-      name: cache-volume
-    - mountPath: C:/scratch
-      name: scratch-volume
+    - image: microsoft/windowsservercore:1709
+      name: my-empty-dir-pod
+      volumeMounts:
+        - mountPath: /cache
+          name: cache-volume
+        - mountPath: C:/scratch
+          name: scratch-volume
   volumes:
-  - name: cache-volume
-    emptyDir: {}
-  - name: scratch-volume
-    emptyDir: {}
+    - name: cache-volume
+      emptyDir: {}
+    - name: scratch-volume
+      emptyDir: {}
   nodeSelector:
     beta.kubernetes.io/os: windows
