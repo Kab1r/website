@@ -406,7 +406,7 @@ Minikube の VM は `minikube ip`コマンドで取得できるホストオン�
 
 `kubectl get service $SERVICE --output='jsonpath="{.spec.ports[0].nodePort}"'`
 
-## 永続ボリューム
+## 永続ボリュー�
 
 Minikube は `hostPath` タイプ
 の[PersistentVolumes](/docs/concepts/storage/persistent-volumes/)をサポートしま
@@ -519,7 +519,7 @@ Minikube の詳細については
   、[ロードマップ](https://git.k8s.io/minikube/docs/contributors/roadmap.md)を参
   照してください。
 - **開発ガイド**: プルリクエストを送る方法の概要については
-  、[CONTRIBUTING.md](https://git.k8s.io/minikube/CONTRIBUTING.md)を参照してくだ
+  、[CONTRIBUTING.md](https://git.k8s.io/minikube/CONTRIBUTING.md)を参照してく�
   さい。
 - **Minikube のビルド**: Minikube をソースからビルド/テストする方法については
   、[ビルドガイド](https://git.k8s.io/minikube/docs/contributors/build_guide.md)を

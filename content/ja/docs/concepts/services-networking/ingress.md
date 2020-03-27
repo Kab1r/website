@@ -101,11 +101,11 @@ spec:
 は`apiVersion`、`kind`や`metadata`フィールドが必要です。設定ファイルの利用に関す
 る一般的な情報は
 、[アプリケーションのデプロイ](/docs/tasks/run-application/run-stateless-application-deployment/)、[コンテナーの設定](/docs/tasks/configure-pod-container/configure-pod-configmap/)、[リソースの管理](/docs/concepts/cluster-administration/manage-deployment/)を
-参照してください。  
+参照してください。
 Ingress では、Ingress コントローラーに依存しているいくつかのオプションの設定をす
 るためにアノテーションを使うことが多いです。その例としては
 、[rewrite-target アノテーション](https://github.com/kubernetes/ingress-nginx/blob/master/docs/examples/rewrite/README.md)な
-どがあります。  
+どがあります。
 [Ingress コントローラー](/docs/concepts/services-networking/ingress-controllers)の
 種類が異なれば、サポートするアノテーションも異なります。サポートされているアノテ
 ーションについて学ぶために、ユーザーが使用する Ingress コントローラーのドキュメ

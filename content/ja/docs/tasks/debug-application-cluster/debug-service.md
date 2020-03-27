@@ -52,7 +52,7 @@ kubectl run -it --rm --restart=Never alpine --image=alpine sh
 / #
 ```
 
-{{< note >}} コマンドプロンプトが表示されない場合は、Enter キーを押してみてくだ
+{{< note >}} コマンドプロンプトが表示されない場合は、Enter キーを押してみてく�
 さい。 {{< /note >}}
 
 使用したい実行中の`Pod`が既にある場合は、以下のようにしてその`Pod`内でコマンドを

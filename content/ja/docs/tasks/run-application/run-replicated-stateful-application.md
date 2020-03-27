@@ -29,7 +29,7 @@ weight: 30
   [Service](/ja/docs/concepts/services-networking/service/)、
   [ConfigMap](/docs/tasks/configure-pod-container/configure-pod-configmap/)など
   の他のコアな概念に精通していることを前提としています。
-- MySQL に関する知識は記事の理解に役立ちますが、このチュートリアルは他のシステム
+- MySQL に関する知識は記事の理解に役立ちますが、このチュートリアルは他のシステ�
   にも役立つ一般的なパターンを提示することを目的としています。
 
 {{% /capture %}}

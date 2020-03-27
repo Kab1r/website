@@ -39,7 +39,7 @@ content_template: templates/task
 
 {{% capture steps %}}
 
-## Helm リポジトリーにサービスカタログを追加
+## Helm リポジトリーにサービスカタログを追�
 
 Helm をインストールし、以下のコマンドを実行することでローカルマシン
 に*service-catalog*の Helm リポジトリーを追加します。

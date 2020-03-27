@@ -282,7 +282,7 @@ Deployment を更新するには下記のステップに従ってください。
   nginx-deployment-1564180365-z9gth   1/1       Running   0          14s
   ```
 
-  次に Pod を更新させたいときは、Deployment の Pod テンプレートを再度更新するだ
+  次に Pod を更新させたいときは、Deployment の Pod テンプレートを再度更新する�
   けです。
 
   Deployment は、Pod が更新されている間に特定の数の Pod のみ停止状態になることを
@@ -801,7 +801,7 @@ ReplicaSet に追加されました。ロールアウトの処理では、新し
 これにより、不必要なロールアウトを実行することなく一時停止と再開を行う間に複数の
 修正を反映できます。
 
-- 例えば、作成直後の Deployment を考えます。  
+- 例えば、作成直後の Deployment を考えます。
   Deployment の詳細情報を確認します。
 
   ```shell

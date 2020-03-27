@@ -21,5 +21,5 @@ tags:
 モンには
 、{{< glossary_tooltip text="kubelet" term_id="kubelet" >}}、{{< glossary_tooltip text="kube-proxy" term_id="kube-proxy" >}}、
 および{{< glossary_tooltip term_id="docker" >}}など
-の{{< glossary_tooltip text="CRI" term_id="cri" >}}を実装するコンテナランタイム
+の{{< glossary_tooltip text="CRI" term_id="cri" >}}を実装するコンテナランタイ�
 が含まれます。

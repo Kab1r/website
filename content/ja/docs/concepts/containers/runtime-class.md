@@ -83,7 +83,7 @@ handler: myconfiguration # 対応するCRI設定
 ### 使用例
 
 一度 RuntimeClass がクラスターに対して設定されると、それを使用するのは非常に簡単
-です。PodSpec の`runtimeClassName`を指定してください。  
+です。PodSpec の`runtimeClassName`を指定してください。
 例えば
 
 ```yaml
@@ -127,7 +127,7 @@ Kubernetes のビルトインの dockershim CRI は、ランタイムハンド�
 [plugins.cri.containerd.runtimes.${HANDLER_NAME}]
 ```
 
-containerd の設定に関する詳細なドキュメントは下記を参照してください。  
+containerd の設定に関する詳細なドキュメントは下記を参照してください。
 https://github.com/containerd/cri/blob/master/docs/config.md
 
 #### [cri-o](https://cri-o.io/)
@@ -142,7 +142,7 @@ https://github.com/containerd/cri/blob/master/docs/config.md
   runtime_path = "${PATH_TO_BINARY}"
 ```
 
-cri-o の設定に関する詳細なドキュメントは下記を参照してください。  
+cri-o の設定に関する詳細なドキュメントは下記を参照してください。
 https://github.com/kubernetes-sigs/cri-o/blob/master/cmd/crio/config.go
 
 ### RutimeClass を α 版から β 版にアップグレードする

@@ -455,7 +455,7 @@ _GA_ 機能とは(_GA_ 機能は*安定版* 機能とも呼ばれます):
 - `DynamicProvisioningScheduling`: デフォルトのスケジューラーを拡張してボリュー
   ムトポロジーを認識し PV プロビジョニングを処理します。この機能は、v1.12
   の`VolumeScheduling`機能に完全に置き換えられました。
-- `DynamicVolumeProvisioning`(_非推奨_): Pod への永続ボリューム
+- `DynamicVolumeProvisioning`(_非推奨_): Pod への永続ボリュー�
   の[動的プロビジョニング](/docs/concepts/storage/dynamic-provisioning/)を有効に
   します。
 - `EnableAggregatedDiscoveryTimeout` (_非推奨_): 集約されたディスカバリーコール
@@ -522,7 +522,7 @@ _GA_ 機能とは(_GA_ 機能は*安定版* 機能とも呼ばれます):
   有効になっていて
   、[emptyDir ボリューム](/docs/concepts/storage/volumes/#emptydir)の backing
   filesystem がプロジェクトクォータをサポートし有効になっている場合、プロジェク
-  トクォータを使用して、パフォーマンスと精度を向上させるために、ファイルシステム
+  トクォータを使用して、パフォーマンスと精度を向上させるために、ファイルシステ�
   へのアクセスではな
   く[emptyDir ボリューム](/docs/concepts/storage/volumes/#emptydir)ストレージ消
   費を監視します。

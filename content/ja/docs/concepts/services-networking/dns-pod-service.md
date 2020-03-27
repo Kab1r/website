@@ -20,7 +20,7 @@ Kubernetes の DNS はクラスター上で DNS Pod と Service をスケジュ�
 
 クラスター内(DNS サーバーそれ自体も含む)で定義された全ての Service は DNS 名を割
 り当てられます。デフォルトでは、クライアント Pod の DNS サーチリストは Pod 自身
-のネームスペースと、クラスターのデフォルトドメインを含みます。  
+のネームスペースと、クラスターのデフォルトドメインを含みます。
 下記の例でこの仕組みを説明します。
 
 Kubernetes の`bar`というネームスペース内で`foo`という名前の Service があると仮定
@@ -31,7 +31,7 @@ Service を探すことができます。
 
 下記のセクションでは、サポートされているレコードタイプとレイアウトについて詳しく
 まとめています。うまく機能する他のレイアウト、名前、またはクエリーは、実装の詳細
-を考慮し、警告なしに変更されることがあります。  
+を考慮し、警告なしに変更されることがあります。
 最新の仕様に関する詳細は
 、[Kubernetes における DNS ベースの Service ディスカバリ](https://github.com/kubernetes/dns/blob/master/docs/specification.md)を
 参照ください。
@@ -57,10 +57,10 @@ SRV レコードは、通常の Service もしく
 一部である名前付きポート向けに作成されます。それぞれの名前付きポートに対して、そ
 の SRV レコード
 は`_my-port-name._my-port-protocol.my-svc.my-namespace.svc.cluster.local`という
-形式となります。  
+形式となります。
 通常の Service に対しては、この SRV レコード
 は`my-svc.my-namespace.svc.cluster.local`という形式のドメイン名とポート番号へ名
-前解決します。  
+前解決します。
 Headless Service に対しては、この SRV レコードは複数の結果を返します。それは
 Service の背後にある各 Pod の 1 つを返すのと
 、`auto-generated-name.my-svc.my-namespace.svc.cluster.local`という形式の Pod の
@@ -145,7 +145,7 @@ spec:
 もしその Pod と同じネームスペース内で、同じサブドメインを持った Headless Service
 が存在していた場合、クラスターの KubeDNS サーバーもまた、その Pod の完全修飾ドメ
 イン名(FQDN)に対する A レコードを返します。例えば、"`busybox-1`"というホスト名で
-、"`default-subdomain`"というサブドメインを持った Pod と、その Pod と同じネーム
+、"`default-subdomain`"というサブドメインを持った Pod と、その Pod と同じネー�
 スペース内にある"`default-subdomain`"という名前の Headless Service があると考え
 ると、その Pod は自身の完全修飾ドメイン名(FQDN)を
 "`busybox-1.default-subdomain.my-namespace.svc.cluster.local`"として扱います

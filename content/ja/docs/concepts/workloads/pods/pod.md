@@ -28,7 +28,7 @@ Kubernetes は、Docker だけでなくより多くのコンテナ・ランタ�
 すが、Docker は最もよく知られているランタイムであり、Docker の用語を使って Pod
 を説明することが可能です。
 
-Pod 内では、Linux namespace や cgroup などの Docker コンテナを分離する一連の要素
+Pod 内では、Linux namespace や cgroup などの Docker コンテナを分離する一連の要�
 と同じものがコンテキストとして共有されます。 Pod のコンテキスト内で、個々のアプ
 リケーションに更なる分離が適用されることがあります。
 

@@ -52,7 +52,7 @@ key-value ペアを保持している必要があります(複数のラベルを
 ることができます。また、`kubectl describe node "nodename"`から、その Node の全て
 のラベルを表示することもできます。
 
-### ステップ 2: Pod への nodeSelector フィールドの追加
+### ステップ 2: Pod への nodeSelector フィールドの追�
 
 該当の Pod の config ファイルに、nodeSelector のセクションを追加します: 例として
 以下の config ファイルを扱います:

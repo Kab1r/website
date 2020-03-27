@@ -38,7 +38,7 @@ DaemonSet のいくつかの典型的な使用例は以下の通りです。
 
 ### DaemonSet の作成
 
-ユーザーは YAML ファイル内で DaemonSet の設定を記述することができます。  
+ユーザーは YAML ファイル内で DaemonSet の設定を記述することができます。
 例えば、下記の`daemonset.yaml`ファイルでは`fluentd-elasticsearch`という Docker
 イメージを稼働させる DaemonSet の設定を記述します。
 
@@ -53,7 +53,7 @@ kubectl apply -f https://k8s.io/examples/controllers/daemonset.yaml
 ### 必須のフィールド
 
 他の全ての Kubernetes の設定と同様に、DaemonSet
-は`apiVersion`、`kind`と`metadata`フィールドが必須となります。  
+は`apiVersion`、`kind`と`metadata`フィールドが必須となります。
 設定ファイルの活用法に関する一般的な情報は
 、[アプリケーションのデプロイ](/ja/docs/tasks/run-application/run-stateless-application-deployment/)、[コンテナの設定](/ja/docs/tasks/)、[kubectl を用いたオブジェクトの管理](/ja/docs/concepts/overview/working-with-objects/object-management/)と
 いったドキュメントを参照ください。
@@ -122,7 +122,7 @@ Pod を作成すべきではありません。さもないと、DaemonSet
 もしユーザーが`.spec.template.spec.nodeSelector`を指定したとき、DaemonSet コント
 ローラーは、そ
 の[node selector](/ja/docs/concepts/configuration/assign-pod-node/)にマッチする
-Pod を Node 上に作成します。  
+Pod を Node 上に作成します。
 同様に、もし`.spec.template.spec.affinity`を指定したとき、DaemonSet コントローラ
 ーは[node affinity](/ja/docs/concepts/configuration/assign-pod-node/)マッチする
 Pod を Node 上に作成します。もしユーザーがどちらも指定しないとき、DaemonSet コン
@@ -137,7 +137,7 @@ Pod を Node 上に作成します。もしユーザーがどちらも指定し�
 DaemonSet は全ての利用可能な Node が単一の Pod のコピーを稼働させることを保証し
 ます。通常、Pod が稼働する Node は Kubernetes スケジューラーによって選択されます
 。しかし、DaemonSet の Pod は代わりに DaemonSet コントローラーによって作成され、
-スケジューリングされます。  
+スケジューリングされます。
 下記の問題について説明します:
 
 - 矛盾する Pod のふるまい: スケジューリングされるのを待っている通常の Pod は、作
@@ -175,7 +175,7 @@ DaemonSet の Pod に自動的に追加されます。デフォルトスケジ�
 
 DaemonSet の Pod
 は[Taints と Tolerations](/docs/concepts/configuration/taint-and-toleration)の設
-定を尊重します。  
+定を尊重します。
 下記の Tolerations は、関連する機能によって自動的に DaemonSet の Pod に追加され
 ます。
 
@@ -251,7 +251,7 @@ Node 上で直接起動することにより(例: `init`、`upstartd`、`systemd
 
 Kubelet によって監視されているディレクトリに対してファイルを書き込むことによって
 、Pod を作成することが可能です。これ
-は[静的 Pod](/docs/concepts/cluster-administration/static-pod/)と呼ばれます。  
+は[静的 Pod](/docs/concepts/cluster-administration/static-pod/)と呼ばれます。
 DaemonSet と違い、静的 Pod は kubectl や他の Kubernetes API クライアントで管理で
 きません。静的 Pod は ApiServer に依存しておらず、クラスターの自立起動時に最適で
 す。また、静的 Pod は将来的には廃止される予定です。

@@ -144,7 +144,7 @@ Kubernetes によって開始されたコンテナは、DNS 検索にこの DNS 
 
 ### クラスターレベルログ
 
-[クラスターレベルログ](/docs/concepts/cluster-administration/logging/)メカニズム
+[クラスターレベルログ](/docs/concepts/cluster-administration/logging/)メカニズ�
 は、コンテナのログを、検索／参照インターフェイスを備えた中央ログストアに保存しま
 す。
 

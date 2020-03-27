@@ -302,7 +302,7 @@ matchLabels:
 
 ReplicaSet とそれが所有する全ての Pod 削除したいときは
 、[`kubectl delete`](/docs/reference/generated/kubectl/kubectl-commands#delete)コ
-マンドを使ってください。  
+マンドを使ってください。
 [ガーベージコレクター](/docs/concepts/workloads/controllers/garbage-collection/)が
 デフォルトで自動的に全ての依存する Pod を削除します。
 
@@ -408,7 +408,7 @@ ReplicaSet は、Node 上のいくつかのエージェント(例えば、Kubele
 
 Pod を Pod それ自身で停止させたいような場合(例えば、バッチ用のジョブなど)は
 、ReplicaSet の代わり
-に[`Job`](/docs/concepts/jobs/run-to-completion-finite-workloads/)を使用してくだ
+に[`Job`](/docs/concepts/jobs/run-to-completion-finite-workloads/)を使用してく�
 さい。
 
 ### DaemonSet
@@ -426,7 +426,7 @@ ReplicaSet
 後継となるものです。この 2 つは、ReplicationController
 が[ラベルについてのユーザーガイド](/docs/concepts/overview/working-with-objects/labels/#label-selectors)に
 書かれているように、集合ベース(set-based)のセレクター要求をサポートしていないこ
-とを除いては、同じ目的を果たし、同じようにふるまいます。  
+とを除いては、同じ目的を果たし、同じようにふるまいます。
 このように、ReplicaSet は ReplicationController よりも好まれます。
 
 {{% /capture %}}

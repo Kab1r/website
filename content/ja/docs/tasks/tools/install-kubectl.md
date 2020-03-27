@@ -216,7 +216,7 @@ Windows で[Powershell Gallery](https://www.powershellgallery.com/)パッケー�
 ージャーを使用していれば、Powershell で kubectl をインストールおよびアップデート
 することもできます。
 
-1. インストールコマンドを実行してください（必ず`DownloadLocation`を指定してくだ
+1. インストールコマンドを実行してください（必ず`DownloadLocation`を指定してく�
    さい）:
 
    ```
@@ -376,7 +376,7 @@ bash-completion は多くのパッケージマネージャーから提供され�
 る`/usr/share/bash-completion/bash_completion`が作成されます。パッケージマネージ
 ャーによっては、このファイルを`~/.bashrc`にて手動で source する必要があります。
 
-これを調べるには、シェルをリロードしてから`type _init_completion`を実行してくだ
+これを調べるには、シェルをリロードしてから`type _init_completion`を実行してく�
 さい。コマンドが成功していればすでに設定済みです。そうでなければ、`~/.bashrc`に
 以下を追記してください:
 

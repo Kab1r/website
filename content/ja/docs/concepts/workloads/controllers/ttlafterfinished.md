@@ -12,7 +12,7 @@ weight: 65
 {{< feature-state for_k8s_version="v1.12" state="alpha" >}}
 
 TTL コントローラーは実行を終えたリソースオブジェクトのライフタイムを制御するため
-の TTL メカニズムを提供します。  
+の TTL メカニズムを提供します。
 TTL コントローラーは現
 在[Job](/docs/concepts/workloads/controllers/jobs-run-to-completion/)のみ扱って
 いて、将来的に Pod やカスタムリソースなど、他のリソースの実行終了を扱えるように
@@ -33,7 +33,7 @@ TTL コントローラーは現在 Job に対してのみサポートされて�
 の[例](/docs/concepts/workloads/controllers/jobs-run-to-completion/#clean-up-finished-jobs-automatically)の
 ように、Job の`.spec.ttlSecondsAfterFinished`フィールドを指定することにより、終
 了した Job(`完了した`もしくは`失敗した`)を自動的に削除するためにこの機能を使うこ
-とができます。  
+とができます。
 TTL コントローラーは、そのリソースが終了したあと指定した TTL の秒数後に削除でき
 るか推定します。言い換えると、その TTL が期限切れになると、TTL コントローラーが
 リソースをクリーンアップするときに、そのリソースに紐づく従属オブジェクトも一緒に

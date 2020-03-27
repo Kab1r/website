@@ -81,7 +81,7 @@ Kubernetes の[_Pod_](/ja/docs/concepts/workloads/pods/pod/) は、コンテナ�
 態を確認し、Pod のコンテナが停止した場合には再起動します。Deployment は Pod の作
 成やスケールを管理するために推奨される方法(手段)です。
 
-1. `kubectl create` コマンドを使用して Pod を管理する Deployment を作成してくだ
+1. `kubectl create` コマンドを使用して Pod を管理する Deployment を作成してく�
    さい。Pod は提供された Docker イメージを元にコンテナを実行します。
 
    ```shell
