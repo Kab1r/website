@@ -25,7 +25,7 @@ class RedisWQ(object):
         """The default connection parameters are: host='localhost', port=6379, db=0
 
         The work queue is identified by "name".  The library may create other
-        keys with "name" as a prefix. 
+        keys with "name" as a prefix.
         """
         self._db = redis.StrictRedis(**redis_kwargs)
         # The session ID will uniquely identify this "worker".
@@ -79,7 +79,7 @@ class RedisWQ(object):
         return self._db.exists(self._lease_key_prefix + self._itemkey(item))
 
     def lease(self, lease_secs=60, block=True, timeout=None):
-        """Begin working on an item the work queue. 
+        """Begin working on an item the work queue.
 
         Lease the item for lease_secs.  After that time, other
         workers may consider this client to have crashed or stalled
