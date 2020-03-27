@@ -6,48 +6,52 @@ weight: 70
 
 {{% capture overview %}}
 
-このタスクでは、フロントエンドとバックエンドのマイクロサービスを作成する方法を示します。
-バックエンドのマイクロサービスは挨拶です。
-フロントエンドとバックエンドは、Kubernetes {{< glossary_tooltip term_id="service" >}}オブジェクトを使用して接続されます。
+このタスクでは、フロントエンドとバックエンドのマイクロサービスを作成する方法を示
+します。バックエンドのマイクロサービスは挨拶です。フロントエンドとバックエンドは
+、Kubernetes {{< glossary_tooltip term_id="service" >}}オブジェクトを使用して接
+続されます。
 
 {{% /capture %}}
-
 
 {{% capture objectives %}}
 
-* {{< glossary_tooltip term_id="deployment" >}}オブジェクトを使用してマイクロサービスを作成および実行します。
-* フロントエンドを経由してトラフィックをバックエンドにルーティングします。
-* Serviceオブジェクトを使用して、フロントエンドアプリケーションをバックエンドアプリケーションに接続します。
+- {{< glossary_tooltip term_id="deployment" >}}オブジェクトを使用してマイクロサ
+  ービスを作成および実行します。
+- フロントエンドを経由してトラフィックをバックエンドにルーティングします。
+- Service オブジェクトを使用して、フロントエンドアプリケーションをバックエンドア
+  プリケーションに接続します。
 
 {{% /capture %}}
-
 
 {{% capture prerequisites %}}
 
-* {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+- {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
 
-* このタスクでは[Serviceで外部ロードバランサー](/docs/tasks/access-application-cluster/create-external-load-balancer/)を使用しますが、外部ロードバランサーの使用がサポートされている環境である必要があります。
-  ご使用の環境がこれをサポートしていない場合は、代わりにタイプ[NodePort](/ja/docs/concepts/services-networking/service/#nodeport)のServiceを使用できます。
+- このタスクで
+  は[Service で外部ロードバランサー](/docs/tasks/access-application-cluster/create-external-load-balancer/)を
+  使用しますが、外部ロードバランサーの使用がサポートされている環境である必要があ
+  ります。ご使用の環境がこれをサポートしていない場合は、代わりにタイ
+  プ[NodePort](/ja/docs/concepts/services-networking/service/#nodeport)の
+  Service を使用できます。
 
 {{% /capture %}}
 
-
 {{% capture lessoncontent %}}
 
-### Deploymentを使用したバックエンドの作成
+### Deployment を使用したバックエンドの作成
 
-バックエンドは、単純な挨拶マイクロサービスです。
-バックエンドのDeploymentの構成ファイルは次のとおりです:
+バックエンドは、単純な挨拶マイクロサービスです。バックエンドの Deployment の構成
+ファイルは次のとおりです:
 
 {{< codenew file="service/access/hello.yaml" >}}
 
-バックエンドのDeploymentを作成します:
+バックエンドの Deployment を作成します:
 
 ```shell
 kubectl apply -f https://k8s.io/examples/service/access/hello.yaml
 ```
 
-バックエンドのDeploymentに関する情報を表示します:
+バックエンドの Deployment に関する情報を表示します:
 
 ```shell
 kubectl describe deployment hello
@@ -90,43 +94,49 @@ Events:
 ...
 ```
 
-### バックエンドServiceオブジェクトの作成
+### バックエンド Service オブジェクトの作成
 
-フロントエンドをバックエンドに接続する鍵は、バックエンドServiceです。
-Serviceは、バックエンドマイクロサービスに常に到達できるように、永続的なIPアドレスとDNS名のエントリを作成します。
-Serviceは{{< glossary_tooltip text="セレクター" term_id="selector" >}}を使用して、トラフィックをルーティングするPodを見つけます。
+フロントエンドをバックエンドに接続する鍵は、バックエンド Service です。 Service
+は、バックエンドマイクロサービスに常に到達できるように、永続的な IP アドレスと
+DNS 名のエントリを作成します。 Service
+は{{< glossary_tooltip text="セレクター" term_id="selector" >}}を使用して、トラ
+フィックをルーティングする Pod を見つけます。
 
-まず、Service構成ファイルを調べます:
+まず、Service 構成ファイルを調べます:
 
 {{< codenew file="service/access/hello-service.yaml" >}}
 
-設定ファイルで、Serviceが`app：hello`および`tier：backend`というラベルを持つPodにトラフィックをルーティングしていることがわかります。
+設定ファイルで、Service が`app：hello`および`tier：backend`というラベルを持つ
+Pod にトラフィックをルーティングしていることがわかります。
 
-`hello` Serviceを作成します:
+`hello` Service を作成します:
 
 ```shell
 kubectl apply -f https://k8s.io/examples/service/access/hello-service.yaml
 ```
 
-この時点で、バックエンドのDeploymentが実行され、そちらにトラフィックをルーティングできるServiceがあります。
+この時点で、バックエンドの Deployment が実行され、そちらにトラフィックをルーティ
+ングできる Service があります。
 
 ### フロントエンドの作成
 
-バックエンドができたので、バックエンドに接続するフロントエンドを作成できます。
-フロントエンドは、バックエンドServiceに指定されたDNS名を使用して、バックエンドワーカーPodに接続します。
-DNS名は`hello`です。これは、前のサービス設定ファイルの`name`フィールドの値です。
+バックエンドができたので、バックエンドに接続するフロントエンドを作成できます。フ
+ロントエンドは、バックエンド Service に指定された DNS 名を使用して、バックエンド
+ワーカー Pod に接続します。 DNS 名は`hello`です。これは、前のサービス設定ファイ
+ルの`name`フィールドの値です。
 
-フロントエンドDeploymentのPodは、helloバックエンドServiceを見つけるように構成されたnginxイメージを実行します。
-これはnginx設定ファイルです:
+フロントエンド Deployment の Pod は、hello バックエンド Service を見つけるように
+構成された nginx イメージを実行します。これは nginx 設定ファイルです:
 
 {{< codenew file="service/access/frontend.conf" >}}
 
-バックエンドと同様に、フロントエンドにはDeploymentとServiceがあります。
-Serviceの設定には`type：LoadBalancer`があります。これは、Serviceがクラウドプロバイダーのデフォルトのロードバランサーを使用することを意味します。
+バックエンドと同様に、フロントエンドには Deployment と Service があります。
+Service の設定には`type：LoadBalancer`があります。これは、Service がクラウドプロ
+バイダーのデフォルトのロードバランサーを使用することを意味します。
 
 {{< codenew file="service/access/frontend.yaml" >}}
 
-フロントエンドのDeploymentとServiceを作成します:
+フロントエンドの Deployment と Service を作成します:
 
 ```shell
 kubectl apply -f https://k8s.io/examples/service/access/frontend.yaml
@@ -139,40 +149,44 @@ deployment.apps/frontend created
 service/frontend created
 ```
 
-{{< note >}}
-nginxの構成は、[コンテナイメージ](/examples/service/access/Dockerfile)に焼き付けられます。
-これを行うためのより良い方法は、[ConfigMap](/docs/tasks/configure-pod-container/configure-pod-configmap/)を使用して、構成をより簡単に変更できるようにすることです。
-{{< /note >}}
+{{< note >}} nginx の構成は
+、[コンテナイメージ](/examples/service/access/Dockerfile)に焼き付けられます。こ
+れを行うためのより良い方法は
+、[ConfigMap](/docs/tasks/configure-pod-container/configure-pod-configmap/)を使
+用して、構成をより簡単に変更できるようにすることです。 {{< /note >}}
 
-### フロントエンドServiceと対話
+### フロントエンド Service と対話
 
-LoadBalancerタイプのServiceを作成したら、このコマンドを使用して外部IPを見つけることができます:
+LoadBalancer タイプの Service を作成したら、このコマンドを使用して外部 IP を見つ
+けることができます:
 
 ```shell
 kubectl get service frontend --watch
 ```
 
-これにより`frontend` Serviceの設定が表示され、変更が監視されます。
-最初、外部IPは`<pending>`としてリストされます:
+これにより`frontend` Service の設定が表示され、変更が監視されます。最初、外部 IP
+は`<pending>`としてリストされます:
 
 ```
 NAME       TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)  AGE
 frontend   LoadBalancer   10.51.252.116   <pending>     80/TCP   10s
 ```
 
-ただし、外部IPがプロビジョニングされるとすぐに、`EXTERNAL-IP`という見出しの下に新しいIPが含まれるように構成が更新されます:
+ただし、外部 IP がプロビジョニングされるとすぐに、`EXTERNAL-IP`という見出しの下
+に新しい IP が含まれるように構成が更新されます:
 
 ```
 NAME       TYPE           CLUSTER-IP      EXTERNAL-IP        PORT(S)  AGE
 frontend   LoadBalancer   10.51.252.116   XXX.XXX.XXX.XXX    80/TCP   1m
 ```
 
-このIPを使用して、クラスターの外部から`frontend` Serviceとやり取りできるようになりました。
+この IP を使用して、クラスターの外部から`frontend` Service とやり取りできるよう
+になりました。
 
 ### フロントエンドを介するトラフィック送信
 
-フロントエンドとバックエンドが接続されました。
-フロントエンドServiceの外部IPに対してcurlコマンドを使用して、エンドポイントにアクセスできます。
+フロントエンドとバックエンドが接続されました。フロントエンド Service の外部 IP
+に対して curl コマンドを使用して、エンドポイントにアクセスできます。
 
 ```shell
 curl http://${EXTERNAL_IP} # これを前に見たEXTERNAL-IPに置き換えます
@@ -181,17 +195,15 @@ curl http://${EXTERNAL_IP} # これを前に見たEXTERNAL-IPに置き換えま�
 出力には、バックエンドによって生成されたメッセージが表示されます:
 
 ```json
-{"message":"Hello"}
+{ "message": "Hello" }
 ```
 
 {{% /capture %}}
 
-
 {{% capture whatsnext %}}
 
-* [Service](/ja/docs/concepts/services-networking/service/)の詳細
-* [ConfigMap](/docs/tasks/configure-pod-container/configure-pod-configmap/)の詳細
+- [Service](/ja/docs/concepts/services-networking/service/)の詳細
+- [ConfigMap](/docs/tasks/configure-pod-container/configure-pod-configmap/)の詳
+  細
 
 {{% /capture %}}
-
-

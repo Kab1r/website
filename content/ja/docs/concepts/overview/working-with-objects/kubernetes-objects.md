@@ -2,45 +2,81 @@
 title: Kubernetesオブジェクトを理解する
 content_template: templates/concept
 weight: 10
-card: 
+card:
   name: concepts
   weight: 40
 ---
 
-{{% capture overview %}}
-このページでは、KubernetesオブジェクトがKubernetes APIでどのように表現されているか、またそれらを`.yaml`フォーマットでどのように表現するかを説明します。
-{{% /capture %}}
+{{% capture overview %}} このページでは、Kubernetes オブジェクトが Kubernetes
+API でどのように表現されているか、またそれらを`.yaml`フォーマットでどのように表
+現するかを説明します。 {{% /capture %}}
 
 {{% capture body %}}
-## Kubernetesオブジェクトを理解する
 
-*Kubernetesオブジェクト* は、Kubernetes上で永続的なエンティティです。Kubernetesはこれらのエンティティを使い、クラスターの状態を表現します。具体的に言うと、下記のような内容が表現出来ます:
+## Kubernetes オブジェクトを理解する
 
-* どのようなコンテナ化されたアプリケーションが稼働しているか（またそれらはどのノード上で動いているか）
-* それらのアプリケーションから利用可能なリソース
-* アプリケーションがどのように振る舞うかのポリシー、例えば再起動、アップグレード、耐障害性ポリシーなど
+_Kubernetes オブジェクト_ は、Kubernetes 上で永続的なエンティティです
+。Kubernetes はこれらのエンティティを使い、クラスターの状態を表現します。具体的
+に言うと、下記のような内容が表現出来ます:
 
-Kubernetesオブジェクトは"意図の記録"です。一度オブジェクトを作成すると、Kubernetesは常にそのオブジェクトが存在し続けるように動きます。オブジェクトを作成することで、Kubernetesに対し効果的にあなたのクラスターのワークロードがこのようになっていて欲しいと伝えているのです。これが、あなたのクラスターの**望ましい状態**です。
+- どのようなコンテナ化されたアプリケーションが稼働しているか（またそれらはどのノ
+  ード上で動いているか）
+- それらのアプリケーションから利用可能なリソース
+- アプリケーションがどのように振る舞うかのポリシー、例えば再起動、アップグレード
+  、耐障害性ポリシーなど
 
-Kubernetesオブジェクトを操作するには、作成、変更、または削除に関わらず[Kubernetes API](/docs/concepts/overview/kubernetes-api/)を使う必要があるでしょう。例えば`kubectl`コマンドラインインターフェースを使った場合、このCLIが処理に必要なKubernetes API命令を、あなたに代わり発行します。あなたのプログラムから[クライアントライブラリ](/docs/reference/using-api/client-libraries/)を利用し、直接Kubernetes APIを利用することも可能です。
+Kubernetes オブジェクトは"意図の記録"です。一度オブジェクトを作成すると
+、Kubernetes は常にそのオブジェクトが存在し続けるように動きます。オブジェクトを
+作成することで、Kubernetes に対し効果的にあなたのクラスターのワークロードがこの
+ようになっていて欲しいと伝えているのです。これが、あなたのクラスターの**望ましい
+状態**です。
 
-### オブジェクトのspec（仕様）とstatus（状態）
+Kubernetes オブジェクトを操作するには、作成、変更、または削除に関わら
+ず[Kubernetes API](/docs/concepts/overview/kubernetes-api/)を使う必要があるでし
+ょう。例えば`kubectl`コマンドラインインターフェースを使った場合、この CLI が処理
+に必要な Kubernetes API 命令を、あなたに代わり発行します。あなたのプログラムか
+ら[クライアントライブラリ](/docs/reference/using-api/client-libraries/)を利用し
+、直接 Kubernetes API を利用することも可能です。
 
-全てのKubernetesオブジェクトは、オブジェクトの設定を管理する２つの入れ子になったオブジェクトのフィールドを持っています。それは *spec* オブジェクトと *status* オブジェクトです。*spec* オブジェクトはあなたが指定しなければならない項目で、オブジェクトの *望ましい状態* を記述し、オブジェクトに持たせたい特徴を表現します。*status* オブジェクトはオブジェクトの *現在の状態* を示し、その情報はKubernetesから与えられ、更新されます。常に、Kubernetesコントロールプレーンは、あなたから指定された望ましい状態と現在の状態が一致するよう積極的に管理をします。
+### オブジェクトの spec（仕様）と status（状態）
 
-例えば、KubernetesのDeploymentはクラスター上で稼働するアプリケーションを表現するオブジェクトです。Deploymentを作成するとき、アプリケーションの複製を３つ稼働させるようDeploymentのspecで指定するかもしれません。KubernetesはDeploymentのspecを読み取り、指定されたアプリケーションを３つ起動し、現在の状態がspecに一致するようにします。もしこれらのインスタンスでどれかが落ちた場合（statusが変わる）、Kubernetesはspecと、statusの違いに反応し、修正しようとします。この場合は、落ちたインスタンスの代わりのインスタンスを立ち上げます。
+全ての Kubernetes オブジェクトは、オブジェクトの設定を管理する２つの入れ子になっ
+たオブジェクトのフィールドを持っています。それは _spec_ オブジェクトと _status_
+オブジェクトです。_spec_ オブジェクトはあなたが指定しなければならない項目で、オ
+ブジェクトの _望ましい状態_ を記述し、オブジェクトに持たせたい特徴を表現します
+。_status_ オブジェクトはオブジェクトの _現在の状態_ を示し、その情報は
+Kubernetes から与えられ、更新されます。常に、Kubernetes コントロールプレーンは、
+あなたから指定された望ましい状態と現在の状態が一致するよう積極的に管理をします。
 
-spec、status、metadataに関するさらなる情報は、[Kubernetes API Conventions](https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md)をご確認ください。
+例えば、Kubernetes の Deployment はクラスター上で稼働するアプリケーションを表現
+するオブジェクトです。Deployment を作成するとき、アプリケーションの複製を３つ稼
+働させるよう Deployment の spec で指定するかもしれません。Kubernetes は
+Deployment の spec を読み取り、指定されたアプリケーションを３つ起動し、現在の状
+態が spec に一致するようにします。もしこれらのインスタンスでどれかが落ちた場合
+（status が変わる）、Kubernetes は spec と、status の違いに反応し、修正しようと
+します。この場合は、落ちたインスタンスの代わりのインスタンスを立ち上げます。
 
-### Kubernetesオブジェクトを記述する
+spec、status、metadata に関するさらなる情報は
+、[Kubernetes API Conventions](https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md)を
+ご確認ください。
 
-Kubernetesでオブジェクトを作成する場合、オブジェクトの基本的な情報（例えば名前）と共に、望ましい状態を記述したオブジェクトのspecを渡さなければいけません。KubernetesAPIを利用しオブジェクトを作成する場合（直接APIを呼ぶか、`kubectl`を利用するかに関わらず）、APIリクエストはそれらの情報をJSON形式でリクエストのBody部に含んでいなければなりません。
+### Kubernetes オブジェクトを記述する
 
-ここで、KubernetesのDeploymentに必要なフィールドとオブジェクトのspecを記載した`.yaml`ファイルの例を示します:
+Kubernetes でオブジェクトを作成する場合、オブジェクトの基本的な情報（例えば名前
+）と共に、望ましい状態を記述したオブジェクトの spec を渡さなければいけません
+。KubernetesAPI を利用しオブジェクトを作成する場合（直接 API を呼ぶか
+、`kubectl`を利用するかに関わらず）、API リクエストはそれらの情報を JSON 形式で
+リクエストの Body 部に含んでいなければなりません。
+
+ここで、Kubernetes の Deployment に必要なフィールドとオブジェクトの spec を記載
+した`.yaml`ファイルの例を示します:
 
 {{< codenew file="application/deployment.yaml" >}}
 
-上に示した`.yaml`ファイルを利用してDeploymentを作成するには、`kubectl`コマンドラインインターフェースに含まれている[`kubectl apply`](/docs/reference/generated/kubectl/kubectl-commands#apply)コマンドに`.yaml`ファイルを引数に指定し、実行します。ここで例を示します:
+上に示した`.yaml`ファイルを利用して Deployment を作成するには、`kubectl`コマンド
+ラインインターフェースに含まれてい
+る[`kubectl apply`](/docs/reference/generated/kubectl/kubectl-commands#apply)コ
+マンドに`.yaml`ファイルを引数に指定し、実行します。ここで例を示します:
 
 ```shell
 kubectl apply -f https://k8s.io/examples/application/deployment.yaml --record
@@ -54,19 +90,31 @@ deployment.apps/nginx-deployment created
 
 ### 必須フィールド
 
-Kubernetesオブジェクトを`.yaml`ファイルに記載して作成する場合、下記に示すフィールドに値をセットしておく必要があります:
+Kubernetes オブジェクトを`.yaml`ファイルに記載して作成する場合、下記に示すフィー
+ルドに値をセットしておく必要があります:
 
-* `apiVersion` - どのバージョンのKubernetesAPIを利用してオブジェクトを作成するか
-* `kind` - どの種類のオブジェクトを作成するか
-* `metadata` - オブジェクトを一意に特定するための情報、`name`、string、UID、また任意の`namespace`が該当する
+- `apiVersion` - どのバージョンの KubernetesAPI を利用してオブジェクトを作成する
+  か
+- `kind` - どの種類のオブジェクトを作成するか
+- `metadata` - オブジェクトを一意に特定するための情報、`name`、string、UID、また
+  任意の`namespace`が該当する
 
-またオブジェクトの`spec`の値も指定する必要があります。`spec`の正確なフォーマットは、Kubernetesオブジェクトごとに異なり、オブジェクトごとに特有な入れ子のフィールドを持っています。[Kubernetes API リファレンス](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)が、Kubernetesで作成出来る全てのオブジェクトに関するspecのフォーマットを探すのに役立ちます。
-例えば、`Pod`オブジェクトに関する`spec`のフォーマットは[こちら](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core)を、また`Deployment`オブジェクトに関する`spec`のフォーマットは[こちら](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#deploymentspec-v1-apps)をご確認ください。
+またオブジェクトの`spec`の値も指定する必要があります。`spec`の正確なフォーマット
+は、Kubernetes オブジェクトごとに異なり、オブジェクトごとに特有な入れ子のフィー
+ルドを持っています。[Kubernetes API
+リファレンス](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
+が、Kubernetes で作成出来る全てのオブジェクトに関する spec のフォーマットを探す
+のに役立ちます。例えば、`Pod`オブジェクトに関する`spec`のフォーマット
+は[こちら](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core)
+を、また`Deployment`オブジェクトに関する`spec`のフォーマット
+は[こちら](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#deploymentspec-v1-apps)
+をご確認ください。
 
 {{% /capture %}}
 
 {{% capture whatsnext %}}
 
-* 最も重要、かつ基本的なKubernetesオブジェクト群を学びましょう、例えば、[Pod](/ja/docs/concepts/workloads/pods/pod-overview/)です。
+- 最も重要、かつ基本的な Kubernetes オブジェクト群を学びましょう、例えば
+  、[Pod](/ja/docs/concepts/workloads/pods/pod-overview/)です。
 
 {{% /capture %}}

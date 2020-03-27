@@ -8,13 +8,17 @@ short_description: >
 
 aka:
 tags:
-- fundamental
-- core-object
+  - fundamental
+  - core-object
 ---
-{{< glossary_tooltip text="Pods" term_id="pod" >}}の集合で実行されているアプリケーションをネットワークサービスとして公開する抽象的な方法。
+
+{{< glossary_tooltip text="Pods" term_id="pod" >}}の集合で実行されているアプリケ
+ーションをネットワークサービスとして公開する抽象的な方法。
 
 <!--more-->
 
-Serviceが対象とするPodの集合は、(通常){{< glossary_tooltip text="セレクター" term_id="selector" >}}によって決定されます。
-Podを追加または削除するとセレクターにマッチしているPodの集合は変更されます。
-Serviceは、ネットワークトラフィックが現在そのワークロードを処理するPodの集合に向かうことを保証します。
+Service が対象とする Pod の集合は、(通常
+){{< glossary_tooltip text="セレクター" term_id="selector" >}}によって決定されま
+す。 Pod を追加または削除するとセレクターにマッチしている Pod の集合は変更されま
+す。 Service は、ネットワークトラフィックが現在そのワークロードを処理する Pod の
+集合に向かうことを保証します。

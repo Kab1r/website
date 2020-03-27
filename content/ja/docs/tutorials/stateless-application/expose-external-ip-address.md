@@ -6,36 +6,40 @@ weight: 10
 
 {{% capture overview %}}
 
-このページでは、外部IPアドレスを公開するKubernetesのServiceオブジェクトを作成する方法を示します。
+このページでは、外部 IP アドレスを公開する Kubernetes の Service オブジェクトを
+作成する方法を示します。
 
 {{% /capture %}}
-
 
 {{% capture prerequisites %}}
 
- * [kubectl](/ja/docs/tasks/tools/install-kubectl/)をインストールしてください。
+- [kubectl](/ja/docs/tasks/tools/install-kubectl/)をインストールしてください。
 
- * Kubernetesクラスターを作成する際に、Google Kubernetes EngineやAmazon Web Servicesのようなクラウドプロバイダーを使用します。このチュートリアルでは、クラウドプロバイダーを必要とする[外部ロードバランサー](/docs/tasks/access-application-cluster/create-external-load-balancer/)を作成します。
+- Kubernetes クラスターを作成する際に、Google Kubernetes Engine や Amazon Web
+  Services のようなクラウドプロバイダーを使用します。このチュートリアルでは、ク
+  ラウドプロバイダーを必要とす
+  る[外部ロードバランサー](/docs/tasks/access-application-cluster/create-external-load-balancer/)を
+  作成します。
 
- * Kubernetes APIサーバーと通信するために、`kubectl`を設定してください。手順については、各クラウドプロバイダーのドキュメントを参照してください。
+- Kubernetes API サーバーと通信するために、`kubectl`を設定してください。手順につ
+  いては、各クラウドプロバイダーのドキュメントを参照してください。
 
 {{% /capture %}}
-
 
 {{% capture objectives %}}
 
-* 5つのインスタンスで実際のアプリケーションを起動します。
-* 外部IPアドレスを公開するServiceオブジェクトを作成します。
-* 起動中のアプリケーションにアクセスするためにServiceオブジェクトを使用します。
+- 5 つのインスタンスで実際のアプリケーションを起動します。
+- 外部 IP アドレスを公開する Service オブジェクトを作成します。
+- 起動中のアプリケーションにアクセスするために Service オブジェクトを使用します
+  。
 
 {{% /capture %}}
 
-
 {{% capture lessoncontent %}}
 
-## 5つのPodで起動しているアプリケーションへのServiceの作成
+## 5 つの Pod で起動しているアプリケーションへの Service の作成
 
-1. クラスターにてHello Worldアプリケーションを実行してください。
+1. クラスターにて Hello World アプリケーションを実行してください。
 
 {{< codenew file="service/load-balancer-example.yaml" >}}
 
@@ -43,24 +47,28 @@ weight: 10
 kubectl apply -f https://k8s.io/examples/service/load-balancer-example.yaml
 ```
 
+上記のコマンドにより
+、[Deployment](/ja/docs/concepts/workloads/controllers/deployment/)オブジェクト
+を作成し、[ReplicaSet](/ja/docs/concepts/workloads/controllers/replicaset/)オブ
+ジェクトを関連づけます。ReplicaSet には 5 つ
+の[Pod](/ja/docs/concepts/workloads/pods/pod/)があり、それぞれ Hello World アプ
+リケーションが起動しています。
 
-上記のコマンドにより、[Deployment](/ja/docs/concepts/workloads/controllers/deployment/)オブジェクトを作成し、[ReplicaSet](/ja/docs/concepts/workloads/controllers/replicaset/)オブジェクトを関連づけます。ReplicaSetには5つの[Pod](/ja/docs/concepts/workloads/pods/pod/)があり、それぞれHello Worldアプリケーションが起動しています。
-
-1. Deploymentに関する情報を表示します:
+1.  Deployment に関する情報を表示します:
 
         kubectl get deployments hello-world
         kubectl describe deployments hello-world
 
-1. ReplicaSetオブジェクトに関する情報を表示します:
+1.  ReplicaSet オブジェクトに関する情報を表示します:
 
         kubectl get replicasets
         kubectl describe replicasets
 
-1. Deploymentを公開するServiceオブジェクトを作成します。
+1.  Deployment を公開する Service オブジェクトを作成します。
 
         kubectl expose deployment hello-world --type=LoadBalancer --name=my-service
 
-1. Serviceに関する情報を表示します:
+1.  Service に関する情報を表示します:
 
         kubectl get services my-service
 
@@ -69,9 +77,10 @@ kubectl apply -f https://k8s.io/examples/service/load-balancer-example.yaml
         NAME         TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)    AGE
         my-service   LoadBalancer   10.3.245.137   104.198.205.71   8080/TCP   54s
 
-    注意: 外部IPアドレスが\<pending\>と表示されている場合は、しばらく待ってから同じコマンドを実行してください。
+    注意: 外部 IP アドレスが\<pending\>と表示されている場合は、しばらく待ってか
+    ら同じコマンドを実行してください。
 
-1. Serviceに関する詳細な情報を表示します:
+1.  Service に関する詳細な情報を表示します:
 
         kubectl describe services my-service
 
@@ -91,56 +100,57 @@ kubectl apply -f https://k8s.io/examples/service/load-balancer-example.yaml
         Session Affinity:   None
         Events:         <none>
 
-    Serviceによって公開された外部IPアドレス(`LoadBalancer Ingress`)を記録しておいてください。
-    この例では、外部IPアドレスは104.198.205.71です。
-    また、`Port`および`NodePort`の値も控えてください。
-    この例では、`Port`は8080、`NodePort`は32377です。
+    Service によって公開された外部 IP アドレス(`LoadBalancer Ingress`)を記録して
+    おいてください。この例では、外部 IP アドレスは 104.198.205.71 です。また
+    、`Port`および`NodePort`の値も控えてください。この例では、`Port`は
+    8080、`NodePort`は 32377 です。
 
-1. 先ほどの出力にて、Serviceにはいくつかのエンドポイントがあることを確認できます: 10.0.0.6:8080、
-   10.0.1.6:8080、10.0.1.7:8080、その他2つです。
-   これらはHello Worldアプリケーションが動作しているPodの内部IPアドレスです。
-   これらのPodのアドレスを確認するには、次のコマンドを実行します:
+1.  先ほどの出力にて、Service にはいくつかのエンドポイントがあることを確認できま
+    す: 10.0.0.6:8080、 10.0.1.6:8080、10.0.1.7:8080、その他 2 つです。これらは
+    Hello World アプリケーションが動作している Pod の内部 IP アドレスです。これ
+    らの Pod のアドレスを確認するには、次のコマンドを実行します:
 
-        kubectl get pods --output=wide
+         kubectl get pods --output=wide
 
     出力は次のようになります:
 
-        NAME                         ...  IP         NODE
-        hello-world-2895499144-1jaz9 ...  10.0.1.6   gke-cluster-1-default-pool-e0b8d269-1afc
-        hello-world-2895499144-2e5uh ...  10.0.1.8   gke-cluster-1-default-pool-e0b8d269-1afc
-        hello-world-2895499144-9m4h1 ...  10.0.0.6   gke-cluster-1-default-pool-e0b8d269-5v7a
-        hello-world-2895499144-o4z13 ...  10.0.1.7   gke-cluster-1-default-pool-e0b8d269-1afc
-        hello-world-2895499144-segjf ...  10.0.2.5   gke-cluster-1-default-pool-e0b8d269-cpuc
+         NAME                         ...  IP         NODE
+         hello-world-2895499144-1jaz9 ...  10.0.1.6   gke-cluster-1-default-pool-e0b8d269-1afc
+         hello-world-2895499144-2e5uh ...  10.0.1.8   gke-cluster-1-default-pool-e0b8d269-1afc
+         hello-world-2895499144-9m4h1 ...  10.0.0.6   gke-cluster-1-default-pool-e0b8d269-5v7a
+         hello-world-2895499144-o4z13 ...  10.0.1.7   gke-cluster-1-default-pool-e0b8d269-1afc
+         hello-world-2895499144-segjf ...  10.0.2.5   gke-cluster-1-default-pool-e0b8d269-cpuc
 
-1. Hello Worldアプリケーションにアクセスするために、外部IPアドレス(`LoadBalancer Ingress`)を使用します:
+1.  Hello World アプリケーションにアクセスするために、外部 IP アドレス
+    (`LoadBalancer Ingress`)を使用します:
 
         curl http://<external-ip>:<port>
 
-    ここで、`<external-ip>`はServiceの外部IPアドレス(`LoadBalancer Ingress`)で、
-    `<port>`はServiceの詳細出力における`Port`です。minikubeを使用している場合、`minikube service my-service`を実行することでHello Worldアプリケーションをブラウザで自動的に
-    開かれます。
+    ここで、`<external-ip>`は Service の外部 IP アドレス(`LoadBalancer Ingress`)
+    で、 `<port>`は Service の詳細出力における`Port`です。minikube を使用してい
+    る場合、`minikube service my-service`を実行することで Hello World アプリケー
+    ションをブラウザで自動的に開かれます。
 
-    正常なリクエストに対するレスポンスは、helloメッセージです:
+    正常なリクエストに対するレスポンスは、hello メッセージです:
 
         Hello Kubernetes!
 
 {{% /capture %}}
 
-
 {{% capture cleanup %}}
 
-Serviceを削除する場合、次のコマンドを実行します:
+Service を削除する場合、次のコマンドを実行します:
 
         kubectl delete services my-service
 
-Deployment、ReplicaSet、およびHello Worldアプリケーションが動作しているPodを削除する場合、次のコマンドを実行します:
+Deployment、ReplicaSet、および Hello World アプリケーションが動作している Pod を
+削除する場合、次のコマンドを実行します:
 
         kubectl delete deployment hello-world
 
 {{% /capture %}}
 
-
 {{% capture whatsnext %}}
 
-[connecting applications with services](/docs/concepts/services-networking/connect-applications-service/)にて詳細を学ぶことができます。
-{{% /capture %}}
+[connecting applications with services](/docs/concepts/services-networking/connect-applications-service/)に
+て詳細を学ぶことができます。 {{% /capture %}}

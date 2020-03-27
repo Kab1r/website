@@ -4,69 +4,79 @@ content_template: templates/task
 weight: 70
 ---
 
-{{% capture overview %}}
-このページでは、[`projected`](/docs/concepts/storage/volumes/#projected)（投影）ボリュームを使用して、既存の複数のボリュームソースを同一ディレクトリ内にマウントする方法を説明します。
-現在、`secret`、`configMap`、`downwardAPI`および`serviceAccountToken`ボリュームを投影できます。
+{{% capture overview %}} このページでは
+、[`projected`](/docs/concepts/storage/volumes/#projected)（投影）ボリュームを使
+用して、既存の複数のボリュームソースを同一ディレクトリ内にマウントする方法を説明
+します。現在、`secret`、`configMap`、`downwardAPI`および`serviceAccountToken`ボ
+リュームを投影できます。
 
-{{< note >}}
-`serviceAccountToken`はボリュームタイプではありません。
-{{< /note >}}
-{{% /capture %}}
+{{< note >}} `serviceAccountToken`はボリュームタイプではありません。
+{{< /note >}} {{% /capture %}}
 
-{{% capture prerequisites %}}
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
-{{% /capture %}}
+{{% capture prerequisites %}} {{< include "task-tutorial-prereqs.md" >}}
+{{< version-check >}} {{% /capture %}}
 
 {{% capture steps %}}
-## ProjectedボリュームをPodに設定する
 
-この課題では、ローカルファイルからユーザーネームおよびパスワードの{{< glossary_tooltip text="Secret" term_id="secret" >}}を作成します。
-次に、単一のコンテナを実行するPodを作成し、[`projected`](/docs/concepts/storage/volumes/#projected)ボリュームを使用してそれぞれのSecretを同じ共有ディレクトリにマウントします。
+## Projected ボリュームを Pod に設定する
 
-以下にPodの設定ファイルを示します:
+この課題では、ローカルファイルからユーザーネームおよびパスワード
+の{{< glossary_tooltip text="Secret" term_id="secret" >}}を作成します。次に、単
+一のコンテナを実行する Pod を作成し
+、[`projected`](/docs/concepts/storage/volumes/#projected)ボリュームを使用してそ
+れぞれの Secret を同じ共有ディレクトリにマウントします。
+
+以下に Pod の設定ファイルを示します:
 
 {{< codenew file="pods/storage/projected.yaml" >}}
 
-1. Secretを作成します:
+1. Secret を作成します:
 
-    ```shell
-    # ユーザーネームおよびパスワードを含むファイルを作成します:
-    echo -n "admin" > ./username.txt
-    echo -n "1f2d1e2e67df" > ./password.txt
+   ```shell
+   # ユーザーネームおよびパスワードを含むファイルを作成します:
+   echo -n "admin" > ./username.txt
+   echo -n "1f2d1e2e67df" > ./password.txt
 
-    # これらのファイルからSecretを作成します:
-    kubectl create secret generic user --from-file=./username.txt
-    kubectl create secret generic pass --from-file=./password.txt
-    ```
-1. Podを作成します:
+   # これらのファイルからSecretを作成します:
+   kubectl create secret generic user --from-file=./username.txt
+   kubectl create secret generic pass --from-file=./password.txt
+   ```
 
-    ```shell
-    kubectl apply -f https://k8s.io/examples/pods/storage/projected.yaml
-    ```
-1. Pod内のコンテナが実行されていることを確認するため、Podの変更を監視します:
+1. Pod を作成します:
 
-    ```shell
-    kubectl get --watch pod test-projected-volume
-    ```
-    出力は次のようになります:
-    ```
-    NAME                    READY     STATUS    RESTARTS   AGE
-    test-projected-volume   1/1       Running   0          14s
-    ```
+   ```shell
+   kubectl apply -f https://k8s.io/examples/pods/storage/projected.yaml
+   ```
+
+1. Pod 内のコンテナが実行されていることを確認するため、Pod の変更を監視します:
+
+   ```shell
+   kubectl get --watch pod test-projected-volume
+   ```
+
+   出力は次のようになります:
+
+   ```
+   NAME                    READY     STATUS    RESTARTS   AGE
+   test-projected-volume   1/1       Running   0          14s
+   ```
+
 1. 別の端末にて、実行中のコンテナへのシェルを取得します:
 
-    ```shell
-    kubectl exec -it test-projected-volume -- /bin/sh
-    ```
-1. シェル内にて、投影されたソースを含む`projected-volume`ディレクトリが存在することを確認します:
+   ```shell
+   kubectl exec -it test-projected-volume -- /bin/sh
+   ```
 
-    ```shell
-    ls /projected-volume/
-    ```
+1. シェル内にて、投影されたソースを含む`projected-volume`ディレクトリが存在する
+   ことを確認します:
+
+   ```shell
+   ls /projected-volume/
+   ```
 
 ## クリーンアップ
 
-PodおよびSecretを削除します:
+Pod および Secret を削除します:
 
 ```shell
 kubectl delete pod test-projected-volume
@@ -76,6 +86,9 @@ kubectl delete secret user pass
 {{% /capture %}}
 
 {{% capture whatsnext %}}
-* [`projected`](/docs/concepts/storage/volumes/#projected)ボリュームについてさらに学ぶ
-* [all-in-oneボリューム](https://github.com/kubernetes/community/blob/{{< param "githubbranch" >}}/contributors/design-proposals/node/all-in-one-volume.md)のデザインドキュメントを読む
-{{% /capture %}}
+
+- [`projected`](/docs/concepts/storage/volumes/#projected)ボリュームについてさら
+  に学ぶ
+- [all-in-one ボリューム](https://github.com/kubernetes/community/blob/{{< param
+  "githubbranch" >}}/contributors/design-proposals/node/all-in-one-volume.md)の
+  デザインドキュメントを読む {{% /capture %}}

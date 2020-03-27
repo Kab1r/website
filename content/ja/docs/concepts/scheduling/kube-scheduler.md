@@ -6,7 +6,10 @@ weight: 60
 
 {{% capture overview %}}
 
-Kubernetesにおいて、_スケジューリング_ とは、{{< glossary_tooltip term_id="kubelet" >}}が{{< glossary_tooltip text="Pod" term_id="pod" >}}を稼働させるために{{< glossary_tooltip text="Node" term_id="node" >}}に割り当てることを意味します。
+Kubernetes において、_スケジューリング_ とは
+、{{< glossary_tooltip term_id="kubelet" >}}が{{< glossary_tooltip text="Pod" term_id="pod" >}}を
+稼働させるために{{< glossary_tooltip text="Node" term_id="node" >}}に割り当てる
+ことを意味します。
 
 {{% /capture %}}
 
@@ -14,105 +17,178 @@ Kubernetesにおいて、_スケジューリング_ とは、{{< glossary_toolti
 
 ## スケジューリングの概要{#scheduling}
 
-スケジューラーは新規に作成されたPodで、Nodeに割り当てられていないものを監視します。スケジューラーは発見した各Podのために、稼働させるべき最適なNodeを見つけ出す責務を担っています。そのスケジューラーは下記で説明するスケジューリングの原理を考慮に入れて、NodeへのPodの割り当てを行います。
+スケジューラーは新規に作成された Pod で、Node に割り当てられていないものを監視し
+ます。スケジューラーは発見した各 Pod のために、稼働させるべき最適な Node を見つ
+け出す責務を担っています。そのスケジューラーは下記で説明するスケジューリングの原
+理を考慮に入れて、Node への Pod の割り当てを行います。
 
-Podが特定のNodeに割り当てられる理由を理解したい場合や、カスタムスケジューラーを自身で作ろうと考えている場合、このページはスケジューリングに関して学ぶのに役立ちます。
+Pod が特定の Node に割り当てられる理由を理解したい場合や、カスタムスケジューラー
+を自身で作ろうと考えている場合、このページはスケジューリングに関して学ぶのに役立
+ちます。
 
 ## kube-scheduler
 
-[kube-scheduler](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/)はKubernetesにおけるデフォルトのスケジューラーで、{{< glossary_tooltip text="コントロールプレーン" term_id="control-plane" >}}の一部分として稼働します。  
-kube-schedulerは、もし希望するのであれば自分自身でスケジューリングのコンポーネントを実装でき、それを代わりに使用できるように設計されています。
+[kube-scheduler](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/)は
+Kubernetes におけるデフォルトのスケジューラーで
+、{{< glossary_tooltip text="コントロールプレーン" term_id="control-plane" >}}の
+一部分として稼働します。  
+kube-scheduler は、もし希望するのであれば自分自身でスケジューリングのコンポーネ
+ントを実装でき、それを代わりに使用できるように設計されています。
 
-kube-schedulerは、新規に作成された各Podや他のスケジューリングされていないPodを稼働させるために最適なNodeを選択します。  
-しかし、Pod内の各コンテナにはそれぞれ異なるリソースの要件があり、各Pod自体にもそれぞれ異なる要件があります。そのため、既存のNodeは特定のスケジューリング要求によってフィルターされる必要があります。
+kube-scheduler は、新規に作成された各 Pod や他のスケジューリングされていない Pod
+を稼働させるために最適な Node を選択します。  
+しかし、Pod 内の各コンテナにはそれぞれ異なるリソースの要件があり、各 Pod 自体に
+もそれぞれ異なる要件があります。そのため、既存の Node は特定のスケジューリング要
+求によってフィルターされる必要があります。
 
-クラスター内でPodに対する割り当て要求を満たしたNodeは_割り当て可能_ なNodeと呼ばれます。  
-もし適切なNodeが一つもない場合、スケジューラーがNodeを割り当てることができるまで、そのPodはスケジュールされずに残ります。
+クラスター内で Pod に対する割り当て要求を満たした Node は*割り当て可能* な Node
+と呼ばれます。  
+もし適切な Node が一つもない場合、スケジューラーが Node を割り当てることができる
+まで、その Pod はスケジュールされずに残ります。
 
-スケジューラーはPodに対する割り当て可能なNodeをみつけ、それらの割り当て可能なNodeにスコアをつけます。その中から最も高いスコアのNodeを選択し、Podに割り当てるためのいくつかの関数を実行します。  
-スケジューラーは_binding_ と呼ばれる処理中において、APIサーバーに対して割り当てが決まったNodeの情報を通知します。
+スケジューラーは Pod に対する割り当て可能な Node をみつけ、それらの割り当て可能
+な Node にスコアをつけます。その中から最も高いスコアの Node を選択し、Pod に割り
+当てるためのいくつかの関数を実行します。  
+スケジューラーは*binding* と呼ばれる処理中において、API サーバーに対して割り当て
+が決まった Node の情報を通知します。
 
-スケジューリングを決定する上で考慮が必要な要素としては、個別または複数のリソース要求や、ハードウェア/ソフトウェアのポリシー制約、affinityやanti-affinityの設定、データの局所性や、ワークロード間での干渉などが挙げられます。
+スケジューリングを決定する上で考慮が必要な要素としては、個別または複数のリソース
+要求や、ハードウェア/ソフトウェアのポリシー制約、affinity や anti-affinity の設
+定、データの局所性や、ワークロード間での干渉などが挙げられます。
 
-## kube-schedulerによるスケジューリング{#kube-scheduler-implementation}
+## kube-scheduler によるスケジューリング{#kube-scheduler-implementation}
 
-kube-schedulerは2ステップの操作によってPodに割り当てるNodeを選択します。
+kube-scheduler は 2 ステップの操作によって Pod に割り当てる Node を選択します。
 
 1. フィルタリング
 
 2. スコアリング
 
-_フィルタリング_ ステップでは、Podに割り当て可能なNodeのセットを探します。例えばPodFitsResourcesフィルターは、Podのリソース要求を満たすのに十分なリソースをもつNodeがどれかをチェックします。このステップの後、候補のNodeのリストは、要求を満たすNodeを含みます。  
-たいてい、リストの要素は複数となります。もしこのリストが空の場合、そのPodはスケジュール可能な状態とはなりません。
+_フィルタリング_ ステップでは、Pod に割り当て可能な Node のセットを探します。例
+えば PodFitsResources フィルターは、Pod のリソース要求を満たすのに十分なリソース
+をもつ Node がどれかをチェックします。このステップの後、候補の Node のリストは、
+要求を満たす Node を含みます。  
+たいてい、リストの要素は複数となります。もしこのリストが空の場合、その Pod はス
+ケジュール可能な状態とはなりません。
 
-_スコアリング_ ステップでは、Podを割り当てるのに最も適したNodeを選択するために、スケジューラーはリストの中のNodeをランク付けします。  
-スケジューラーは、フィルタリングによって選ばれた各Nodeに対してスコアを付けます。このスコアはアクティブなスコア付けのルールに基づいています。
+_スコアリング_ ステップでは、Pod を割り当てるのに最も適した Node を選択するため
+に、スケジューラーはリストの中の Node をランク付けします。  
+スケジューラーは、フィルタリングによって選ばれた各 Node に対してスコアを付けます
+。このスコアはアクティブなスコア付けのルールに基づいています。
 
-最後に、kube-schedulerは最も高いランクのNodeに対してPodを割り当てます。もし同一のスコアのNodeが複数ある場合は、kube-schedulerがランダムに1つ選択します。
+最後に、kube-scheduler は最も高いランクの Node に対して Pod を割り当てます。もし
+同一のスコアの Node が複数ある場合は、kube-scheduler がランダムに 1 つ選択します
+。
 
 ### デフォルトのポリシーについて
 
-kube-schedulerは、デフォルトで用意されているスケジューリングポリシーのセットを持っています。
+kube-scheduler は、デフォルトで用意されているスケジューリングポリシーのセットを
+持っています。
 
 ### フィルタリング
 
-- `PodFitsHostPorts`: Nodeに、Podが要求するポートが利用可能かどうかをチェックします。  
+- `PodFitsHostPorts`: Node に、Pod が要求するポートが利用可能かどうかをチェック
+  します。
 
-- `PodFitsHost`: Podがそのホスト名において特定のNodeを指定しているかをチェックします。
+- `PodFitsHost`: Pod がそのホスト名において特定の Node を指定しているかをチェッ
+  クします。
 
-- `PodFitsResources`: Nodeに、Podが要求するリソース(例: CPUとメモリー)が利用可能かどうかをチェックします。
+- `PodFitsResources`: Node に、Pod が要求するリソース(例: CPU とメモリー)が利用
+  可能かどうかをチェックします。
 
-- `PodMatchNodeSelector`: PodのNodeSelectorが、Nodeのラベルにマッチするかどうかをチェックします。
+- `PodMatchNodeSelector`: Pod の NodeSelector が、Node のラベルにマッチするかど
+  うかをチェックします。
 
-- `NoVolumeZoneConflict`: Podが要求するVolumeがNode上で利用可能かを、障害が発生しているゾーンを考慮して評価します。
+- `NoVolumeZoneConflict`: Pod が要求する Volume が Node 上で利用可能かを、障害が
+  発生しているゾーンを考慮して評価します。
 
-- `NoDiskConflict`: NodeのVolumeがPodの要求を満たし、すでにマウントされているかどうかを評価します。
+- `NoDiskConflict`: Node の Volume が Pod の要求を満たし、すでにマウントされてい
+  るかどうかを評価します。
 
-- `MaxCSIVolumeCount`: CSI Volumeをいくつ割り当てるべきか決定し、それが設定された上限を超えるかどうかを評価します。
+- `MaxCSIVolumeCount`: CSI Volume をいくつ割り当てるべきか決定し、それが設定され
+  た上限を超えるかどうかを評価します。
 
-- `CheckNodeMemoryPressure`: もしNodeがメモリーの容量が逼迫している場合、また設定された例外がない場合はそのPodはそのNodeにスケジュールされません。
+- `CheckNodeMemoryPressure`: もし Node がメモリーの容量が逼迫している場合、また
+  設定された例外がない場合はその Pod はその Node にスケジュールされません。
 
-- `CheckNodePIDPressure`: もしNodeのプロセスIDが枯渇しそうになっていた場合や、設定された例外がない場合はそのPodはそのNodeにスケジュールされません。
+- `CheckNodePIDPressure`: もし Node のプロセス ID が枯渇しそうになっていた場合や
+  、設定された例外がない場合はその Pod はその Node にスケジュールされません。
 
-- `CheckNodeDiskPressure`: もしNodeのストレージが逼迫している場合(ファイルシステムの残り容量がほぼない場合)や、設定された例外がない場合はそのPodはそのNodeにスケジュールされません。
+- `CheckNodeDiskPressure`: もし Node のストレージが逼迫している場合(ファイルシス
+  テムの残り容量がほぼない場合)や、設定された例外がない場合はその Pod はその
+  Node にスケジュールされません。
 
-- `CheckNodeCondition`: Nodeは、ファイルシステムの空き容量が完全になくなった場合、ネットワークが利用不可な場合、kubeletがPodを稼働させる準備をできていない場合などに、その状況を通知できます。Nodeがこの状況下かつ設定された例外がない場合、Podは該当のNodeにスケジュールされません。
+- `CheckNodeCondition`: Node は、ファイルシステムの空き容量が完全になくなった場
+  合、ネットワークが利用不可な場合、kubelet が Pod を稼働させる準備をできていな
+  い場合などに、その状況を通知できます。Node がこの状況下かつ設定された例外がな
+  い場合、Pod は該当の Node にスケジュールされません。
 
-- `PodToleratesNodeTaints`: PodのTolerationがNodeのTaintを許容できるかチェックします。
+- `PodToleratesNodeTaints`: Pod の Toleration が Node の Taint を許容できるかチ
+  ェックします。
 
-- `CheckVolumeBinding`: Podが要求するVolumeの要求を満たすか評価します。これはPersistentVolumeClaimがバインドされているかに関わらず適用されます。
+- `CheckVolumeBinding`: Pod が要求する Volume の要求を満たすか評価します。これは
+  PersistentVolumeClaim がバインドされているかに関わらず適用されます。
 
 ### スコアリング
 
-- `SelectorSpreadPriority`:　同一のService、StatefulSetや、ReplicaSetに属するPodを複数のホストをまたいで稼働させます。
+- `SelectorSpreadPriority`:　同一の Service、StatefulSet や、ReplicaSet に属する
+  Pod を複数のホストをまたいで稼働させます。
 
-- `InterPodAffinityPriority`: weightedPodAffinityTermの要素をイテレートして合計を計算したり、もし一致するPodAffinityTermがNodeに適合している場合は、"重み"を合計値に足したりします。:最も高い合計値を持つNode(複数もあり)が候補となります。
+- `InterPodAffinityPriority`: weightedPodAffinityTerm の要素をイテレートして合計
+  を計算したり、もし一致する PodAffinityTerm が Node に適合している場合は、"重み
+  "を合計値に足したりします。:最も高い合計値を持つ Node(複数もあり)が候補となり
+  ます。
 
-- `LeastRequestedPriority`: 要求されたリソースがより低いNodeを優先するものです。言い換えると、Nodeに多くのPodが稼働しているほど、Podが使用するリソースが多くなり、その要求量が低いNodeが選択されます。
+- `LeastRequestedPriority`: 要求されたリソースがより低い Node を優先するものです
+  。言い換えると、Node に多くの Pod が稼働しているほど、Pod が使用するリソースが
+  多くなり、その要求量が低い Node が選択されます。
 
-- `MostRequestedPriority`: 要求されたリソースがより多いNodeを優先するものです。このポリシーは、ワークロードの全体セットを実行するために必要な最小数のNodeに対して、スケジュールされたPodを適合させます。　
+- `MostRequestedPriority`: 要求されたリソースがより多い Node を優先するものです
+  。このポリシーは、ワークロードの全体セットを実行するために必要な最小数の Node
+  に対して、スケジュールされた Pod を適合させます。
 
-- `RequestedToCapacityRatioPriority`: デフォルトのリソーススコアリング関数を使用して、requestedToCapacityベースのResourceAllocationPriorityを作成します。
+- `RequestedToCapacityRatioPriority`: デフォルトのリソーススコアリング関数を使用
+  して、requestedToCapacity ベースの ResourceAllocationPriority を作成します。
 
-- `BalancedResourceAllocation`: バランスのとれたリソース使用量になるようにNodeを選択します。
+- `BalancedResourceAllocation`: バランスのとれたリソース使用量になるように Node
+  を選択します。
 
-- `NodePreferAvoidPodsPriority`: Nodeの`scheduler.alpha.kubernetes.io/preferAvoidPods`というアノテーションに基づいてNodeの優先順位づけをします。この設定により、2つの異なるPodが同じNode上で実行しないことを示唆できます。
+- `NodePreferAvoidPodsPriority`: Node
+  の`scheduler.alpha.kubernetes.io/preferAvoidPods`というアノテーションに基づい
+  て Node の優先順位づけをします。この設定により、2 つの異なる Pod が同じ Node
+  上で実行しないことを示唆できます。
 
-- `NodeAffinityPriority`: "PreferredDuringSchedulingIgnoredDuringExecution"の値によって示されたNode Affinityのスケジューリング性向に基づいてNodeの優先順位づけを行います。詳細は[NodeへのPodの割り当て](https://kubernetes.io/ja/docs/concepts/configuration/assign-pod-node/)にて確認できます。
+- `NodeAffinityPriority`: "PreferredDuringSchedulingIgnoredDuringExecution"の値
+  によって示された Node Affinity のスケジューリング性向に基づいて Node の優先順
+  位づけを行います。詳細
+  は[Node への Pod の割り当て](https://kubernetes.io/ja/docs/concepts/configuration/assign-pod-node/)に
+  て確認できます。
 
-- `TaintTolerationPriority`: Node上における許容できないTaintsの数に基づいて、全てのNodeの優先順位リストを準備します。このポリシーでは優先順位リストを考慮してNodeのランクを調整します。
+- `TaintTolerationPriority`: Node 上における許容できない Taints の数に基づいて、
+  全ての Node の優先順位リストを準備します。このポリシーでは優先順位リストを考慮
+  して Node のランクを調整します。
 
-- `ImageLocalityPriority`: すでにPodに対するコンテナイメージをローカルにキャッシュしているNodeを優先します。
+- `ImageLocalityPriority`: すでに Pod に対するコンテナイメージをローカルにキャッ
+  シュしている Node を優先します。
 
-- `ServiceSpreadingPriority`: このポリシーの目的は、特定のServiceに対するバックエンドのPodが、それぞれ異なるNodeで実行されるようにすることです。このポリシーではServiceのバックエンドのPodが既に実行されていないNode上にスケジュールするように優先します。これによる結果として、Serviceは単体のNode障害に対してより耐障害性が高まります。
+- `ServiceSpreadingPriority`: このポリシーの目的は、特定の Service に対するバッ
+  クエンドの Pod が、それぞれ異なる Node で実行されるようにすることです。このポ
+  リシーでは Service のバックエンドの Pod が既に実行されていない Node 上にスケジ
+  ュールするように優先します。これによる結果として、Service は単体の Node 障害に
+  対してより耐障害性が高まります。
 
-- `CalculateAntiAffinityPriorityMap`: このポリシーは[PodのAnti-Affinity](https://kubernetes.io/ja/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity)の実装に役立ちます。
+- `CalculateAntiAffinityPriorityMap`: このポリシー
+  は[Pod の Anti-Affinity](https://kubernetes.io/ja/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity)の
+  実装に役立ちます。
 
-- `EqualPriorityMap`: 全てのNodeに対して等しい重みを与えます。
+- `EqualPriorityMap`: 全ての Node に対して等しい重みを与えます。
 
-{{% /capture %}}
-{{% capture whatsnext %}}
-* [スケジューラーのパフォーマンスチューニング](/docs/concepts/scheduling/scheduler-perf-tuning/)を参照してください。
-* kube-schedulerの[リファレンスドキュメント](/docs/reference/command-line-tools-reference/kube-scheduler/)を参照してください。
-* [複数のスケジューラーの設定](https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/)について学んでください。
-{{% /capture %}}
+{{% /capture %}} {{% capture whatsnext %}}
+
+- [スケジューラーのパフォーマンスチューニング](/docs/concepts/scheduling/scheduler-perf-tuning/)を
+  参照してください。
+- kube-scheduler
+  の[リファレンスドキュメント](/docs/reference/command-line-tools-reference/kube-scheduler/)を
+  参照してください。
+- [複数のスケジューラーの設定](https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/)に
+  ついて学んでください。 {{% /capture %}}

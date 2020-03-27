@@ -6,10 +6,17 @@ weight: 40
 
 {{% capture overview %}}
 
-_ラベル(Labels)_ はPodなどのオブジェクトに割り当てられたキーとバリューのペアです。  
-ラベルはユーザーに関連した意味のあるオブジェクトの属性を指定するために使われることを目的としています。しかしKubernetesのコアシステムに対して直接的にその意味を暗示するものではありません。  
-ラベルはオブジェクトのサブセットを選択し、グルーピングするために使うことができます。また、ラベルはオブジェクトの作成時に割り当てられ、その後いつでも追加、修正ができます。  
-各オブジェクトはキーとバリューのラベルのセットを定義できます。各キーは、単一のオブジェクトに対してはユニークである必要があります。 
+_ラベル(Labels)_ は Pod などのオブジェクトに割り当てられたキーとバリューのペアで
+す。  
+ラベルはユーザーに関連した意味のあるオブジェクトの属性を指定するために使われるこ
+とを目的としています。しかし Kubernetes のコアシステムに対して直接的にその意味を
+暗示するものではありません。  
+ラベルはオブジェクトのサブセットを選択し、グルーピングするために使うことができま
+す。また、ラベルはオブジェクトの作成時に割り当てられ、その後いつでも追加、修正が
+できます。  
+各オブジェクトはキーとバリューのラベルのセットを定義できます。各キーは、単一のオ
+ブジェクトに対してはユニークである必要があります。
+
 ```json
 "metadata": {
   "labels": {
@@ -19,70 +26,102 @@ _ラベル(Labels)_ はPodなどのオブジェクトに割り当てられたキ
 }
 ```
 
-ラベルは効率的な検索・閲覧を可能にし、UIやCLI上での利用に最適です。 
-識別用途でない情報は、[アノテーション](/docs/concepts/overview/working-with-objects/annotations/)を用いて記録されるべきです。  
+ラベルは効率的な検索・閲覧を可能にし、UI や CLI 上での利用に最適です。 識別用途
+でない情報は
+、[アノテーション](/docs/concepts/overview/working-with-objects/annotations/)を
+用いて記録されるべきです。
 
 {{% /capture %}}
-
 
 {{% capture body %}}
 
 ## ラベルを使う動機
 
-ラベルは、クライアントにそのマッピング情報を保存することを要求することなく、ユーザー独自の組織構造をシステムオブジェクト上で疎結合にマッピングできます。
+ラベルは、クライアントにそのマッピング情報を保存することを要求することなく、ユー
+ザー独自の組織構造をシステムオブジェクト上で疎結合にマッピングできます。
 
-サービスデプロイメントとバッチ処理のパイプラインは多くの場合、多次元のエンティティとなります(例: 複数のパーティション、Deployment、リリーストラック、ティアー、ティアー毎のマイクロサービスなど)  
-管理は分野横断的な操作が必要になることが多く、それによって厳密な階層表現、特にユーザーによるものでなく、インフラストラクチャーによって定義された厳格な階層のカプセル化が破られます。
+サービスデプロイメントとバッチ処理のパイプラインは多くの場合、多次元のエンティテ
+ィとなります(例: 複数のパーティション、Deployment、リリーストラック、ティアー、
+ティアー毎のマイクロサービスなど)  
+管理は分野横断的な操作が必要になることが多く、それによって厳密な階層表現、特にユ
+ーザーによるものでなく、インフラストラクチャーによって定義された厳格な階層のカプ
+セル化が破られます。
 
 ラベルの例:
 
-   * `"release" : "stable"`, `"release" : "canary"`
-   * `"environment" : "dev"`, `"environment" : "qa"`, `"environment" : "production"`
-   * `"tier" : "frontend"`, `"tier" : "backend"`, `"tier" : "cache"`
-   * `"partition" : "customerA"`, `"partition" : "customerB"`
-   * `"track" : "daily"`, `"track" : "weekly"`
+- `"release" : "stable"`, `"release" : "canary"`
+- `"environment" : "dev"`, `"environment" : "qa"`,
+  `"environment" : "production"`
+- `"tier" : "frontend"`, `"tier" : "backend"`, `"tier" : "cache"`
+- `"partition" : "customerA"`, `"partition" : "customerB"`
+- `"track" : "daily"`, `"track" : "weekly"`
 
-これらは単によく使われるラベルの例です。ユーザーは自由に規約を決めることができます。
-ラベルのキーは、ある1つのオブジェクトに対してユニークである必要があることは覚えておかなくてはなりません。  
+これらは単によく使われるラベルの例です。ユーザーは自由に規約を決めることができま
+す。ラベルのキーは、ある 1 つのオブジェクトに対してユニークである必要があること
+は覚えておかなくてはなりません。
 
 ## 構文と文字セット
 
-ラベルは、キーとバリューのベアです。正しいラベルキーは2つのセグメントを持ちます。  
+ラベルは、キーとバリューのベアです。正しいラベルキーは 2 つのセグメントを持ちま
+す。  
 それは`/`によって分割されたオプショナルなプレフィックスと名前です。  
-名前セグメントは必須で、63文字以下である必要があり、文字列の最初と最後は英数字(`[a-z0-9A-Z]`)で、文字列の間ではこれに加えてダッシュ(`-`)、アンダースコア(`_`)、ドット(`.`)を使うことができます。  
-プレフィックスはオプションです。もしプレフィックスが指定されていた場合、プレフィックスはDNSサブドメイン形式である必要があり、それはドット(`.`)で区切られたDNSラベルのセットで、253文字以下である必要があり、最後にスラッシュ(`/`)が続きます。  
+名前セグメントは必須で、63 文字以下である必要があり、文字列の最初と最後は英数字
+(`[a-z0-9A-Z]`)で、文字列の間ではこれに加えてダッシュ(`-`)、アンダースコア
+(`_`)、ドット(`.`)を使うことができます。  
+プレフィックスはオプションです。もしプレフィックスが指定されていた場合、プレフィ
+ックスは DNS サブドメイン形式である必要があり、それはドット(`.`)で区切られた DNS
+ラベルのセットで、253 文字以下である必要があり、最後にスラッシュ(`/`)が続きます
+。
 
-もしプレフィックスが省略された場合、ラベルキーはそのユーザーに対してプライベートであると推定されます。  
-エンドユーザーのオブジェクトにラベルを追加するような自動化されたシステムコンポーネント(例: `kube-scheduler` `kube-controller-manager` `kube-apiserver` `kubectl`やその他のサードパーティツール)は、プレフィックスを指定しなくてはなりません。  
+もしプレフィックスが省略された場合、ラベルキーはそのユーザーに対してプライベート
+であると推定されます。  
+エンドユーザーのオブジェクトにラベルを追加するような自動化されたシステムコンポー
+ネント(例: `kube-scheduler` `kube-controller-manager` `kube-apiserver`
+`kubectl`やその他のサードパーティツール)は、プレフィックスを指定しなくてはなりま
+せん。
 
-`kubernetes.io/`と`k8s.io/`プレフィックスは、Kubernetesコアコンポーネントのために予約されています。  
+`kubernetes.io/`と`k8s.io/`プレフィックスは、Kubernetes コアコンポーネントのため
+に予約されています。
 
-正しいラベル値は63文字以下の長さで、空文字か、もしくは開始と終了が英数字(`[a-z0-9A-Z]`)で、文字列の間がダッシュ(`-`)、アンダースコア(`_`)、ドット(`.`)と英数字である文字列を使うことができます。  
+正しいラベル値は 63 文字以下の長さで、空文字か、もしくは開始と終了が英数字
+(`[a-z0-9A-Z]`)で、文字列の間がダッシュ(`-`)、アンダースコア(`_`)、ドット(`.`)と
+英数字である文字列を使うことができます。
 
 ## ラベルセレクター
 
-[名前とUID](/docs/user-guide/identifiers)とは異なり、ラベルはユニーク性を提供しません。通常、多くのオブジェクトが同じラベルを保持することを想定します。
+[名前と UID](/docs/user-guide/identifiers)とは異なり、ラベルはユニーク性を提供し
+ません。通常、多くのオブジェクトが同じラベルを保持することを想定します。
 
-*ラベルセレクター* を介して、クライアントとユーザーはオブジェクトのセットを指定できます。ラベルセレクターはKubernetesにおいてコアなグルーピング機能となります。
+_ラベルセレクター_ を介して、クライアントとユーザーはオブジェクトのセットを指定
+できます。ラベルセレクターは Kubernetes においてコアなグルーピング機能となります
+。
 
-Kubernetes APIは現在2タイプのセレクターをサポートしています。  
+Kubernetes API は現在 2 タイプのセレクターをサポートしています。  
 それは*等価ベース(equality-based)* と*集合ベース(set-based)* です。  
-単一のラベルセレクターは、コンマ区切りの複数の*要件(requirements)* で構成されています。  
-複数の要件がある場合、コンマセパレーターは論理積 _AND_(`&&`)オペレーターと同様にふるまい、全ての要件を満たす必要があります。
+単一のラベルセレクターは、コンマ区切りの複数の*要件(requirements)* で構成されて
+います。  
+複数の要件がある場合、コンマセパレーターは論理積 _AND_(`&&`)オペレーターと同様に
+ふるまい、全ての要件を満たす必要があります。
 
-空文字の場合や、指定なしのセレクターに関するセマンティクスは、コンテキストに依存します。
-そしてセレクターを使うAPIタイプは、それらのセレクターの妥当性とそれらが示す意味をドキュメントに記載するべきです。
+空文字の場合や、指定なしのセレクターに関するセマンティクスは、コンテキストに依存
+します。そしてセレクターを使う API タイプは、それらのセレクターの妥当性とそれら
+が示す意味をドキュメントに記載するべきです。
 
-{{< note >}}
-ReplicaSetなど、いくつかのAPIタイプにおいて、2つのインスタンスのラベルセレクターは単一の名前空間において重複してはいけません。重複していると、コントローラがそれらのラベルセレクターがコンフリクトした操作とみなし、どれだけの数のレプリカを稼働させるべきか決めることができなくなります。
-{{< /note >}}
+{{< note >}} ReplicaSet など、いくつかの API タイプにおいて、2 つのインスタンス
+のラベルセレクターは単一の名前空間において重複してはいけません。重複していると、
+コントローラがそれらのラベルセレクターがコンフリクトした操作とみなし、どれだけの
+数のレプリカを稼働させるべきか決めることができなくなります。 {{< /note >}}
 
-### *等価ベース(Equality-based)* の要件(requirement)
+### _等価ベース(Equality-based)_ の要件(requirement)
 
-*等価ベース(Equality-based)* もしくは*不等ベース(Inequality-based)* の要件は、ラベルキーとラベル値によるフィルタリングを可能にします。  
-要件に一致したオブジェクトは、指定されたラベルの全てを満たさなくてはいけませんが、それらのオブジェクトはさらに追加のラベルも持つことができます。  
-そして等価ベースの要件においては、3つの種類のオペレーターの利用が許可されています。`=`、`==`、`!=`となります。  
-最初の2つのオペレーター(`=`、`==`)は*等価(Equality)* を表現し(この2つは単なる同義語)、最後の1つ(`!=`)は*不等(Inequality)* を意味します。  
+_等価ベース(Equality-based)_ もしくは*不等ベース(Inequality-based)* の要件は、ラ
+ベルキーとラベル値によるフィルタリングを可能にします。  
+要件に一致したオブジェクトは、指定されたラベルの全てを満たさなくてはいけませんが
+、それらのオブジェクトはさらに追加のラベルも持つことができます。  
+そして等価ベースの要件においては、3 つの種類のオペレーターの利用が許可されていま
+す。`=`、`==`、`!=`となります。  
+最初の 2 つのオペレーター(`=`、`==`)は*等価(Equality)* を表現し(この 2 つは単な
+る同義語)、最後の 1 つ(`!=`)は*不等(Inequality)* を意味します。  
 例えば
 
 ```
@@ -90,13 +129,18 @@ environment = production
 tier != frontend
 ```
 
-最初の例は、キーが`environment`で、値が`production`である全てのリソースを対象にします。  
-次の例は、キーが`tier`で、値が`frontend`とは異なるリソースと、`tier`という名前のキーを持たない全てのリソースを対象にします。  
-コンマセパレーター`,`を使って、`production`の中から、`frontend`のものを除外するようにフィルターすることもできます。  
-`environment=production,tier!=frontend`  
+最初の例は、キーが`environment`で、値が`production`である全てのリソースを対象に
+します。  
+次の例は、キーが`tier`で、値が`frontend`とは異なるリソースと、`tier`という名前の
+キーを持たない全てのリソースを対象にします。  
+コンマセパレーター`,`を使って、`production`の中から、`frontend`のものを除外する
+ようにフィルターすることもできます。  
+`environment=production,tier!=frontend`
 
-等価ベースのラベル要件の1つの使用シナリオとして、PodにおけるNodeの選択要件を指定するケースがあります。  
-例えば、下記のサンプルPodは、ラベル`accelerator=nvidia-tesla-p100`をもったNodeを選択します。  
+等価ベースのラベル要件の 1 つの使用シナリオとして、Pod における Node の選択要件
+を指定するケースがあります。  
+例えば、下記のサンプル Pod は、ラベル`accelerator=nvidia-tesla-p100`をもった
+Node を選択します。
 
 ```yaml
 apiVersion: v1
@@ -114,12 +158,15 @@ spec:
     accelerator: nvidia-tesla-p100
 ```
 
-### *集合ベース(Set-based)* の要件(requirement)
+### _集合ベース(Set-based)_ の要件(requirement)
 
-*集合ベース(Set-based)* のラベルの要件は値のセットによってキーをフィルタリングします。  
-`in`、`notin`、`exists`の3つのオペレーターをサポートしています(キーを特定するのみ)。    
+_集合ベース(Set-based)_ のラベルの要件は値のセットによってキーをフィルタリングし
+ます。  
+`in`、`notin`、`exists`の 3 つのオペレーターをサポートしています(キーを特定する
+のみ)。
 
-例えば:  
+例えば:
+
 ```
 environment in (production, qa)
 tier notin (frontend, backend)
@@ -127,93 +174,132 @@ partition
 !partition
 ```
 
-最初の例では、キーが`environment`で、値が`production`か`qa`に等しいリソースを全て選択します。  
-第2の例では、キーが`tier`で、値が`frontend`と`backend`以外のもの、そして`tier`キーを持たないリソースを全て選択します。  
-第3の例では、`partition`というキーをもつラベルを全て選択し、値はチェックしません。  
-第4の例では、`partition`というキーを持たないラベルを全て選択し、値はチェックしません。  
-同様に、コンマセパレーターは、_AND_ オペレーターと同様にふるまいます。そのため、`partition`と`environment`キーの値がともに`qa`でないラベルを選択するには、`partition,environment notin (qa)`と記述することで可能です。  
-*集合ベース* のラベルセレクターは、`environment=production`という記述が`environment in (production)`と等しいため、一般的な等価形式となります。 `!=`と`notin`も同様に等価となります。  
+最初の例では、キーが`environment`で、値が`production`か`qa`に等しいリソースを全
+て選択します。  
+第 2 の例では、キーが`tier`で、値が`frontend`と`backend`以外のもの、そし
+て`tier`キーを持たないリソースを全て選択します。  
+第 3 の例では、`partition`というキーをもつラベルを全て選択し、値はチェックしませ
+ん。  
+第 4 の例では、`partition`というキーを持たないラベルを全て選択し、値はチェックし
+ません。  
+同様に、コンマセパレーターは、_AND_ オペレーターと同様にふるまいます。そのため
+、`partition`と`environment`キーの値がともに`qa`でないラベルを選択するには
+、`partition,environment notin (qa)`と記述することで可能です。  
+_集合ベース_ のラベルセレクターは、`environment=production`という記述
+が`environment in (production)`と等しいため、一般的な等価形式となります。
+`!=`と`notin`も同様に等価となります。
 
-*集合ベース* の要件は、*等価ベース* の要件と混在できます。  
+_集合ベース_ の要件は、_等価ベース_ の要件と混在できます。  
 例えば:  
 `partition in (customerA, customerB),environment!=qa`.
 
 ## API
 
-### LISTとWATCHによるフィルタリング
+### LIST と WATCH によるフィルタリング
 
-LISTとWATCHオペレーションは、単一のクエリパラメータを使うことによって返されるオブジェクトのセットをフィルターするためのラベルセレクターを指定できます。  
-*集合ベース* と*等価ベース* のどちらの要件も許可されています(ここでは、URLクエリストリング内で出現します)。  
+LIST と WATCH オペレーションは、単一のクエリパラメータを使うことによって返される
+オブジェクトのセットをフィルターするためのラベルセレクターを指定できます。  
+_集合ベース_ と*等価ベース* のどちらの要件も許可されています(ここでは、URL クエ
+リストリング内で出現します)。
 
-  * *等価ベース* での要件: `?labelSelector=environment%3Dproduction,tier%3Dfrontend`
-  * *集合ベース* での要件: `?labelSelector=environment+in+%28production%2Cqa%29%2Ctier+in+%28frontend%29`
+- _等価ベース_ での要件:
+  `?labelSelector=environment%3Dproduction,tier%3Dfrontend`
+- _集合ベース_ での要件:
+  `?labelSelector=environment+in+%28production%2Cqa%29%2Ctier+in+%28frontend%29`
 
-上記の2つの形式のラベルセレクターはRESTクライアントを介してリストにしたり、もしくは確認するために使われます。  
-例えば、`kubectl`によって`apiserver`をターゲットにし、*等価ベース* の要件でフィルターすると以下のように書けます。  
+上記の 2 つの形式のラベルセレクターは REST クライアントを介してリストにしたり、
+もしくは確認するために使われます。  
+例えば、`kubectl`によって`apiserver`をターゲットにし、_等価ベース_ の要件でフィ
+ルターすると以下のように書けます。
 
 ```shell
 kubectl get pods -l environment=production,tier=frontend
 ```
 
-もしくは、*集合ベース* の要件を指定すると以下のようになります。  
+もしくは、_集合ベース_ の要件を指定すると以下のようになります。
+
 ```shell
 kubectl get pods -l 'environment in (production),tier in (frontend)'
 ```
 
-すでに言及したように、*集合ベース* の要件は、*等価ベース* の要件より表現力があります。  
-例えば、値に対する_OR_ オペレーターを実装して以下のように書けます。  
+すでに言及したように、_集合ベース_ の要件は、_等価ベース_ の要件より表現力があり
+ます。  
+例えば、値に対する*OR* オペレーターを実装して以下のように書けます。
 
 ```shell
 kubectl get pods -l 'environment in (production, qa)'
 ```
 
-もしくは、_exists_ オペレーターを介して、否定マッチングによる制限もできます。  
+もしくは、_exists_ オペレーターを介して、否定マッチングによる制限もできます。
 
 ```shell
 kubectl get pods -l 'environment,environment notin (frontend)'
 ```
 
-### APIオブジェクトに参照を設定する
-[`Service`](/docs/user-guide/services) と [`ReplicationController`](/docs/user-guide/replication-controller)のような、いくつかのKubernetesオブジェクトでは、ラベルセレクターを[Pod](/docs/user-guide/pods)のような他のリソースのセットを指定するのにも使われます。  
+### API オブジェクトに参照を設定する
 
-#### ServiceとReplicationController
-`Service`が対象とするPodの集合は、ラベルセレクターによって定義されます。  
-同様に、`ReplicationController`が管理するべきPod数についてもラベルセレクターを使って定義されます。  
+[`Service`](/docs/user-guide/services) と
+[`ReplicationController`](/docs/user-guide/replication-controller)のような、いく
+つかの Kubernetes オブジェクトでは、ラベルセレクター
+を[Pod](/docs/user-guide/pods)のような他のリソースのセットを指定するのにも使われ
+ます。
 
-それぞれのオブジェクトに対するラベルセレクターはマップを使って`json`もしくは`yaml`形式のファイルで定義され、*等価ベース* のセレクターのみサポートされています。  
+#### Service と ReplicationController
+
+`Service`が対象とする Pod の集合は、ラベルセレクターによって定義されます。  
+同様に、`ReplicationController`が管理するべき Pod 数についてもラベルセレクターを
+使って定義されます。
+
+それぞれのオブジェクトに対するラベルセレクターはマップを使って`json`もしく
+は`yaml`形式のファイルで定義され、_等価ベース_ のセレクターのみサポートされてい
+ます。
 
 ```json
 "selector": {
     "component" : "redis",
 }
 ```
-もしくは  
+
+もしくは
 
 ```yaml
 selector:
-    component: redis
+  component: redis
 ```
 
-このセレクター(それぞれ`json`または`yaml`形式)は、`component=redis`または`component in (redis)`と等価です。   
+このセレクター(それぞれ`json`または`yaml`形式)は、`component=redis`また
+は`component in (redis)`と等価です。
 
-#### *集合ベース* の要件指定をサポートするリソース
+#### _集合ベース_ の要件指定をサポートするリソース
 
-[`Job`](/docs/concepts/workloads/controllers/jobs-run-to-completion/)や[`Deployment`](/ja/docs/concepts/workloads/controllers/deployment/)、[`ReplicaSet`](/ja/docs/concepts/workloads/controllers/replicaset/)や[`DaemonSet`](/ja/docs/concepts/workloads/controllers/daemonset/)などの比較的新しいリソースは、*集合ベース* での要件指定もサポートしています。  
+[`Job`](/docs/concepts/workloads/controllers/jobs-run-to-completion/)や[`Deployment`](/ja/docs/concepts/workloads/controllers/deployment/)、[`ReplicaSet`](/ja/docs/concepts/workloads/controllers/replicaset/)や[`DaemonSet`](/ja/docs/concepts/workloads/controllers/daemonset/)な
+どの比較的新しいリソースは、_集合ベース_ での要件指定もサポートしています。
+
 ```yaml
 selector:
   matchLabels:
     component: redis
   matchExpressions:
-    - {key: tier, operator: In, values: [cache]}
-    - {key: environment, operator: NotIn, values: [dev]}
+    - { key: tier, operator: In, values: [cache] }
+    - { key: environment, operator: NotIn, values: [dev] }
 ```
 
-`matchLabels`は、`{key,value}`ペアのマップです。`matchLabels`内の単一の`{key,value}`は、`matchExpressions`の要素と等しく、それは、`key`フィールドがキー名で、`operator`が"In"で、`values`配列は単に"値"を保持します。  
-`matchExpressions`はPodセレクター要件のリストです。対応しているオペレーターは`In`、`NotIn`、`Exists`と`DoesNotExist`です。`values`のセットは、`In`と`NotIn`オペレーターにおいては空文字を許容しません。  
-`matchLabels`と`matchExpressions`の両方によって指定された全ての要件指定はANDで判定されます。つまり要件にマッチするには指定された全ての要件を満たす必要があります。  
+`matchLabels`は、`{key,value}`ペアのマップです。`matchLabels`内の単一
+の`{key,value}`は、`matchExpressions`の要素と等しく、それは、`key`フィールドがキ
+ー名で、`operator`が"In"で、`values`配列は単に"値"を保持します。  
+`matchExpressions`は Pod セレクター要件のリストです。対応しているオペレーター
+は`In`、`NotIn`、`Exists`と`DoesNotExist`です。`values`のセットは
+、`In`と`NotIn`オペレーターにおいては空文字を許容しません。  
+`matchLabels`と`matchExpressions`の両方によって指定された全ての要件指定は AND で
+判定されます。つまり要件にマッチするには指定された全ての要件を満たす必要がありま
+す。
 
-#### Nodeのセットを選択する  
-ラベルを選択するための1つのユースケースはPodがスケジュールできるNodeのセットを制限することです。  
-さらなる情報に関しては、[Node選定](/ja/docs/concepts/configuration/assign-pod-node/) のドキュメントを参照してください。 
+#### Node のセットを選択する
+
+ラベルを選択するための 1 つのユースケースは Pod がスケジュールできる Node のセッ
+トを制限することです。  
+さらなる情報に関しては
+、[Node 選定](/ja/docs/concepts/configuration/assign-pod-node/) のドキュメントを
+参照してください。
 
 {{% /capture %}}

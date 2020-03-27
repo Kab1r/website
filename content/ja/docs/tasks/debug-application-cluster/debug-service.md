@@ -3,22 +3,22 @@ content_template: templates/concept
 title: Serviceのデバッグ
 ---
 
-{{% capture overview %}}
-新規にKubernetesをインストールした環境でかなり頻繁に発生する問題は、`Service`が適切に機能しないというものです。
-`Deployment`を実行して`Service`を作成したにもかかわらず、アクセスしようとしても応答がありません。
-何が問題になっているのかを理解するのに、このドキュメントがきっと役立つでしょう。
-
+{{% capture overview %}} 新規に Kubernetes をインストールした環境でかなり頻繁に
+発生する問題は、`Service`が適切に機能しないというものです。 `Deployment`を実行し
+て`Service`を作成したにもかかわらず、アクセスしようとしても応答がありません。何
+が問題になっているのかを理解するのに、このドキュメントがきっと役立つでしょう。
 
 {{% /capture %}}
-
 
 {{% capture body %}}
 
 ## 規則
 
-このドキュメントでは全体を通して、実行可能なさまざまなコマンドが示されます。
-中には`Pod`内で実行する必要があるコマンドもあれば、Kubernetesの`ノード`上で実行する必要があるコマンドや、`kubectl`とクラスターの認証情報がある場所であればどこでも実行できるコマンドもあります。
-期待される内容を明確にするために、このドキュメントでは次の規則を使用します。
+このドキュメントでは全体を通して、実行可能なさまざまなコマンドが示されます。中に
+は`Pod`内で実行する必要があるコマンドもあれば、Kubernetes の`ノード`上で実行する
+必要があるコマンドや、`kubectl`とクラスターの認証情報がある場所であればどこでも
+実行できるコマンドもあります。期待される内容を明確にするために、このドキュメント
+では次の規則を使用します。
 
 コマンド"COMMAND"が`Pod`内で実行され、"OUTPUT"を出力すると期待される場合:
 
@@ -41,20 +41,22 @@ kubectl ARGS
 OUTPUT
 ```
 
-## Pod内でコマンドを実行する
+## Pod 内でコマンドを実行する
 
-ここでの多くのステップでは、クラスターで実行されている`Pod`が見ているものを確認する必要があります。
-これを行う最も簡単な方法は、インタラクティブなalpineの`Pod`を実行することです。
+ここでの多くのステップでは、クラスターで実行されている`Pod`が見ているものを確認
+する必要があります。これを行う最も簡単な方法は、インタラクティブな alpine
+の`Pod`を実行することです。
 
 ```none
 kubectl run -it --rm --restart=Never alpine --image=alpine sh
 / #
 ```
-{{< note >}}
-コマンドプロンプトが表示されない場合は、Enterキーを押してみてください。
-{{< /note >}}
 
-使用したい実行中の`Pod`が既にある場合は、以下のようにしてその`Pod`内でコマンドを実行できます。
+{{< note >}} コマンドプロンプトが表示されない場合は、Enter キーを押してみてくだ
+さい。 {{< /note >}}
+
+使用したい実行中の`Pod`が既にある場合は、以下のようにしてその`Pod`内でコマンドを
+実行できます。
 
 ```shell
 kubectl exec <POD-NAME> -c <CONTAINER-NAME> -- <COMMAND>
@@ -62,8 +64,9 @@ kubectl exec <POD-NAME> -c <CONTAINER-NAME> -- <COMMAND>
 
 ## セットアップ
 
-このドキュメントのウォークスルーのために、いくつかの`Pod`を実行しましょう。
-おそらくあなた自身の`Service`をデバッグしているため、あなた自身の詳細に置き換えることもできますし、これに沿って2番目のデータポイントを取得することもできます。
+このドキュメントのウォークスルーのために、いくつかの`Pod`を実行しましょう。おそ
+らくあなた自身の`Service`をデバッグしているため、あなた自身の詳細に置き換えるこ
+ともできますし、これに沿って 2 番目のデータポイントを取得することもできます。
 
 ```shell
 kubectl run hostnames --image=k8s.gcr.io/serve_hostname \
@@ -73,9 +76,9 @@ kubectl run hostnames --image=k8s.gcr.io/serve_hostname \
 deployment.apps/hostnames created
 ```
 
-`kubectl`コマンドは作成、変更されたリソースのタイプと名前を出力するため、この後のコマンドで使用することもできます。
-{{< note >}}
-これは、次のYAMLで`Deployment`を開始した場合と同じです。
+`kubectl`コマンドは作成、変更されたリソースのタイプと名前を出力するため、この後
+のコマンドで使用することもできます。 {{< note >}} これは、次の YAML
+で`Deployment`を開始した場合と同じです。
 
 ```yaml
 apiVersion: apps/v1
@@ -93,12 +96,13 @@ spec:
         app: hostnames
     spec:
       containers:
-      - name: hostnames
-        image: k8s.gcr.io/serve_hostname
-        ports:
-        - containerPort: 9376
-          protocol: TCP
+        - name: hostnames
+          image: k8s.gcr.io/serve_hostname
+          ports:
+            - containerPort: 9376
+              protocol: TCP
 ```
+
 {{< /note >}}
 
 `Pod`が実行中であることを確認してください。
@@ -111,12 +115,14 @@ hostnames-632524106-ly40y   1/1       Running   0          2m
 hostnames-632524106-tlaok   1/1       Running   0          2m
 ```
 
-## Serviceは存在するか？
+## Service は存在するか？
 
-賢明な読者は、`Service`をまだ実際に作成していないことにお気付きかと思いますが、これは意図的です。これは時々忘れられるステップであり、最初に確認すべきことです。
+賢明な読者は、`Service`をまだ実際に作成していないことにお気付きかと思いますが、
+これは意図的です。これは時々忘れられるステップであり、最初に確認すべきことです。
 
-では、存在しない`Service`にアクセスしようとするとどうなるでしょうか？
-この`Service`を名前で利用する別の`Pod`があると仮定すると、次のような結果が得られます。
+では、存在しない`Service`にアクセスしようとするとどうなるでしょうか？こ
+の`Service`を名前で利用する別の`Pod`があると仮定すると、次のような結果が得られま
+す。
 
 ```shell
 u@pod$ wget -O- hostnames
@@ -132,8 +138,8 @@ No resources found.
 Error from server (NotFound): services "hostnames" not found
 ```
 
-犯人がいましたので、`Service`を作成しましょう。
-前と同様に、これはウォークスルー用です。ご自身の`Service`の詳細を使用することもできます。
+犯人がいましたので、`Service`を作成しましょう。前と同様に、これはウォークスルー
+用です。ご自身の`Service`の詳細を使用することもできます。
 
 ```shell
 kubectl expose deployment hostnames --port=80 --target-port=9376
@@ -148,7 +154,7 @@ NAME        TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 hostnames   ClusterIP   10.0.1.175   <none>        80/TCP    5s
 ```
 
-前と同様に、これは次のようなYAMLで`Service`を開始した場合と同じです。
+前と同様に、これは次のような YAML で`Service`を開始した場合と同じです。
 
 ```yaml
 apiVersion: v1
@@ -159,15 +165,15 @@ spec:
   selector:
     app: hostnames
   ports:
-  - name: default
-    protocol: TCP
-    port: 80
-    targetPort: 9376
+    - name: default
+      protocol: TCP
+      port: 80
+      targetPort: 9376
 ```
 
 これで、`Service`が存在することが確認できました。
 
-## サービスはDNSによって機能しているか？
+## サービスは DNS によって機能しているか？
 
 同じ`Namespace`の`Pod`から次のコマンドを実行してください。
 
@@ -179,7 +185,8 @@ Name:      hostnames
 Address 1: 10.0.1.175 hostnames.default.svc.cluster.local
 ```
 
-これが失敗した場合、おそらく`Pod`と`Service`が異なる`Namespace`にあるため、ネームスペースで修飾された名前を試してください。
+これが失敗した場合、おそらく`Pod`と`Service`が異なる`Namespace`にあるため、ネー
+ムスペースで修飾された名前を試してください。
 
 ```shell
 u@pod$ nslookup hostnames.default
@@ -189,8 +196,9 @@ Name:      hostnames.default
 Address 1: 10.0.1.175 hostnames.default.svc.cluster.local
 ```
 
-これが機能する場合、クロスネームスペース名を使用するようにアプリケーションを調整するか、同じ`Namespace`でアプリと`Service`を実行する必要があります。
-これでも失敗する場合は、完全修飾名を試してください。
+これが機能する場合、クロスネームスペース名を使用するようにアプリケーションを調整
+するか、同じ`Namespace`でアプリと`Service`を実行する必要があります。これでも失敗
+する場合は、完全修飾名を試してください。
 
 ```shell
 u@pod$ nslookup hostnames.default.svc.cluster.local
@@ -200,16 +208,15 @@ Name:      hostnames.default.svc.cluster.local
 Address 1: 10.0.1.175 hostnames.default.svc.cluster.local
 ```
 
-ここでのサフィックス"default.svc.cluster.local"に注意してください。
-"default"は、操作している`Namespace`です。
-"svc"は、これが`Service`であることを示します。
-"cluster.local"はクラスタードメインであり、あなたのクラスターでは異なる場合があります。
+ここでのサフィックス"default.svc.cluster.local"に注意してください。 "default"は
+、操作している`Namespace`です。 "svc"は、これが`Service`であることを示します。
+"cluster.local"はクラスタードメインであり、あなたのクラスターでは異なる場合があ
+ります。
 
 クラスター内の`ノード`からも試すこともできます。
 
-{{< note >}}
-10.0.0.10は私のDNS `Service`であり、あなたのクラスターでは異なるかもしれません。
-{{< /note >}}
+{{< note >}} 10.0.0.10 は私の DNS `Service`であり、あなたのクラスターでは異なる
+かもしれません。 {{< /note >}}
 
 ```shell
 u@node$ nslookup hostnames.default.svc.cluster.local 10.0.0.10
@@ -220,7 +227,8 @@ Name:   hostnames.default.svc.cluster.local
 Address: 10.0.1.175
 ```
 
-完全修飾名では検索できるのに、相対名ではできない場合、`/etc/resolv.conf`ファイルが正しいことを確認する必要があります。
+完全修飾名では検索できるのに、相対名ではできない場合、`/etc/resolv.conf`ファイル
+が正しいことを確認する必要があります。
 
 ```shell
 u@pod$ cat /etc/resolv.conf
@@ -229,24 +237,29 @@ search default.svc.cluster.local svc.cluster.local cluster.local example.com
 options ndots:5
 ```
 
-`nameserver`行はクラスターのDNS `Service`を示さなければなりません。
-これは、`--cluster-dns`フラグで`kubelet`に渡されます。
+`nameserver`行はクラスターの DNS `Service`を示さなければなりません。これは
+、`--cluster-dns`フラグで`kubelet`に渡されます。
 
-`search`行には、`Service`名を見つけるための適切なサフィックスを含める必要があります。
-この場合、ローカルの`Namespace`で`Service`を見つけるためのサフィックス(`default.svc.cluster.local`)、すべての`Namespaces`で`Service`を見つけるためのサフィックス(`svc.cluster.local`)、およびクラスターのサフィックス(`cluster.local`)です。
-インストール方法によっては、その後に追加のレコードがある場合があります(合計6つまで)。
-クラスターのサフィックスは、`--cluster-domain`フラグを使用して`kubelet`に渡されます。
-このドキュメントではそれが"cluster.local"であると仮定していますが、あなたのクラスターでは異なる場合があります。
-その場合は、上記のすべてのコマンドでクラスターのサフィックスを変更する必要があります。
+`search`行には、`Service`名を見つけるための適切なサフィックスを含める必要があり
+ます。この場合、ローカルの`Namespace`で`Service`を見つけるためのサフィックス
+(`default.svc.cluster.local`)、すべての`Namespaces`で`Service`を見つけるためのサ
+フィックス(`svc.cluster.local`)、およびクラスターのサフィックス(`cluster.local`)
+です。インストール方法によっては、その後に追加のレコードがある場合があります(合
+計 6 つまで)。クラスターのサフィックスは、`--cluster-domain`フラグを使用し
+て`kubelet`に渡されます。このドキュメントではそれが"cluster.local"であると仮定し
+ていますが、あなたのクラスターでは異なる場合があります。その場合は、上記のすべて
+のコマンドでクラスターのサフィックスを変更する必要があります。
 
-`options`行では、DNSクライアントライブラリーが検索パスをまったく考慮しないように`ndots`を十分に高く設定する必要があります。
-Kubernetesはデフォルトでこれを5に設定します。これは、生成されるすべてのDNS名をカバーするのに十分な大きさです。
+`options`行では、DNS クライアントライブラリーが検索パスをまったく考慮しないよう
+に`ndots`を十分に高く設定する必要があります。 Kubernetes はデフォルトでこれを 5
+に設定します。これは、生成されるすべての DNS 名をカバーするのに十分な大きさです
+。
 
-### ServiveはDNSに存在するか？
+### Servive は DNS に存在するか？
 
-上記がまだ失敗する場合、DNSルックアップが`Service`に対して機能していません。
-一歩離れて、他の何が機能していないかを確認しましょう。
-Kubernetesマスターの`Service`は常に機能するはずです。
+上記がまだ失敗する場合、DNS ルックアップが`Service`に対して機能していません。一
+歩離れて、他の何が機能していないかを確認しましょう。 Kubernetes マスター
+の`Service`は常に機能するはずです。
 
 ```shell
 u@pod$ nslookup kubernetes.default
@@ -257,12 +270,15 @@ Name:      kubernetes.default
 Address 1: 10.0.0.1 kubernetes.default.svc.cluster.local
 ```
 
-これが失敗した場合、このドキュメントのkube-proxyセクションに移動するか、あるいは、このドキュメントの先頭に戻って最初からやり直し、あなた自身の`Service`をデバッグする代わりにDNSをデバッグする必要があるかもしれません。
+これが失敗した場合、このドキュメントの kube-proxy セクションに移動するか、あるい
+は、このドキュメントの先頭に戻って最初からやり直し、あなた自身の`Service`をデバ
+ッグする代わりに DNS をデバッグする必要があるかもしれません。
 
-## ServiceはIPでは機能するか？
+## Service は IP では機能するか？
 
-DNSが機能することを確認できると仮定すると、次にテストするのは`Service`が機能しているかどうかです。
-上述の`kubectl get`で確認できる`Service`のIPに、クラスター内のノードからアクセスします。
+DNS が機能することを確認できると仮定すると、次にテストするのは`Service`が機能し
+ているかどうかです。上述の`kubectl get`で確認できる`Service`の IP に、クラスター
+内のノードからアクセスします。
 
 ```shell
 u@node$ curl 10.0.1.175:80
@@ -275,64 +291,70 @@ u@node$ curl 10.0.1.175:80
 hostnames-bvc05
 ```
 
-`Service`が機能している場合は、正しい応答が得られるはずです。
-そうでない場合、おかしい可能性のあるものがいくつかあるため、続けましょう。
+`Service`が機能している場合は、正しい応答が得られるはずです。そうでない場合、お
+かしい可能性のあるものがいくつかあるため、続けましょう。
 
-## Serviceは正しいか？
+## Service は正しいか？
 
-馬鹿げているように聞こえるかもしれませんが、`Service`が正しく定義され`Pod`のポートとマッチすることを二度、三度と確認すべきです。
-`Service`を読み返して確認しましょう。
+馬鹿げているように聞こえるかもしれませんが、`Service`が正しく定義され`Pod`のポー
+トとマッチすることを二度、三度と確認すべきです。 `Service`を読み返して確認しまし
+ょう。
 
 ```shell
 kubectl get service hostnames -o json
 ```
+
 ```json
 {
-    "kind": "Service",
-    "apiVersion": "v1",
-    "metadata": {
-        "name": "hostnames",
-        "namespace": "default",
-        "uid": "428c8b6c-24bc-11e5-936d-42010af0a9bc",
-        "resourceVersion": "347189",
-        "creationTimestamp": "2015-07-07T15:24:29Z",
-        "labels": {
-            "app": "hostnames"
-        }
-    },
-    "spec": {
-        "ports": [
-            {
-                "name": "default",
-                "protocol": "TCP",
-                "port": 80,
-                "targetPort": 9376,
-                "nodePort": 0
-            }
-        ],
-        "selector": {
-            "app": "hostnames"
-        },
-        "clusterIP": "10.0.1.175",
-        "type": "ClusterIP",
-        "sessionAffinity": "None"
-    },
-    "status": {
-        "loadBalancer": {}
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "hostnames",
+    "namespace": "default",
+    "uid": "428c8b6c-24bc-11e5-936d-42010af0a9bc",
+    "resourceVersion": "347189",
+    "creationTimestamp": "2015-07-07T15:24:29Z",
+    "labels": {
+      "app": "hostnames"
     }
+  },
+  "spec": {
+    "ports": [
+      {
+        "name": "default",
+        "protocol": "TCP",
+        "port": 80,
+        "targetPort": 9376,
+        "nodePort": 0
+      }
+    ],
+    "selector": {
+      "app": "hostnames"
+    },
+    "clusterIP": "10.0.1.175",
+    "type": "ClusterIP",
+    "sessionAffinity": "None"
+  },
+  "status": {
+    "loadBalancer": {}
+  }
 }
 ```
 
-* アクセスしようとしているポートは`spec.ports[]`に定義されていますか？
-* `targetPort`は`Pod`に対して適切ですか(多くの`Pod`は`Service`とは異なるポートを使用することを選択します)？
-* `targetPort`を数値で定義しようとしている場合、それは数値(9376)、文字列"9376"のどちらですか？
-* `targetPort`を名前で定義しようとしている場合、`Pod`は同じ名前でポートを公開していますか？
-* ポートの`protocol`は`Pod`のものと同じですか？
+- アクセスしようとしているポートは`spec.ports[]`に定義されていますか？
+- `targetPort`は`Pod`に対して適切ですか(多くの`Pod`は`Service`とは異なるポートを
+  使用することを選択します)？
+- `targetPort`を数値で定義しようとしている場合、それは数値(9376)、文字列"9376"の
+  どちらですか？
+- `targetPort`を名前で定義しようとしている場合、`Pod`は同じ名前でポートを公開し
+  ていますか？
+- ポートの`protocol`は`Pod`のものと同じですか？
 
-## ServiceにEndpointsがあるか？
+## Service に Endpoints があるか？
 
-ここまで来たということは、`Service`は存在し、DNSによって名前解決できることが確認できているでしょう。
-ここでは、実行した`Pod`が`Service`によって実際に選択されていることを確認しましょう。
+ここまで来たということは、`Service`は存在し、DNS によって名前解決できることが確
+認できているでしょう。ここでは、実行した`Pod`が`Service`によって実際に選択されて
+いることを確認しましょう。
 
 以前に、`Pod`が実行されていることを確認しました。再確認しましょう。
 
@@ -344,10 +366,12 @@ hostnames-bvc05   1/1       Running   0          1h
 hostnames-yp2kp   1/1       Running   0          1h
 ```
 
-"AGE"列は、これらの`Pod`が約1時間前のものであることを示しており、それらが正常に実行され、クラッシュしていないことを意味します。
+"AGE"列は、これらの`Pod`が約 1 時間前のものであることを示しており、それらが正常
+に実行され、クラッシュしていないことを意味します。
 
-`-l app=hostnames`引数はラベルセレクターで、ちょうど私たちの`Service`に定義されているものと同じです。
-Kubernetesシステム内には、すべての`Service`のセレクターを評価し、結果を`Endpoints`オブジェクトに保存するコントロールループがあります。
+`-l app=hostnames`引数はラベルセレクターで、ちょうど私たちの`Service`に定義され
+ているものと同じです。 Kubernetes システム内には、すべての`Service`のセレクター
+を評価し、結果を`Endpoints`オブジェクトに保存するコントロールループがあります。
 
 ```shell
 kubectl get endpoints hostnames
@@ -355,18 +379,20 @@ NAME        ENDPOINTS
 hostnames   10.244.0.5:9376,10.244.0.6:9376,10.244.0.7:9376
 ```
 
-これにより、Endpointsコントローラーが`Service`の正しい`Pod`を見つけていることを確認できます。
-`hostnames`行が空白の場合、`Service`の`spec.selector`フィールドが実際に`Pod`の`metadata.labels`値を選択していることを確認する必要があります。
-よくある間違いは、タイプミスまたは他のエラー、たとえば`Service`が`run=hostnames`を選択しているのに`Deployment`が`app=hostnames`を指定していることです。
+これにより、Endpoints コントローラーが`Service`の正しい`Pod`を見つけていることを
+確認できます。 `hostnames`行が空白の場合、`Service`の`spec.selector`フィールドが
+実際に`Pod`の`metadata.labels`値を選択していることを確認する必要があります。よく
+ある間違いは、タイプミスまたは他のエラー、たとえば`Service`が`run=hostnames`を選
+択しているのに`Deployment`が`app=hostnames`を指定していることです。
 
-## Podは機能しているか？
+## Pod は機能しているか？
 
-この時点で、`Service`が存在し、`Pod`を選択していることがわかります。
-`Pod`が実際に機能していることを確認しましょう。`Service`メカニズムをバイパスして、`Pod`に直接アクセスすることができます。
+この時点で、`Service`が存在し、`Pod`を選択していることがわかります。 `Pod`が実際
+に機能していることを確認しましょう。`Service`メカニズムをバイパスして、`Pod`に直
+接アクセスすることができます。
 
-{{< note >}}
-これらのコマンドは、`Service`ポート(80)ではなく、`Pod`ポート(9376)を使用します。
-{{< /note >}}
+{{< note >}} これらのコマンドは、`Service`ポート(80)ではなく、`Pod`ポート(9376)
+を使用します。 {{< /note >}}
 
 ```shell
 u@pod$ wget -qO- 10.244.0.5:9376
@@ -379,11 +405,13 @@ u@pod$ wget -qO- 10.244.0.7:9376
 hostnames-yp2kp
 ```
 
-`Endpoints`リスト内の各`Pod`は、それぞれの自身のホスト名を返すはずです。
-そうならない(または、あなた自身の`Pod`の正しい振る舞いにならない)場合は、そこで何が起こっているのかを調査する必要があります。
-`kubectl logs`が役立つかもしれません。あるいは、`kubectl exec`で直接`Pod`にアクセスし、そこでサービスをチェックしましょう。
+`Endpoints`リスト内の各`Pod`は、それぞれの自身のホスト名を返すはずです。そうなら
+ない(または、あなた自身の`Pod`の正しい振る舞いにならない)場合は、そこで何が起こ
+っているのかを調査する必要があります。 `kubectl logs`が役立つかもしれません。あ
+るいは、`kubectl exec`で直接`Pod`にアクセスし、そこでサービスをチェックしましょ
+う。
 
-もう1つ確認すべきことは、`Pod`がクラッシュしたり、再起動されていないことです。
+もう 1 つ確認すべきことは、`Pod`がクラッシュしたり、再起動されていないことです。
 頻繁に再起動されていると、断続的な接続の問題が発生する可能性があります。
 
 ```shell
@@ -394,29 +422,30 @@ hostnames-632524106-ly40y   1/1       Running   0          2m
 hostnames-632524106-tlaok   1/1       Running   0          2m
 ```
 
-再起動回数が多い場合は、[Podをデバッグする](/ja/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#podのデバッグ)方法の詳細をご覧ください。
+再起動回数が多い場合は
+、[Pod をデバッグする](/ja/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#podのデバッグ)方
+法の詳細をご覧ください。
 
-## kube-proxyは機能しているか？
+## kube-proxy は機能しているか？
 
-ここに到達したのなら、`Service`は実行され、`Endpoints`があり、`Pod`が実際にサービスを提供しています。
-この時点で、`Service`のプロキシーメカニズム全体が疑わしいです。
-ひとつひとつ確認しましょう。
+ここに到達したのなら、`Service`は実行され、`Endpoints`があり、`Pod`が実際にサー
+ビスを提供しています。この時点で、`Service`のプロキシーメカニズム全体が疑わしい
+です。ひとつひとつ確認しましょう。
 
-### kube-proxyは実行されているか？
+### kube-proxy は実行されているか？
 
-`kube-proxy`が`ノード`上で実行されていることを確認しましょう。
-以下のような結果が得られるはずです。
+`kube-proxy`が`ノード`上で実行されていることを確認しましょう。以下のような結果が
+得られるはずです。
 
 ```shell
 u@node$ ps auxw | grep kube-proxy
 root  4194  0.4  0.1 101864 17696 ?    Sl Jul04  25:43 /usr/local/bin/kube-proxy --master=https://kubernetes-master --kubeconfig=/var/lib/kube-proxy/kubeconfig --v=2
 ```
 
-次に、マスターとの接続など、明らかな失敗をしていないことを確認します。
-これを行うには、ログを確認する必要があります。
-ログへのアクセス方法は、`ノード`のOSに依存します。
-一部のOSでは/var/log/kube-proxy.logのようなファイルですが、他のOSでは`journalctl`を使用してログにアクセスします。
-次のように表示されます。
+次に、マスターとの接続など、明らかな失敗をしていないことを確認します。これを行う
+には、ログを確認する必要があります。ログへのアクセス方法は、`ノード`の OS に依存
+します。一部の OS では/var/log/kube-proxy.log のようなファイルですが、他の OS で
+は`journalctl`を使用してログにアクセスします。次のように表示されます。
 
 ```none
 I1027 22:14:53.995134    5063 server.go:200] Running in resource-only container "/kube-proxy"
@@ -431,20 +460,24 @@ I1027 22:14:54.040154    5063 proxier.go:294] Adding new service "kube-system/ku
 I1027 22:14:54.040223    5063 proxier.go:294] Adding new service "kube-system/kube-dns:dns-tcp" at 10.0.0.10:53/TCP
 ```
 
-マスターに接続できないことに関するエラーメッセージが表示された場合、`ノード`の設定とインストール手順をダブルチェックする必要があります。
+マスターに接続できないことに関するエラーメッセージが表示された場合、`ノード`の設
+定とインストール手順をダブルチェックする必要があります。
 
-`kube-proxy`が正しく実行できない理由の可能性の1つは、必須の`conntrack`バイナリが見つからないことです。
-これは、例えばKubernetesをスクラッチからインストールするなど、クラスターのインストール方法に依存して、一部のLinuxシステムで発生する場合があります。
-これが該当する場合は、`conntrack`パッケージを手動でインストール(例: Ubuntuでは`sudo apt install conntrack`)する必要があり、その後に再試行する必要があります。
+`kube-proxy`が正しく実行できない理由の可能性の 1 つは、必須の`conntrack`バイナリ
+が見つからないことです。これは、例えば Kubernetes をスクラッチからインストールす
+るなど、クラスターのインストール方法に依存して、一部の Linux システムで発生する
+場合があります。これが該当する場合は、`conntrack`パッケージを手動でインストール(
+例: Ubuntu では`sudo apt install conntrack`)する必要があり、その後に再試行する必
+要があります。
 
-### kube-proxyはiptablesルールを書いているか？
+### kube-proxy は iptables ルールを書いているか？
 
-`kube-proxy`の主な責務の1つは、`Service`を実装する`iptables`ルールを記述することです。
-それらのルールが書かれていることを確認しましょう。
+`kube-proxy`の主な責務の 1 つは、`Service`を実装する`iptables`ルールを記述するこ
+とです。それらのルールが書かれていることを確認しましょう。
 
-kube-proxyは、"userspace"モード、"iptables"モード、または"ipvs"モードで実行できます。
-あなたが"iptables"モードまたは"ipvs"モードを使用していることを願います。
-続くケースのいずれかが表示されるはずです。
+kube-proxy は、"userspace"モード、"iptables"モード、または"ipvs"モードで実行でき
+ます。あなたが"iptables"モードまたは"ipvs"モードを使用していることを願います。続
+くケースのいずれかが表示されるはずです。
 
 #### Userspace
 
@@ -454,11 +487,13 @@ u@node$ iptables-save | grep hostnames
 -A KUBE-PORTALS-HOST -d 10.0.1.175/32 -p tcp -m comment --comment "default/hostnames:default" -m tcp --dport 80 -j DNAT --to-destination 10.240.115.247:48577
 ```
 
-`Service`の各ポート毎(この例では1つ)に2つのルールがあるはずです。
-"KUBE-PORTALS-CONTAINER"と"KUBE-PORTALS-HOST"です。
-これらが表示されない場合は、`-v`フラグを4に設定して`kube-proxy`を再起動してから、もう一度ログを確認してください。
+`Service`の各ポート毎(この例では 1 つ)に 2 つのルールがあるはずです。
+"KUBE-PORTALS-CONTAINER"と"KUBE-PORTALS-HOST"です。これらが表示されない場合は
+、`-v`フラグを 4 に設定して`kube-proxy`を再起動してから、もう一度ログを確認して
+ください。
 
-"userspace"モードを使用する必要がある人ほとんどないため、ここではこれ以上の時間を費やしません。
+"userspace"モードを使用する必要がある人ほとんどないため、ここではこれ以上の時間
+を費やしません。
 
 #### Iptables
 
@@ -476,8 +511,11 @@ u@node$ iptables-save | grep hostnames
 -A KUBE-SVC-NWV5X2332I4OT4T3 -m comment --comment "default/hostnames:" -j KUBE-SEP-57KPRZ3JQVENLNBR
 ```
 
-`KUBE-SERVICES`に1つのルールがあり、`KUBE-SVC-(hash)`のエンドポイント毎に1つまたは2つのルールがあり(`SessionAffinity`に依存)、エンドポイント毎に1つの`KUBE-SEP-(hash)`チェーンがあり、 そしてそれぞれの`KUBE-SEP-(hash)`チェーンにはいくつかのルールがあるはずです。
-正確なルールは、あなたの正確な構成(NodePortとLoadBalancerを含む)によって異なります。
+`KUBE-SERVICES`に 1 つのルールがあり、`KUBE-SVC-(hash)`のエンドポイント毎に 1 つ
+または 2 つのルールがあり(`SessionAffinity`に依存)、エンドポイント毎に 1 つ
+の`KUBE-SEP-(hash)`チェーンがあり、 そしてそれぞれの`KUBE-SEP-(hash)`チェーンに
+はいくつかのルールがあるはずです。正確なルールは、あなたの正確な構成(NodePort と
+LoadBalancer を含む)によって異なります。
 
 #### IPVS
 
@@ -493,23 +531,29 @@ TCP  10.0.1.175:80 rr
 ...
 ```
 
-IPVSプロキシーは、各Serviceアドレス(Cluster IP、External IP、NodePort IP、Load Balancer IPなど)毎の仮想サーバーと、Serviceのエンドポイントが存在する場合に対応する実サーバーを作成します。
-この例では、hostnames Service(`10.0.1.175:80`)は3つのエンドポイント(`10.244.0.5:9376`、`10.244.0.6:9376`、`10.244.0.7:9376`)を持ち、上と似た結果が得られるはずです。
+IPVS プロキシーは、各 Service アドレス(Cluster IP、External IP、NodePort
+IP、Load Balancer IP など)毎の仮想サーバーと、Service のエンドポイントが存在する
+場合に対応する実サーバーを作成します。この例では、hostnames
+Service(`10.0.1.175:80`)は 3 つのエンドポイント
+(`10.244.0.5:9376`、`10.244.0.6:9376`、`10.244.0.7:9376`)を持ち、上と似た結果が
+得られるはずです。
 
-### kube-proxyはプロキシしているか？
+### kube-proxy はプロキシしているか？
 
-上記のルールが表示されていると仮定すると、もう一度IPを使用して`Service`へのアクセスを試してください。
+上記のルールが表示されていると仮定すると、もう一度 IP を使用して`Service`へのア
+クセスを試してください。
 
 ```shell
 u@node$ curl 10.0.1.175:80
 hostnames-0uton
 ```
 
-もしこれが失敗し、あなたがuserspaceプロキシーを使用している場合、プロキシーへの直接アクセスを試してみてください。
-もしiptablesプロキシーを使用している場合、このセクションはスキップしてください。
+もしこれが失敗し、あなたが userspace プロキシーを使用している場合、プロキシーへ
+の直接アクセスを試してみてください。もし iptables プロキシーを使用している場合、
+このセクションはスキップしてください。
 
-上記の`iptables-save`の出力を振り返り、`kube-proxy`が`Service`に使用しているポート番号を抽出します。
-上記の例では"48577"です。このポートに接続してください。
+上記の`iptables-save`の出力を振り返り、`kube-proxy`が`Service`に使用しているポー
+ト番号を抽出します。上記の例では"48577"です。このポートに接続してください。
 
 ```shell
 u@node$ curl localhost:48577
@@ -522,19 +566,24 @@ hostnames-yp2kp
 Setting endpoints for default/hostnames:default to [10.244.0.5:9376 10.244.0.6:9376 10.244.0.7:9376]
 ```
 
-これらが表示されない場合は、`-v`フラグを4に設定して`kube-proxy`を再起動してから、再度ログを確認してください。
+これらが表示されない場合は、`-v`フラグを 4 に設定して`kube-proxy`を再起動してか
+ら、再度ログを確認してください。
 
-### PodはService IPを介して自分自身にアクセスできない
+### Pod は Service IP を介して自分自身にアクセスできない
 
-これはネットワークが"hairpin"トラフィック用に適切に設定されていない場合、通常は`kube-proxy`が`iptables`モードで実行され、Podがブリッジネットワークに接続されている場合に発生します。
-`Kubelet`は`hairpin-mode`[フラグ](/docs/admin/kubelet/)を公開します。
-これにより、Serviceのエンドポイントが自身のServiceのVIPにアクセスしようとした場合に、自身への負荷分散を可能にします。
-`hairpin-mode`フラグは`hairpin-veth`または`promiscuous-bridge`に設定する必要があります。
+これはネットワークが"hairpin"トラフィック用に適切に設定されていない場合、通常
+は`kube-proxy`が`iptables`モードで実行され、Pod がブリッジネットワークに接続され
+ている場合に発生します。
+`Kubelet`は`hairpin-mode`[フラグ](/docs/admin/kubelet/)を公開します。これにより
+、Service のエンドポイントが自身の Service の VIP にアクセスしようとした場合に、
+自身への負荷分散を可能にします。 `hairpin-mode`フラグは`hairpin-veth`また
+は`promiscuous-bridge`に設定する必要があります。
 
 この問題をトラブルシューティングする一般的な手順は次のとおりです。
 
-* `hairpin-mode`が`hairpin-veth`または`promiscuous-bridge`に設定されていることを確認します。
-次のような表示がされるはずです。この例では、`hairpin-mode`は`promiscuous-bridge`に設定されています。
+- `hairpin-mode`が`hairpin-veth`または`promiscuous-bridge`に設定されていることを
+  確認します。次のような表示がされるはずです。この例では
+  、`hairpin-mode`は`promiscuous-bridge`に設定されています。
 
 ```shell
 u@node$ ps auxw|grep kubelet
@@ -542,20 +591,22 @@ root      3392  1.1  0.8 186804 65208 ?        Sl   00:51  11:11 /usr/local/bin/
 
 ```
 
-* 実際に使われている`hairpin-mode`を確認します。
-これを行うには、kubeletログを確認する必要があります。
-ログへのアクセス方法は、NodeのOSによって異なります。
-一部のOSでは/var/log/kubelet.logなどのファイルですが、他のOSでは`journalctl`を使用してログにアクセスします。
-互換性のために、実際に使われている`hairpin-mode`が`--hairpin-mode`フラグと一致しない場合があることに注意してください。
-kubelet.logにキーワード`hairpin`を含むログ行があるかどうかを確認してください。
-実際に使われている`hairpin-mode`を示す以下のようなログ行があるはずです。
+- 実際に使われている`hairpin-mode`を確認します。これを行うには、kubelet ログを確
+  認する必要があります。ログへのアクセス方法は、Node の OS によって異なります。
+  一部の OS では/var/log/kubelet.log などのファイルですが、他の OS で
+  は`journalctl`を使用してログにアクセスします。互換性のために、実際に使われてい
+  る`hairpin-mode`が`--hairpin-mode`フラグと一致しない場合があることに注意してく
+  ださい。 kubelet.log にキーワード`hairpin`を含むログ行があるかどうかを確認して
+  ください。実際に使われている`hairpin-mode`を示す以下のようなログ行があるはずで
+  す。
 
 ```shell
 I0629 00:51:43.648698    3252 kubelet.go:380] Hairpin mode set to "promiscuous-bridge"
 ```
 
-* 実際に使われている`hairpin-mode`が`hairpin-veth`の場合、`Kubelet`にノードの`/sys`で操作する権限があることを確認します。
-すべてが正常に機能している場合、次のようなものが表示されます。
+- 実際に使われている`hairpin-mode`が`hairpin-veth`の場合、`Kubelet`にノード
+  の`/sys`で操作する権限があることを確認します。すべてが正常に機能している場合、
+  次のようなものが表示されます。
 
 ```shell
 for intf in /sys/devices/virtual/net/cbr0/brif/*; do cat $intf/hairpin_mode; done
@@ -565,8 +616,9 @@ for intf in /sys/devices/virtual/net/cbr0/brif/*; do cat $intf/hairpin_mode; don
 1
 ```
 
-実際に使われている`hairpin-mode`が`promiscuous-bridge`の場合、`Kubelet`にノード上のLinuxブリッジを操作する権限があることを確認してください。
-`cbr0`ブリッジが使用され適切に構成されている場合、以下が表示されます。
+実際に使われている`hairpin-mode`が`promiscuous-bridge`の場合、`Kubelet`にノード
+上の Linux ブリッジを操作する権限があることを確認してください。 `cbr0`ブリッジが
+使用され適切に構成されている場合、以下が表示されます。
 
 ```shell
 u@node$ ifconfig cbr0 |grep PROMISC
@@ -574,15 +626,15 @@ UP BROADCAST RUNNING PROMISC MULTICAST  MTU:1460  Metric:1
 
 ```
 
-* 上記のいずれも解決しない場合、助けを求めてください。
+- 上記のいずれも解決しない場合、助けを求めてください。
 
 ## 助けを求める
 
 ここまでたどり着いたということは、とてもおかしなことが起こっています。
 `Service`は実行中で、`Endpoints`があり、`Pod`は実際にサービスを提供しています。
-DNSは動作していて、`iptables`ルールがインストールされていて、`kube-proxy`も誤動作していないようです。
-それでも、あなたの`Service`は機能していません。
-おそらく私たちにお知らせ頂いた方がよいでしょう。調査をお手伝いします！
+DNS は動作していて、`iptables`ルールがインストールされていて、`kube-proxy`も誤動
+作していないようです。それでも、あなたの`Service`は機能していません。おそらく私
+たちにお知らせ頂いた方がよいでしょう。調査をお手伝いします！
 
 [Slack](/docs/troubleshooting/#slack)または
 [Forum](https://discuss.kubernetes.io)または
@@ -592,6 +644,7 @@ DNSは動作していて、`iptables`ルールがインストールされてい�
 
 {{% capture whatsnext %}}
 
-詳細については、[トラブルシューティングドキュメント](/docs/troubleshooting/)をご覧ください。
+詳細については、[トラブルシューティングドキュメント](/docs/troubleshooting/)をご
+覧ください。
 
 {{% /capture %}}
