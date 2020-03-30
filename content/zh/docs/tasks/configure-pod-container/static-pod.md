@@ -186,7 +186,7 @@ For example, this is how to start a simple web server as a static Pod:
     ```
 
     或者在
-    [Kubelet 配置文件](/docs/tasks/administer-cluster/kubelet-config-file)中添加
+    [Kubelet 配置文件](/docs/tasks/administer-cluster/kubelet-config-file)中添�
     `staticPodPath: <目录>`字段。
 
 <!--
