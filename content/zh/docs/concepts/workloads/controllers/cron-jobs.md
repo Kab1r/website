@@ -73,7 +73,7 @@ but do not completely prevent them. Therefore, jobs should be _idempotent_.
 
 ## CronJob 限制
 
-CronJob 创建 Job 对象，每个 Job 的执行次数大约为一次。我们之所以说 "大约"，是因
+CronJob 创建 Job 对象，每个 Job 的执行次数大约为一次。我们之所以说 "大约"，是�
 为在某些情况下，可能会创建两个 Job，或者不会创建任何 Job。我们试图使这些情况尽量
 少发生，但不能完全杜绝。因此，Job 应该是 _幂等的_。
 
