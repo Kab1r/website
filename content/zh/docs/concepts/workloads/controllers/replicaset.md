@@ -282,7 +282,7 @@ When using the REST API or the `client-go` library, you must set `propagationPol
 要删除 ReplicaSet 和它的所有 Pod，使
 用[`kubectl delete`](/docs/reference/generated/kubectl/kubectl-commands#delete)
 命令。默认情况下
-，[垃圾收集器](/docs/concepts/workloads/controllers/garbage-collection/) 自动删
+，[垃圾收集器](/docs/concepts/workloads/controllers/garbage-collection/) 自动�
 除所有依赖的 Pod。
 
 当使用 REST API 或 `client-go` 库时，您必须在删除选项中将 `propagationPolicy` 设
@@ -418,7 +418,7 @@ application using a Deployment, please read [Run a Stateless Application Using a
 [`Deployment`](/docs/concepts/workloads/controllers/deployment/) 是一个高级 API
 对象，它以 `kubectl rolling-update` 的方式更新其底层副本集及其 Pod。如果您需要滚
 动更新功能，建议使用 Deployment，因为 Deployment 与 `kubectl rolling-update` 不
-同的是：它是声明式的、服务器端的、并且具有其他特性。有关使用 Deployment 来运行无
+同的是：它是声明式的、服务器端的、并且具有其他特性。有关使用 Deployment 来运行�
 状态应用的更多信息，请参阅
 [使用 Deployment 运行无状态应用](/docs/tasks/run-application/run-stateless-application-deployment/)。
 
