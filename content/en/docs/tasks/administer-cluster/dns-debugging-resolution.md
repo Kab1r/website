@@ -1,20 +1,20 @@
 ---
 reviewers:
-- bowei
-- zihongz
-title:  Debugging DNS Resolution
+  - bowei
+  - zihongz
+title: Debugging DNS Resolution
 content_template: templates/task
 ---
 
-{{% capture overview %}}
-This page provides hints on diagnosing DNS problems.
+{{% capture overview %}} This page provides hints on diagnosing DNS problems.
 {{% /capture %}}
 
 {{% capture prerequisites %}}
-* {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
-* Kubernetes version 1.6 and above.
-* The cluster must be configured to use the `coredns` (or `kube-dns`) addons.
-{{% /capture %}}
+
+- {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+- Kubernetes version 1.6 and above.
+- The cluster must be configured to use the `coredns` (or `kube-dns`) addons.
+  {{% /capture %}}
 
 {{% capture steps %}}
 
@@ -35,8 +35,8 @@ NAME      READY     STATUS    RESTARTS   AGE
 dnsutils   1/1       Running   0          <some-time>
 ```
 
-Once that pod is running, you can exec `nslookup` in that environment.
-If you see something like the following, DNS is working correctly.
+Once that pod is running, you can exec `nslookup` in that environment. If you
+see something like the following, DNS is working correctly.
 
 ```shell
 kubectl exec -ti dnsutils -- nslookup kubernetes.default
@@ -51,16 +51,16 @@ If the `nslookup` command fails, check the following:
 
 ### Check the local DNS configuration first
 
-Take a look inside the resolv.conf file.
-(See [Inheriting DNS from the node](/docs/tasks/administer-cluster/dns-custom-nameservers/#inheriting-dns-from-the-node) and
-[Known issues](#known-issues) below for more information)
+Take a look inside the resolv.conf file. (See
+[Inheriting DNS from the node](/docs/tasks/administer-cluster/dns-custom-nameservers/#inheriting-dns-from-the-node)
+and [Known issues](#known-issues) below for more information)
 
 ```shell
 kubectl exec dnsutils cat /etc/resolv.conf
 ```
 
-Verify that the search path and name server are set up like the following
-(note that search path may vary for different cloud providers):
+Verify that the search path and name server are set up like the following (note
+that search path may vary for different cloud providers):
 
 ```
 search default.svc.cluster.local svc.cluster.local cluster.local google.internal c.gce_project_id.internal
@@ -68,8 +68,8 @@ nameserver 10.0.0.10
 options ndots:5
 ```
 
-Errors such as the following indicate a problem with the coredns/kube-dns add-on or
-associated Services:
+Errors such as the following indicate a problem with the coredns/kube-dns add-on
+or associated Services:
 
 ```
 kubectl exec -ti dnsutils -- nslookup kubernetes.default
@@ -94,6 +94,7 @@ nslookup: can't resolve 'kubernetes.default'
 Use the `kubectl get pods` command to verify that the DNS pod is running.
 
 For CoreDNS:
+
 ```shell
 kubectl get pods --namespace=kube-system -l k8s-app=kube-dns
 NAME                       READY     STATUS    RESTARTS   AGE
@@ -104,6 +105,7 @@ coredns-7b96bf9f76-mvmmt   1/1       Running   0           1h
 ```
 
 Or for kube-dns:
+
 ```shell
 kubectl get pods --namespace=kube-system -l k8s-app=kube-dns
 NAME                    READY     STATUS    RESTARTS   AGE
@@ -121,6 +123,7 @@ have to deploy it manually.
 Use `kubectl logs` command to see logs for the DNS containers.
 
 For CoreDNS:
+
 ```shell
 for p in $(kubectl get pods --namespace=kube-system -l k8s-app=kube-dns -o name); do kubectl logs --namespace=kube-system $p; done
 ```
@@ -136,8 +139,8 @@ linux/amd64, go1.10.3, 2e322f6
 2018/08/15 14:37:17 [INFO] plugin/reload: Running configuration MD5 = 24e6c59e83ce706f07bcc82c31b1ea1c
 ```
 
-
 For kube-dns, there are 3 sets of logs:
+
 ```shell
 kubectl logs --namespace=kube-system $(kubectl get pods --namespace=kube-system -l k8s-app=kube-dns -o name | head -1) -c kubedns
 
@@ -146,11 +149,11 @@ kubectl logs --namespace=kube-system $(kubectl get pods --namespace=kube-system 
 kubectl logs --namespace=kube-system $(kubectl get pods --namespace=kube-system -l k8s-app=kube-dns -o name | head -1) -c sidecar
 ```
 
-See if there are any suspicious error messages in the logs. In kube-dns, a '`W`', '`E`' or '`F`' at the beginning
-of a line represents a Warning, Error or Failure. Please search for entries that have these
-as the logging level and use
-[kubernetes issues](https://github.com/kubernetes/kubernetes/issues)
-to report unexpected errors.
+See if there are any suspicious error messages in the logs. In kube-dns, a
+'`W`', '`E`' or '`F`' at the beginning of a line represents a Warning, Error or
+Failure. Please search for entries that have these as the logging level and use
+[kubernetes issues](https://github.com/kubernetes/kubernetes/issues) to report
+unexpected errors.
 
 ### Is DNS service up?
 
@@ -164,17 +167,16 @@ kube-dns     ClusterIP   10.0.0.10      <none>        53/UDP,53/TCP        1h
 ...
 ```
 
-
-Note that the service name will be "kube-dns" for both CoreDNS and kube-dns deployments.
-If you have created the service or in the case it should be created by default
-but it does not appear, see 
+Note that the service name will be "kube-dns" for both CoreDNS and kube-dns
+deployments. If you have created the service or in the case it should be created
+by default but it does not appear, see
 [debugging services](/docs/tasks/debug-application-cluster/debug-service/) for
 more information.
 
 ### Are DNS endpoints exposed?
 
-You can verify that DNS endpoints are exposed by using the `kubectl get endpoints`
-command.
+You can verify that DNS endpoints are exposed by using the
+`kubectl get endpoints` command.
 
 ```shell
 kubectl get ep kube-dns --namespace=kube-system
@@ -183,17 +185,18 @@ kube-dns   10.180.3.17:53,10.180.3.17:53    1h
 ```
 
 If you do not see the endpoints, see endpoints section in the
-[debugging services](/docs/tasks/debug-application-cluster/debug-service/) documentation.
+[debugging services](/docs/tasks/debug-application-cluster/debug-service/)
+documentation.
 
 For additional Kubernetes DNS examples, see the
 [cluster-dns examples](https://github.com/kubernetes/examples/tree/master/staging/cluster-dns)
 in the Kubernetes GitHub repository.
 
-
 ### Are DNS queries being received/processed?
 
-You can verify if queries are being received by CoreDNS by adding the `log` plugin to the CoreDNS configuration (aka Corefile).
-The CoreDNS Corefile is held in a ConfigMap named `coredns`. To edit it, use the command ...
+You can verify if queries are being received by CoreDNS by adding the `log`
+plugin to the CoreDNS configuration (aka Corefile). The CoreDNS Corefile is held
+in a ConfigMap named `coredns`. To edit it, use the command ...
 
 ```
 kubectl -n kube-system edit configmap coredns
@@ -228,9 +231,12 @@ data:
 
 ```
 
-After saving the changes, it may take up to minute or two for Kubernetes to propagate these changes to the CoreDNS pods.
+After saving the changes, it may take up to minute or two for Kubernetes to
+propagate these changes to the CoreDNS pods.
 
-Next, make some queries and view the logs per the sections above in this document. If CoreDNS pods are receiving the queries, you should see them in the logs.
+Next, make some queries and view the logs per the sections above in this
+document. If CoreDNS pods are receiving the queries, you should see them in the
+logs.
 
 Here is an example of a query in the log.
 
@@ -248,30 +254,45 @@ linux/amd64, go1.10.3, 2e322f6
 
 ## Known issues
 
-Some Linux distributions (e.g. Ubuntu) use a local DNS resolver by default (systemd-resolved).
-Systemd-resolved moves and replaces `/etc/resolv.conf` with a stub file that can cause a fatal forwarding
-loop when resolving names in upstream servers. This can be fixed manually by using kubelet's `--resolv-conf` flag
-to point to the correct `resolv.conf` (With `systemd-resolved`, this is `/run/systemd/resolve/resolv.conf`).
-kubeadm (>= 1.11) automatically detects `systemd-resolved`, and adjusts the kubelet flags accordingly.
+Some Linux distributions (e.g. Ubuntu) use a local DNS resolver by default
+(systemd-resolved). Systemd-resolved moves and replaces `/etc/resolv.conf` with
+a stub file that can cause a fatal forwarding loop when resolving names in
+upstream servers. This can be fixed manually by using kubelet's `--resolv-conf`
+flag to point to the correct `resolv.conf` (With `systemd-resolved`, this is
+`/run/systemd/resolve/resolv.conf`). kubeadm (>= 1.11) automatically detects
+`systemd-resolved`, and adjusts the kubelet flags accordingly.
 
 Kubernetes installs do not configure the nodes' `resolv.conf` files to use the
-cluster DNS by default, because that process is inherently distribution-specific.
-This should probably be implemented eventually.
+cluster DNS by default, because that process is inherently
+distribution-specific. This should probably be implemented eventually.
 
-Linux's libc (a.k.a. glibc) has a limit for the DNS `nameserver` records to 3 by default. What's more, for the glibc versions which are older than glibc-2.17-222 ([the new versions update see this issue](https://access.redhat.com/solutions/58028)), the allowed number of DNS `search` records has been limited to 6 ([see this bug from 2005](https://bugzilla.redhat.com/show_bug.cgi?id=168253)). Kubernetes needs to consume 1 `nameserver` record and 3 `search` records. This means that if a local installation already uses 3 `nameserver`s or uses more than 3 `search`es while your glibc version is in the affected list, some of those settings will be lost. To work around the DNS `nameserver` records limit, the node can run `dnsmasq`, which will provide more `nameserver` entries. You can also use kubelet's `--resolv-conf` flag. To fix the DNS `search` records limit, consider upgrading your linux distribution or upgrading to an unaffected version of glibc.
+Linux's libc (a.k.a. glibc) has a limit for the DNS `nameserver` records to 3 by
+default. What's more, for the glibc versions which are older than glibc-2.17-222
+([the new versions update see this issue](https://access.redhat.com/solutions/58028)),
+the allowed number of DNS `search` records has been limited to 6
+([see this bug from 2005](https://bugzilla.redhat.com/show_bug.cgi?id=168253)).
+Kubernetes needs to consume 1 `nameserver` record and 3 `search` records. This
+means that if a local installation already uses 3 `nameserver`s or uses more
+than 3 `search`es while your glibc version is in the affected list, some of
+those settings will be lost. To work around the DNS `nameserver` records limit,
+the node can run `dnsmasq`, which will provide more `nameserver` entries. You
+can also use kubelet's `--resolv-conf` flag. To fix the DNS `search` records
+limit, consider upgrading your linux distribution or upgrading to an unaffected
+version of glibc.
 
 If you are using Alpine version 3.3 or earlier as your base image, DNS may not
-work properly due to a known issue with Alpine.
-Check [here](https://github.com/kubernetes/kubernetes/issues/30215)
-for more information.
+work properly due to a known issue with Alpine. Check
+[here](https://github.com/kubernetes/kubernetes/issues/30215) for more
+information.
 
 ## References
 
 - [DNS for Services and Pods](/docs/concepts/services-networking/dns-pod-service/)
-- [Docs for the kube-dns DNS cluster addon](http://releases.k8s.io/{{< param "githubbranch" >}}/cluster/addons/dns/kube-dns/README.md)
+- [Docs for the kube-dns DNS cluster addon](http://releases.k8s.io/{{< param
+  "githubbranch" >}}/cluster/addons/dns/kube-dns/README.md)
 
 ## What's next
+
 - [Autoscaling the DNS Service in a Cluster](/docs/tasks/administer-cluster/dns-horizontal-autoscaling/).
 
 {{% /capture %}}
-
