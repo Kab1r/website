@@ -5,8 +5,8 @@ content_template: templates/concept
 
 {{% capture overview %}}
 
-{{< comment >}}Updated: 4/14/2015{{< /comment >}}
-{{< comment >}}Edited and moved to Concepts section: 2/2/17{{< /comment >}}
+{{< comment >}}Updated: 4/14/2015{{< /comment >}} {{< comment >}}Edited and
+moved to Concepts section: 2/2/17{{< /comment >}}
 
 该页面将描述 Pod 的生命周期。
 
@@ -16,31 +16,50 @@ content_template: templates/concept
 
 ## Pod phase
 
-Pod 的 `status` 定义在 [PodStatus](/docs/resources-reference/v1.7/#podstatus-v1-core) 对象中，其中有一个 `phase` 字段。
+Pod 的 `status` 定义在
+[PodStatus](/docs/resources-reference/v1.7/#podstatus-v1-core) 对象中，其中有一
+个 `phase` 字段。
 
-Pod 的运行阶段（phase）是 Pod 在其生命周期中的简单宏观概述。该阶段并不是对容器或 Pod 的综合汇总，也不是为了做为综合状态机。
+Pod 的运行阶段（phase）是 Pod 在其生命周期中的简单宏观概述。该阶段并不是对容器或
+Pod 的综合汇总，也不是为了做为综合状态机。
 
-Pod 相位的数量和含义是严格指定的。除了本文档中列举的内容外，不应该再假定 Pod 有其他的 `phase` 值。
+Pod 相位的数量和含义是严格指定的。除了本文档中列举的内容外，不应该再假定 Pod 有
+其他的 `phase` 值。
 
 下面是 `phase` 可能的值：
 
-- 挂起（Pending）：Pod 已被 Kubernetes 系统接受，但有一个或者多个容器镜像尚未创建。等待时间包括调度 Pod 的时间和通过网络下载镜像的时间，这可能需要花点时间。
-- 运行中（Running）：该 Pod 已经绑定到了一个节点上，Pod 中所有的容器都已被创建。至少有一个容器正在运行，或者正处于启动或重启状态。
+- 挂起（Pending）：Pod 已被 Kubernetes 系统接受，但有一个或者多个容器镜像尚未创
+  建。等待时间包括调度 Pod 的时间和通过网络下载镜像的时间，这可能需要花点时间。
+- 运行中（Running）：该 Pod 已经绑定到了一个节点上，Pod 中所有的容器都已被创建。
+  至少有一个容器正在运行，或者正处于启动或重启状态。
 - 成功（Succeeded）：Pod 中的所有容器都被成功终止，并且不会再重启。
-- 失败（Failed）：Pod 中的所有容器都已终止了，并且至少有一个容器是因为失败终止。也就是说，容器以非0状态退出或者被系统终止。
-- 未知（Unknown）：因为某些原因无法取得 Pod 的状态，通常是因为与 Pod 所在主机通信失败。
+- 失败（Failed）：Pod 中的所有容器都已终止了，并且至少有一个容器是因为失败终止。
+  也就是说，容器以非 0 状态退出或者被系统终止。
+- 未知（Unknown）：因为某些原因无法取得 Pod 的状态，通常是因为与 Pod 所在主机通
+  信失败。
 
 ## Pod 状态
 
-Pod 有一个 PodStatus 对象，其中包含一个 [PodCondition](/docs/resources-reference/v1.7/#podcondition-v1-core) 数组。 PodCondition 数组的每个元素都有一个 `type` 字段和一个 `status` 字段。`type` 字段是字符串，可能的值有 PodScheduled、Ready、Initialized 和 Unschedulable。`status` 字段是一个字符串，可能的值有 True、False 和 Unknown。
+Pod 有一个 PodStatus 对象，其中包含一个
+[PodCondition](/docs/resources-reference/v1.7/#podcondition-v1-core) 数组。
+PodCondition 数组的每个元素都有一个 `type` 字段和一个 `status` 字段。`type` 字段
+是字符串，可能的值有 PodScheduled、Ready、Initialized 和 Unschedulable。`status`
+字段是一个字符串，可能的值有 True、False 和 Unknown。
 
 ## 容器探针
 
-[探针](/docs/resources-reference/v1.7/#probe-v1-core) 是由 [kubelet](/docs/admin/kubelet/) 对容器执行的定期诊断。要执行诊断，kubelet 调用由容器实现的 [Handler](https://godoc.org/k8s.io/kubernetes/pkg/api/v1#Handler)。有三种类型的处理程序：
+[探针](/docs/resources-reference/v1.7/#probe-v1-core) 是由
+[kubelet](/docs/admin/kubelet/) 对容器执行的定期诊断。要执行诊断，kubelet 调用由
+容器实现的 [Handler](https://godoc.org/k8s.io/kubernetes/pkg/api/v1#Handler)。有
+三种类型的处理程序：
 
-- [ExecAction](/docs/resources-reference/v1.7/#execaction-v1-core)：在容器内执行指定命令。如果命令退出时返回码为 0 则认为诊断成功。
-- [TCPSocketAction](/docs/resources-reference/v1.7/#tcpsocketaction-v1-core)：对指定端口上的容器的 IP 地址进行 TCP 检查。如果端口打开，则诊断被认为是成功的。
-- [HTTPGetAction](/docs/resources-reference/v1.7/#httpgetaction-v1-core)：对指定的端口和路径上的容器的 IP 地址执行 HTTP Get 请求。如果响应的状态码大于等于200 且小于 400，则诊断被认为是成功的。
+- [ExecAction](/docs/resources-reference/v1.7/#execaction-v1-core)：在容器内执行
+  指定命令。如果命令退出时返回码为 0 则认为诊断成功。
+- [TCPSocketAction](/docs/resources-reference/v1.7/#tcpsocketaction-v1-core)：对
+  指定端口上的容器的 IP 地址进行 TCP 检查。如果端口打开，则诊断被认为是成功的。
+- [HTTPGetAction](/docs/resources-reference/v1.7/#httpgetaction-v1-core)：对指定
+  的端口和路径上的容器的 IP 地址执行 HTTP Get 请求。如果响应的状态码大于等于 200
+  且小于 400，则诊断被认为是成功的。
 
 每次探测都将获得以下三种结果之一：
 
@@ -50,45 +69,80 @@ Pod 有一个 PodStatus 对象，其中包含一个 [PodCondition](/docs/resourc
 
 Kubelet 可以选择是否执行在容器上运行的三种探针执行和做出反应：
 
-- `livenessProbe`：指示容器是否正在运行。如果存活探测失败，则 kubelet 会杀死容器，并且容器将受到其 [重启策略](/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy) 的影响。如果容器不提供存活探针，则默认状态为 `Success`。
-- `readinessProbe`：指示容器是否准备好服务请求。如果就绪探测失败，端点控制器将从与 Pod 匹配的所有 Service 的端点中删除该 Pod 的 IP 地址。初始延迟之前的就绪状态默认为 `Failure`。如果容器不提供就绪探针，则默认状态为 `Success`。
-- `startupProbe`: 指示容器中的应用是否已经启动。如果提供了启动探测(startup probe)，则禁用所有其他探测，直到它成功为止。如果启动探测失败，kubelet 将杀死容器，容器服从其重启策略进行重启。如果容器没有提供启动探测，则默认状态为成功`Success`。
+- `livenessProbe`：指示容器是否正在运行。如果存活探测失败，则 kubelet 会杀死容器
+  ，并且容器将受到其
+  [重启策略](/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy) 的影响
+  。如果容器不提供存活探针，则默认状态为 `Success`。
+- `readinessProbe`：指示容器是否准备好服务请求。如果就绪探测失败，端点控制器将从
+  与 Pod 匹配的所有 Service 的端点中删除该 Pod 的 IP 地址。初始延迟之前的就绪状
+  态默认为 `Failure`。如果容器不提供就绪探针，则默认状态为 `Success`。
+- `startupProbe`: 指示容器中的应用是否已经启动。如果提供了启动探测(startup
+  probe)，则禁用所有其他探测，直到它成功为止。如果启动探测失败，kubelet 将杀死容
+  器，容器服从其重启策略进行重启。如果容器没有提供启动探测，则默认状态为成
+  功`Success`。
 
 ### 该什么时候使用存活（liveness）和就绪（readiness）探针?
 
-如果容器中的进程能够在遇到问题或不健康的情况下自行崩溃，则不一定需要存活探针; kubelet 将根据 Pod 的`restartPolicy` 自动执行正确的操作。
+如果容器中的进程能够在遇到问题或不健康的情况下自行崩溃，则不一定需要存活探针;
+kubelet 将根据 Pod 的`restartPolicy` 自动执行正确的操作。
 
-如果您希望容器在探测失败时被杀死并重新启动，那么请指定一个存活探针，并指定`restartPolicy` 为 Always 或 OnFailure。
+如果您希望容器在探测失败时被杀死并重新启动，那么请指定一个存活探针，并指
+定`restartPolicy` 为 Always 或 OnFailure。
 
-如果要仅在探测成功时才开始向 Pod 发送流量，请指定就绪探针。在这种情况下，就绪探针可能与存活探针相同，但是 spec 中的就绪探针的存在意味着 Pod 将在没有接收到任何流量的情况下启动，并且只有在探针探测成功后才开始接收流量。
+如果要仅在探测成功时才开始向 Pod 发送流量，请指定就绪探针。在这种情况下，就绪探
+针可能与存活探针相同，但是 spec 中的就绪探针的存在意味着 Pod 将在没有接收到任何
+流量的情况下启动，并且只有在探针探测成功后才开始接收流量。
 
-如果您希望容器能够自行维护，您可以指定一个就绪探针，该探针检查与存活探针不同的端点。
+如果您希望容器能够自行维护，您可以指定一个就绪探针，该探针检查与存活探针不同的端
+点。
 
-请注意，如果您只想在 Pod 被删除时能够排除请求，则不一定需要使用就绪探针；在删除 Pod 时，Pod 会自动将自身置于未完成状态，无论就绪探针是否存在。当等待 Pod 中的容器停止时，Pod 仍处于未完成状态。
+请注意，如果您只想在 Pod 被删除时能够排除请求，则不一定需要使用就绪探针；在删除
+Pod 时，Pod 会自动将自身置于未完成状态，无论就绪探针是否存在。当等待 Pod 中的容
+器停止时，Pod 仍处于未完成状态。
 
 ## Pod 和容器状态
 
-有关 Pod 容器状态的详细信息，请参阅 [PodStatus](/docs/resources-reference/v1.7/#podstatus-v1-core) 和 [ContainerStatus](/docs/resources-reference/v1.7/#containerstatus-v1-core)。请注意，报告的 Pod 状态信息取决于当前的 [ContainerState](/docs/resources-reference/v1.7/#containerstatus-v1-core)。
+有关 Pod 容器状态的详细信息，请参阅
+[PodStatus](/docs/resources-reference/v1.7/#podstatus-v1-core) 和
+[ContainerStatus](/docs/resources-reference/v1.7/#containerstatus-v1-core)。请注
+意，报告的 Pod 状态信息取决于当前的
+[ContainerState](/docs/resources-reference/v1.7/#containerstatus-v1-core)。
 
 ## 重启策略
 
-PodSpec 中有一个 `restartPolicy` 字段，可能的值为 Always、OnFailure 和 Never。默认为 Always。 `restartPolicy` 适用于 Pod 中的所有容器。`restartPolicy` 仅指通过同一节点上的 kubelet 重新启动容器。失败的容器由 kubelet 以五分钟为上限的指数退避延迟（10秒，20秒，40秒...）重新启动，并在成功执行十分钟后重置。如 [Pod 文档](/docs/user-guide/pods/#durability-of-pods-or-lack-thereof) 中所述，一旦绑定到一个节点，Pod 将永远不会重新绑定到另一个节点。
+PodSpec 中有一个 `restartPolicy` 字段，可能的值为 Always、OnFailure 和 Never。默
+认为 Always。 `restartPolicy` 适用于 Pod 中的所有容器。`restartPolicy` 仅指通过
+同一节点上的 kubelet 重新启动容器。失败的容器由 kubelet 以五分钟为上限的指数退避
+延迟（10 秒，20 秒，40 秒...）重新启动，并在成功执行十分钟后重置。如
+[Pod 文档](/docs/user-guide/pods/#durability-of-pods-or-lack-thereof) 中所述，一
+旦绑定到一个节点，Pod 将永远不会重新绑定到另一个节点。
 
 ## Pod 的生命
 
-一般来说，Pod 不会消失，直到人为销毁他们。这可能是一个人或控制器。这个规则的唯一例外是成功或失败的 `phase` 超过一段时间（由 master 确定）的Pod将过期并被自动销毁。
+一般来说，Pod 不会消失，直到人为销毁他们。这可能是一个人或控制器。这个规则的唯一
+例外是成功或失败的 `phase` 超过一段时间（由 master 确定）的 Pod 将过期并被自动销
+毁。
 
 有三种可用的控制器：
 
-- 使用 [Job](/docs/concepts/jobs/run-to-completion-finite-workloads/) 运行预期会终止的 Pod，例如批量计算。Job 仅适用于重启策略为 `OnFailure` 或 `Never` 的 Pod。
+- 使用 [Job](/docs/concepts/jobs/run-to-completion-finite-workloads/) 运行预期会
+  终止的 Pod，例如批量计算。Job 仅适用于重启策略为 `OnFailure` 或 `Never` 的
+  Pod。
 
+* 对预期不会终止的 Pod 使用
+  [ReplicationController](/docs/concepts/workloads/controllers/replicationcontroller/)、[ReplicaSet](/docs/concepts/workloads/controllers/replicaset/)
+  和 [Deployment](/docs/concepts/workloads/controllers/deployment/) ，例如 Web
+  服务器。 ReplicationController 仅适用于具有 `restartPolicy` 为 Always 的 Pod。
+* 提供特定于机器的系统服务，使用
+  [DaemonSet](/docs/concepts/workloads/controllers/daemonset/) 为每台机器运行一
+  个 Pod 。
 
-- 对预期不会终止的 Pod 使用 [ReplicationController](/docs/concepts/workloads/controllers/replicationcontroller/)、[ReplicaSet](/docs/concepts/workloads/controllers/replicaset/) 和 [Deployment](/docs/concepts/workloads/controllers/deployment/) ，例如 Web 服务器。 ReplicationController 仅适用于具有 `restartPolicy` 为 Always 的 Pod。
-- 提供特定于机器的系统服务，使用 [DaemonSet](/docs/concepts/workloads/controllers/daemonset/) 为每台机器运行一个 Pod 。
+所有这三种类型的控制器都包含一个 PodTemplate。建议创建适当的控制器，让它们来创建
+Pod，而不是直接自己创建 Pod。这是因为单独的 Pod 在机器故障的情况下没有办法自动复
+原，而控制器却可以。
 
-所有这三种类型的控制器都包含一个 PodTemplate。建议创建适当的控制器，让它们来创建 Pod，而不是直接自己创建 Pod。这是因为单独的 Pod 在机器故障的情况下没有办法自动复原，而控制器却可以。
-
-如果节点死亡或与集群的其余部分断开连接，则 Kubernetes 将应用一个策略将丢失节点上的所有 Pod 的 `phase` 设置为 Failed。
+如果节点死亡或与集群的其余部分断开连接，则 Kubernetes 将应用一个策略将丢失节点上
+的所有 Pod 的 `phase` 设置为 Failed。
 
 ## 示例
 
@@ -112,23 +166,23 @@ metadata:
   name: liveness-http
 spec:
   containers:
-  - args:
-    - /server
-    image: k8s.gcr.io/liveness
-    livenessProbe:
-      httpGet:
-        # 当没有定义 "host" 时，使用 "PodIP"
-        # host: my-host
-        # 当没有定义 "scheme" 时，使用 "HTTP" scheme 只允许 "HTTP" 和 "HTTPS"
-        # scheme: HTTPS
-        path: /healthz
-        port: 8080
-        httpHeaders:
-        - name: X-Custom-Header
-          value: Awesome
-      initialDelaySeconds: 15
-      timeoutSeconds: 1
-    name: liveness
+    - args:
+        - /server
+      image: k8s.gcr.io/liveness
+      livenessProbe:
+        httpGet:
+          # 当没有定义 "host" 时，使用 "PodIP"
+          # host: my-host
+          # 当没有定义 "scheme" 时，使用 "HTTP" scheme 只允许 "HTTP" 和 "HTTPS"
+          # scheme: HTTPS
+          path: /healthz
+          port: 8080
+          httpHeaders:
+            - name: X-Custom-Header
+              value: Awesome
+        initialDelaySeconds: 15
+        timeoutSeconds: 1
+      name: liveness
 ```
 
 ### 状态示例
@@ -175,6 +229,3 @@ spec:
   - 如果是用控制器来运行，Pod 将在别处重建。
 
 {{% /capture %}}
-
-
-
