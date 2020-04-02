@@ -274,7 +274,7 @@ is true.
 Here's an example that orphans the dependents of a ReplicaSet:
 -->
 
-kubectl 也支持级联删除。通过设置 `--cascade` 为 `true`，可以使用 kubectl 自动删
+kubectl 也支持级联删除。通过设置 `--cascade` 为 `true`，可以使用 kubectl 自动�
 除附属对象。设置 `--cascade` 为 `false`，会使附属对象成为孤儿附属对象
 。`--cascade` 的默认值是 true。
 
