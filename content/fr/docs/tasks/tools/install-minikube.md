@@ -104,11 +104,11 @@ pour plus d'informations. {{</ caution >}}
 
 Minikube prend également en charge un `vm-driver=podman` similaire au pilote
 Docker. Podman est exécuté en tant que superutilisateur (utilisateur root),
-c'est le meilleur moyen de garantir que vos conteneurs ont un accès complet à
+c'est le meilleur moyen de garantir que vos conteneurs ont un accès complet �
 toutes les fonctionnalités disponibles sur votre système.
 
 {{< caution >}} Le pilote `podman` nécessite l’exécution des conteneurs en tant
-que root car les comptes d’utilisateurs normaux n’ont pas un accès complet à
+que root car les comptes d’utilisateurs normaux n’ont pas un accès complet �
 toutes les fonctionnalités du système d’exploitation que leurs conteneurs
 pourraient avoir besoin d’exécuter. {{</ caution >}}
 
