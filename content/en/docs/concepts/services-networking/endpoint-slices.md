@@ -1,6 +1,6 @@
 ---
 reviewers:
-- freehan
+  - freehan
 title: EndpointSlices
 feature:
   title: EndpointSlices
@@ -10,7 +10,6 @@ feature:
 content_template: templates/concept
 weight: 10
 ---
-
 
 {{% capture overview %}}
 
@@ -26,11 +25,11 @@ Endpoints.
 
 ## Motivation
 
-The Endpoints API has provided a simple and straightforward way of
-tracking network endpoints in Kubernetes. Unfortunately as Kubernetes clusters
-and Services have gotten larger, limitations of that API became more visible.
-Most notably, those included challenges with scaling to larger numbers of
-network endpoints.
+The Endpoints API has provided a simple and straightforward way of tracking
+network endpoints in Kubernetes. Unfortunately as Kubernetes clusters and
+Services have gotten larger, limitations of that API became more visible. Most
+notably, those included challenges with scaling to larger numbers of network
+endpoints.
 
 Since all network endpoints for a Service were stored in a single Endpoints
 resource, those resources could get quite large. That affected the performance
@@ -42,13 +41,12 @@ platform for additional features such as topological routing.
 ## EndpointSlice resources {#endpointslice-resource}
 
 In Kubernetes, an EndpointSlice contains references to a set of network
-endpoints. The EndpointSlice controller automatically creates EndpointSlices
-for a Kubernetes Service when a {{< glossary_tooltip text="selector"
-term_id="selector" >}} is specified. These EndpointSlices will include
-references to any Pods that match the Service selector. EndpointSlices group
-network endpoints together by unique Service and Port combinations.
-The name of a EndpointSlice object must be a valid
-[DNS subdomain name](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
+endpoints. The EndpointSlice controller automatically creates EndpointSlices for
+a Kubernetes Service when a {{< glossary_tooltip text="selector"
+term_id="selector" >}} is specified. These EndpointSlices will include references
+to any Pods that match the Service selector. EndpointSlices group network endpoints
+together by unique Service and Port combinations. The name of a EndpointSlice object
+must be a valid [DNS subdomain name](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
 As an example, here's a sample EndpointSlice resource for the `example`
 Kubernetes Service.
@@ -88,9 +86,9 @@ improvement for services with large numbers of endpoints.
 
 EndpointSlices support three address types:
 
-* IPv4
-* IPv6
-* FQDN (Fully Qualified Domain Name)
+- IPv4
+- IPv6
+- FQDN (Fully Qualified Domain Name)
 
 ### Topology
 
@@ -99,14 +97,14 @@ This is used to indicate where an endpoint is, containing information about the
 corresponding Node, zone, and region. When the values are available, the
 following Topology labels will be set by the EndpointSlice controller:
 
-* `kubernetes.io/hostname` - The name of the Node this endpoint is on.
-* `topology.kubernetes.io/zone` - The zone this endpoint is in. 
-* `topology.kubernetes.io/region` - The region this endpoint is in.
+- `kubernetes.io/hostname` - The name of the Node this endpoint is on.
+- `topology.kubernetes.io/zone` - The zone this endpoint is in.
+- `topology.kubernetes.io/region` - The region this endpoint is in.
 
 The values of these labels are derived from resources associated with each
 endpoint in a slice. The hostname label represents the value of the NodeName
 field on the corresponding Pod. The zone and region labels represent the value
-of the labels with the same names on the corresponding Node. 
+of the labels with the same names on the corresponding Node.
 
 ### Management
 
@@ -139,16 +137,16 @@ matching the Service selector.
 
 By default, EndpointSlices are limited to a size of 100 endpoints each. You can
 configure this with the `--max-endpoints-per-slice` {{< glossary_tooltip
-text="kube-controller-manager" term_id="kube-controller-manager" >}} flag up to
-a maximum of 1000.
+text="kube-controller-manager" term_id="kube-controller-manager" >}} flag up to a
+maximum of 1000.
 
 ### Distribution of EndpointSlices
 
 Each EndpointSlice has a set of ports that applies to all endpoints within the
 resource. When named ports are used for a Service, Pods may end up with
 different target port numbers for the same named port, requiring different
-EndpointSlices. This is similar to the logic behind how subsets are grouped
-with Endpoints.
+EndpointSlices. This is similar to the logic behind how subsets are grouped with
+Endpoints.
 
 The controller tries to fill EndpointSlices as full as possible, but does not
 actively rebalance them. The logic of the controller is fairly straightforward:
@@ -159,7 +157,7 @@ actively rebalance them. The logic of the controller is fairly straightforward:
    fill them up with any new endpoints needed.
 3. If there's still new endpoints left to add, try to fit them into a previously
    unchanged slice and/or create new ones.
-   
+
 Importantly, the third step prioritizes limiting EndpointSlice updates over a
 perfectly full distribution of EndpointSlices. As an example, if there are 10
 new endpoints to add and 2 EndpointSlices with room for 5 more endpoints each,
@@ -184,7 +182,8 @@ getting replaced.
 
 {{% capture whatsnext %}}
 
-* [Enabling EndpointSlices](/docs/tasks/administer-cluster/enabling-endpointslices)
-* Read [Connecting Applications with Services](/docs/concepts/services-networking/connect-applications-service/)
+- [Enabling EndpointSlices](/docs/tasks/administer-cluster/enabling-endpointslices)
+- Read
+  [Connecting Applications with Services](/docs/concepts/services-networking/connect-applications-service/)
 
 {{% /capture %}}
