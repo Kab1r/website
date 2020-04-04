@@ -9,39 +9,53 @@ weight: 28
 <!--
 The kubelet is the primary "node agent" that runs on each node. It can register the node with the apiserver using one of: the hostname; a flag to override the hostname; or specific logic for a cloud provider.
 -->
-kubelet 是在每个 Node 节点上运行的主要 “节点代理”。它向 apiserver 注册节点时可以使用主机名（hostname）；可以提供用于覆盖主机名的参数；还可以执行特定于某云服务商的逻辑。
+
+kubelet 是在每个 Node 节点上运行的主要 “节点代理”。它向 apiserver 注册节点时可以
+使用主机名（hostname）；可以提供用于覆盖主机名的参数；还可以执行特定于某云服务商
+的逻辑。
 
 <!--
 The kubelet works in terms of a PodSpec. A PodSpec is a YAML or JSON object that describes a pod. The kubelet takes a set of PodSpecs that are provided through various mechanisms (primarily through the apiserver) and ensures that the containers described in those PodSpecs are running and healthy. The kubelet doesn't manage containers which were not created by Kubernetes.
 -->
-kubelet 是基于 PodSpec 来工作的。每个 PodSpec 是一个描述 Pod 的 YAML 或 JSON 对象。kubelet 接受通过各种机制（主要是通过 apiserver）提供的一组 PodSpec，并确保这些 PodSpec 中描述的容器处于运行状态且运行状况良好。kubelet 不管理不是由 Kubernetes 创建的容器。
+
+kubelet 是基于 PodSpec 来工作的。每个 PodSpec 是一个描述 Pod 的 YAML 或 JSON 对
+象。kubelet 接受通过各种机制（主要是通过 apiserver）提供的一组 PodSpec，并确保这
+些 PodSpec 中描述的容器处于运行状态且运行状况良好。kubelet 不管理不是由
+Kubernetes 创建的容器。
 
 <!--
 Other than from an PodSpec from the apiserver, there are three ways that a container manifest can be provided to the Kubelet.
 -->
-除了来自 apiserver 的 PodSpec 之外，还可以通过以下三种方式将容器清单（manifest）提供给 kubelet。
+
+除了来自 apiserver 的 PodSpec 之外，还可以通过以下三种方式将容器清单（manifest）
+提供给 kubelet。
 
 <!--
 File: Path passed as a flag on the command line. Files under this path will be monitored periodically for updates. The monitoring period is 20s by default and is configurable via a flag.
 -->
-File（文件）：利用命令行参数给定路径。kubelet 周期性地监视此路径下的文件是否有更新。监视周期默认为 20s，且可通过参数进行配置。
+
+File（文件）：利用命令行参数给定路径。kubelet 周期性地监视此路径下的文件是否有更
+新。监视周期默认为 20s，且可通过参数进行配置。
 
 <!--
 HTTP endpoint: HTTP endpoint passed as a parameter on the command line. This endpoint is checked every 20 seconds (also configurable with a flag).
 -->
-HTTP endpoint（HTTP 端点）：利用命令行参数指定 HTTP 端点。此端点每 20 秒被检查一次（也可以使用参数进行配置）。
+
+HTTP endpoint（HTTP 端点）：利用命令行参数指定 HTTP 端点。此端点每 20 秒被检查一
+次（也可以使用参数进行配置）。
 
 <!--
 HTTP server: The kubelet can also listen for HTTP and respond to a simple API (underspec'd currently) to submit a new manifest.
 -->
-HTTP server（HTTP 服务器）：kubelet 还可以侦听 HTTP 并响应简单的 API（当前未经过规范）来提交新的清单。
+
+HTTP server（HTTP 服务器）：kubelet 还可以侦听 HTTP 并响应简单的 API（当前未经过
+规范）来提交新的清单。
 
 ```
 kubelet [flags]
 ```
 
 {{% /capture %}}
-
 
 {{% capture options %}}
 
@@ -63,7 +77,7 @@ kubelet [flags]
       设置为 true 表示添加文件目录到 header 中
       </td>
     </tr>
-    
+
     <tr>
       <td colspan="2">--address 0.0.0.0</td>
     </tr>
@@ -75,10 +89,10 @@ kubelet [flags]
        kubelet 的服务 IP 地址（所有 IPv4 接口设置为 0.0.0.0 ，所有 IPv6 接口设置为 “::”）（默认值为 0.0.0.0）（已弃用：在 --config 指定的配置文件中进行设置。有关更多信息，请参阅 https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/。）
       </td>
     </tr>
-    
+
     <tr>
       <td colspan="2">--allowed-unsafe-sysctls strings</td>
-    </tr>  
+    </tr>
     <tr>
       <td></td><td style="line-height: 130%; word-wrap: break-word;">
       <!--
@@ -367,7 +381,7 @@ kubelet [flags]
     <tr>
        <td colspan="2">--cni-cache-dir string</td>
     </tr>
-    <tr>                                            
+    <tr>
        <td></td><td style="line-height: 130%; word-wrap: break-word;">
        <!--
        <Warning: Alpha feature> The full path of the directory in which CNI should store cache files. This docker-specific flag only works when container-runtime is set to docker. (default "/var/lib/cni/cache")
@@ -422,8 +436,8 @@ kubelet [flags]
       -->
       &lt;警告：beta 功能&gt; 设置容器可以存在的容器日志文件个数上限。此值必须不小于 2。此参数只能与 --container-runtime=remote 参数一起使用。（默认值为 5）。（已弃用：在 --config 指定的配置文件中进行设置。有关更多信息，请参阅 https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/。）
       </td>
-    </tr>    
-  
+    </tr>
+
     <tr>
        <td colspan="2">--container-log-max-size string</td>
     </tr>
@@ -471,7 +485,7 @@ kubelet [flags]
       设置 containerd 的端点（默认值为 “/run/containerd/containerd.sock”）（已弃用：这是一个错误地在 kubelet 中注册的 cadvisor 参数。由于遗留问题，在删除之前，它将遵循标准的 CLI 弃用时间表。）
       </td>
     </tr>
-    
+
     <tr>
        <td colspan="2">--contention-profiling</td>
     </tr>
@@ -543,7 +557,7 @@ kubelet [flags]
        docker 服务的端点地址（默认值为 “unix:///var/run/docker.sock”）（已弃用：这是一个错误地在 kubelet 中注册的 cadvisor 参数。由于遗留问题，在删除之前，它将遵循标准的 CLI 弃用时间表。）
       </td>
     </tr>
-    
+
     <tr>
        <td colspan="2">--docker-endpoint string</td>
     </tr>
@@ -867,7 +881,7 @@ kubelet [flags]
       设置为 true 表示在计算节点可分配资源数量时忽略硬性逐出阈值设置。请参考 https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/。（默认值为 false）。
       </td>
     </tr>
-    
+
     <tr>
        <td colspan="2">--experimental-bootstrap-kubeconfig string</td>
     </tr>
@@ -965,7 +979,7 @@ kubelet [flags]
       全局资源清理（housekeeping）操作的时间间隔。（默认值为 1m0s）（已弃用：这是一个错误地在 kubelet 中注册的 cadvisor 参数。由于遗留问题，在删除之前，它将遵循标准的 CLI 弃用时间表。）
       </td>
     </tr>
-    
+
     <tr>
        <td colspan="2">--hairpin-mode string</td>
     </tr>
@@ -1097,7 +1111,7 @@ kubelet [flags]
       [实验性特性] 远程镜像服务的端点。若未设定则默认情况下使用 container-runtime-endpoint 的值。目前支持的类型包括在 Linux 系统上的 UNIX 套接字端点和 Windows 系统上的 npipe 和 TCP 端点。例如：‘unix:///var/run/dockershim.sock’、‘npipe:////./pipe/dockershim’。
       </td>
     </tr>
-    
+
     <tr>
        <td colspan="2">--iptables-drop-bit int32</td>
     </tr>
@@ -1109,7 +1123,7 @@ kubelet [flags]
       标记数据包将被丢弃的 fwmark 位设置。必须在 [0，31] 范围内。（已弃用：在 --config 指定的配置文件中进行设置。有关更多信息，请参阅 https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/。）
       </td>
     </tr>
-    
+
     <tr>
        <td colspan="2">--iptables-masquerade-bit int32</td>
     </tr>
@@ -1121,7 +1135,7 @@ kubelet [flags]
       标记数据包将进行 SNAT 的 fwmark 位设置。必须在 [0，31] 范围内。请将此参数与 kube-proxy 中的相应参数匹配。（默认值为 14）（已弃用：在 --config 指定的配置文件中进行设置。有关更多信息，请参阅 https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/。）
       </td>
     </tr>
-    
+
     <tr>
        <td colspan="2">--keep-terminated-pod-volumes</td>
     </tr>
@@ -1133,7 +1147,7 @@ kubelet [flags]
     设置为 true 表示 Pod 终止后仍然保留之前挂载过的卷，常用于调试与卷有关的问题。（已弃用：未来版本将会移除该参数）
     </td>
     </tr>
-    
+
     <tr>
        <td colspan="2">--kube-api-burst int32</td>
     </tr>
@@ -1266,9 +1280,9 @@ kubelet [flags]
       如果此值为非空，则在所指定的目录中写入日志文件
       </td>
     </tr>
-    
+
     <tr>
-      <td colspan="2">--log-file string</td>  
+      <td colspan="2">--log-file string</td>
     </tr>
     <tr>
       <td></td><td style="line-height: 130%; word-wrap: break-word;">
@@ -1278,7 +1292,7 @@ kubelet [flags]
       如果此值非空，使用所给字符串作为日志文件名
       </td>
     </tr>
-    
+
     <tr>
       <td colspan="2">--log-file-max-size uint</td>
     </tr>
@@ -1373,7 +1387,7 @@ kubelet [flags]
        kubelet 向 Pod 注入 Kubernetes 主控服务信息时使用的命名空间（默认值为 “default”）（已弃用：此参数将在未来的版本中删除。）
       </td>
     </tr>
-    
+
     <tr>
        <td colspan="2">--max-open-files int</td>
     </tr>
@@ -2154,6 +2168,7 @@ kubelet [flags]
       指定 kubelet 计算和缓存所有 Pod 和卷的磁盘用量总值的时间间隔。要禁用磁盘用量计算，请设置为 0。（默认值为 1m0s）（已弃用：在 --config 指定的配置文件中进行设置。有关更多信息，请参阅 https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/。）
       </td>
     </tr>
+
   </tbody>
 </table>
 
