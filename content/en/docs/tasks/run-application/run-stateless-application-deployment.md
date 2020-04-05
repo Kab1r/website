@@ -11,22 +11,19 @@ This page shows how to run an application using a Kubernetes Deployment object.
 
 {{% /capture %}}
 
-
 {{% capture objectives %}}
 
-* Create an nginx deployment.
-* Use kubectl to list information about the deployment.
-* Update the deployment.
+- Create an nginx deployment.
+- Use kubectl to list information about the deployment.
+- Update the deployment.
 
 {{% /capture %}}
-
 
 {{% capture prerequisites %}}
 
 {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
 
 {{% /capture %}}
-
 
 {{% capture lessoncontent %}}
 
@@ -38,12 +35,11 @@ a Deployment that runs the nginx:1.14.2 Docker image:
 
 {{< codenew file="application/deployment.yaml" >}}
 
-
-1. Create a Deployment based on the YAML file:
+1.  Create a Deployment based on the YAML file:
 
         kubectl apply -f https://k8s.io/examples/application/deployment.yaml
 
-1. Display information about the Deployment:
+1.  Display information about the Deployment:
 
         kubectl describe deployment nginx-deployment
 
@@ -78,7 +74,7 @@ a Deployment that runs the nginx:1.14.2 Docker image:
         NewReplicaSet:    nginx-deployment-1771418926 (2/2 replicas created)
         No events.
 
-1. List the pods created by the deployment:
+1.  List the pods created by the deployment:
 
         kubectl get pods -l app=nginx
 
@@ -88,7 +84,7 @@ a Deployment that runs the nginx:1.14.2 Docker image:
         nginx-deployment-1771418926-7o5ns   1/1       Running   0          16h
         nginx-deployment-1771418926-r18az   1/1       Running   0          16h
 
-1. Display information about a pod:
+1.  Display information about a pod:
 
         kubectl describe pod <pod-name>
 
@@ -101,11 +97,11 @@ specifies that the deployment should be updated to use nginx 1.16.1.
 
 {{< codenew file="application/deployment-update.yaml" >}}
 
-1. Apply the new YAML file:
+1.  Apply the new YAML file:
 
          kubectl apply -f https://k8s.io/examples/application/deployment-update.yaml
 
-1. Watch the deployment create pods with new names and delete the old pods:
+1.  Watch the deployment create pods with new names and delete the old pods:
 
          kubectl get pods -l app=nginx
 
@@ -117,11 +113,11 @@ should have four pods:
 
 {{< codenew file="application/deployment-scale.yaml" >}}
 
-1. Apply the new YAML file:
+1.  Apply the new YAML file:
 
         kubectl apply -f https://k8s.io/examples/application/deployment-scale.yaml
 
-1. Verify that the Deployment has four pods:
+1.  Verify that the Deployment has four pods:
 
         kubectl get pods -l app=nginx
 
@@ -142,17 +138,15 @@ Delete the deployment by name:
 ## ReplicationControllers -- the Old Way
 
 The preferred way to create a replicated application is to use a Deployment,
-which in turn uses a ReplicaSet. Before the Deployment and ReplicaSet were
-added to Kubernetes, replicated applications were configured using a
+which in turn uses a ReplicaSet. Before the Deployment and ReplicaSet were added
+to Kubernetes, replicated applications were configured using a
 [ReplicationController](/docs/concepts/workloads/controllers/replicationcontroller/).
 
 {{% /capture %}}
 
-
 {{% capture whatsnext %}}
 
-* Learn more about [Deployment objects](/docs/concepts/workloads/controllers/deployment/).
+- Learn more about
+  [Deployment objects](/docs/concepts/workloads/controllers/deployment/).
 
 {{% /capture %}}
-
-
