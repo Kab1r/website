@@ -26,14 +26,14 @@ spec:
           name: konnectivity-agent
           command: ["/proxy-agent"]
           args: [
-                  "--logtostderr=true",
-                  "--ca-cert=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt",
-                  # Since the konnectivity server runs with hostNetwork=true,
-                  # this is the IP address of the master machine.
-                  "--proxy-server-host=35.225.206.7",
-                  "--proxy-server-port=8132",
-                  "--service-account-token-path=/var/run/secrets/tokens/konnectivity-agent-token"
-                  ]
+              "--logtostderr=true",
+              "--ca-cert=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt",
+              # Since the konnectivity server runs with hostNetwork=true,
+              # this is the IP address of the master machine.
+              "--proxy-server-host=35.225.206.7",
+              "--proxy-server-port=8132",
+              "--service-account-token-path=/var/run/secrets/tokens/konnectivity-agent-token",
+            ]
           volumeMounts:
             - mountPath: /var/run/secrets/tokens
               name: konnectivity-agent-token
