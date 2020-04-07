@@ -21,11 +21,11 @@ communication.
 
 ## Configure the Konnectivity service
 
-First, you need to configure the API Server to use the Konnectivity service
-to direct its network traffic to cluster nodes:
+First, you need to configure the API Server to use the Konnectivity service to
+direct its network traffic to cluster nodes:
 
 1. Set the `--egress-selector-config-file` flag of the API Server, it is the
-path to the API Server egress configuration file.
+   path to the API Server egress configuration file.
 1. At the path, create a configuration file. For example,
 
 {{< codenew file="admin/konnectivity/egress-selector-configuration.yaml" >}}
@@ -35,7 +35,8 @@ Next, you need to deploy the Konnectivity server and agents.
 is a reference implementation.
 
 Deploy the Konnectivity server on your master node. The provided yaml assumes
-that the Kubernetes components are deployed as a {{< glossary_tooltip text="static Pod"
+that the Kubernetes components are deployed as a
+{{< glossary_tooltip text="static Pod"
 term_id="static-pod" >}} in your cluster. If not, you can deploy the Konnectivity
 server as a DaemonSet.
 
