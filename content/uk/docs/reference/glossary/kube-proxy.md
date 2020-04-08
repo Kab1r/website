@@ -10,14 +10,18 @@ short_description: >
 
 aka:
 tags:
-- fundamental
-- networking
+  - fundamental
+  - networking
 ---
+
 <!-- [kube-proxy](/docs/reference/command-line-tools-reference/kube-proxy/) is a
 network proxy that runs on each node in your cluster, implementing part of
 the Kubernetes {{< glossary_tooltip term_id="service">}} concept.
 -->
-[kube-proxy](/docs/reference/command-line-tools-reference/kube-proxy/) є мережевим проксі, що запущене на кожному вузлі кластера і реалізує частину концепції Kubernetes {{< glossary_tooltip term_id="service" text="Service">}}.
+
+[kube-proxy](/docs/reference/command-line-tools-reference/kube-proxy/) є
+мережевим проксі, що запущене на кожному вузлі кластера і реалізує частину
+концепції Kubernetes {{< glossary_tooltip term_id="service" text="Service">}}.
 
 <!--more-->
 
@@ -25,9 +29,13 @@ the Kubernetes {{< glossary_tooltip term_id="service">}} concept.
 network communication to your Pods from network sessions inside or outside
 of your cluster.
 -->
-kube-proxy відповідає за мережеві правила на вузлах. Ці правила обумовлюють підключення по мережі до ваших Pod'ів всередині чи поза межами кластера.
+
+kube-proxy відповідає за мережеві правила на вузлах. Ці правила обумовлюють
+підключення по мережі до ваших Pod'ів всередині чи поза межами кластера.
 
 <!--kube-proxy uses the operating system packet filtering layer if there is one
 and it's available. Otherwise, kube-proxy forwards the traffic itself.
 -->
-kube-proxy використовує шар фільтрації пакетів операційної системи, за наявності такого. В іншому випадку kube-proxy скеровує трафік самостійно.
+
+kube-proxy використовує шар фільтрації пакетів операційної системи, за наявності
+такого. В іншому випадку kube-proxy скеровує трафік самостійно.
