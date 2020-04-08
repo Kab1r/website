@@ -541,7 +541,7 @@ PersistentVolumes 将会被挂载到合适的挂载点上。
 
 ## 扩容/缩容 StatefulSet
 
-扩容/缩容 StatefulSet 指增加或减少它的副本数。这通过更新 `replicas` 字段完成。你
+扩容/缩容 StatefulSet 指增加或减少它的副本数。这通过更新 `replicas` 字段完成。�
 可以使用[`kubectl
 scale`](zh/docs/user-guide/kubectl/{{< param "version" >}}/#scale) 或者[`kubectl
 patch`](zh/docs/user-guide/kubectl/{{< param "version" >}}/#patch)来扩容/缩容一
@@ -916,7 +916,7 @@ Patch the StatefulSet to decrement the partition.
 
 #### 灰度扩容
 
-你可以通过减少 [上文](#分段更新)指定的 `partition` 来进行灰度扩容，以此来测试你
+你可以通过减少 [上文](#分段更新)指定的 `partition` 来进行灰度扩容，以此来测试�
 的程序的改动。
 
 Patch StatefulSet 来减少分区。
@@ -1112,7 +1112,7 @@ In one terminal window, watch the Pods in the StatefulSet.
 ## 删除 StatefulSet
 
 StatefulSet 同时支持级联和非级联删除。使用非级联方式删除 StatefulSet 时
-，StatefulSet 的 Pod 不会被删除。使用级联删除时，StatefulSet 和它的 Pod 都会被删
+，StatefulSet 的 Pod 不会被删除。使用级联删除时，StatefulSet 和它的 Pod 都会被�
 除。
 
 ### 非级联删除
