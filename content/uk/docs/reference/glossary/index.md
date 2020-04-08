@@ -1,7 +1,7 @@
 ---
 approvers:
-- maxymvlasov
-- anastyakulyk
+  - maxymvlasov
+  - anastyakulyk
 # title: Standardized Glossary
 title: Глосарій
 layout: glossary
@@ -11,7 +11,6 @@ weight: 5
 card:
   name: reference
   weight: 10
-#   title: Glossary
+  #   title: Glossary
   title: Глосарій
 ---
-

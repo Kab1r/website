@@ -10,7 +10,9 @@ short_description: >
   Шар, в якому запущено контейнерізовані застосунки.
 aka:
 tags:
-- fundamental
+  - fundamental
 ---
+
 <!-- The layer where various containerized applications run. -->
+
 Шар, в якому запущено контейнерізовані застосунки.

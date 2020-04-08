@@ -11,12 +11,16 @@ short_description: >
 
 aka:
 tags:
-- fundamental
+  - fundamental
 ---
+
 <!-- Allows users to filter a list of resources based on labels. -->
+
 Дозволяє користувачам фільтрувати ресурси за мітками.
 
 <!--more-->
 
 <!-- Selectors are applied when querying lists of resources to filter them by {{< glossary_tooltip text="Labels" term_id="label" >}}. -->
-Селектори застосовуються при створенні запитів для фільтрації ресурсів за {{< glossary_tooltip text="мітками" term_id="label" >}}.
+
+Селектори застосовуються при створенні запитів для фільтрації ресурсів за
+{{< glossary_tooltip text="мітками" term_id="label" >}}.
