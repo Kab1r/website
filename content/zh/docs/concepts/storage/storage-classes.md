@@ -686,7 +686,7 @@ parameters:
   [如何配置 Heketi](https://github.com/heketi/heketi/wiki/Setting-up-the-topology)。
 
   当动态分配持久卷时，Gluster 插件自动创建名为 `gluster-dynamic-<claimname>` 的
-  端点和 headless service。在 PVC 被删除时动态端点和 headless service 会自动被删
+  端点和 headless service。在 PVC 被删除时动态端点和 headless service 会自动被�
   除。
 
 ### OpenStack Cinder
