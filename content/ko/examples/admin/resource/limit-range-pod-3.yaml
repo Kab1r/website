@@ -4,10 +4,10 @@ metadata:
   name: busybox3
 spec:
   containers:
-  - name: busybox-cnt01
-    image: busybox
-    resources:
-      limits:
-        memory: "300Mi"
-      requests:
-        memory: "100Mi"
+    - name: busybox-cnt01
+      image: busybox
+      resources:
+        limits:
+          memory: "300Mi"
+        requests:
+          memory: "100Mi"

@@ -4,6 +4,6 @@ metadata:
   name: limit-memory-ratio-pod
 spec:
   limits:
-  - maxLimitRequestRatio:
-      memory: 2
-    type: Pod
+    - maxLimitRequestRatio:
+        memory: 2
+      type: Pod
