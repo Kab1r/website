@@ -1,11 +1,9 @@
 ---
-
 title: 安装扩展（Addons）
 content_template: templates/concept
 ---
 
 {{% capture overview %}}
-
 
 <!--
 Add-ons extend the functionality of Kubernetes.
@@ -22,7 +20,6 @@ Add-ons 扩展了 Kubernetes 的功能。
 每个 add-ons 按字母顺序排序 - 顺序不代表任何优先地位。
 
 {{% /capture %}}
-
 
 {{% capture body %}}
 
@@ -48,20 +45,51 @@ Add-ons 扩展了 Kubernetes 的功能。
 
 ## 网络和网络策略
 
-* [ACI](https://www.github.com/noironetworks/aci-containers) 通过 Cisco ACI 提供集成的容器网络和安全网络。
-* [Calico](https://docs.projectcalico.org/v3.11/getting-started/kubernetes/installation/calico)  是一个安全的 L3 网络和网络策略提供者。
-* [Canal](https://github.com/tigera/canal/tree/master/k8s-install)  结合 Flannel 和 Calico， 提供网络和网络策略。
-* [Cilium](https://github.com/cilium/cilium) 是一个 L3 网络和网络策略插件， 能够透明的实施  HTTP/API/L7 策略。 同时支持路由（routing）和叠加/封装（ overlay/encapsulation）模式。
-* [CNI-Genie](https://github.com/Huawei-PaaS/CNI-Genie)  使 Kubernetes 无缝连接到一种 CNI 插件，例如：Flannel、Calico、Canal、Romana 或者 Weave。
-* [Contiv](http://contiv.github.io) 为多种用例提供可配置网络（使用 BGP 的原生 L3，使用 vxlan 的 overlay，经典 L2 和  Cisco-SDN/ACI）和丰富的策略框架。Contiv 项目完全[开源](http://github.com/contiv)。[安装工具](http://github.com/contiv/install)同时提供基于和不基于 kubeadm 的安装选项。
-* [Contrail](http://www.juniper.net/us/en/products-services/sdn/contrail/contrail-networking/), based on [Tungsten Fabric](https://tungsten.io), is an open source, multi-cloud network virtualization and policy management platform. Contrail and Tungsten Fabric are integrated with orchestration systems such as Kubernetes, OpenShift, OpenStack and Mesos, and provide isolation modes for virtual machines, containers/pods and bare metal workloads.
-* [Flannel](https://github.com/coreos/flannel/blob/master/Documentation/kube-flannel.yml) 是一个可以用于 Kubernetes 的 overlay 网络提供者。
-* [Knitter](https://github.com/ZTE/Knitter/) 是为 kubernetes 提供复合网络解决方案的网络组件.
-* [Multus](https://github.com/Intel-Corp/multus-cni) 是一个多插件，可在 Kubernetes 中提供多种网络支持，以支持所有 CNI 插件（例如 Calico，Cilium，Contiv，Flannel）is a Multi plugin for multiple network support in Kubernetes to support all CNI plugins (e.g. Calico, Cilium, Contiv, Flannel)，而且包含了在Kubernetes中基于 SRIOV，DPDK，OVS-DPDK 和 VPP 的工作负载.
-* [NSX-T](https://docs.vmware.com/en/VMware-NSX-T/2.0/nsxt_20_ncp_kubernetes.pdf) 容器插件（ NCP ）提供了 VMware NSX-T 与容器协调器（例如 Kubernetes）之间的集成，以及 NSX-T 与基于容器的 CaaS / PaaS 平台（例如关键容器服务（ PKS ）和 OpenShift ）之间的集成。
-* [Nuage](https://github.com/nuagenetworks/nuage-kubernetes/blob/v5.1.1-1/docs/kubernetes-1-installation.rst) 是一个SDN平台，可在Kubernetes Pods和非Kubernetes环境之间提供基于策略的联网，并具有可视化和安全监控。
-* [Romana](http://romana.io) 是一个 pod 网络的层 3 解决方案，并且支持 [NetworkPolicy API](/docs/concepts/services-networking/network-policies/)。Kubeadm add-on 安装细节可以在[这里](https://github.com/romana/romana/tree/master/containerize)找到。
-* [Weave Net](https://www.weave.works/docs/net/latest/kube-addon/)  提供了在网络分组两端参与工作的网络和网络策略，并且不需要额外的数据库。
+- [ACI](https://www.github.com/noironetworks/aci-containers) 通过 Cisco ACI 提供
+  集成的容器网络和安全网络。
+- [Calico](https://docs.projectcalico.org/v3.11/getting-started/kubernetes/installation/calico)
+  是一个安全的 L3 网络和网络策略提供者。
+- [Canal](https://github.com/tigera/canal/tree/master/k8s-install) 结合 Flannel
+  和 Calico， 提供网络和网络策略。
+- [Cilium](https://github.com/cilium/cilium) 是一个 L3 网络和网络策略插件， 能够
+  透明的实施 HTTP/API/L7 策略。 同时支持路由（routing）和叠加/封装（
+  overlay/encapsulation）模式。
+- [CNI-Genie](https://github.com/Huawei-PaaS/CNI-Genie) 使 Kubernetes 无缝连接到
+  一种 CNI 插件，例如：Flannel、Calico、Canal、Romana 或者 Weave。
+- [Contiv](http://contiv.github.io) 为多种用例提供可配置网络（使用 BGP 的原生
+  L3，使用 vxlan 的 overlay，经典 L2 和 Cisco-SDN/ACI）和丰富的策略框架。Contiv
+  项目完
+  全[开源](http://github.com/contiv)。[安装工具](http://github.com/contiv/install)同
+  时提供基于和不基于 kubeadm 的安装选项。
+- [Contrail](http://www.juniper.net/us/en/products-services/sdn/contrail/contrail-networking/),
+  based on [Tungsten Fabric](https://tungsten.io), is an open source,
+  multi-cloud network virtualization and policy management platform. Contrail
+  and Tungsten Fabric are integrated with orchestration systems such as
+  Kubernetes, OpenShift, OpenStack and Mesos, and provide isolation modes for
+  virtual machines, containers/pods and bare metal workloads.
+- [Flannel](https://github.com/coreos/flannel/blob/master/Documentation/kube-flannel.yml)
+  是一个可以用于 Kubernetes 的 overlay 网络提供者。
+- [Knitter](https://github.com/ZTE/Knitter/) 是为 kubernetes 提供复合网络解决方
+  案的网络组件.
+- [Multus](https://github.com/Intel-Corp/multus-cni) 是一个多插件，可在
+  Kubernetes 中提供多种网络支持，以支持所有 CNI 插件（例如
+  Calico，Cilium，Contiv，Flannel）is a Multi plugin for multiple network
+  support in Kubernetes to support all CNI plugins (e.g. Calico, Cilium, Contiv,
+  Flannel)，而且包含了在 Kubernetes 中基于 SRIOV，DPDK，OVS-DPDK 和 VPP 的工作负
+  载.
+- [NSX-T](https://docs.vmware.com/en/VMware-NSX-T/2.0/nsxt_20_ncp_kubernetes.pdf)
+  容器插件（ NCP ）提供了 VMware NSX-T 与容器协调器（例如 Kubernetes）之间的集成
+  ，以及 NSX-T 与基于容器的 CaaS / PaaS 平台（例如关键容器服务（ PKS ）和
+  OpenShift ）之间的集成。
+- [Nuage](https://github.com/nuagenetworks/nuage-kubernetes/blob/v5.1.1-1/docs/kubernetes-1-installation.rst)
+  是一个 SDN 平台，可在 Kubernetes Pods 和非 Kubernetes 环境之间提供基于策略的联
+  网，并具有可视化和安全监控。
+- [Romana](http://romana.io) 是一个 pod 网络的层 3 解决方案，并且支持
+  [NetworkPolicy API](/docs/concepts/services-networking/network-policies/)。Kubeadm
+  add-on 安装细节可以
+  在[这里](https://github.com/romana/romana/tree/master/containerize)找到。
+- [Weave Net](https://www.weave.works/docs/net/latest/kube-addon/) 提供了在网络
+  分组两端参与工作的网络和网络策略，并且不需要额外的数据库。
 
 <!--
 ## Service Discovery
@@ -71,7 +99,9 @@ Add-ons 扩展了 Kubernetes 的功能。
 
 ## 服务发现
 
-* [CoreDNS](https://coredns.io) 是一种灵活的，可扩展的 DNS 服务器，可以 [安装](https://github.com/coredns/deployment/tree/master/kubernetes) 为集群内的 Pod 提供 DNS 服务。
+- [CoreDNS](https://coredns.io) 是一种灵活的，可扩展的 DNS 服务器，可以
+  [安装](https://github.com/coredns/deployment/tree/master/kubernetes) 为集群内
+  的 Pod 提供 DNS 服务。
 
 <!--
 ## Visualization &amp; Control
@@ -82,9 +112,11 @@ Add-ons 扩展了 Kubernetes 的功能。
 
 ## 可视化管理
 
-
-* [Dashboard](https://github.com/kubernetes/dashboard#kubernetes-dashboard) 是一个 Kubernetes 的 web 控制台界面。
-* [Weave Scope](https://www.weave.works/documentation/scope-latest-installing/#k8s) 是一个图形化工具，用于查看你的 containers、 pods、services 等。 请和一个 [Weave Cloud account](https://cloud.weave.works/) 一起使用，或者自己运行 UI。
+- [Dashboard](https://github.com/kubernetes/dashboard#kubernetes-dashboard) 是一
+  个 Kubernetes 的 web 控制台界面。
+- [Weave Scope](https://www.weave.works/documentation/scope-latest-installing/#k8s)
+  是一个图形化工具，用于查看你的 containers、 pods、services 等。 请和一个
+  [Weave Cloud account](https://cloud.weave.works/) 一起使用，或者自己运行 UI。
 
 <!--
 ## Infrastructure
@@ -94,7 +126,8 @@ Add-ons 扩展了 Kubernetes 的功能。
 
 ## 基础设施
 
-* [KubeVirt](https://kubevirt.io/user-guide/#/installation/installation) 是可以让 Kubernetes 运行虚拟机的 add-ons 。通常运行在裸机群集上。
+- [KubeVirt](https://kubevirt.io/user-guide/#/installation/installation) 是可以
+  让 Kubernetes 运行虚拟机的 add-ons 。通常运行在裸机群集上。
 
 <!--
 ## Legacy Add-ons
@@ -106,7 +139,8 @@ Well-maintained ones should be linked to here. PRs welcome!
 
 ## 遗留 Add-ons
 
-还有一些其它 add-ons 归档在已废弃的  [cluster/addons](https://git.k8s.io/kubernetes/cluster/addons) 路径中。
+还有一些其它 add-ons 归档在已废弃的
+[cluster/addons](https://git.k8s.io/kubernetes/cluster/addons) 路径中。
 
 维护完善的 add-ons 应该被链接到这里。欢迎提出 PRs！
 
