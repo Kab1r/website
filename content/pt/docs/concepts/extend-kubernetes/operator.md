@@ -8,7 +8,7 @@ weight: 30
 
 Operadores são extensões de software para o Kubernetes que fazem uso de
 [_recursos personalizados_](/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-para gerir aplicações e os seus componentes. Operadores seguem os  
+para gerir aplicações e os seus componentes. Operadores seguem os
 princípios do Kubernetes, notavelmente o
 [ciclo de controle](/docs/concepts/#kubernetes-control-plane).
 
