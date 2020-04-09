@@ -1,7 +1,7 @@
 ---
 reviewers:
-- verb
-- soltysh
+  - verb
+  - soltysh
 title: Debug Running Pods
 content_template: templates/task
 ---
@@ -14,10 +14,10 @@ This page explains how to debug Pods running (or crashing) on a Node.
 
 {{% capture prerequisites %}}
 
-* Your {{< glossary_tooltip text="Pod" term_id="pod" >}} should already be
-  scheduled and running. If your Pod is not yet running, start with [Troubleshoot
-  Applications](/docs/tasks/debug-application-cluster/debug-application/).
-* For some of the advanced debugging steps you need to know on which Node the
+- Your {{< glossary_tooltip text="Pod" term_id="pod" >}} should already be
+  scheduled and running. If your Pod is not yet running, start with
+  [Troubleshoot Applications](/docs/tasks/debug-application-cluster/debug-application/).
+- For some of the advanced debugging steps you need to know on which Node the
   Pod is running and have shell access to run commands on that Node. You don't
   need that access to run the standard debug steps that use `kubectl`.
 
@@ -33,7 +33,8 @@ First, look at the logs of the affected container:
 kubectl logs ${POD_NAME} ${CONTAINER_NAME}
 ```
 
-If your container has previously crashed, you can access the previous container's crash log with:
+If your container has previously crashed, you can access the previous
+container's crash log with:
 
 ```shell
 kubectl logs --previous ${POD_NAME} ${CONTAINER_NAME}
@@ -50,9 +51,8 @@ base images, you can run commands inside a specific container with
 kubectl exec ${POD_NAME} -c ${CONTAINER_NAME} -- ${CMD} ${ARG1} ${ARG2} ... ${ARGN}
 ```
 
-{{< note >}}
-`-c ${CONTAINER_NAME}` is optional. You can omit it for Pods that only contain a single container.
-{{< /note >}}
+{{< note >}} `-c ${CONTAINER_NAME}` is optional. You can omit it for Pods that
+only contain a single container. {{< /note >}}
 
 As an example, to look at the logs from a running Cassandra pod, you might run
 
@@ -67,8 +67,8 @@ arguments to `kubectl exec`, for example:
 kubectl exec -it cassandra -- sh
 ```
 
-For more details, see [Get a Shell to a Running Container](
-/docs/tasks/debug-application-cluster/get-shell-running-container/).
+For more details, see
+[Get a Shell to a Running Container](/docs/tasks/debug-application-cluster/get-shell-running-container/).
 
 ## Debugging with an ephemeral debug container {#ephemeral-container}
 
@@ -77,18 +77,16 @@ For more details, see [Get a Shell to a Running Container](
 {{< glossary_tooltip text="Ephemeral containers" term_id="ephemeral-container" >}}
 are useful for interactive troubleshooting when `kubectl exec` is insufficient
 because a container has crashed or a container image doesn't include debugging
-utilities, such as with [distroless images](
-https://github.com/GoogleContainerTools/distroless). `kubectl` has an alpha
-command that can create ephemeral containers for debugging beginning with version
-`v1.18`.
+utilities, such as with
+[distroless images](https://github.com/GoogleContainerTools/distroless).
+`kubectl` has an alpha command that can create ephemeral containers for
+debugging beginning with version `v1.18`.
 
 ### Example debugging using ephemeral containers {#ephemeral-container-example}
 
-{{< note >}}
-The examples in this section require the `EphemeralContainers` [feature gate](
-/docs/reference/command-line-tools-reference/feature-gates/) enabled in your
-cluster and `kubectl` version v1.18 or later.
-{{< /note >}}
+{{< note >}} The examples in this section require the `EphemeralContainers`
+[feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
+enabled in your cluster and `kubectl` version v1.18 or later. {{< /note >}}
 
 You can use the `kubectl alpha debug` command to add ephemeral containers to a
 running Pod. First, create a pod for the example:
@@ -97,11 +95,9 @@ running Pod. First, create a pod for the example:
 kubectl run ephemeral-demo --image=k8s.gcr.io/pause:3.1 --restart=Never
 ```
 
-{{< note >}}
-This section use the `pause` container image in examples because it does not
-contain userland debugging utilities, but this method works with all container
-images.
-{{< /note >}}
+{{< note >}} This section use the `pause` container image in examples because it
+does not contain userland debugging utilities, but this method works with all
+container images. {{< /note >}}
 
 If you attempt to use `kubectl exec` to create a shell you will see an error
 because there is no shell in this container image.
@@ -130,18 +126,18 @@ If you don't see a command prompt, try pressing enter.
 
 This command adds a new busybox container and attaches to it. The `--target`
 parameter targets the process namespace of another container. It's necessary
-here because `kubectl run` does not enable [process namespace sharing](
-/docs/tasks/configure-pod-container/share-process-namespace/) in the pod it
-creates.
+here because `kubectl run` does not enable
+[process namespace sharing](/docs/tasks/configure-pod-container/share-process-namespace/)
+in the pod it creates.
 
-{{< note >}}
-The `--target` parameter must be supported by the {{< glossary_tooltip
-text="Container Runtime" term_id="container-runtime" >}}. When not supported,
-the Ephemeral Container may not be started, or it may be started with an
-isolated process namespace.
-{{< /note >}}
+{{< note >}} The `--target` parameter must be supported by the
+{{< glossary_tooltip
+text="Container Runtime" term_id="container-runtime" >}}. When not supported, the
+Ephemeral Container may not be started, or it may be started with an isolated process
+namespace. {{< /note >}}
 
-You can view the state of the newly created ephemeral container using `kubectl describe`:
+You can view the state of the newly created ephemeral container using
+`kubectl describe`:
 
 ```shell
 kubectl describe pod ephemeral-demo
