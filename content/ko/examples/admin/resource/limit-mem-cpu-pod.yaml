@@ -4,7 +4,7 @@ metadata:
   name: limit-mem-cpu-per-pod
 spec:
   limits:
-  - max:
-      cpu: "2"
-      memory: "2Gi"
-    type: Pod
+    - max:
+        cpu: "2"
+        memory: "2Gi"
+      type: Pod

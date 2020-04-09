@@ -3,7 +3,7 @@ kind: PodSecurityPolicy
 metadata:
   name: example
 spec:
-  privileged: false  # 특권을 가진 파드는 허용금지!
+  privileged: false # 특권을 가진 파드는 허용금지!
   # 나머지는 일부 필수 필드를 채운다.
   seLinux:
     rule: RunAsAny
@@ -14,4 +14,4 @@ spec:
   fsGroup:
     rule: RunAsAny
   volumes:
-  - '*'
+    - "*"

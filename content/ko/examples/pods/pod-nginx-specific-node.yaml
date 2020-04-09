@@ -5,6 +5,6 @@ metadata:
 spec:
   nodeName: foo-node # 특정 노드에 파드 스케줄
   containers:
-  - name: nginx
-    image: nginx
-    imagePullPolicy: IfNotPresent
+    - name: nginx
+      image: nginx
+      imagePullPolicy: IfNotPresent
