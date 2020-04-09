@@ -597,7 +597,7 @@ spec:
             - containerPort: 80
 ```
 
-가끔, 파드 내에서 실행되는 애플리케이션이 다른 오브젝트의 설정 값을 사용해야 할
+가끔, 파드 내에서 실행되는 애플리케이션이 다른 오브젝트의 설정 값을 사용해야 �
 수도 있다. 예를 들어, 디플로이먼트 오브젝트의 파드는 Env 또는 커맨드 인수로 해당
 서비스 네임을 읽어야 한다고 하자. `kustomization.yaml` 파일에 `namePrefix` 또는
 `nameSuffix`가 추가되면 서비스 네임이 변경될 수 있다. 커맨드 인수 내에 서비스 네
@@ -695,7 +695,7 @@ Kustomize는 **base**와 **overlay**의 개념을 가지고 있다. **base**는
 터리이거나 원격 리포지터리의 디렉터리가 될 수 있다. **overlay**는
 `kustomization.yaml`이 있는 디렉터리로 다른 kustomization 디렉터리들을 `bases`로
 참조한다. **base**는 overlay에 대해서 알지 못하며 여러 overlay들에서 사용될 수
-있다. 한 overlay는 다수의 base들을 가질 수 있고, base들에서 모든 리소스를 구성할
+있다. 한 overlay는 다수의 base들을 가질 수 있고, base들에서 모든 리소스를 구성�
 수 있으며, 이들의 위에 사용자 정의도 가질 수 있다.
 
 다음은 base에 대한 예이다.

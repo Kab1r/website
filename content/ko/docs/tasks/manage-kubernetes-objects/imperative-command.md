@@ -102,7 +102,7 @@ kubectl create service nodeport -h
 
 - `delete <타입>/<이름>`
 
-{{< note >}} 명령형 커맨드와 명령형 오브젝트 구성 모두 `kubectl delete`를 사용할
+{{< note >}} 명령형 커맨드와 명령형 오브젝트 구성 모두 `kubectl delete`를 사용�
 수있다. 차이점은 커맨드에 전해지는 인수에 있다. 명령형 커맨드로
 `kubectl delete`을 사용하기 위해, 삭제할 오브젝트를 인수로 전한다. 다음은 nginx
 라는 디플로이먼트 오브젝트를 전하는 예제이다. {{< /note >}}
@@ -149,7 +149,7 @@ kubectl create service clusterip my-svc --clusterip="None" -o yaml --dry-run=cli
 
 ## 생성 전 오브젝트 수정을 위해 `--edit` 사용하기
 
-생성 전에 오브젝트에 임의의 변경을 가하기 위해 `kubectl create --edit` 을 사용할
+생성 전에 오브젝트에 임의의 변경을 가하기 위해 `kubectl create --edit` 을 사용�
 수 있다. 다음은 관련 예제이다.
 
 ```sh

@@ -121,7 +121,7 @@ spec:
 ## 토폴로지 인식
 
 [다중 영역](/ko/docs/setup/best-practices/multiple-zones/) 클러스터에서 파드는
-한 지역 내여러 영역에 걸쳐 분산될 수 있다. 파드가 예약된 영역에서 단일 영역 스토
+한 지역 내여러 영역에 걸쳐 분산될 수 있다. 파드가 예약된 영역에서 단일 영역 스�
 리지 백엔드를프로비전 해야 한다.
 [볼륨 바인딩 모드](/docs/concepts/storage/storage-classes/#volume-binding-mode)를
 설정해서 수행할 수 있다.

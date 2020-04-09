@@ -33,7 +33,7 @@ weight: 20
 
 RuntimeClass 특징 게이트가 활성화(기본값)를 확인한다. 특징 게이트 활성화에 대한
 설명은
-[특징 게이트](/docs/reference/command-line-tools-reference/feature-gates/)를참고
+[특징 게이트](/docs/reference/command-line-tools-reference/feature-gates/)를참�
 한다. `RuntimeClass` 특징 게이트는 apiservers _및_ kubelets에서 활성화되어야 한
 다.
 
@@ -98,7 +98,7 @@ spec:
   # ...
 ```
 
-이것은 Kubelet이 지명된 런타임 클래스를 사용하여 해당 파드를 실행하도록 지시할
+이것은 Kubelet이 지명된 런타임 클래스를 사용하여 해당 파드를 실행하도록 지시�
 것이다. 만약 지명된 런타임 클래스가 없거나, CRI가 상응하는 핸들러를 실행할 수 없
 는 경우, 파드는 `Failed` 터미널
 [단계](/ko/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase)로 들어간다. 에
@@ -183,7 +183,7 @@ PodOverhead를 사용하려면, PodOverhead
 성화 시켜야 한다. (기본으로 활성화 되어 있다.)
 
 파드 오버헤드는 런타임 클래스에서 `overhead` 필드를 통해 정의된다. 이 필드를 사
-용하면, 해당 런타임 클래스를 사용해서 구동 중인 파드의 오버헤드를 특정할 수 있고
+용하면, 해당 런타임 클래스를 사용해서 구동 중인 파드의 오버헤드를 특정할 수 있�
 이 오버헤드가쿠버네티스 내에서 처리된다는 것을 보장할 수 있다.
 
 {{% /capture %}} {{% capture whatsnext %}}

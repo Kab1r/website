@@ -8,8 +8,8 @@ weight: 10
 
 컨테이너 내의 디스크에 있는 파일은 임시적이며, 컨테이너에서 실행될 때애플리케이
 션에 적지 않은 몇 가지 문제가 발생한다. 첫째, 컨테이너가 충돌되면, kubelet은 컨
-테이너를 재시작시키지만, 컨테이너는 깨끗한 상태로시작되기 때문에 기존 파일이 유
-실된다. 둘째, `파드` 에서 컨테이너를 함께 실행할 때 컨테이너 사이에 파일을 공유
+테이너를 재시작시키지만, 컨테이너는 깨끗한 상태로시작되기 때문에 기존 파일이 �
+실된다. 둘째, `파드` 에서 컨테이너를 함께 실행할 때 컨테이너 사이에 파일을 공�
 해야 하는 경우가 자주 발생한다. 쿠버네티스의 `볼륨` 추상화는 이 두 가지 문제를
 모두 해결한다.
 
@@ -308,7 +308,7 @@ spec:
 `emptyDir` 볼륨은 파드가 노드에 할당 될 때 처음 생성되며, 해당 노드에서 파드가
 실행되는 동안에만 존재한다. 이름에서 알 수 있듯이 `emptyDir` 볼륨은 처음에는 비
 어있다. 파드내 모든 컨테이너는 `emptyDir` 볼륨에서 동일한파일을 읽고 쓸수 있지만
-, 볼륨은 각각의 컨테이너에서 동일하거나다른 경로에 마운트 될 수 있다. 어떤 이유
+, 볼륨은 각각의 컨테이너에서 동일하거나다른 경로에 마운트 될 수 있다. 어떤 이�
 로든 노드에서 파드를 제거하면 `emptyDir` 의 데이터가 영구적으로 삭제된다.
 
 {{< note >}} 컨테이너의 충돌은 노드에서 파드를 제거하지 _않기_ 때문에,
@@ -323,7 +323,7 @@ spec:
 
 기본적으로, `emptyDir` 볼륨은 노드를 지원하는 모든 매체에저장된다(환경에 따라 디
 스크, SSD 또는 네트워크 스토리지일수 있다). 그러나 `emptyDir.medium` 필드를
-`"Memory"` 로 설정해서쿠버네티스에 tmpfs(RAM 기반 파일 시스템)를 마운트하도록 할
+`"Memory"` 로 설정해서쿠버네티스에 tmpfs(RAM 기반 파일 시스템)를 마운트하도록 �
 수 있다. tmpfs는 매우 빠르지만, 디스크와 다르게 노드 재부팅시 tmpfs가 지워지고,
 작성하는 모든 파일이 컨테이너 메모리제한에 포함된다.
 
@@ -489,8 +489,8 @@ GCE PD의 CSI 마이그레이션 기능이 활성화된 경우 기존 트리 내
 [EmptyDir](#emptydir)을 마운트하고, 여기에 git을 사용해서 repo를 복제하고,
 [EmptyDir](#emptydir)을 파드 컨테이너에 마운트 한다. {{< /warning >}}
 
-`gitRepo` 볼륨은 볼륨 플러그인으로 할 수 있는 예시이다. 빈디렉터리를 마운트하고
-파드가 사용할 수 있도록 해당 디렉터리에 git 리포지트리를복제한다. 미래에는 모든
+`gitRepo` 볼륨은 볼륨 플러그인으로 할 수 있는 예시이다. 빈디렉터리를 마운트하�
+파드가 사용할 수 있도록 해당 디렉터리에 git 리포지트리를복제한다. 미래에는 모�
 이용 사례에 대해 쿠버네티스 API를 확장하는 대신에 이런 볼륨은 훨씬 더 분리된 모
 델로 이동될 수 있다.
 
@@ -690,7 +690,7 @@ spec:
                 - example-node
 ```
 
-로컬 볼륨을 사용할 때는 퍼시스턴트볼륨의 `nodeAffinity` 가 필요하다. 이를 통해쿠
+로컬 볼륨을 사용할 때는 퍼시스턴트볼륨의 `nodeAffinity` 가 필요하다. 이를 통해�
 버네티스 스케줄러는 올바른 노드의 로컬 볼륨을 파드가 사용할 수 있도록 올바르게스
 케줄할 수 있다.
 
@@ -704,7 +704,7 @@ spec:
 파드 어피니티 그리고 파드 안티 어피니티와같이 파드가 가질 수 있는 다른 노드 제약
 조건으로 평가되도록 만든다.
 
-로컬 볼륨 라이프사이클의 향상된 관리를 위해 외부 정적프로비저너를 별도로 실행할
+로컬 볼륨 라이프사이클의 향상된 관리를 위해 외부 정적프로비저너를 별도로 실행�
 수 있다. 이 프로비저너는 아직 동적프로비저닝을 지원하지 않는 것을 참고한다. 외부
 로컬 프로비저너를 실행하는 방법에 대한예시는
 [로컬 볼륨 프로비저너 사용자가이드](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner)를
@@ -732,7 +732,7 @@ param "githubbranch" >}}/staging/volumes/nfs)를 본다.
 `persistentVolumeClaim` 볼륨은
 [퍼시스턴트볼륨](/docs/concepts/storage/persistent-volumes/)을 파드에 마운트하는
 데 사용한다. 퍼시스턴트볼륨은사용자가 특정 클라우드 환경의 세부 내용을 몰라도 내
-구성이있는 스토리지 (GCE 퍼시스턴트디스크 또는 iSCSI 볼륨와 같은)를 "클레임" 할
+구성이있는 스토리지 (GCE 퍼시스턴트디스크 또는 iSCSI 볼륨와 같은)를 "클레임" �
 수 있는 방법이다.
 
 더 자세한 내용은
@@ -754,7 +754,7 @@ param "githubbranch" >}}/staging/volumes/nfs)를 본다.
 "githubbranch" >}}/contributors/design-proposals/node/all-in-one-volume.md)를 본
 다.
 
-서비스 어카운트 토큰의 프로젝션은 쿠버네티스 1.11에 기능이도입되었고 1.12에서 베
+서비스 어카운트 토큰의 프로젝션은 쿠버네티스 1.11에 기능이도입되었고 1.12에서 �
 타로 승격되었다. 1.11에서 이 기능을 활성화 하려면 `TokenRequestProjection`
 [기능 게이트](/docs/reference/command-line-tools-reference/feature-gates/)를
 True로 명시적인 설정이 필요하다.
@@ -998,7 +998,7 @@ param "githubbranch" >}}/staging/volumes/scaleio)를 본다.
 ### secret {#secret}
 
 `secret` 볼륨은 암호와 같은 민감한 정보를 파드에 전달하는데사용된다. 쿠버네티스
-API에 시크릿을 저장하고 쿠버네티스에 직접적으로 연결하지 않고도파드에서 사용할
+API에 시크릿을 저장하고 쿠버네티스에 직접적으로 연결하지 않고도파드에서 사용�
 수 있도록 파일로 마운트 할 수 있다. `secret` 볼륨은 tmpfs(RAM 기반 파일시스템)로
 지원되기 때문에 비 휘발성 스토리지에 절대기록되지 않는다.
 
@@ -1015,7 +1015,7 @@ API에 시크릿을 저장하고 쿠버네티스에 직접적으로 연결하지
 `storageos` 볼륨을 사용하면 기존 [StorageOS](https://www.storageos.com) 볼륨을
 파드에 마운트할 수 있다.
 
-StorageOS 는 쿠버네티스 환경에서 컨테이너로 실행되므로쿠버네티스 클러스터의 모든
+StorageOS 는 쿠버네티스 환경에서 컨테이너로 실행되므로쿠버네티스 클러스터의 모�
 노드의 로컬 또는 연결된 스토리지에 접근할 수 있다. 노드 장애로부터 보호하기 위해
 데이터를 복제할 수 있다. 씬(Thin) 프로비저닝과압축은 활용률을 높이고 비용을 절감
 할 수 있게 한다.
@@ -1065,7 +1065,7 @@ spec:
 ### vsphereVolume {#vspherevolume}
 
 {{< note >}} 전제조건: 쿠버네티스와 함께 vSphere Cloud Provider가 구성됨. 클라우
-드공급자구성에 대해선
+드공급자구성에 대해�
 [vSphere 시작 가이드](https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/)를
 참조한다. {{< /note >}}
 
@@ -1222,7 +1222,7 @@ spec:
 
 ## 아웃 오브 트리 볼륨 플러그인
 
-아웃 오브 트리 볼륨 플러그인에는 컨테이너 스토리지 인터페이스 (CSI) 그리고
+아웃 오브 트리 볼륨 플러그인에는 컨테이너 스토리지 인터페이스 (CSI) 그리�
 FlexVolume이 포함된다. 스토리지 벤더들은 이 플러그인을 쿠버네티스 리포지터리에추
 가하지 않고도 사용자 정의 스토리지 플러그인을 만들 수 있다.
 
@@ -1284,7 +1284,7 @@ CSI 호환 볼륨 드라이버가 쿠버네티스 클러스터에 배포되면 `
 - `fsType`: 만약 PV의 `VolumeMode` 가 `Filesystem` 인 경우에 이 필드는볼륨을 마
   운트하는 데 사용해야 하는 파일시스템을 지정하는 데 사용될 수 있다. 만약볼륨이
   포맷되지 않았고 포맷이 지원되는 경우, 이 값은볼륨을 포맷하는데 사용된다. 이 값
-  은 `ControllerPublishVolumeRequest`, `NodeStageVolumeRequest` 그리고
+  은 `ControllerPublishVolumeRequest`, `NodeStageVolumeRequest` 그리�
   `NodePublishVolumeRequest` 의 `VolumeCapability` 필드를 통해 CSI 드라이버로 전
   달된다.
 - `volumeAttributes`: 볼륨의 정적 속성을 지정하는 문자열과 문자열을매핑한다. 이
@@ -1292,10 +1292,10 @@ CSI 호환 볼륨 드라이버가 쿠버네티스 클러스터에 배포되면 `
   [CSI 사양](https://github.com/container-storage-interface/spec/blob/master/spec.md#createvolume)에
   정의된 대로 CSI 드라이버의 `CreateVolumeResponse` 와 `volume.attributes` 필드
   에서 반환되는 매핑과 일치해야 한다. 이 매핑은
-  `ControllerPublishVolumeRequest`, `NodeStageVolumeRequest`, 그리고
+  `ControllerPublishVolumeRequest`, `NodeStageVolumeRequest`, 그리�
   `NodePublishVolumeRequest` 의 `volume_attributes` 필드를통해 CSI 드라이버로 전
   달된다.
-- `controllerPublishSecretRef`: CSI의 `ControllerPublishVolume` 그리고
+- `controllerPublishSecretRef`: CSI의 `ControllerPublishVolume` 그리�
   `ControllerUnpublishVolume` 호출을 완료하기 위해 CSI 드라이버에 전달하려는민감
   한 정보가 포함된 시크릿 오브젝트에 대한 참조이다. 이 필드는선택사항이며, 시크
   릿이 필요하지 않은 경우 비어있을 수 있다. 만약 시크릿 오브젝트에둘 이상의 시크
@@ -1420,7 +1420,7 @@ FlexVolume 드라이버 바이너리 파일은 각각의 노드(그리고 일부
   설명된 `rshared` 마운트 전파와 같다.
 
 - `Bidirectional` - 이 볼륨 마운트는 `HostToContainer` 마운트와 동일하게 작동한
-  다. 추가로 컨테이너에서 생성된 모든 볼륨 마운트는 동일한 볼륨을사용하는 모든
+  다. 추가로 컨테이너에서 생성된 모든 볼륨 마운트는 동일한 볼륨을사용하는 모�
   파드의 모든 컨테이너와 호스트로 다시 전파된다.
 
   이 모드의 일반적인 유스 케이스로는 FlexVolume 또는 CSI 드라이버를 사용하는 파

@@ -106,7 +106,7 @@ API는 현재 _일치성 기준_ 과 _집합성 기준_ 이라는 두 종류의 
 사항이 있는 경우 쉼표 기호가 AND(`&&`) 연산자로 구분되는 역할을 하도록 해야 한다
 .
 
-비어있거나 지정되지 않은 셀렉터는 상황에 따라 달라진다. 셀렉터를 사용하는 API 유
+비어있거나 지정되지 않은 셀렉터는 상황에 따라 달라진다. 셀렉터를 사용하는 API �
 형은 유효성과 의미를 문서화해야 한다.
 
 {{< note >}} 레플리카 셋과 같은 일부 API 유형에서 두 인스턴스의 레이블 셀렉터는
@@ -176,7 +176,7 @@ partition
 자로 작동한다. 따라서 `partition,environment notin (qa)`와 같이 사용하면 값과 상
 관없이 키가 `partition`인 것과 키가 `environment`이고 값이 `qa`와 다른 리소스를
 필터링할 수 있다. _집합성 기준_ 레이블 셀렉터는 일반적으로
-`environment=production`과 `environment in (production)`을 같은 것으로 본다. 유
+`environment=production`과 `environment in (production)`을 같은 것으로 본다. �
 사하게는 `!=`과 `notin`을 같은 것으로 본다.
 
 _집합성 기준_ 요건은 _일치성 기준_ 요건과 조합해서 사용할 수 있다. 예를 들어
@@ -257,7 +257,7 @@ selector:
 
 [`Job`](/ko/docs/concepts/workloads/controllers/jobs-run-to-completion/),
 [`Deployment`](/ko/docs/concepts/workloads/controllers/deployment/),
-[`ReplicaSet`](/ko/docs/concepts/workloads/controllers/replicaset/) 그리고
+[`ReplicaSet`](/ko/docs/concepts/workloads/controllers/replicaset/) 그리�
 [`DaemonSet`](/ko/docs/concepts/workloads/controllers/daemonset/) 같은 새로운 리
 소스들은 집합성 기준의 요건도 지원한다.
 

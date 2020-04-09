@@ -45,7 +45,7 @@ _커스텀 리소스_ 는 쿠버네티스 API의 익스텐션으로, 기본 쿠�
 상태와동기화 상태로 유지하려고 한다. 컨트롤러는 구조화된 데이터를 사용자가원하는
 상태의 레코드로 해석하고 지속적으로이 상태를 유지한다.
 
-클러스터 라이프사이클과 관계없이 실행 중인 클러스터에 커스텀 컨트롤러를 배포하고
+클러스터 라이프사이클과 관계없이 실행 중인 클러스터에 커스텀 컨트롤러를 배포하�
 업데이트할 수 있다. 커스텀 컨트롤러는 모든 종류의 리소스와 함께 작동할 수 있지만
 커스텀 리소스와 결합할 때 특히 효과적이다.
 [오퍼레이터 패턴](https://coreos.com/blog/introducing-operators.html)은 사용자
@@ -55,7 +55,7 @@ _커스텀 리소스_ 는 쿠버네티스 API의 익스텐션으로, 기본 쿠�
 ## 쿠버네티스 클러스터에 커스텀 리소스를 추가해야 하나?
 
 새로운 API를 생성할 때
-[쿠버네티스 클러스터 API와 생성한 API를 애그리게이트](/ko/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)할
+[쿠버네티스 클러스터 API와 생성한 API를 애그리게이트](/ko/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)�
 것인지 아니면 생성한 API를 독립적으로 유지할 것인지 고려하자.
 
 | API 애그리게이트를 고려할 경우                                                                                                                                             | 독립 API를 고려할 경우                                                                      |

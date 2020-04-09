@@ -405,7 +405,7 @@ Minikube 가상 머신을 종료하고 삭제한다. 어떤 데이터나 상태�
 [kubectl 컨텍스트](/docs/reference/generated/kubectl/kubectl-commands/#-em-set-context-em-)를
 생성한다. 이 컨텍스트는 Minikube 클러스터와 통신하는 설정을 포함한다.
 
-Minikube는 이 컨텍스트를 자동적으로 기본으로 설정한다. 만약 미래에 이것을 바꾸고
+Minikube는 이 컨텍스트를 자동적으로 기본으로 설정한다. 만약 미래에 이것을 바꾸�
 싶다면
 
 `kubectl config use-context minikube`을 실행하자.

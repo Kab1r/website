@@ -24,7 +24,7 @@ content_template: templates/concept
 ## API 클라이언트 라이브러리
 
 프로그래밍 언어에서 쿠버네티스 API를 호출하기 위해서,
-[클라이언트 라이브러리](/ko/docs/reference/using-api/client-libraries/)를 사용할
+[클라이언트 라이브러리](/ko/docs/reference/using-api/client-libraries/)를 사용�
 수 있다. 공식적으로 지원되는 클라이언트 라이브러리는 다음과 같다.
 
 - [쿠버네티스 Go 클라이언트 라이브러리](https://github.com/kubernetes/client-go/)

@@ -122,7 +122,7 @@ spec:
 
 {{< codenew file="pods/topology-spread-constraints/one-constraint.yaml" >}}
 
-`topologyKey: zone` 는 "zone:<any value>" 레이블 쌍을 가지는 노드에 대해서만 균
+`topologyKey: zone` 는 "zone:<any value>" 레이블 쌍을 가지는 노드에 대해서만 �
 등한 분배를 적용하는 것을 의미한다. `whenUnsatisfiable: DoNotSchedule` 은 만약
 들어오는 파드가 제약 조건을 만족시키지 못하면 스케줄러에게 pending 상태를 유지하
 도록 지시한다.
@@ -143,13 +143,13 @@ spec:
 
 사용자는 파드 스펙을 조정해서 다음과 같은 다양한 요구사항을 충족할 수 있다.
 
-- `maxSkew` 를 "2" 보다 큰 값으로 변경해서 들어오는 파드들이 "zoneA"에도 배치할
+- `maxSkew` 를 "2" 보다 큰 값으로 변경해서 들어오는 파드들이 "zoneA"에도 배치�
   수 있도록 한다.
 - `topologyKey` 를 "node"로 변경해서 파드가 영역이 아닌, 노드에 걸쳐 고르게 분산
   할 수 있게 한다. 위의 예시에서 만약 `maxSkew` 가 "1"로 유지되면 들어오는 파드
   는 오직 "node4"에만 배치할 수 있다.
 - `whenUnsatisfiable: DoNotSchedule` 에서 `whenUnsatisfiable: ScheduleAnyway` 로
-  변경하면 들어오는 파드는 항상 다른 스케줄링 API를 충족한다는 가정하에 스케줄할
+  변경하면 들어오는 파드는 항상 다른 스케줄링 API를 충족한다는 가정하에 스케줄�
   수 있도록 보장한다. 그러나 일치하는 파드가 적은 토폴로지 도메인에 배치되는 것
   이 좋다. (이 선호도는 리소스 사용 비율 등과 같은 다른 내부 스케줄링 우선순위와
   공동으로 정규화 된다는 것을 알아두자.)

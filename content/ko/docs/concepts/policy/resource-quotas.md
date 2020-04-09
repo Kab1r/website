@@ -211,7 +211,7 @@ IP 공급이 고갈되는 경우를 피하기 위해네임스페이스에 `pods`
 
 특정
 [우선 순위](/docs/concepts/configuration/pod-priority-preemption/#pod-priority)로
-파드를 생성할 수 있다. 쿼터 스펙의 `scopeSelector` 필드를 사용하여 파드의 우선
+파드를 생성할 수 있다. 쿼터 스펙의 `scopeSelector` 필드를 사용하여 파드의 우�
 순위에 따라 파드의 시스템 리소스 사용을제어할 수 있다.
 
 쿼터 스펙의 `scopeSelector`가 파드를 선택한 경우에만 쿼터가 일치하고 사용된다.
