@@ -1,7 +1,7 @@
 ---
 reviewers:
-- davidopp
-- wojtek-t
+  - davidopp
+  - wojtek-t
 title: Pod Priority and Preemption
 content_template: templates/concept
 weight: 70
@@ -20,17 +20,14 @@ pending Pod possible.
 
 {{% capture body %}}
 
+{{< warning >}} In a cluster where not all users are trusted, a malicious user
+could create Pods at the highest possible priorities, causing other Pods to be
+evicted/not get scheduled. An administrator can use ResourceQuota to prevent
+users from creating pods at high priorities.
 
-{{< warning >}}
-In a cluster where not all users are trusted, a malicious user could create Pods
-at the highest possible priorities, causing other Pods to be evicted/not get
-scheduled.
-An administrator can use ResourceQuota to prevent users from creating pods at
-high priorities.
-
-See [limit Priority Class consumption by default](/docs/concepts/policy/resource-quotas/#limit-priority-class-consumption-by-default)
-for details.
-{{< /warning >}}
+See
+[limit Priority Class consumption by default](/docs/concepts/policy/resource-quotas/#limit-priority-class-consumption-by-default)
+for details. {{< /warning >}}
 
 ## How to use priority and preemption
 
@@ -45,10 +42,10 @@ To use priority and preemption:
 
 Keep reading for more information about these steps.
 
-{{< note >}}
-Kubernetes already ships with two PriorityClasses:
-`system-cluster-critical` and `system-node-critical`.
-These are common classes and are used to [ensure that critical components are always scheduled first](/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/).
+{{< note >}} Kubernetes already ships with two PriorityClasses:
+`system-cluster-critical` and `system-node-critical`. These are common classes
+and are used to
+[ensure that critical components are always scheduled first](/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/).
 {{< /note >}}
 
 If you try the feature and then decide to disable it, you must remove the
@@ -60,22 +57,18 @@ Pods.
 
 ## How to disable preemption
 
-{{< caution >}}
-Critical pods rely on scheduler preemption to be scheduled when a cluster
-is under resource pressure. For this reason, it is not recommended to
-disable preemption.
-{{< /caution >}}
+{{< caution >}} Critical pods rely on scheduler preemption to be scheduled when
+a cluster is under resource pressure. For this reason, it is not recommended to
+disable preemption. {{< /caution >}}
 
-{{< note >}}
-In Kubernetes 1.15 and later, if the feature `NonPreemptingPriority` is enabled,
-PriorityClasses have the option to set `preemptionPolicy: Never`.
-This will prevent pods of that PriorityClass from preempting other pods.
-{{< /note >}}
+{{< note >}} In Kubernetes 1.15 and later, if the feature
+`NonPreemptingPriority` is enabled, PriorityClasses have the option to set
+`preemptionPolicy: Never`. This will prevent pods of that PriorityClass from
+preempting other pods. {{< /note >}}
 
 Preemption is controlled by a kube-scheduler flag `disablePreemption`, which is
-set to `false` by default.
-If you want to disable preemption despite the above note, you can set
-`disablePreemption` to `true`.
+set to `false` by default. If you want to disable preemption despite the above
+note, you can set `disablePreemption` to `true`.
 
 This option is available in component configs only and is not available in
 old-style command line options. Below is a sample component config to disable
@@ -87,8 +80,7 @@ kind: KubeSchedulerConfiguration
 algorithmSource:
   provider: DefaultProvider
 
-...
-
+---
 disablePreemption: true
 ```
 
@@ -98,8 +90,7 @@ A PriorityClass is a non-namespaced object that defines a mapping from a
 priority class name to the integer value of the priority. The name is specified
 in the `name` field of the PriorityClass object's metadata. The value is
 specified in the required `value` field. The higher the value, the higher the
-priority.
-The name of a PriorityClass object must be a valid
+priority. The name of a PriorityClass object must be a valid
 [DNS subdomain name](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names),
 and it cannot be prefixed with `system-`.
 
@@ -120,16 +111,16 @@ cluster when they should use this PriorityClass.
 
 ### Notes about PodPriority and existing clusters
 
--   If you upgrade your existing cluster and enable this feature, the priority
-    of your existing Pods is effectively zero.
+- If you upgrade your existing cluster and enable this feature, the priority of
+  your existing Pods is effectively zero.
 
--   Addition of a PriorityClass with `globalDefault` set to `true` does not
-    change the priorities of existing Pods. The value of such a PriorityClass is
-    used only for Pods created after the PriorityClass is added.
+- Addition of a PriorityClass with `globalDefault` set to `true` does not change
+  the priorities of existing Pods. The value of such a PriorityClass is used
+  only for Pods created after the PriorityClass is added.
 
--   If you delete a PriorityClass, existing Pods that use the name of the
-    deleted PriorityClass remain unchanged, but you cannot create more Pods that
-    use the name of the deleted PriorityClass.
+- If you delete a PriorityClass, existing Pods that use the name of the deleted
+  PriorityClass remain unchanged, but you cannot create more Pods that use the
+  name of the deleted PriorityClass.
 
 ### Example PriorityClass
 
@@ -147,38 +138,30 @@ description: "This priority class should be used for XYZ service pods only."
 
 {{< feature-state for_k8s_version="v1.15" state="alpha" >}}
 
-Pods with `PreemptionPolicy: Never` will be placed in the scheduling queue
-ahead of lower-priority pods,
-but they cannot preempt other pods.
-A non-preempting pod waiting to be scheduled will stay in the scheduling queue,
-until sufficient resources are free,
-and it can be scheduled.
-Non-preempting pods,
-like other pods,
-are subject to scheduler back-off.
-This means that if the scheduler tries these pods and they cannot be scheduled,
-they will be retried with lower frequency,
-allowing other pods with lower priority to be scheduled before them.
+Pods with `PreemptionPolicy: Never` will be placed in the scheduling queue ahead
+of lower-priority pods, but they cannot preempt other pods. A non-preempting pod
+waiting to be scheduled will stay in the scheduling queue, until sufficient
+resources are free, and it can be scheduled. Non-preempting pods, like other
+pods, are subject to scheduler back-off. This means that if the scheduler tries
+these pods and they cannot be scheduled, they will be retried with lower
+frequency, allowing other pods with lower priority to be scheduled before them.
 
-Non-preempting pods may still be preempted by other,
-high-priority pods.
+Non-preempting pods may still be preempted by other, high-priority pods.
 
-`PreemptionPolicy` defaults to `PreemptLowerPriority`,
-which will allow pods of that PriorityClass to preempt lower-priority pods
-(as is existing default behavior).
-If `PreemptionPolicy` is set to `Never`,
-pods in that PriorityClass will be non-preempting.
+`PreemptionPolicy` defaults to `PreemptLowerPriority`, which will allow pods of
+that PriorityClass to preempt lower-priority pods (as is existing default
+behavior). If `PreemptionPolicy` is set to `Never`, pods in that PriorityClass
+will be non-preempting.
 
 The use of the `PreemptionPolicy` field requires the `NonPreemptingPriority`
-[feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
-to be enabled.
+[feature gate](/docs/reference/command-line-tools-reference/feature-gates/) to
+be enabled.
 
-An example use case is for data science workloads.
-A user may submit a job that they want to be prioritized above other workloads,
-but do not wish to discard existing work by preempting running pods.
-The high priority job with `PreemptionPolicy: Never` will be scheduled
-ahead of other queued pods,
-as soon as sufficient cluster resources "naturally" become free.
+An example use case is for data science workloads. A user may submit a job that
+they want to be prioritized above other workloads, but do not wish to discard
+existing work by preempting running pods. The high priority job with
+`PreemptionPolicy: Never` will be scheduled ahead of other queued pods, as soon
+as sufficient cluster resources "naturally" become free.
 
 ### Example Non-preempting PriorityClass
 
@@ -202,8 +185,8 @@ the priority. If the priority class is not found, the Pod is rejected.
 
 The following YAML is an example of a Pod configuration that uses the
 PriorityClass created in the preceding example. The priority admission
-controller checks the specification and resolves the priority of the Pod to
-1000000.
+controller checks the specification and resolves the priority of the Pod
+to 1000000.
 
 ```yaml
 apiVersion: v1
@@ -214,20 +197,20 @@ metadata:
     env: test
 spec:
   containers:
-  - name: nginx
-    image: nginx
-    imagePullPolicy: IfNotPresent
+    - name: nginx
+      image: nginx
+      imagePullPolicy: IfNotPresent
   priorityClassName: high-priority
 ```
 
 ### Effect of Pod priority on scheduling order
 
-When Pod priority is enabled, the scheduler orders pending Pods by
-their priority and a pending Pod is placed ahead of other pending Pods
-with lower priority in the scheduling queue. As a result, the higher
-priority Pod may be scheduled sooner than Pods with lower priority if
-its scheduling requirements are met. If such Pod cannot be scheduled,
-scheduler will continue and tries to schedule other lower priority Pods.
+When Pod priority is enabled, the scheduler orders pending Pods by their
+priority and a pending Pod is placed ahead of other pending Pods with lower
+priority in the scheduling queue. As a result, the higher priority Pod may be
+scheduled sooner than Pods with lower priority if its scheduling requirements
+are met. If such Pod cannot be scheduled, scheduler will continue and tries to
+schedule other lower priority Pods.
 
 ## Preemption
 
@@ -276,12 +259,12 @@ priority Pods to zero or a small number.
 #### PodDisruptionBudget is supported, but not guaranteed
 
 A [Pod Disruption Budget (PDB)](/docs/concepts/workloads/pods/disruptions/)
-allows application owners to limit the number of Pods of a replicated application
-that are down simultaneously from voluntary disruptions. Kubernetes supports
-PDB when preempting Pods, but respecting PDB is best effort. The scheduler tries
-to find victims whose PDB are not violated by preemption, but if no such victims
-are found, preemption will still happen, and lower priority Pods will be removed
-despite their PDBs being violated.
+allows application owners to limit the number of Pods of a replicated
+application that are down simultaneously from voluntary disruptions. Kubernetes
+supports PDB when preempting Pods, but respecting PDB is best effort. The
+scheduler tries to find victims whose PDB are not violated by preemption, but if
+no such victims are found, preemption will still happen, and lower priority Pods
+will be removed despite their PDBs being violated.
 
 #### Inter-Pod affinity on lower-priority Pods
 
@@ -289,13 +272,11 @@ A Node is considered for preemption only when the answer to this question is
 yes: "If all the Pods with lower priority than the pending Pod are removed from
 the Node, can the pending Pod be scheduled on the Node?"
 
-{{< note >}}
-Preemption does not necessarily remove all lower-priority
-Pods. If the pending Pod can be scheduled by removing fewer than all
-lower-priority Pods, then only a portion of the lower-priority Pods are removed.
-Even so, the answer to the preceding question must be yes. If the answer is no,
-the Node is not considered for preemption.
-{{< /note >}}
+{{< note >}} Preemption does not necessarily remove all lower-priority Pods. If
+the pending Pod can be scheduled by removing fewer than all lower-priority Pods,
+then only a portion of the lower-priority Pods are removed. Even so, the answer
+to the preceding question must be yes. If the answer is no, the Node is not
+considered for preemption. {{< /note >}}
 
 If a pending Pod has inter-pod affinity to one or more of the lower-priority
 Pods on the Node, the inter-Pod affinity rule cannot be satisfied in the absence
@@ -313,15 +294,15 @@ Suppose a Node N is being considered for preemption so that a pending Pod P can
 be scheduled on N. P might become feasible on N only if a Pod on another Node is
 preempted. Here's an example:
 
-*   Pod P is being considered for Node N.
-*   Pod Q is running on another Node in the same Zone as Node N.
-*   Pod P has Zone-wide anti-affinity with Pod Q (`topologyKey:
-    failure-domain.beta.kubernetes.io/zone`).
-*   There are no other cases of anti-affinity between Pod P and other Pods in
-    the Zone.
-*   In order to schedule Pod P on Node N, Pod Q can be preempted, but scheduler
-    does not perform cross-node preemption. So, Pod P will be deemed
-    unschedulable on Node N.
+- Pod P is being considered for Node N.
+- Pod Q is running on another Node in the same Zone as Node N.
+- Pod P has Zone-wide anti-affinity with Pod Q
+  (`topologyKey: failure-domain.beta.kubernetes.io/zone`).
+- There are no other cases of anti-affinity between Pod P and other Pods in the
+  Zone.
+- In order to schedule Pod P on Node N, Pod Q can be preempted, but scheduler
+  does not perform cross-node preemption. So, Pod P will be deemed unschedulable
+  on Node N.
 
 If Pod Q were removed from its Node, the Pod anti-affinity violation would be
 gone, and Pod P could possibly be scheduled on Node N.
@@ -337,14 +318,14 @@ examples of potential problems and ways to deal with them.
 ### Pods are preempted unnecessarily
 
 Preemption removes existing Pods from a cluster under resource pressure to make
-room for higher priority pending Pods. If you give high priorities to
-certain Pods by mistake, these unintentionally high priority Pods may cause
-preemption in your cluster. Pod priority is specified by setting the
-`priorityClassName` field in the Pod's specification. The integer value for
-priority is then resolved and populated to the `priority` field of `podSpec`.
+room for higher priority pending Pods. If you give high priorities to certain
+Pods by mistake, these unintentionally high priority Pods may cause preemption
+in your cluster. Pod priority is specified by setting the `priorityClassName`
+field in the Pod's specification. The integer value for priority is then
+resolved and populated to the `priority` field of `podSpec`.
 
-To address the problem, you can change the `priorityClassName` for those Pods
-to use lower priority classes, or leave that field empty. An empty
+To address the problem, you can change the `priorityClassName` for those Pods to
+use lower priority classes, or leave that field empty. An empty
 `priorityClassName` is resolved to zero by default.
 
 When a Pod is preempted, there will be events recorded for the preempted Pod.
@@ -357,16 +338,16 @@ than the victims. If preemption happens in such scenarios, please file an issue.
 ### Pods are preempted, but the preemptor is not scheduled
 
 When pods are preempted, they receive their requested graceful termination
-period, which is by default 30 seconds. If the victim Pods do not terminate within
-this period, they are forcibly terminated. Once all the victims go away, the
-preemptor Pod can be scheduled.
+period, which is by default 30 seconds. If the victim Pods do not terminate
+within this period, they are forcibly terminated. Once all the victims go away,
+the preemptor Pod can be scheduled.
 
 While the preemptor Pod is waiting for the victims to go away, a higher priority
 Pod may be created that fits on the same Node. In this case, the scheduler will
 schedule the higher priority Pod instead of the preemptor.
 
-This is expected behavior: the Pod with the higher priority should take the place
-of a Pod with a lower priority. Other controller actions, such as
+This is expected behavior: the Pod with the higher priority should take the
+place of a Pod with a lower priority. Other controller actions, such as
 [cluster autoscaling](/docs/tasks/administer-cluster/cluster-management/#cluster-autoscaling),
 may eventually provide capacity to schedule the pending Pods.
 
@@ -374,11 +355,10 @@ may eventually provide capacity to schedule the pending Pods.
 
 The scheduler tries to find nodes that can run a pending Pod. If no node is
 found, the scheduler tries to remove Pods with lower priority from an arbitrary
-node in order to make room for the pending pod.
-If a node with low priority Pods is not feasible to run the pending Pod, the scheduler
-may choose another node with higher priority Pods (compared to the Pods on the
-other node) for preemption. The victims must still have lower priority than the
-preemptor Pod.
+node in order to make room for the pending pod. If a node with low priority Pods
+is not feasible to run the pending Pod, the scheduler may choose another node
+with higher priority Pods (compared to the Pods on the other node) for
+preemption. The victims must still have lower priority than the preemptor Pod.
 
 When there are multiple nodes available for preemption, the scheduler tries to
 choose the node with a set of Pods with lowest priority. However, if such Pods
@@ -404,17 +384,17 @@ The only component that considers both QoS and Pod priority is
 [kubelet out-of-resource eviction](/docs/tasks/administer-cluster/out-of-resource/).
 The kubelet ranks Pods for eviction first by whether or not their usage of the
 starved resource exceeds requests, then by Priority, and then by the consumption
-of the starved compute resource relative to the Pods’ scheduling requests.
-See
+of the starved compute resource relative to the Pods’ scheduling requests. See
 [evicting end-user pods](/docs/tasks/administer-cluster/out-of-resource/#evicting-end-user-pods)
 for more details.
 
-kubelet out-of-resource eviction does not evict Pods when their
-usage does not exceed their requests. If a Pod with lower priority is not
-exceeding its requests, it won't be evicted. Another Pod with higher priority
-that exceeds its requests may be evicted.
+kubelet out-of-resource eviction does not evict Pods when their usage does not
+exceed their requests. If a Pod with lower priority is not exceeding its
+requests, it won't be evicted. Another Pod with higher priority that exceeds its
+requests may be evicted.
 
-{{% /capture %}}
-{{% capture whatsnext %}}
-* Read about using ResourceQuotas in connection with PriorityClasses: [limit Priority Class consumption by default](/docs/concepts/policy/resource-quotas/#limit-priority-class-consumption-by-default)
-{{% /capture %}}
+{{% /capture %}} {{% capture whatsnext %}}
+
+- Read about using ResourceQuotas in connection with PriorityClasses:
+  [limit Priority Class consumption by default](/docs/concepts/policy/resource-quotas/#limit-priority-class-consumption-by-default)
+  {{% /capture %}}

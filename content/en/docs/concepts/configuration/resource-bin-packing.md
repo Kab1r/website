@@ -1,8 +1,8 @@
 ---
 reviewers:
-- bsalamat
-- k82cn
-- ahg-g
+  - bsalamat
+  - k82cn
+  - ahg-g
 title: Resource Bin Packing for Extended Resources
 content_template: templates/concept
 weight: 10
@@ -12,7 +12,10 @@ weight: 10
 
 {{< feature-state for_k8s_version="v1.16" state="alpha" >}}
 
-The kube-scheduler can be configured to enable bin packing of resources along with extended resources using `RequestedToCapacityRatioResourceAllocation` priority function. Priority functions can be used to fine-tune the kube-scheduler as per custom needs. 
+The kube-scheduler can be configured to enable bin packing of resources along
+with extended resources using `RequestedToCapacityRatioResourceAllocation`
+priority function. Priority functions can be used to fine-tune the
+kube-scheduler as per custom needs.
 
 {{% /capture %}}
 
@@ -20,10 +23,24 @@ The kube-scheduler can be configured to enable bin packing of resources along wi
 
 ## Enabling Bin Packing using RequestedToCapacityRatioResourceAllocation
 
-Before Kubernetes 1.15, Kube-scheduler used to allow scoring nodes based on the request to capacity ratio of primary resources like CPU and Memory. Kubernetes 1.16 added a new parameter to the priority function that allows the users to specify the resources along with weights for each resource to score nodes based on the request to capacity ratio. This allows users to bin pack extended resources by using appropriate parameters improves the utilization of scarce resources in large clusters. The behavior of the `RequestedToCapacityRatioResourceAllocation` priority function can be controlled by a configuration option called `requestedToCapacityRatioArguments`. This argument consists of two parameters `shape` and `resources`. Shape allows the user to tune the function as least requested or most requested based on `utilization` and `score` values. Resources
-consists of `name` which specifies the resource to be considered during scoring and `weight` specify the weight of each resource.
+Before Kubernetes 1.15, Kube-scheduler used to allow scoring nodes based on the
+request to capacity ratio of primary resources like CPU and Memory. Kubernetes
+1.16 added a new parameter to the priority function that allows the users to
+specify the resources along with weights for each resource to score nodes based
+on the request to capacity ratio. This allows users to bin pack extended
+resources by using appropriate parameters improves the utilization of scarce
+resources in large clusters. The behavior of the
+`RequestedToCapacityRatioResourceAllocation` priority function can be controlled
+by a configuration option called `requestedToCapacityRatioArguments`. This
+argument consists of two parameters `shape` and `resources`. Shape allows the
+user to tune the function as least requested or most requested based on
+`utilization` and `score` values. Resources consists of `name` which specifies
+the resource to be considered during scoring and `weight` specify the weight of
+each resource.
 
-Below is an example configuration that sets `requestedToCapacityRatioArguments` to bin packing behavior for extended resources `intel.com/foo` and `intel.com/bar`
+Below is an example configuration that sets `requestedToCapacityRatioArguments`
+to bin packing behavior for extended resources `intel.com/foo` and
+`intel.com/bar`
 
 ```json
 {
@@ -60,14 +77,17 @@ Below is an example configuration that sets `requestedToCapacityRatioArguments` 
 
 ### Tuning RequestedToCapacityRatioResourceAllocation Priority Function
 
-`shape` is used to specify the behavior of the `RequestedToCapacityRatioPriority` function.
+`shape` is used to specify the behavior of the
+`RequestedToCapacityRatioPriority` function.
 
 ```yaml
  {"utilization": 0, "score": 0},
  {"utilization": 100, "score": 10}
 ```
 
-The above arguments give the node a score of 0 if utilization is 0% and 10 for utilization 100%, thus enabling bin packing behavior. To enable least requested the score value must be reversed as follows.
+The above arguments give the node a score of 0 if utilization is 0% and 10 for
+utilization 100%, thus enabling bin packing behavior. To enable least requested
+the score value must be reversed as follows.
 
 ```yaml
  {"utilization": 0, "score": 100},
@@ -76,30 +96,29 @@ The above arguments give the node a score of 0 if utilization is 0% and 10 for u
 
 `resources` is an optional parameter which by defaults is set to:
 
-``` yaml
-"resources": [
-              {"name": "CPU", "weight": 1},
-              {"name": "Memory", "weight": 1}
-            ]
+```yaml
+"resources": [{ "name": "CPU", "weight": 1 }, { "name": "Memory", "weight": 1 }]
 ```
 
-It can be used to add extended resources as follows: 
+It can be used to add extended resources as follows:
 
 ```yaml
-"resources": [
-              {"name": "intel.com/foo", "weight": 5},
-              {"name": "CPU", "weight": 3},
-              {"name": "Memory", "weight": 1}
-            ]
+"resources":
+  [
+    { "name": "intel.com/foo", "weight": 5 },
+    { "name": "CPU", "weight": 3 },
+    { "name": "Memory", "weight": 1 },
+  ]
 ```
 
-The weight parameter is optional and is set to 1 if not specified. Also, the weight cannot be set to a negative value.
+The weight parameter is optional and is set to 1 if not specified. Also, the
+weight cannot be set to a negative value.
 
 ### How the RequestedToCapacityRatioResourceAllocation Priority Function Scores Nodes
 
 This section is intended for those who want to understand the internal details
-of this feature.
-Below is an example of how the node score is calculated for a given set of values.
+of this feature. Below is an example of how the node score is calculated for a
+given set of values.
 
 ```
 Requested Resources
