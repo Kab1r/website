@@ -932,7 +932,7 @@ kubectl get nodes
 ```
 
 使用 [`kubectl
-cordon`](/zh/docs/user-guide/kubectl/{{< param "version" >}}/#cordon) cordon 你
+cordon`](/zh/docs/user-guide/kubectl/{{< param "version" >}}/#cordon) cordon �
 的集群中除 4 个节点以外的所有节点。
 
 ```shell

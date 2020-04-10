@@ -428,7 +428,7 @@ to limit the total amount of resources that can be consumed. If used in conjunct
 with namespaces, it can prevent one team from hogging all the resources.
 -->
 
-在上面的输出中，您可以看到如果 Pod 请求超过 1120m CPU 或者 6.23Gi 内存，节点将无
+在上面的输出中，您可以看到如果 Pod 请求超过 1120m CPU 或者 6.23Gi 内存，节点将�
 法满足。
 
 通过查看 `Pods` 部分，您将看到哪些 Pod 占用的节点上的资源。
@@ -952,7 +952,7 @@ To consume an extended resource in a Pod, include the resource name as a key
 in the `spec.containers[].resources.limits` map in the container spec.
 -->
 
-要在 Pod 中使用扩展资源，请在容器规范的 `spec.containers[].resources.limits` 映
+要在 Pod 中使用扩展资源，请在容器规范的 `spec.containers[].resources.limits` �
 射中包含资源名称作为键。
 
 {{< note >}}

@@ -448,7 +448,7 @@ $ grace=$(kubectl get po cassandra-0 -o=jsonpath='{.spec.terminationGracePeriodS
 Kubernetes
 _[Replication Controller](/zh/docs/user-guide/replication-controller)_ 负责复制
 一个完全相同的 pod 集合。像 Service 一样，它具有一个 selector query，用来识别它
-的集合成员。和 Service 不一样的是，它还具有一个期望的副本数，并且会通过创建或删
+的集合成员。和 Service 不一样的是，它还具有一个期望的副本数，并且会通过创建或�
 除 Pod 来保证 Pod 的数量满足它期望的状态。
 
 和我们刚才定义的 Service 一起，Replication Controller 能够让我们轻松的构建一个复
