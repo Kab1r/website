@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Generate all certificates
 
@@ -83,8 +81,6 @@ kubeadm init phase certs all [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -103,6 +99,3 @@ kubeadm init phase certs all [flags]
 
 </tbody>
 </table>
-
-
-

@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Run pre-flight checks for kubeadm init.
 
@@ -48,8 +46,6 @@ kubeadm init phase preflight [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -68,6 +64,3 @@ kubeadm init phase preflight [flags]
 
 </tbody>
 </table>
-
-
-

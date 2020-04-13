@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Remove a local etcd member for a control plane node.
 
@@ -34,8 +32,6 @@ kubeadm reset phase remove-etcd-member [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -54,6 +50,3 @@ kubeadm reset phase remove-etcd-member [flags]
 
 </tbody>
 </table>
-
-
-

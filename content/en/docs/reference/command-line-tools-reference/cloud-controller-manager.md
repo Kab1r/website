@@ -6,9 +6,8 @@ weight: 30
 
 {{% capture synopsis %}}
 
-
-The Cloud controller manager is a daemon that embeds
-the cloud specific control loops shipped with Kubernetes.
+The Cloud controller manager is a daemon that embeds the cloud specific control
+loops shipped with Kubernetes.
 
 ```
 cloud-controller-manager [flags]
@@ -532,7 +531,4 @@ cloud-controller-manager [flags]
 </tbody>
 </table>
 
-
-
 {{% /capture %}}
-

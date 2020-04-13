@@ -1,10 +1,10 @@
-
 ### Synopsis
 
+Generate the certificate for the API server to connect to kubelet, and save them
+into apiserver-kubelet-client.cert and apiserver-kubelet-client.key files.
 
-Generate the certificate for the API server to connect to kubelet, and save them into apiserver-kubelet-client.cert and apiserver-kubelet-client.key files.
-
-If both files already exist, kubeadm skips the generation step and existing files will be used.
+If both files already exist, kubeadm skips the generation step and existing
+files will be used.
 
 Alpha Disclaimer: this command is currently alpha.
 
@@ -66,8 +66,6 @@ kubeadm init phase certs apiserver-kubelet-client [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -86,6 +84,3 @@ kubeadm init phase certs apiserver-kubelet-client [flags]
 
 </tbody>
 </table>
-
-
-

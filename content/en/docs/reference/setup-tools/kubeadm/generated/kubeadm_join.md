@@ -1,51 +1,47 @@
-
 ### Synopsis
 
+When joining a kubeadm initialized cluster, we need to establish bidirectional
+trust. This is split into discovery (having the Node trust the Kubernetes
+Control Plane) and TLS bootstrap (having the Kubernetes Control Plane trust the
+Node).
 
-
-When joining a kubeadm initialized cluster, we need to establish
-bidirectional trust. This is split into discovery (having the Node
-trust the Kubernetes Control Plane) and TLS bootstrap (having the
-Kubernetes Control Plane trust the Node).
-
-There are 2 main schemes for discovery. The first is to use a shared
-token along with the IP address of the API server. The second is to
-provide a file - a subset of the standard kubeconfig file. This file
-can be a local file or downloaded via an HTTPS URL. The forms are
-kubeadm join --discovery-token abcdef.1234567890abcdef 1.2.3.4:6443,
-kubeadm join --discovery-file path/to/file.conf, or kubeadm join
---discovery-file https://url/file.conf. Only one form can be used. If
-the discovery information is loaded from a URL, HTTPS must be used.
-Also, in that case the host installed CA bundle is used to verify
+There are 2 main schemes for discovery. The first is to use a shared token along
+with the IP address of the API server. The second is to provide a file - a
+subset of the standard kubeconfig file. This file can be a local file or
+downloaded via an HTTPS URL. The forms are kubeadm join --discovery-token
+abcdef.1234567890abcdef 1.2.3.4:6443, kubeadm join --discovery-file
+path/to/file.conf, or kubeadm join --discovery-file https://url/file.conf. Only
+one form can be used. If the discovery information is loaded from a URL, HTTPS
+must be used. Also, in that case the host installed CA bundle is used to verify
 the connection.
 
 If you use a shared token for discovery, you should also pass the
---discovery-token-ca-cert-hash flag to validate the public key of the
-root certificate authority (CA) presented by the Kubernetes Control Plane.
-The value of this flag is specified as "&lt;hash-type&gt;:&lt;hex-encoded-value&gt;",
-where the supported hash type is "sha256". The hash is calculated over
-the bytes of the Subject Public Key Info (SPKI) object (as in RFC7469).
-This value is available in the output of "kubeadm init" or can be
-calculated using standard tools. The --discovery-token-ca-cert-hash flag
-may be repeated multiple times to allow more than one public key.
+--discovery-token-ca-cert-hash flag to validate the public key of the root
+certificate authority (CA) presented by the Kubernetes Control Plane. The value
+of this flag is specified as "&lt;hash-type&gt;:&lt;hex-encoded-value&gt;",
+where the supported hash type is "sha256". The hash is calculated over the bytes
+of the Subject Public Key Info (SPKI) object (as in RFC7469). This value is
+available in the output of "kubeadm init" or can be calculated using standard
+tools. The --discovery-token-ca-cert-hash flag may be repeated multiple times to
+allow more than one public key.
 
-If you cannot know the CA public key hash ahead of time, you can pass
-the --discovery-token-unsafe-skip-ca-verification flag to disable this
-verification. This weakens the kubeadm security model since other nodes
-can potentially impersonate the Kubernetes Control Plane.
+If you cannot know the CA public key hash ahead of time, you can pass the
+--discovery-token-unsafe-skip-ca-verification flag to disable this verification.
+This weakens the kubeadm security model since other nodes can potentially
+impersonate the Kubernetes Control Plane.
 
-The TLS bootstrap mechanism is also driven via a shared token. This is
-used to temporarily authenticate with the Kubernetes Control Plane to submit a
-certificate signing request (CSR) for a locally created key pair. By
-default, kubeadm will set up the Kubernetes Control Plane to automatically
-approve these signing requests. This token is passed in with the
---tls-bootstrap-token abcdef.1234567890abcdef flag.
+The TLS bootstrap mechanism is also driven via a shared token. This is used to
+temporarily authenticate with the Kubernetes Control Plane to submit a
+certificate signing request (CSR) for a locally created key pair. By default,
+kubeadm will set up the Kubernetes Control Plane to automatically approve these
+signing requests. This token is passed in with the --tls-bootstrap-token
+abcdef.1234567890abcdef flag.
 
-Often times the same token is used for both parts. In this case, the
---token flag can be used instead of specifying each token individually.
-
+Often times the same token is used for both parts. In this case, the --token
+flag can be used instead of specifying each token individually.
 
 The "join [api-server-endpoint]" command executes the following phases:
+
 ```
 preflight              Run join pre-flight checks
 control-plane-prepare  Prepare the machine for serving a control plane
@@ -59,7 +55,6 @@ control-plane-join     Join a machine as a control plane instance
   /update-status         Register the new control-plane node into the ClusterStatus maintained in the kubeadm-config ConfigMap
   /mark-control-plane    Mark a node as a control-plane
 ```
-
 
 ```
 kubeadm join [api-server-endpoint] [flags]
@@ -196,8 +191,6 @@ kubeadm join [api-server-endpoint] [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -216,6 +209,3 @@ kubeadm join [api-server-endpoint] [flags]
 
 </tbody>
 </table>
-
-
-

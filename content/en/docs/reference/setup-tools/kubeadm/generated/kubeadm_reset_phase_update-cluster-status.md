@@ -1,8 +1,7 @@
-
 ### Synopsis
 
-
-Remove this node from the ClusterStatus object if the node is a control plane node.
+Remove this node from the ClusterStatus object if the node is a control plane
+node.
 
 ```
 kubeadm reset phase update-cluster-status [flags]
@@ -27,8 +26,6 @@ kubeadm reset phase update-cluster-status [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -47,6 +44,3 @@ kubeadm reset phase update-cluster-status [flags]
 
 </tbody>
 </table>
-
-
-

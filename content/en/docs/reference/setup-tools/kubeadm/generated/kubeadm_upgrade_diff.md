@@ -1,8 +1,7 @@
-
 ### Synopsis
 
-
-Show what differences would be applied to existing static pod manifests. See also: kubeadm upgrade apply --dry-run
+Show what differences would be applied to existing static pod manifests. See
+also: kubeadm upgrade apply --dry-run
 
 ```
 kubeadm upgrade diff [version] [flags]
@@ -69,8 +68,6 @@ kubeadm upgrade diff [version] [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -89,6 +86,3 @@ kubeadm upgrade diff [version] [flags]
 
 </tbody>
 </table>
-
-
-

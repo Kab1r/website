@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Generate the kubeconfig for the new control plane components
 
@@ -90,8 +88,6 @@ kubeadm join phase control-plane-prepare kubeconfig [api-server-endpoint] [flags
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -110,6 +106,3 @@ kubeadm join phase control-plane-prepare kubeconfig [api-server-endpoint] [flags
 
 </tbody>
 </table>
-
-
-

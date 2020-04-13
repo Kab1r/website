@@ -1,8 +1,7 @@
-
 ### Synopsis
 
-
-Write a file with KubeletConfiguration and an environment file with node specific kubelet settings, and then (re)start kubelet.
+Write a file with KubeletConfiguration and an environment file with node
+specific kubelet settings, and then (re)start kubelet.
 
 ```
 kubeadm init phase kubelet-start [flags]
@@ -55,8 +54,6 @@ kubeadm init phase kubelet-start [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -75,6 +72,3 @@ kubeadm init phase kubelet-start [flags]
 
 </tbody>
 </table>
-
-
-

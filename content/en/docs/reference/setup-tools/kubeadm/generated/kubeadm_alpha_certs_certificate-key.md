@@ -1,14 +1,10 @@
-
 ### Synopsis
 
+This command will print out a secure randomly-generated certificate key that can
+be used with the "init" command.
 
-
-This command will print out a secure randomly-generated certificate key that can be used with
-the "init" command.
-
-You can also use "kubeadm init --upload-certs" without specifying a certificate key and it will
-generate and print one for you.
-
+You can also use "kubeadm init --upload-certs" without specifying a certificate
+key and it will generate and print one for you.
 
 ```
 kubeadm alpha certs certificate-key [flags]
@@ -33,8 +29,6 @@ kubeadm alpha certs certificate-key [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -53,6 +47,3 @@ kubeadm alpha certs certificate-key [flags]
 
 </tbody>
 </table>
-
-
-

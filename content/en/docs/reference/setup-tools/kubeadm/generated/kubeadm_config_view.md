@@ -1,12 +1,10 @@
-
 ### Synopsis
 
+Using this command, you can view the ConfigMap in the cluster where the
+configuration for kubeadm is located.
 
-
-Using this command, you can view the ConfigMap in the cluster where the configuration for kubeadm is located.
-
-The configuration is located in the "kube-system" namespace in the "kubeadm-config" ConfigMap.
-
+The configuration is located in the "kube-system" namespace in the
+"kubeadm-config" ConfigMap.
 
 ```
 kubeadm config view [flags]
@@ -30,8 +28,6 @@ kubeadm config view [flags]
 
 </tbody>
 </table>
-
-
 
 ### Options inherited from parent commands
 
@@ -58,6 +54,3 @@ kubeadm config view [flags]
 
 </tbody>
 </table>
-
-
-

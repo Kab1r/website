@@ -1,8 +1,9 @@
-
 ### Synopsis
 
-
-Download the kubelet configuration from a ConfigMap of the form "kubelet-config-1.X" in the cluster, where X is the minor version of the kubelet. kubeadm uses the KuberneteVersion field in the kubeadm-config ConfigMap to determine what the _desired_ kubelet version is.
+Download the kubelet configuration from a ConfigMap of the form
+"kubelet-config-1.X" in the cluster, where X is the minor version of the
+kubelet. kubeadm uses the KuberneteVersion field in the kubeadm-config ConfigMap
+to determine what the _desired_ kubelet version is.
 
 ```
 kubeadm upgrade node phase kubelet-config [flags]
@@ -41,8 +42,6 @@ kubeadm upgrade node phase kubelet-config [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -61,6 +60,3 @@ kubeadm upgrade node phase kubelet-config [flags]
 
 </tbody>
 </table>
-
-
-

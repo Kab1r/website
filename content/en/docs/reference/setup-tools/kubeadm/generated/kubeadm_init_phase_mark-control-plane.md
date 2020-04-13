@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Mark a node as a control-plane
 
@@ -13,7 +11,7 @@ kubeadm init phase mark-control-plane [flags]
 ```
   # Applies control-plane label and taint to the current node, functionally equivalent to what executed by kubeadm init.
   kubeadm init phase mark-control-plane --config config.yml
-  
+
   # Applies control-plane label and taint to a specific node
   kubeadm init phase mark-control-plane --node-name myNode
 ```
@@ -51,8 +49,6 @@ kubeadm init phase mark-control-plane [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -71,6 +67,3 @@ kubeadm init phase mark-control-plane [flags]
 
 </tbody>
 </table>
-
-
-

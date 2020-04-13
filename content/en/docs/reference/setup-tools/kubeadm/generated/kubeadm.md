@@ -1,8 +1,4 @@
-
 ### Synopsis
-
-
-
 
     ┌──────────────────────────────────────────────────────────┐
     │ KUBEADM                                                  │
@@ -32,8 +28,6 @@ Example usage:
 
     You can then repeat the second step on as many other machines as you like.
 
-
-
 ### Options
 
    <table style="width: 100%; table-layout: fixed;">
@@ -59,6 +53,3 @@ Example usage:
 
 </tbody>
 </table>
-
-
-

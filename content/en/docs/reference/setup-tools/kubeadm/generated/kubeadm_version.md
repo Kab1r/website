@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Print the version of kubeadm
 
@@ -34,8 +32,6 @@ kubeadm version [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -54,6 +50,3 @@ kubeadm version [flags]
 
 </tbody>
 </table>
-
-
-

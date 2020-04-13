@@ -1,17 +1,16 @@
-
 ### Synopsis
 
-
-Performs a best effort revert of changes made to this host by 'kubeadm init' or 'kubeadm join'
+Performs a best effort revert of changes made to this host by 'kubeadm init' or
+'kubeadm join'
 
 The "reset" command executes the following phases:
+
 ```
 preflight              Run reset pre-flight checks
 update-cluster-status  Remove this node from the ClusterStatus object.
 remove-etcd-member     Remove a local etcd member.
 cleanup-node           Run cleanup node.
 ```
-
 
 ```
 kubeadm reset [flags]
@@ -78,8 +77,6 @@ kubeadm reset [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -98,6 +95,3 @@ kubeadm reset [flags]
 
 </tbody>
 </table>
-
-
-

@@ -1,8 +1,7 @@
-
 ### Synopsis
 
-
-Register the new control-plane node into the ClusterStatus maintained in the kubeadm-config ConfigMap
+Register the new control-plane node into the ClusterStatus maintained in the
+kubeadm-config ConfigMap
 
 ```
 kubeadm join phase control-plane-join update-status [flags]
@@ -55,8 +54,6 @@ kubeadm join phase control-plane-join update-status [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -75,6 +72,3 @@ kubeadm join phase control-plane-join update-status [flags]
 
 </tbody>
 </table>
-
-
-

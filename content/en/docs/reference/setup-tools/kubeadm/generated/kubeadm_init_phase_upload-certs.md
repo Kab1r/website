@@ -1,8 +1,7 @@
-
 ### Synopsis
 
-
-This command is not meant to be run on its own. See list of available subcommands.
+This command is not meant to be run on its own. See list of available
+subcommands.
 
 ```
 kubeadm init phase upload-certs [flags]
@@ -55,8 +54,6 @@ kubeadm init phase upload-certs [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -75,6 +72,3 @@ kubeadm init phase upload-certs [flags]
 
 </tbody>
 </table>
-
-
-

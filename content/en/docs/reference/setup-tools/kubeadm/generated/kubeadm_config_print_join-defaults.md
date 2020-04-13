@@ -1,13 +1,12 @@
-
 ### Synopsis
 
+This command prints objects such as the default join configuration that is used
+for 'kubeadm join'.
 
-
-This command prints objects such as the default join configuration that is used for 'kubeadm join'.
-
-Note that sensitive values like the Bootstrap Token fields are replaced with placeholder values like {"abcdef.0123456789abcdef" "" "nil" &lt;nil&gt; [] []} in order to pass validation but
-not perform the real computation for creating a token.
-
+Note that sensitive values like the Bootstrap Token fields are replaced with
+placeholder values like {"abcdef.0123456789abcdef" "" "nil" &lt;nil&gt; [][]} in
+order to pass validation but not perform the real computation for creating a
+token.
 
 ```
 kubeadm config print join-defaults [flags]
@@ -39,8 +38,6 @@ kubeadm config print join-defaults [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -66,6 +63,3 @@ kubeadm config print join-defaults [flags]
 
 </tbody>
 </table>
-
-
-

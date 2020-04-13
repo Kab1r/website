@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Upgrade your Kubernetes cluster to the specified version
 
@@ -125,8 +123,6 @@ kubeadm upgrade apply [version]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -145,6 +141,3 @@ kubeadm upgrade apply [version]
 
 </tbody>
 </table>
-
-
-

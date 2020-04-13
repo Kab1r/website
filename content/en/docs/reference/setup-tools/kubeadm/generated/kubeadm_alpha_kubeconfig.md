@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Kubeconfig file utilities.
 
@@ -25,8 +23,6 @@ Alpha Disclaimer: this command is currently alpha.
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -45,6 +41,3 @@ Alpha Disclaimer: this command is currently alpha.
 
 </tbody>
 </table>
-
-
-

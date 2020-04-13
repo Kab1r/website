@@ -1,8 +1,7 @@
-
 ### Synopsis
 
-
-[EXPERIMENTAL] Download certificates shared among control-plane nodes from the kubeadm-certs Secret
+[EXPERIMENTAL] Download certificates shared among control-plane nodes from the
+kubeadm-certs Secret
 
 ```
 kubeadm join phase control-plane-prepare download-certs [api-server-endpoint] [flags]
@@ -90,8 +89,6 @@ kubeadm join phase control-plane-prepare download-certs [api-server-endpoint] [f
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -110,6 +107,3 @@ kubeadm join phase control-plane-prepare download-certs [api-server-endpoint] [f
 
 </tbody>
 </table>
-
-
-

@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Use this command to invoke single phase of the init workflow
 
@@ -23,8 +21,6 @@ Use this command to invoke single phase of the init workflow
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -43,6 +39,3 @@ Use this command to invoke single phase of the init workflow
 
 </tbody>
 </table>
-
-
-

@@ -1,10 +1,7 @@
-
 ### Synopsis
 
-
-
-This command prints configurations for subcommands provided.
-For details, see: https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2
+This command prints configurations for subcommands provided. For details, see:
+https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2
 
 ```
 kubeadm config print [flags]
@@ -28,8 +25,6 @@ kubeadm config print [flags]
 
 </tbody>
 </table>
-
-
 
 ### Options inherited from parent commands
 
@@ -56,6 +51,3 @@ kubeadm config print [flags]
 
 </tbody>
 </table>
-
-
-

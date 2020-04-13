@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Commands related to handling kubernetes certificates
 
@@ -23,8 +21,6 @@ Commands related to handling kubernetes certificates
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -43,6 +39,3 @@ Commands related to handling kubernetes certificates
 
 </tbody>
 </table>
-
-
-

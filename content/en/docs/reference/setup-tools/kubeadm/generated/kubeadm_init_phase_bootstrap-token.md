@@ -1,10 +1,10 @@
-
 ### Synopsis
 
+Bootstrap tokens are used for establishing bidirectional trust between a node
+joining the cluster and a control-plane node.
 
-Bootstrap tokens are used for establishing bidirectional trust between a node joining the cluster and a control-plane node.
-
-This command makes all the configurations required to make bootstrap tokens works and then creates an initial token.
+This command makes all the configurations required to make bootstrap tokens
+works and then creates an initial token.
 
 ```
 kubeadm init phase bootstrap-token [flags]
@@ -58,8 +58,6 @@ kubeadm init phase bootstrap-token [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -78,6 +76,3 @@ kubeadm init phase bootstrap-token [flags]
 
 </tbody>
 </table>
-
-
-

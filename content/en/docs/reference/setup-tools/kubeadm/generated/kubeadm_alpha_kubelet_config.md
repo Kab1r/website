@@ -1,8 +1,7 @@
-
 ### Synopsis
 
-
-This command is not meant to be run on its own. See list of available subcommands.
+This command is not meant to be run on its own. See list of available
+subcommands.
 
 ### Options
 
@@ -23,8 +22,6 @@ This command is not meant to be run on its own. See list of available subcommand
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -43,6 +40,3 @@ This command is not meant to be run on its own. See list of available subcommand
 
 </tbody>
 </table>
-
-
-

@@ -1,25 +1,23 @@
-
 ### Synopsis
 
-
-
-Output shell completion code for the specified shell (bash or zsh).
-The shell code must be evaluated to provide interactive
-completion of kubeadm commands. This can be done by sourcing it from
-the .bash_profile.
+Output shell completion code for the specified shell (bash or zsh). The shell
+code must be evaluated to provide interactive completion of kubeadm commands.
+This can be done by sourcing it from the .bash_profile.
 
 Note: this requires the bash-completion framework.
 
 To install it on Mac use homebrew:
-    $ brew install bash-completion
+$ brew install bash-completion
 Once installed, bash_completion must be evaluated. This can be done by adding the
 following line to the .bash_profile
-    $ source $(brew --prefix)/etc/bash_completion
+    $
+source \$(brew --prefix)/etc/bash_completion
 
-If bash-completion is not installed on Linux, please install the 'bash-completion' package
-via your distribution's package manager.
+If bash-completion is not installed on Linux, please install the
+'bash-completion' package via your distribution's package manager.
 
-Note for zsh users: [1] zsh completions are only supported in versions of zsh &gt;= 5.2
+Note for zsh users: [1] zsh completions are only supported in versions of zsh
+&gt;= 5.2
 
 ```
 kubeadm completion SHELL [flags]
@@ -65,8 +63,6 @@ source <(kubeadm completion zsh)
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -85,6 +81,3 @@ source <(kubeadm completion zsh)
 
 </tbody>
 </table>
-
-
-

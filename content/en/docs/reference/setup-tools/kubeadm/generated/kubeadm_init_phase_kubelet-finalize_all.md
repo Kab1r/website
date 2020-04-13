@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Run all kubelet-finalize phases
 
@@ -48,8 +46,6 @@ kubeadm init phase kubelet-finalize all [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -68,6 +64,3 @@ kubeadm init phase kubelet-finalize all [flags]
 
 </tbody>
 </table>
-
-
-

@@ -1,21 +1,20 @@
-
 ### Synopsis
 
+This command lets you convert configuration objects of older versions to the
+latest supported version, locally in the CLI tool without ever touching anything
+in the cluster. In this version of kubeadm, the following API versions are
+supported:
 
-
-This command lets you convert configuration objects of older versions to the latest supported version,
-locally in the CLI tool without ever touching anything in the cluster.
-In this version of kubeadm, the following API versions are supported:
 - kubeadm.k8s.io/v1beta2
 
-Further, kubeadm can only write out config of version "kubeadm.k8s.io/v1beta2", but read both types.
-So regardless of what version you pass to the --old-config parameter here, the API object will be
-read, deserialized, defaulted, converted, validated, and re-serialized when written to stdout or
---new-config if specified.
+Further, kubeadm can only write out config of version "kubeadm.k8s.io/v1beta2",
+but read both types. So regardless of what version you pass to the --old-config
+parameter here, the API object will be read, deserialized, defaulted, converted,
+validated, and re-serialized when written to stdout or --new-config if
+specified.
 
-In other words, the output of this command is what kubeadm actually would read internally if you
-submitted this file to "kubeadm init"
-
+In other words, the output of this command is what kubeadm actually would read
+internally if you submitted this file to "kubeadm init"
 
 ```
 kubeadm config migrate [flags]
@@ -54,8 +53,6 @@ kubeadm config migrate [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -81,6 +78,3 @@ kubeadm config migrate [flags]
 
 </tbody>
 </table>
-
-
-

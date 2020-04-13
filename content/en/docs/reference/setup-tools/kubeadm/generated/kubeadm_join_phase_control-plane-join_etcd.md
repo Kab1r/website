@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Add a new local etcd member
 
@@ -62,8 +60,6 @@ kubeadm join phase control-plane-join etcd [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -82,6 +78,3 @@ kubeadm join phase control-plane-join etcd [flags]
 
 </tbody>
 </table>
-
-
-
