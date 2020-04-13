@@ -1,10 +1,11 @@
-
 ### Synopsis
 
+Generate the kubeconfig file for the kubelet to use and save it to kubelet.conf
+file.
 
-Generate the kubeconfig file for the kubelet to use and save it to kubelet.conf file.
-
-Please note that this should *only* be used for cluster bootstrapping purposes. After your control plane is up, you should request all kubelet credentials from the CSR API.
+Please note that this should _only_ be used for cluster bootstrapping purposes.
+After your control plane is up, you should request all kubelet credentials from
+the CSR API.
 
 ```
 kubeadm init phase kubeconfig kubelet [flags]
@@ -85,8 +86,6 @@ kubeadm init phase kubeconfig kubelet [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -105,6 +104,3 @@ kubeadm init phase kubeconfig kubelet [flags]
 
 </tbody>
 </table>
-
-
-

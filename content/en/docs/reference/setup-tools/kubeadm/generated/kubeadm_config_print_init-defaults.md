@@ -1,13 +1,12 @@
-
 ### Synopsis
 
+This command prints objects such as the default init configuration that is used
+for 'kubeadm init'.
 
-
-This command prints objects such as the default init configuration that is used for 'kubeadm init'.
-
-Note that sensitive values like the Bootstrap Token fields are replaced with placeholder values like {"abcdef.0123456789abcdef" "" "nil" &lt;nil&gt; [] []} in order to pass validation but
-not perform the real computation for creating a token.
-
+Note that sensitive values like the Bootstrap Token fields are replaced with
+placeholder values like {"abcdef.0123456789abcdef" "" "nil" &lt;nil&gt; [][]} in
+order to pass validation but not perform the real computation for creating a
+token.
 
 ```
 kubeadm config print init-defaults [flags]
@@ -39,8 +38,6 @@ kubeadm config print init-defaults [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -66,6 +63,3 @@ kubeadm config print init-defaults [flags]
 
 </tbody>
 </table>
-
-
-

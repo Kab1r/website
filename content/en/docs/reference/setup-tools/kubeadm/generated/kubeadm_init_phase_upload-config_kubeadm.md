@@ -1,8 +1,8 @@
-
 ### Synopsis
 
-
-Upload the kubeadm ClusterConfiguration to a ConfigMap called kubeadm-config in the kube-system namespace. This enables correct configuration of system components and a seamless user experience when upgrading.
+Upload the kubeadm ClusterConfiguration to a ConfigMap called kubeadm-config in
+the kube-system namespace. This enables correct configuration of system
+components and a seamless user experience when upgrading.
 
 Alternatively, you can use kubeadm config.
 
@@ -50,8 +50,6 @@ kubeadm init phase upload-config kubeadm [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -70,6 +68,3 @@ kubeadm init phase upload-config kubeadm [flags]
 
 </tbody>
 </table>
-
-
-

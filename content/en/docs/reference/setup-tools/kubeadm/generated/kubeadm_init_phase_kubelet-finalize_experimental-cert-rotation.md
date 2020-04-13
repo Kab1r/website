@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Enable kubelet client certificate rotation
 
@@ -41,8 +39,6 @@ kubeadm init phase kubelet-finalize experimental-cert-rotation [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -61,6 +57,3 @@ kubeadm init phase kubelet-finalize experimental-cert-rotation [flags]
 
 </tbody>
 </table>
-
-
-

@@ -1,10 +1,12 @@
-
 ### Synopsis
 
+Enable or update dynamic kubelet configuration for a Node, against the
+kubelet-config-1.X ConfigMap in the cluster, where X is the minor version of the
+desired kubelet version.
 
-Enable or update dynamic kubelet configuration for a Node, against the kubelet-config-1.X ConfigMap in the cluster, where X is the minor version of the desired kubelet version.
-
-WARNING: This feature is still experimental, and disabled by default. Enable only if you know what you are doing, as it may have surprising side-effects at this stage.
+WARNING: This feature is still experimental, and disabled by default. Enable
+only if you know what you are doing, as it may have surprising side-effects at
+this stage.
 
 Alpha Disclaimer: this command is currently alpha.
 
@@ -17,7 +19,7 @@ kubeadm alpha kubelet config enable-dynamic [flags]
 ```
   # Enable dynamic kubelet configuration for a Node.
   kubeadm alpha phase kubelet enable-dynamic-config --node-name node-1 --kubelet-version 1.18.0
-  
+
   WARNING: This feature is still experimental, and disabled by default. Enable only if you know what you are doing, as it
   may have surprising side-effects at this stage.
 ```
@@ -62,8 +64,6 @@ kubeadm alpha kubelet config enable-dynamic [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -82,6 +82,3 @@ kubeadm alpha kubelet config enable-dynamic [flags]
 
 </tbody>
 </table>
-
-
-

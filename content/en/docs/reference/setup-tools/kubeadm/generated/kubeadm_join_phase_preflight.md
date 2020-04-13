@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Run pre-flight checks for kubeadm join.
 
@@ -132,8 +130,6 @@ kubeadm join phase preflight [api-server-endpoint] [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -152,6 +148,3 @@ kubeadm join phase preflight [api-server-endpoint] [flags]
 
 </tbody>
 </table>
-
-
-

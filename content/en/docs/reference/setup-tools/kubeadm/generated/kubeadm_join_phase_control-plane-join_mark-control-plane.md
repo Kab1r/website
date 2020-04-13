@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Mark a node as a control-plane
 
@@ -48,8 +46,6 @@ kubeadm join phase control-plane-join mark-control-plane [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -68,6 +64,3 @@ kubeadm join phase control-plane-join mark-control-plane [flags]
 
 </tbody>
 </table>
-
-
-

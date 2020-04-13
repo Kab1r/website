@@ -1,8 +1,8 @@
-
 ### Synopsis
 
-
-Upload kubelet configuration extracted from the kubeadm InitConfiguration object to a ConfigMap of the form kubelet-config-1.X in the cluster, where X is the minor version of the current (API Server) Kubernetes version.
+Upload kubelet configuration extracted from the kubeadm InitConfiguration object
+to a ConfigMap of the form kubelet-config-1.X in the cluster, where X is the
+minor version of the current (API Server) Kubernetes version.
 
 ```
 kubeadm init phase upload-config kubelet [flags]
@@ -48,8 +48,6 @@ kubeadm init phase upload-config kubelet [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -68,6 +66,3 @@ kubeadm init phase upload-config kubelet [flags]
 
 </tbody>
 </table>
-
-
-

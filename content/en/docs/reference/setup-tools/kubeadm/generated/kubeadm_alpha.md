@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Kubeadm experimental sub-commands
 
@@ -23,8 +21,6 @@ Kubeadm experimental sub-commands
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -43,6 +39,3 @@ Kubeadm experimental sub-commands
 
 </tbody>
 </table>
-
-
-

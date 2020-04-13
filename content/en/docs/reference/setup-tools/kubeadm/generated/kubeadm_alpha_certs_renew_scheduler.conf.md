@@ -1,14 +1,19 @@
-
 ### Synopsis
 
+Renew the certificate embedded in the kubeconfig file for the scheduler manager
+to use.
 
-Renew the certificate embedded in the kubeconfig file for the scheduler manager to use.
+Renewals run unconditionally, regardless of certificate expiration date; extra
+attributes such as SANs will be based on the existing file/certificates, there
+is no need to resupply them.
 
-Renewals run unconditionally, regardless of certificate expiration date; extra attributes such as SANs will be based on the existing file/certificates, there is no need to resupply them.
+Renewal by default tries to use the certificate authority in the local PKI
+managed by kubeadm; as alternative it is possible to use K8s certificate API for
+certificate renewal, or as a last option, to generate a CSR request.
 
-Renewal by default tries to use the certificate authority in the local PKI managed by kubeadm; as alternative it is possible to use K8s certificate API for certificate renewal, or as a last option, to generate a CSR request.
-
-After renewal, in order to make changes effective, is required to restart control-plane components and eventually re-distribute the renewed certificate in case the file is used elsewhere.
+After renewal, in order to make changes effective, is required to restart
+control-plane components and eventually re-distribute the renewed certificate in
+case the file is used elsewhere.
 
 ```
 kubeadm alpha certs renew scheduler.conf [flags]
@@ -68,8 +73,6 @@ kubeadm alpha certs renew scheduler.conf [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -88,6 +91,3 @@ kubeadm alpha certs renew scheduler.conf [flags]
 
 </tbody>
 </table>
-
-
-

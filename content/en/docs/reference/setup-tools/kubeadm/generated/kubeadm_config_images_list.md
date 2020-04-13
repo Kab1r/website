@@ -1,8 +1,7 @@
-
 ### Synopsis
 
-
-Print a list of images kubeadm will use. The configuration file is used in case any images or image repositories are customized
+Print a list of images kubeadm will use. The configuration file is used in case
+any images or image repositories are customized
 
 ```
 kubeadm config images list [flags]
@@ -69,8 +68,6 @@ kubeadm config images list [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -96,6 +93,3 @@ kubeadm config images list [flags]
 
 </tbody>
 </table>
-
-
-

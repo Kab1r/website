@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Generate the certificates for the new control plane components
 
@@ -97,8 +95,6 @@ kubeadm join phase control-plane-prepare certs [api-server-endpoint] [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -117,6 +113,3 @@ kubeadm join phase control-plane-prepare certs [api-server-endpoint] [flags]
 
 </tbody>
 </table>
-
-
-

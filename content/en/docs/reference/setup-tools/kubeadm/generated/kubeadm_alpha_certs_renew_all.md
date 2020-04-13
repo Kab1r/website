@@ -1,8 +1,8 @@
-
 ### Synopsis
 
-
-Renew all known certificates necessary to run the control plane. Renewals are run unconditionally, regardless of expiration date. Renewals can also be run individually for more control.
+Renew all known certificates necessary to run the control plane. Renewals are
+run unconditionally, regardless of expiration date. Renewals can also be run
+individually for more control.
 
 ```
 kubeadm alpha certs renew all [flags]
@@ -62,8 +62,6 @@ kubeadm alpha certs renew all [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -82,6 +80,3 @@ kubeadm alpha certs renew all [flags]
 
 </tbody>
 </table>
-
-
-

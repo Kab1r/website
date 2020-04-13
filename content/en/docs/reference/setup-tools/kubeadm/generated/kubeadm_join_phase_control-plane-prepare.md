@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Prepare the machine for serving a control plane
 
@@ -34,8 +32,6 @@ kubeadm join phase control-plane-prepare [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -54,6 +50,3 @@ kubeadm join phase control-plane-prepare [flags]
 
 </tbody>
 </table>
-
-
-

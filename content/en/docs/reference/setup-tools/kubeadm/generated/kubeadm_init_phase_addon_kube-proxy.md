@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Install the kube-proxy addon components via the API server.
 
@@ -83,8 +81,6 @@ kubeadm init phase addon kube-proxy [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -103,6 +99,3 @@ kubeadm init phase addon kube-proxy [flags]
 
 </tbody>
 </table>
-
-
-

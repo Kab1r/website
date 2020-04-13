@@ -1,10 +1,6 @@
-
 ### Synopsis
 
-
-
 This command will list all bootstrap tokens for you.
-
 
 ```
 kubeadm token list [flags]
@@ -43,8 +39,6 @@ kubeadm token list [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -77,6 +71,3 @@ kubeadm token list [flags]
 
 </tbody>
 </table>
-
-
-

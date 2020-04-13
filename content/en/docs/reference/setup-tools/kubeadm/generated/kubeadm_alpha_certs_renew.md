@@ -1,8 +1,7 @@
-
 ### Synopsis
 
-
-This command is not meant to be run on its own. See list of available subcommands.
+This command is not meant to be run on its own. See list of available
+subcommands.
 
 ```
 kubeadm alpha certs renew [flags]
@@ -27,8 +26,6 @@ kubeadm alpha certs renew [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -47,6 +44,3 @@ kubeadm alpha certs renew [flags]
 
 </tbody>
 </table>
-
-
-

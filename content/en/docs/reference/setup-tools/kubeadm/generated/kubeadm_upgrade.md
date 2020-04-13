@@ -1,6 +1,4 @@
-
 ### Synopsis
-
 
 Upgrade your cluster smoothly to a newer version with this command
 
@@ -27,8 +25,6 @@ kubeadm upgrade [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -47,6 +43,3 @@ kubeadm upgrade [flags]
 
 </tbody>
 </table>
-
-
-

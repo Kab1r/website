@@ -1,8 +1,7 @@
-
 ### Synopsis
 
-
-Generate the kubeconfig file for the admin and for kubeadm itself, and save it to admin.conf file.
+Generate the kubeconfig file for the admin and for kubeadm itself, and save it
+to admin.conf file.
 
 ```
 kubeadm init phase kubeconfig admin [flags]
@@ -76,8 +75,6 @@ kubeadm init phase kubeconfig admin [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -96,6 +93,3 @@ kubeadm init phase kubeconfig admin [flags]
 
 </tbody>
 </table>
-
-
-

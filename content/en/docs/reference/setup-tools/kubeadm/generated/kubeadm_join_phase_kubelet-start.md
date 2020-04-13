@@ -1,8 +1,7 @@
-
 ### Synopsis
 
-
-Write a file with KubeletConfiguration and an environment file with node specific kubelet settings, and then (re)start kubelet.
+Write a file with KubeletConfiguration and an environment file with node
+specific kubelet settings, and then (re)start kubelet.
 
 ```
 kubeadm join phase kubelet-start [api-server-endpoint] [flags]
@@ -90,8 +89,6 @@ kubeadm join phase kubelet-start [api-server-endpoint] [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -110,6 +107,3 @@ kubeadm join phase kubelet-start [api-server-endpoint] [flags]
 
 </tbody>
 </table>
-
-
-

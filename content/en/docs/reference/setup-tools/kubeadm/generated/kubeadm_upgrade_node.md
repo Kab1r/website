@@ -1,15 +1,13 @@
-
 ### Synopsis
-
 
 Upgrade commands for a node in the cluster
 
 The "node" command executes the following phases:
+
 ```
 control-plane   Upgrade the control plane instance deployed on this node, if any
 kubelet-config  Upgrade the kubelet configuration for this node
 ```
-
 
 ```
 kubeadm upgrade node [flags]
@@ -76,8 +74,6 @@ kubeadm upgrade node [flags]
 </tbody>
 </table>
 
-
-
 ### Options inherited from parent commands
 
    <table style="width: 100%; table-layout: fixed;">
@@ -96,6 +92,3 @@ kubeadm upgrade node [flags]
 
 </tbody>
 </table>
-
-
-
