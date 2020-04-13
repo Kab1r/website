@@ -12,7 +12,7 @@ weight: 30
 `kubeadm` tool helps you bootstrap a minimum viable Kubernetes cluster that
 conforms to best practices. In fact, you can use `kubeadm` to set up a cluster
 that will pass the
-[Kubernetes Conformance tests](https://kubernetes.io/blog/2017/10/software-conformance-certification).  
+[Kubernetes Conformance tests](https://kubernetes.io/blog/2017/10/software-conformance-certification).
 `kubeadm` also supports other cluster lifecycle functions, such as
 [bootstrap tokens](/docs/reference/access-authn-authz/bootstrap-tokens/) and
 cluster upgrades.
@@ -271,11 +271,11 @@ setup and deployment order. Read all of this advice carefully before proceeding.
 
 **You must deploy a
 {{< glossary_tooltip text="Container Network Interface" term_id="cni" >}} (CNI)
-based Pod network add-on so that your Pods can communicate with each other.  
+based Pod network add-on so that your Pods can communicate with each other.
 Cluster DNS (CoreDNS) will not start up before a network is installed.**
 
 - Take care that your Pod network must not overlap with any of the host
-  networks: you are likely to see problems if there is any overlap.  
+  networks: you are likely to see problems if there is any overlap.
   (If you find a collision between your network plugin’s preferred Pod network
   and some of your host networks, you should think of a suitable CIDR block to
   use instead, then use that during `kubeadm init` with `--pod-network-cidr` and
@@ -283,13 +283,13 @@ Cluster DNS (CoreDNS) will not start up before a network is installed.**
 
 - By default, `kubeadm` sets up your cluster to use and enforce use of
   [RBAC](/docs/reference/access-authn-authz/rbac/) (role based access
-  control).  
+  control).
   Make sure that your Pod network plugin supports RBAC, and so do any manifests
   that you use to deploy it.
 
 - If you want to use IPv6--either dual-stack, or single-stack IPv6 only
   networking--for your cluster, make sure that your Pod network plugin supports
-  IPv6.  
+  IPv6.
   IPv6 support was added to CNI in
   [v0.6.0](https://github.com/containernetworking/cni/releases/tag/v0.6.0).
 
