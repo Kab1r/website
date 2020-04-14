@@ -6,24 +6,25 @@ weight: 110
 
 {{% capture overview %}}
 
-This page shows how to configure liveness, readiness and startup probes for containers.
+This page shows how to configure liveness, readiness and startup probes for
+containers.
 
-The [kubelet](/docs/admin/kubelet/) uses liveness probes to know when to
-restart a container. For example, liveness probes could catch a deadlock,
-where an application is running, but unable to make progress. Restarting a
-container in such a state can help to make the application more available
-despite bugs.
+The [kubelet](/docs/admin/kubelet/) uses liveness probes to know when to restart
+a container. For example, liveness probes could catch a deadlock, where an
+application is running, but unable to make progress. Restarting a container in
+such a state can help to make the application more available despite bugs.
 
 The kubelet uses readiness probes to know when a container is ready to start
-accepting traffic. A Pod is considered ready when all of its containers are ready.
-One use of this signal is to control which Pods are used as backends for Services.
-When a Pod is not ready, it is removed from Service load balancers.
+accepting traffic. A Pod is considered ready when all of its containers are
+ready. One use of this signal is to control which Pods are used as backends for
+Services. When a Pod is not ready, it is removed from Service load balancers.
 
-The kubelet uses startup probes to know when a container application has started.
-If such a probe is configured, it disables liveness and readiness checks until
-it succeeds, making sure those probes don't interfere with the application startup.
-This can be used to adopt liveness checks on slow starting containers, avoiding them
-getting killed by the kubelet before they are up and running.
+The kubelet uses startup probes to know when a container application has
+started. If such a probe is configured, it disables liveness and readiness
+checks until it succeeds, making sure those probes don't interfere with the
+application startup. This can be used to adopt liveness checks on slow starting
+containers, avoiding them getting killed by the kubelet before they are up and
+running.
 
 {{% /capture %}}
 
@@ -51,9 +52,9 @@ The `periodSeconds` field specifies that the kubelet should perform a liveness
 probe every 5 seconds. The `initialDelaySeconds` field tells the kubelet that it
 should wait 5 seconds before performing the first probe. To perform a probe, the
 kubelet executes the command `cat /tmp/healthy` in the target container. If the
-command succeeds, it returns 0, and the kubelet considers the container to be alive and
-healthy. If the command returns a non-zero value, the kubelet kills the container
-and restarts it.
+command succeeds, it returns 0, and the kubelet considers the container to be
+alive and healthy. If the command returns a non-zero value, the kubelet kills
+the container and restarts it.
 
 When the container starts, it executes this command:
 
@@ -61,9 +62,9 @@ When the container starts, it executes this command:
 /bin/sh -c "touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600"
 ```
 
-For the first 30 seconds of the container's life, there is a `/tmp/healthy` file.
-So during the first 30 seconds, the command `cat /tmp/healthy` returns a success
-code. After 30 seconds, `cat /tmp/healthy` returns a failure code.
+For the first 30 seconds of the container's life, there is a `/tmp/healthy`
+file. So during the first 30 seconds, the command `cat /tmp/healthy` returns a
+success code. After 30 seconds, `cat /tmp/healthy` returns a failure code.
 
 Create the Pod:
 
@@ -124,15 +125,15 @@ liveness-exec   1/1       Running   1          1m
 
 ## Define a liveness HTTP request
 
-Another kind of liveness probe uses an HTTP GET request. Here is the configuration
-file for a Pod that runs a container based on the `k8s.gcr.io/liveness`
-image.
+Another kind of liveness probe uses an HTTP GET request. Here is the
+configuration file for a Pod that runs a container based on the
+`k8s.gcr.io/liveness` image.
 
 {{< codenew file="pods/probe/http-liveness.yaml" >}}
 
-In the configuration file, you can see that the Pod has a single container.
-The `periodSeconds` field specifies that the kubelet should perform a liveness
-probe every 3 seconds. The `initialDelaySeconds` field tells the kubelet that it
+In the configuration file, you can see that the Pod has a single container. The
+`periodSeconds` field specifies that the kubelet should perform a liveness probe
+every 3 seconds. The `initialDelaySeconds` field tells the kubelet that it
 should wait 3 seconds before performing the first probe. To perform a probe, the
 kubelet sends an HTTP GET request to the server that is running in the container
 and listening on port 8080. If the handler for the server's `/healthz` path
@@ -144,7 +145,8 @@ Any code greater than or equal to 200 and less than 400 indicates success. Any
 other code indicates failure.
 
 You can see the source code for the server in
-[server.go](https://github.com/kubernetes/kubernetes/blob/{{< param "githubbranch" >}}/test/images/agnhost/liveness/server.go).
+[server.go](https://github.com/kubernetes/kubernetes/blob/{{< param
+"githubbranch" >}}/test/images/agnhost/liveness/server.go).
 
 For the first 10 seconds that the container is alive, the `/healthz` handler
 returns a status of 200. After that, the handler returns a status of 500.
@@ -162,9 +164,10 @@ http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
 })
 ```
 
-The kubelet starts performing health checks 3 seconds after the container starts.
-So the first couple of health checks will succeed. But after 10 seconds, the health
-checks will fail, and the kubelet will kill and restart the container.
+The kubelet starts performing health checks 3 seconds after the container
+starts. So the first couple of health checks will succeed. But after 10 seconds,
+the health checks will fail, and the kubelet will kill and restart the
+container.
 
 To try the HTTP liveness check, create a Pod:
 
@@ -180,10 +183,9 @@ kubectl describe pod liveness-http
 ```
 
 In releases prior to v1.13 (including v1.13), if the environment variable
-`http_proxy` (or `HTTP_PROXY`) is set on the node where a Pod is running,
-the HTTP liveness probe uses that proxy.
-In releases after v1.13, local HTTP proxy environment variable settings do not
-affect the HTTP liveness probe.
+`http_proxy` (or `HTTP_PROXY`) is set on the node where a Pod is running, the
+HTTP liveness probe uses that proxy. In releases after v1.13, local HTTP proxy
+environment variable settings do not affect the HTTP liveness probe.
 
 ## Define a TCP liveness probe
 
@@ -201,10 +203,10 @@ connect to the `goproxy` container on port 8080. If the probe succeeds, the Pod
 will be marked as ready. The kubelet will continue to run this check every 10
 seconds.
 
-In addition to the readiness probe, this configuration includes a liveness probe.
-The kubelet will run the first liveness probe 15 seconds after the container
-starts. Just like the readiness probe, this will attempt to connect to the
-`goproxy` container on port 8080. If the liveness probe fails, the container
+In addition to the readiness probe, this configuration includes a liveness
+probe. The kubelet will run the first liveness probe 15 seconds after the
+container starts. Just like the readiness probe, this will attempt to connect to
+the `goproxy` container on port 8080. If the liveness probe fails, the container
 will be restarted.
 
 To try the TCP liveness check, create a Pod:
@@ -227,9 +229,9 @@ for HTTP or TCP liveness checks:
 
 ```yaml
 ports:
-- name: liveness-port
-  containerPort: 8080
-  hostPort: 8080
+  - name: liveness-port
+    containerPort: 8080
+    hostPort: 8080
 
 livenessProbe:
   httpGet:
@@ -239,21 +241,21 @@ livenessProbe:
 
 ## Protect slow starting containers with startup probes {#define-startup-probes}
 
-Sometimes, you have to deal with legacy applications that might require
-an additional startup time on their first initialization.
-In such cases, it can be tricky to set up liveness probe parameters without
-compromising the fast response to deadlocks that motivated such a probe.
-The trick is to set up a startup probe with the same command, HTTP or TCP
-check, with a `failureThreshold * periodSeconds` long enough to cover the
-worse case startup time.
+Sometimes, you have to deal with legacy applications that might require an
+additional startup time on their first initialization. In such cases, it can be
+tricky to set up liveness probe parameters without compromising the fast
+response to deadlocks that motivated such a probe. The trick is to set up a
+startup probe with the same command, HTTP or TCP check, with a
+`failureThreshold * periodSeconds` long enough to cover the worse case startup
+time.
 
 So, the previous example would become:
 
 ```yaml
 ports:
-- name: liveness-port
-  containerPort: 8080
-  hostPort: 8080
+  - name: liveness-port
+    containerPort: 8080
+    hostPort: 8080
 
 livenessProbe:
   httpGet:
@@ -271,36 +273,34 @@ startupProbe:
 ```
 
 Thanks to the startup probe, the application will have a maximum of 5 minutes
-(30 * 10 = 300s) to finish its startup.
-Once the startup probe has succeeded once, the liveness probe takes over to
-provide a fast response to container deadlocks.
-If the startup probe never succeeds, the container is killed after 300s and
-subject to the pod's `restartPolicy`.
+(30 \* 10 = 300s) to finish its startup. Once the startup probe has succeeded
+once, the liveness probe takes over to provide a fast response to container
+deadlocks. If the startup probe never succeeds, the container is killed after
+300s and subject to the pod's `restartPolicy`.
 
 ## Define readiness probes
 
-Sometimes, applications are temporarily unable to serve traffic.
-For example, an application might need to load large data or configuration
-files during startup, or depend on external services after startup.
-In such cases, you don't want to kill the application,
-but you don’t want to send it requests either. Kubernetes provides
-readiness probes to detect and mitigate these situations. A pod with containers
-reporting that they are not ready does not receive traffic through Kubernetes
-Services.
+Sometimes, applications are temporarily unable to serve traffic. For example, an
+application might need to load large data or configuration files during startup,
+or depend on external services after startup. In such cases, you don't want to
+kill the application, but you don’t want to send it requests either. Kubernetes
+provides readiness probes to detect and mitigate these situations. A pod with
+containers reporting that they are not ready does not receive traffic through
+Kubernetes Services.
 
-{{< note >}}
-Readiness probes runs on the container during its whole lifecycle.
+{{< note >}} Readiness probes runs on the container during its whole lifecycle.
 {{< /note >}}
 
-Readiness probes are configured similarly to liveness probes. The only difference
-is that you use the `readinessProbe` field instead of the `livenessProbe` field.
+Readiness probes are configured similarly to liveness probes. The only
+difference is that you use the `readinessProbe` field instead of the
+`livenessProbe` field.
 
 ```yaml
 readinessProbe:
   exec:
     command:
-    - cat
-    - /tmp/healthy
+      - cat
+      - /tmp/healthy
   initialDelaySeconds: 5
   periodSeconds: 5
 ```
@@ -314,65 +314,68 @@ for it, and that containers are restarted when they fail.
 
 ## Configure Probes
 
-{{< comment >}}
-Eventually, some of this section could be moved to a concept topic.
-{{< /comment >}}
+{{< comment >}} Eventually, some of this section could be moved to a concept
+topic. {{< /comment >}}
 
-[Probes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#probe-v1-core) have a number of fields that
-you can use to more precisely control the behavior of liveness and readiness
-checks:
+[Probes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#probe-v1-core)
+have a number of fields that you can use to more precisely control the behavior
+of liveness and readiness checks:
 
-* `initialDelaySeconds`: Number of seconds after the container has started
-before liveness or readiness probes are initiated. Defaults to 0 seconds. Minimum value is 0.
-* `periodSeconds`: How often (in seconds) to perform the probe. Default to 10
-seconds. Minimum value is 1.
-* `timeoutSeconds`: Number of seconds after which the probe times out. Defaults
-to 1 second. Minimum value is 1.
-* `successThreshold`: Minimum consecutive successes for the probe to be
-considered successful after having failed. Defaults to 1. Must be 1 for
-liveness. Minimum value is 1.
-* `failureThreshold`: When a Pod starts and the probe fails, Kubernetes will
-try `failureThreshold` times before giving up. Giving up in case of liveness probe means restarting the container. In case of readiness probe the Pod will be marked Unready.
-Defaults to 3. Minimum value is 1.
+- `initialDelaySeconds`: Number of seconds after the container has started
+  before liveness or readiness probes are initiated. Defaults to 0 seconds.
+  Minimum value is 0.
+- `periodSeconds`: How often (in seconds) to perform the probe. Default to 10
+  seconds. Minimum value is 1.
+- `timeoutSeconds`: Number of seconds after which the probe times out. Defaults
+  to 1 second. Minimum value is 1.
+- `successThreshold`: Minimum consecutive successes for the probe to be
+  considered successful after having failed. Defaults to 1. Must be 1 for
+  liveness. Minimum value is 1.
+- `failureThreshold`: When a Pod starts and the probe fails, Kubernetes will try
+  `failureThreshold` times before giving up. Giving up in case of liveness probe
+  means restarting the container. In case of readiness probe the Pod will be
+  marked Unready. Defaults to 3. Minimum value is 1.
 
-[HTTP probes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#httpgetaction-v1-core)
+[HTTP
+probes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#httpgetaction-v1-core)
 have additional fields that can be set on `httpGet`:
 
-* `host`: Host name to connect to, defaults to the pod IP. You probably want to
-set "Host" in httpHeaders instead.
-* `scheme`: Scheme to use for connecting to the host (HTTP or HTTPS). Defaults to HTTP.
-* `path`: Path to access on the HTTP server.
-* `httpHeaders`: Custom headers to set in the request. HTTP allows repeated headers.
-* `port`: Name or number of the port to access on the container. Number must be
-in the range 1 to 65535.
+- `host`: Host name to connect to, defaults to the pod IP. You probably want to
+  set "Host" in httpHeaders instead.
+- `scheme`: Scheme to use for connecting to the host (HTTP or HTTPS). Defaults
+  to HTTP.
+- `path`: Path to access on the HTTP server.
+- `httpHeaders`: Custom headers to set in the request. HTTP allows repeated
+  headers.
+- `port`: Name or number of the port to access on the container. Number must be
+  in the range 1 to 65535.
 
 For an HTTP probe, the kubelet sends an HTTP request to the specified path and
 port to perform the check. The kubelet sends the probe to the pod’s IP address,
 unless the address is overridden by the optional `host` field in `httpGet`. If
-`scheme` field is set to `HTTPS`, the kubelet sends an HTTPS request skipping the
-certificate verification. In most scenarios, you do not want to set the `host` field.
-Here's one scenario where you would set it. Suppose the container listens on 127.0.0.1
-and the Pod's `hostNetwork` field is true. Then `host`, under `httpGet`, should be set
-to 127.0.0.1. If your pod relies on virtual hosts, which is probably the more common
-case, you should not use `host`, but rather set the `Host` header in `httpHeaders`.
+`scheme` field is set to `HTTPS`, the kubelet sends an HTTPS request skipping
+the certificate verification. In most scenarios, you do not want to set the
+`host` field. Here's one scenario where you would set it. Suppose the container
+listens on 127.0.0.1 and the Pod's `hostNetwork` field is true. Then `host`,
+under `httpGet`, should be set to 127.0.0.1. If your pod relies on virtual
+hosts, which is probably the more common case, you should not use `host`, but
+rather set the `Host` header in `httpHeaders`.
 
-For a TCP probe, the kubelet makes the probe connection at the node, not in the pod, which
-means that you can not use a service name in the `host` parameter since the kubelet is unable
-to resolve it.
+For a TCP probe, the kubelet makes the probe connection at the node, not in the
+pod, which means that you can not use a service name in the `host` parameter
+since the kubelet is unable to resolve it.
 
 {{% /capture %}}
 
 {{% capture whatsnext %}}
 
-* Learn more about
-[Container Probes](/docs/concepts/workloads/pods/pod-lifecycle/#container-probes).
+- Learn more about
+  [Container Probes](/docs/concepts/workloads/pods/pod-lifecycle/#container-probes).
 
 You can also read the API references for:
 
-* [Pod](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#pod-v1-core)
-* [Container](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#container-v1-core)
-* [Probe](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#probe-v1-core)
+- [Pod](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#pod-v1-core)
+- [Container](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#container-v1-core)
+- [Probe](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#probe-v1-core)
 
 {{% /capture %}}
-
-
