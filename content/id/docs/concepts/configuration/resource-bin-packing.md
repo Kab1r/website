@@ -8,10 +8,10 @@ weight: 10
 
 {{< feature-state for_k8s_version="1.16" state="alpha" >}}
 
-_Kube-scheduler_ dapat dikonfigurasikan untuk mengaktifkan pembungkusan rapat 
-(_bin packing_) sumber daya bersama dengan sumber daya tambahan melalui fungsi prioritas 
-`RequestedToCapacityRatioResourceAllocation`. Fungsi-fungsi prioritas dapat digunakan 
-untuk menyempurnakan _kube-scheduler_ sesuai dengan kebutuhan.
+_Kube-scheduler_ dapat dikonfigurasikan untuk mengaktifkan pembungkusan rapat
+(_bin packing_) sumber daya bersama dengan sumber daya tambahan melalui fungsi
+prioritas `RequestedToCapacityRatioResourceAllocation`. Fungsi-fungsi prioritas
+dapat digunakan untuk menyempurnakan _kube-scheduler_ sesuai dengan kebutuhan.
 
 {{% /capture %}}
 
@@ -19,24 +19,26 @@ untuk menyempurnakan _kube-scheduler_ sesuai dengan kebutuhan.
 
 ## Mengaktifkan _Bin Packing_ menggunakan RequestedToCapacityRatioResourceAllocation
 
-Sebelum Kubernetes 1.15, _kube-scheduler_ digunakan untuk memungkinkan mencetak 
-skor berdasarkan rasio permintaan terhadap kapasitas sumber daya utama seperti 
-CPU dan Memori. Kubernetes 1.16 menambahkan parameter baru ke fungsi prioritas 
-yang memungkinkan pengguna untuk menentukan sumber daya beserta dengan bobot 
-untuk setiap sumber daya untuk memberi nilai dari Node berdasarkan rasio 
+Sebelum Kubernetes 1.15, _kube-scheduler_ digunakan untuk memungkinkan mencetak
+skor berdasarkan rasio permintaan terhadap kapasitas sumber daya utama seperti
+CPU dan Memori. Kubernetes 1.16 menambahkan parameter baru ke fungsi prioritas
+yang memungkinkan pengguna untuk menentukan sumber daya beserta dengan bobot
+untuk setiap sumber daya untuk memberi nilai dari Node berdasarkan rasio
 permintaan terhadap kapasitas. Hal ini memungkinkan pengguna untuk _bin pack_
 sumber daya tambahan dengan menggunakan parameter yang sesuai untuk meningkatkan
-pemanfaatan sumber daya yang langka dalam klaster yang besar. Perilaku 
-`RequestedToCapacityRatioResourceAllocation` dari fungsi prioritas dapat 
-dikontrol melalui pilihan konfigurasi yang disebut ` RequestToCapacityRatioArguments`.
-Argumen ini terdiri dari dua parameter yaitu `shape` dan `resources`. Shape 
-memungkinkan pengguna untuk menyempurnakan fungsi menjadi yang paling tidak 
-diminta atau paling banyak diminta berdasarkan nilai `utilization` dan `score`. 
-Sumber daya terdiri dari `name` yang menentukan sumber daya mana yang dipertimbangkan 
-selama penilaian dan `weight` yang menentukan bobot masing-masing sumber daya.
+pemanfaatan sumber daya yang langka dalam klaster yang besar. Perilaku
+`RequestedToCapacityRatioResourceAllocation` dari fungsi prioritas dapat
+dikontrol melalui pilihan konfigurasi yang disebut
+`RequestToCapacityRatioArguments`. Argumen ini terdiri dari dua parameter yaitu
+`shape` dan `resources`. Shape memungkinkan pengguna untuk menyempurnakan fungsi
+menjadi yang paling tidak diminta atau paling banyak diminta berdasarkan nilai
+`utilization` dan `score`. Sumber daya terdiri dari `name` yang menentukan
+sumber daya mana yang dipertimbangkan selama penilaian dan `weight` yang
+menentukan bobot masing-masing sumber daya.
 
-Di bawah ini adalah contoh konfigurasi yang menetapkan `requestedToCapacityRatioArguments` 
-pada perilaku _bin packing_ untuk sumber daya tambahan` intel.com/foo` dan `intel.com/bar`
+Di bawah ini adalah contoh konfigurasi yang menetapkan
+`requestedToCapacityRatioArguments` pada perilaku _bin packing_ untuk sumber
+daya tambahan`intel.com/foo` dan `intel.com/bar`
 
 ```json
 {
@@ -73,16 +75,17 @@ pada perilaku _bin packing_ untuk sumber daya tambahan` intel.com/foo` dan `inte
 
 ### Tuning RequestedToCapacityRatioResourceAllocation Priority Function
 
-`shape` digunakan untuk menentukan perilaku dari fungsi `RequestedToCapacityRatioPriority`.
+`shape` digunakan untuk menentukan perilaku dari fungsi
+`RequestedToCapacityRatioPriority`.
 
 ```yaml
  {"utilization": 0, "score": 0},
  {"utilization": 100, "score": 10}
 ```
 
-Argumen di atas memberikan Node nilai 0 jika utilisasi 0% dan 10 untuk utilisasi 100%, 
-yang kemudian mengaktfikan perilaku _bin packing_. Untuk mengaktifkan dari paling 
-yang tidak diminta, nilainya harus dibalik sebagai berikut.
+Argumen di atas memberikan Node nilai 0 jika utilisasi 0% dan 10 untuk utilisasi
+100%, yang kemudian mengaktfikan perilaku _bin packing_. Untuk mengaktifkan dari
+paling yang tidak diminta, nilainya harus dibalik sebagai berikut.
 
 ```yaml
  {"utilization": 0, "score": 100},
@@ -91,32 +94,29 @@ yang tidak diminta, nilainya harus dibalik sebagai berikut.
 
 `resources` adalah parameter opsional yang secara _default_ diatur ke:
 
-``` yaml
-"resources": [
-              {"name": "CPU", "weight": 1},
-              {"name": "Memory", "weight": 1}
-            ]
+```yaml
+"resources": [{ "name": "CPU", "weight": 1 }, { "name": "Memory", "weight": 1 }]
 ```
 
 Ini dapat digunakan untuk menambahkan sumber daya tambahan sebagai berikut:
 
 ```yaml
-"resources": [
-              {"name": "intel.com/foo", "weight": 5},
-              {"name": "CPU", "weight": 3},
-              {"name": "Memory", "weight": 1}
-            ]
+"resources":
+  [
+    { "name": "intel.com/foo", "weight": 5 },
+    { "name": "CPU", "weight": 3 },
+    { "name": "Memory", "weight": 1 },
+  ]
 ```
 
-Parameter `weight` adalah opsional dan diatur ke 1 jika tidak ditentukan. 
-Selain itu, `weight` tidak dapat diatur ke nilai negatif.
+Parameter `weight` adalah opsional dan diatur ke 1 jika tidak ditentukan. Selain
+itu, `weight` tidak dapat diatur ke nilai negatif.
 
 ### Bagaimana Fungsi Prioritas RequestedToCapacityRatioResourceAllocation Menilai Node
 
-Bagian ini ditujukan bagi kamu yang ingin memahami secara detail internal
-dari fitur ini.
-Di bawah ini adalah contoh bagaimana nilai dari Node dihitung untuk satu kumpulan
-nilai yang diberikan.
+Bagian ini ditujukan bagi kamu yang ingin memahami secara detail internal dari
+fitur ini. Di bawah ini adalah contoh bagaimana nilai dari Node dihitung untuk
+satu kumpulan nilai yang diberikan.
 
 ```
 Sumber daya yang diminta
