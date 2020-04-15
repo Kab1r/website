@@ -133,7 +133,7 @@ spec:
 ## Pod アイデンティティー
 
 StatefulSet の Pod は、順番を示す番号、安定したネットワークアイデンティティー、
-安定したストレージからなる一意なアイデンティティーを持ちます。  
+安定したストレージからなる一意なアイデンティティーを持ちます。
 そのアイデンティティーはどの Node 上にスケジュール(もしくは再スケジュール)される
 かに関わらず、その Pod に紐付きます。
 
@@ -151,10 +151,10 @@ StatefulSet 内の各 Pod は、その StatefulSet 名と Pod の順序番号か
 、`web-0,web-1,web-2`という 3 つの Pod が作成されます。 StatefulSet は、Pod のド
 メインをコントロールするため
 に[Headless Service](/ja/docs/concepts/services-networking/service/#headless-service)を
-使うことができます。  
+使うことができます。
 この Headless Service によって管理されたドメイン
 は`$(Service名).$(ネームスペース).svc.cluster.local`形式となり、"cluster.local"
-というのはそのクラスターのドメインとなります。  
+というのはそのクラスターのドメインとなります。
 各 Pod が作成されると、Pod は`$(Pod名).$(管理するServiceドメイン名)`に一致する
 DNS サブドメインを取得し、管理する Service は StatefulSet の`serviceName`で定義
 されます。
@@ -186,7 +186,7 @@ Kubernetes は各 VolumeClaimTemplate に対して、1 つ
 StorageClass が指定されていない場合、デフォルトの StorageClass が使用されます
 。Pod が Node 上にスケジュール(もしくは再スケジュール)されたとき、そ
 の`volumeMounts`は PersistentVolume Claim に関連した PersistentVolume をマウント
-します。  
+します。
 注意点として、Pod の PersistentVolume Claim と関連した PersistentVolume は、Pod
 や StatefulSet が削除されたときに削除されません。削除する場合は手動で行わなけれ
 ばなりません。
@@ -280,7 +280,7 @@ Pod の更新を待ちます。
 り小さい番号を持つ Pod は更新されず、たとえそれらの Pod が削除されたとしても、そ
 れらの Pod は以前のバージョンで再作成されます。もし StatefulSet
 の`.spec.updateStrategy.rollingUpdate.partition`が、`.spec.replicas`より大きい場
-合、`.spec.template`への更新は Pod に反映されません。  
+合、`.spec.template`への更新は Pod に反映されません。
 多くのケースの場合、ユーザーはパーティションを使う必要はありませんが、もし一部の
 更新を行う場合や、カナリー版のバージョンをロールアウトする場合や、段階的ロールア
 ウトを行う場合に最適です。
