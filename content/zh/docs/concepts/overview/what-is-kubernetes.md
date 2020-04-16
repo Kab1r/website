@@ -51,7 +51,7 @@ Kubernetes 项目。Kubernetes 建立在
 Let's take a look at why Kubernetes is so useful by going back in time.
 -->
 
-## 言归正传
+## 言归正�
 
 让我们回顾一下为什么 Kubernetes 如此有用。
 
@@ -172,7 +172,7 @@ Kubernetes 为您提供：
 Kubernetes can expose a container using the DNS name or using their own IP address. If traffic to a container is high, Kubernetes is able to load balance and distribute the network traffic so that the deployment is stable.
 -->
 
-- **服务发现和负载均衡**  
+- **服务发现和负载均衡**
   Kubernetes 可以使用 DNS 名称或自己的 IP 地址公开容器，如果到容器的流量很大
   ，Kubernetes 可以负载均衡并分配网络流量，从而使部署稳定。
 
@@ -181,7 +181,7 @@ Kubernetes can expose a container using the DNS name or using their own IP addre
 Kubernetes allows you to automatically mount a storage system of your choice, such as local storages, public cloud providers, and more.
 -->
 
-- **存储编排**  
+- **存储编排**
   Kubernetes 允许您自动挂载您选择的存储系统，例如本地存储、公共云提供商等。
 
 <!--
@@ -189,7 +189,7 @@ Kubernetes allows you to automatically mount a storage system of your choice, su
 You can describe the desired state for your deployed containers using Kubernetes, and it can change the actual state to the desired state at a controlled rate. For example, you can automate Kubernetes to create new containers for your deployment, remove existing containers and adopt all their resources to the new container.
 -->
 
-- **自动部署和回滚**  
+- **自动部署和回滚**
   您可以使用 Kubernetes 描述已部署容器的所需状态，它可以以受控的速率将实际状态更
   改为所需状态。例如，您可以自动化 Kubernetes 来为您的部署创建新容器，删除现有容
   器并将它们的所有资源用于新容器。
@@ -199,7 +199,7 @@ You can describe the desired state for your deployed containers using Kubernetes
 Kubernetes allows you to specify how much CPU and memory (RAM) each container needs. When containers have resource requests specified, Kubernetes can make better decisions to manage the resources for containers.
 -->
 
-- **自动二进制打包**  
+- **自动二进制打包**
   Kubernetes 允许您指定每个容器所需 CPU 和内存（RAM）。当容器指定了资源请求时
   ，Kubernetes 可以做出更好的决策来管理容器的资源。
 
@@ -208,7 +208,7 @@ Kubernetes allows you to specify how much CPU and memory (RAM) each container ne
 Kubernetes restarts containers that fail, replaces containers, kills containers that don’t respond to your user-defined health check, and doesn’t advertise them to clients until they are ready to serve.
 -->
 
-- **自我修复**  
+- **自我修复**
   Kubernetes 重新启动失败的容器、替换容器、杀死不响应用户定义的运行状况检查的容
   器，并且在准备好服务之前不将其通告给客户端。
 
@@ -217,7 +217,7 @@ Kubernetes restarts containers that fail, replaces containers, kills containers 
 Kubernetes lets you store and manage sensitive information, such as passwords, OAuth tokens, and ssh keys. You can deploy and update secrets and application configuration without rebuilding your container images, and without exposing secrets in your stack configuration.
 -->
 
-- **密钥与配置管理**  
+- **密钥与配置管理**
   Kubernetes 允许您存储和管理敏感信息，例如密码、OAuth 令牌和 ssh 密钥。您可以在
   不重建容器镜像的情况下部署和更新密钥和应用程序配置，也无需在堆栈配置中暴露密钥
   。
