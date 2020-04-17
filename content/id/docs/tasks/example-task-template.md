@@ -6,9 +6,9 @@ toc_hide: true
 
 {{% capture overview %}}
 
-{{< note >}}
-Pastikan juga kamu [membuat isian di daftar isi](/docs/home/contribute/write-new-topic/#creating-an-entry-in-the-table-of-contents) untuk dokumen baru kamu.
-{{< /note >}}
+{{< note >}} Pastikan juga kamu
+[membuat isian di daftar isi](/docs/home/contribute/write-new-topic/#creating-an-entry-in-the-table-of-contents)
+untuk dokumen baru kamu. {{< /note >}}
 
 Halaman ini menunjukkan bagaimana ...
 
@@ -16,9 +16,9 @@ Halaman ini menunjukkan bagaimana ...
 
 {{% capture prerequisites %}}
 
-* {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
-* Lakukan ini.
-* Lakukan ini juga.
+- {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+- Lakukan ini.
+- Lakukan ini juga.
 
 {{% /capture %}}
 
@@ -27,16 +27,19 @@ Halaman ini menunjukkan bagaimana ...
 ## Menjalankan ...
 
 1. Lakukan ini.
-1. Selanjutnya lakukan ini. Bila mungkin silahkan baca [penjelasan terkait](...).
+1. Selanjutnya lakukan ini. Bila mungkin silahkan baca
+   [penjelasan terkait](...).
 
 {{% /capture %}}
 
 {{% capture discussion %}}
 
 ## Memahami ...
+
 **[Bagian opsional]**
 
-Berikut ini hal-hal yang menarik untuk diketahui tentang langkah-langkah yang baru saja kamu lakukan.
+Berikut ini hal-hal yang menarik untuk diketahui tentang langkah-langkah yang
+baru saja kamu lakukan.
 
 {{% /capture %}}
 
@@ -44,9 +47,9 @@ Berikut ini hal-hal yang menarik untuk diketahui tentang langkah-langkah yang ba
 
 **[Bagian optional]**
 
-* Pelajari tentang [menulis topik baru](/docs/home/contribute/write-new-topic/).
-* Lihat [menggunakan _template_ halaman - _template_ tugas](/docs/home/contribute/page-templates/#task_template) untuk mengetahui cara menggunakan _template_ ini.
+- Pelajari tentang [menulis topik baru](/docs/home/contribute/write-new-topic/).
+- Lihat
+  [menggunakan _template_ halaman - _template_ tugas](/docs/home/contribute/page-templates/#task_template)
+  untuk mengetahui cara menggunakan _template_ ini.
 
 {{% /capture %}}
-
-
