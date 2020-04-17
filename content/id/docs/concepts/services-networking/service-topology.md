@@ -88,7 +88,7 @@ dari sebuah Service untuk mengarahkan lalu lintas jaringan seperti berikut ini.
 
 ## Batasan
 
-- Topologi Service tidak kompatibel dengan `externalTrafficPolicy=Local`, dan   
+- Topologi Service tidak kompatibel dengan `externalTrafficPolicy=Local`, dan  �
   karena itu Service tidak dapat menggunakan kedua fitur ini sekaligus.
   Dimungkinkan untuk menggunakan    kedua fitur pada klaster yang sama untuk
   Service yang berbeda, bukan untuk    Service yang sama.
@@ -154,7 +154,7 @@ spec:
 ### Hanya untuk _endpoint_ pada Zona atau Wilayah
 
 Service yang lebih memilih _endpoint_ zona daripada wilayah. Jika tidak ada
-_endpoint_ pada  
+_endpoint_ pada
 keduanya, make lalu lintas jaringan akan dihentikan.
 
 ```yaml
