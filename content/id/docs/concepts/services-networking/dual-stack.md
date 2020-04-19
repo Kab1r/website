@@ -79,7 +79,7 @@ gagal. {{< /caution >}}
 
 Jika klaster kamu mengaktifkan jaringan _dual-stack_ IPv4/IPv6, maka kamu dapat
 membuat {{<glossary_tooltip text ="Service" term_id ="service">}} dengan alamat
-IPv4 atau IPv6. Kamu dapat memilih keluarga alamat untuk clusterIP  
+IPv4 atau IPv6. Kamu dapat memilih keluarga alamat untuk clusterIP
 Service kamu dengan mengatur bagian, `.spec.ipFamily`, pada Service tersebut.
 Kamu hanya dapat mengatur bagian ini saat membuat Service baru. Mengatur bagian
 `.spec.ipFamily` bersifat opsional dan hanya boleh digunakan jika kamu berencana
