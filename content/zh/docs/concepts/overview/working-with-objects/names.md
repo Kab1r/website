@@ -154,7 +154,7 @@ Kubernetes UIDs are universally unique identifiers (also known as UUIDs).
 UUIDs are standardized as ISO/IEC 9834-8 and as ITU-T X.667.
 -->
 
-Kubernetes UIDs 是通用的唯一标识符 (也叫 UUIDs).  
+Kubernetes UIDs 是通用的唯一标识符 (也叫 UUIDs).
 UUIDs 是标准化的，见 ISO/IEC 9834-8 和 ITU-T X.667.
 
 {{% /capture %}}

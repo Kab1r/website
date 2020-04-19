@@ -403,7 +403,7 @@ data 和 stringData 的键必须由字母数字字符 '-', '\_' 或者 '.' 组�
 
 ** 编码注意：** 秘密数据的序列化 JSON 和 YAML 值被编码为 base64 字符串。换行符在
 这些字符串中无效，因此必须省略。在 Darwin / macOS 上使用 `base64` 实用程序时，用
-户应避免使用 `-b` 选项来分隔长行。相反，Linux 用户 _应该_ 在 `base64` 命令中添加
+户应避免使用 `-b` 选项来分隔长行。相反，Linux 用户 _应该_ 在 `base64` 命令中添�
 选项 `-w 0`， 或者，如果`-w`选项不可用的情况下，执行 `base64 | tr -d '\n'`。
 
 <!--
@@ -1075,7 +1075,7 @@ See [Add ImagePullSecrets to a service account](/docs/tasks/configure-pod-contai
  for a detailed explanation of that process.
  -->
 
-### 安排 imagePullSecrets 自动附加
+### 安排 imagePullSecrets 自动附�
 
 您可以手动创建 imagePullSecret，并从 serviceAccount 引用它。使用该
 serviceAccount 创建的任何 pod 和默认使用该 serviceAccount 的 pod 将会将其的
@@ -1115,7 +1115,7 @@ They can only be referenced by pods in that same namespace.
 
 ### 限制
 
-验证 secret volume 来源确保指定的对象引用实际上指向一个类型为 Secret 的对象。因
+验证 secret volume 来源确保指定的对象引用实际上指向一个类型为 Secret 的对象。�
 此，需要在依赖于它的任何 pod 之前创建一个 secret。
 
 Secret API 对象驻留在命名空间中。它们只能由同一命名空间中的 pod 引用。
