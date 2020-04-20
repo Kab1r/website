@@ -37,7 +37,7 @@ pods s'exécutant en un instant peut être différent de l'ensemble de pods
 exécutant cette application un instant plus tard.
 
 Cela conduit à un problème: si un ensemble de pods (appelez-les «backends»)
-fournit des fonctionnalités à d'autres pods (appelez-les «frontends») à
+fournit des fonctionnalités à d'autres pods (appelez-les «frontends») �
 l'intérieur de votre cluster, comment les frontends peuvent-ils trouver et
 suivre l'adresse IP à laquelle se connecter, afin que le frontend puisse
 utiliser la partie backend de la charge de travail?
@@ -155,7 +155,7 @@ spec:
 ```
 
 Étant donné que ce service n'a pas de sélecteur, l'objet Endpoint correspondant
-n'est _pas_ créé automatiquement. Vous pouvez mapper manuellement le service à
+n'est _pas_ créé automatiquement. Vous pouvez mapper manuellement le service �
 l'adresse réseau et au port où il s'exécute, en ajoutant manuellement un objet
 Endpoint:
 
@@ -720,7 +720,7 @@ metadata:
 ```
 
 La deuxième annotation spécifie le protocole utilisé par un pod. Pour HTTPS et
-SSL, l'ELB s'attend à ce que le pod s'authentifie sur la connexion chiffrée, à
+SSL, l'ELB s'attend à ce que le pod s'authentifie sur la connexion chiffrée, �
 l'aide d'un certificat.
 
 HTTP et HTTPS sélectionnent le proxy de couche 7: l'ELB met fin à la connexion
@@ -1063,7 +1063,7 @@ spec:
 
 ## Lacunes
 
-Le proxy fonctionnant dans l'espace utilisateur pour les VIP peut fonctionner à
+Le proxy fonctionnant dans l'espace utilisateur pour les VIP peut fonctionner �
 petite ou moyenne échelle, mais montrera ses limites dans de très grands
 clusters avec des milliers de services. La
 [proposition de conception originale pour les portails](http://issue.k8s.io/1107)
@@ -1144,7 +1144,7 @@ iptables entre en jeu et redirige les paquets vers le propre port du proxy. Le
 vers le backend.
 
 Cela signifie que les propriétaires de services peuvent choisir le port de leur
-choix sans risque de collision. Les clients peuvent simplement se connecter à
+choix sans risque de collision. Les clients peuvent simplement se connecter �
 une adresse IP et à un port, sans savoir à quels pods ils accèdent réellement.
 
 #### iptables
