@@ -312,7 +312,7 @@ onto nodes labeled with `dedicated=groupName`.
   。拥有上述 toleration 的 pod 就能够被分配到上述专用节点，同时也能够被分配到集
   群中的其它节点。如果您希望这些 pod 只能被分配到上述专用节点，那么您还需要给这
   些专用节点另外添加一个和上述 taint 类似的 label （例如
-  ：`dedicated=groupName`），同时 还要在上述 admission controller 中给 pod 增加
+  ：`dedicated=groupName`），同时 还要在上述 admission controller 中给 pod 增�
   节点亲和性要求上述 pod 只能被分配到添加了 `dedicated=groupName` 标签的节点上。
 
 <!--
@@ -575,5 +575,5 @@ Adding these tolerations ensures backward compatibility. You can also add
 arbitrary tolerations to DaemonSets.
 -->
 
-添加上述 toleration 确保了向后兼容，您也可以选择自由的向 DaemonSet 添加
+添加上述 toleration 确保了向后兼容，您也可以选择自由的向 DaemonSet 添�
 toleration。
