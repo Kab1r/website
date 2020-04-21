@@ -6,14 +6,17 @@ full_link: /docs/concepts/workloads/pods/pod-overview/
 short_description: >
   A Pod represents a set of running containers in your cluster.
 
-aka: 
+aka:
 tags:
-- core-object
-- fundamental
+  - core-object
+  - fundamental
 ---
- The smallest and simplest Kubernetes object. A Pod represents a set of running {{< glossary_tooltip text="containers" term_id="container" >}} on your cluster.
 
-<!--more--> 
+The smallest and simplest Kubernetes object. A Pod represents a set of running
+{{< glossary_tooltip text="containers" term_id="container" >}} on your cluster.
 
-A Pod is typically set up to run a single primary container. It can also run optional sidecar containers that add supplementary features like logging. Pods are commonly managed by a {{< glossary_tooltip term_id="deployment" >}}.
+<!--more-->
 
+A Pod is typically set up to run a single primary container. It can also run
+optional sidecar containers that add supplementary features like logging. Pods
+are commonly managed by a {{< glossary_tooltip term_id="deployment" >}}.
