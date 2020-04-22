@@ -13,7 +13,7 @@ menu:
     title: "Tài liệu tham khảo"
     weight: 20
     post: >
-      <p>Tìm hiểu cách sử dụng Kubernetes với mức khái niệm, các hướng dẫn và
+      <p>Tìm hiểu cách sử dụng Kubernetes với mức khái niệm, các hướng dẫn v�
       tài liệu tham khảo. Bạn thậm chí có thể <a href="/editdocs/"
       data-auto-burger-exclude>đóng góp cho các tài liệu</a>!</p>
 overview: >

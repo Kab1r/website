@@ -20,5 +20,5 @@ tin hữu ích vô trong những containers bên trong một Pod.
 Biến môi trường của container cung cấp thông tin cần thiết cho mỗi ứng dụng cùng
 với những thông tin về những resources quan trọng đối với
 {{< glossary_tooltip text="Containers" term_id="container" >}} đó. Ví dụ, thông
-tin chi tiết về file system, thông tin về bản thân của chính container đó, và
+tin chi tiết về file system, thông tin về bản thân của chính container đó, v�
 những resources khác ở trong cluster như điểm kết của một services.

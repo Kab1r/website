@@ -12,11 +12,11 @@ tags:
   - fundamental
 ---
 
-Gán nhãn các đối tượng (tags objects) với các thuộc tính xác định, có ý nghĩa và
+Gán nhãn các đối tượng (tags objects) với các thuộc tính xác định, có ý nghĩa v�
 có liên quan tới người dùng.
 
 <!--more-->
 
 Labels là những cặp key/value gắn liền với những đối tượng như
-{{< glossary_tooltip text="pod" term_id="pod" >}}. Chúng được dùng để tổ chức và
+{{< glossary_tooltip text="pod" term_id="pod" >}}. Chúng được dùng để tổ chức v�
 chọn lựa giữa những tập hợp con của các đối tượng này.
