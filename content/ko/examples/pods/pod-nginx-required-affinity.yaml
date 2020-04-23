@@ -7,12 +7,12 @@ spec:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
-        - matchExpressions:
-          - key: disktype
-            operator: In
-            values:
-            - ssd            
+          - matchExpressions:
+              - key: disktype
+                operator: In
+                values:
+                  - ssd
   containers:
-  - name: nginx
-    image: nginx
-    imagePullPolicy: IfNotPresent
+    - name: nginx
+      image: nginx
+      imagePullPolicy: IfNotPresent
