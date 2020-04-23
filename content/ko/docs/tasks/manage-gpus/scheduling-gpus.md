@@ -137,7 +137,7 @@ kubectl create -f https://raw.githubusercontent.com/kubernetes/kubernetes/releas
 이슈를 로깅하여해당 서드 파티 디바이스 플러그인에 대한 이슈를 리포트할 수 있다.
 
 Google은 GKE에서 NVIDIA GPU 사용에 대한 자체
-[설명서](https://cloud.google.com/kubernetes-engine/docs/how-to/gpus)를 게재하고
+[설명서](https://cloud.google.com/kubernetes-engine/docs/how-to/gpus)를 게재하�
 있다.
 
 ## 다른 타입의 GPU들을 포함하는 클러스터

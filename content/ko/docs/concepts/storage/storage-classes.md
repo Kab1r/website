@@ -162,7 +162,7 @@ volumeBindingMode: Immediate
 [리소스요구 사항](/docs/concepts/configuration/manage-compute-resources-container/),
 [노드 셀렉터](/ko/docs/concepts/configuration/assign-pod-node/#노드-셀렉터-nodeselector),
 [파드 어피니티(affinity)와안티-어피니티(anti-affinity)](/ko/docs/concepts/configuration/assign-pod-node/#어피니티-affinity-와-안티-어피니티-anti-affinity)
-그리고
+그리�
 [테인트(taint)와 톨러레이션(toleration)](/docs/concepts/configuration/taint-and-toleration/)이
 포함된다.
 
@@ -360,7 +360,7 @@ parameters:
   범위( gidMin-gidMax )의 고유한 값(GID)은 동적으로프로비전된 볼륨에 사용된다.
   이것은 선택적인 값이다. 지정하지 않으면, 볼륨은 각각 gidMin과 gidMax의 기본값
   인 2000-2147483647 사이의 값으로 프로비전된다.
-- `volumetype` : 볼륨 유형과 파라미터는 이 선택적 값으로 구성할수 있다. 볼륨 유
+- `volumetype` : 볼륨 유형과 파라미터는 이 선택적 값으로 구성할수 있다. 볼륨 �
   형을 언급하지 않는 경우, 볼륨 유형을 결정하는 것은프로비저너의 책임이다.
 
   예를 들어:
@@ -442,7 +442,7 @@ OpenStack 내부 프로비저너는 사용 중단 되었다.
 
    - 기존 vCenter SPBM 정책을 사용한다.
 
-     vSphere 스토리지 관리의 가장 중요한 기능 중 하나는 정책 기반 관리이다. 스토
+     vSphere 스토리지 관리의 가장 중요한 기능 중 하나는 정책 기반 관리이다. 스�
      리지 정책 기반 관리(Storage Policy Based Management (SPBM))는 광범위한 데이
      터 서비스와 스토리지 솔루션에서 단일 통합 컨트롤 플레인을 제공하는 스토리지
      정책 프레임워크이다. SPBM을 통해 vSphere 관리자는 용량 계획, 차별화된 서비
@@ -600,7 +600,7 @@ parameters:
 - `kind`: 가능한 값은 `shared` (기본값), `dedicated`, 그리고 `managed` 이다.
   `kind` 가 `shared` 인 경우, 모든 비관리 디스크는 클러스터와동일한 리소스 그룹
   에 있는 몇 개의 공유 스토리지 계정에 생성된다. `kind` 가 `dedicated` 인 경우,
-  클러스터와 동일한 리소스 그룹에서 새로운비관리 디스크에 대해 새로운 전용 스토
+  클러스터와 동일한 리소스 그룹에서 새로운비관리 디스크에 대해 새로운 전용 스�
   리지 계정이 생성된다. `kind` 가 `managed` 인 경우, 모든 관리 디스크는 클러스터
   와 동일한 리소스그룹에 생성된다.
 - `resourceGroup`: Azure 디스크를 만들 리소스 그룹을 지정한다. 기존에 있는 리소

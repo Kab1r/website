@@ -18,7 +18,7 @@ weight: 20
 [이 링크](https://groups.google.com/forum/feed/kubernetes-announce/msgs/rss_v2_0.xml?num=50)를
 사용하여 RSS 피드를 구독할 수 있다.
 
-## 취약점 보고
+## 취약점 보�
 
 우리는 쿠버네티스 오픈소스 커뮤니티에 취약점을 보고하는 보안 연구원들과 사용자들
 에게 매우 감사하고 있다. 모든 보고서는 커뮤니티 자원 봉사자들에 의해 철저히 조사

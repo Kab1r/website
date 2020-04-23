@@ -115,7 +115,7 @@ NAME           TYPE           CLUSTER-IP   EXTERNAL-IP   PORT(S)      AGE
 my-nginx-svc   LoadBalancer   10.0.0.208   <pending>     80/TCP       0s
 ```
 
-위의 명령을 사용하여, 먼저 `examples/application/nginx/` 에 리소스를 생성하고
+위의 명령을 사용하여, 먼저 `examples/application/nginx/` 에 리소스를 생성하�
 `-o name` 출력 형식으로 생성한 리소스를 출력한다(각 리소스를 resource/name으로
 출력). 그런 다음 "service"만 `grep` 한 다음 `kubectl get` 으로 출력한다.
 
@@ -123,7 +123,7 @@ my-nginx-svc   LoadBalancer   10.0.0.208   <pending>     80/TCP       0s
 `--filename,-f` 플래그와 함께 `--recursive` 또는 `-R` 을 지정하여, 서브 디렉터리
 에 대한 작업을 재귀적으로 수행할 수도 있다.
 
-예를 들어, 리소스 유형별로 구성된 개발 환경에 필요한 모든
+예를 들어, 리소스 유형별로 구성된 개발 환경에 필요한 모�
 {{< glossary_tooltip text="매니페스트" term_id="manifest" >}}를 보유하는
 `project/k8s/development` 디렉터리가 있다고 가정하자.
 
@@ -208,7 +208,7 @@ labels:
   role: master
 ```
 
-그리고
+그리�
 
 ```yaml
 labels:
@@ -294,7 +294,7 @@ selector:
 ```
 
 안정 및 카나리 릴리스의 레플리카 수를 조정하여 실제 운영 트래픽을 수신할 각 릴리
-스의 비율을 결정한다(이 경우, 3:1). 확신이 들면, 안정 릴리스의 track을 새로운 애
+스의 비율을 결정한다(이 경우, 3:1). 확신이 들면, 안정 릴리스의 track을 새로운 �
 플리케이션 릴리스로 업데이트하고 카나리를 제거할 수 있다.
 
 보다 구체적인 예시는,
@@ -366,7 +366,7 @@ metadata:
 
 ## 애플리케이션 스케일링
 
-애플리케이션의 로드가 증가하거나 축소되면, `kubectl` 을 사용하여 쉽게 스케일링할
+애플리케이션의 로드가 증가하거나 축소되면, `kubectl` 을 사용하여 쉽게 스케일링�
 수 있다. 예를 들어, nginx 레플리카 수를 3에서 1로 줄이려면, 다음을 수행한다.
 
 ```shell
@@ -441,7 +441,7 @@ deployment.apps/my-nginx configured
 
 `kubectl apply` 에 대한 모든 후속 호출, 그리고 `kubectl replace` 및
 `kubectl edit` 와 같이 구성을 수정하는 다른 명령은, 어노테이션을 업데이트하여,
-`kubectl apply` 에 대한 후속 호출이 3-way diff를 사용하여 삭제를 감지하고 수행할
+`kubectl apply` 에 대한 후속 호출이 3-way diff를 사용하여 삭제를 감지하고 수행�
 수 있도록 한다.
 
 ### kubectl edit

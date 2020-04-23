@@ -139,7 +139,7 @@ spec:
         volumeSnapshotContentName: test-content
 ```
 
-## 볼륨 스냅샷 컨텐츠
+## 볼륨 스냅샷 컨텐�
 
 각각의 볼륨스냅샷컨텐츠는 스펙과 상태를 포함한다. 동적 프로비저닝에서는, 스냅샷
 공통 컨트롤러는 `VolumeSnapshotContent` 오브젝트를 생성한다. 예시는 다음과 같다.

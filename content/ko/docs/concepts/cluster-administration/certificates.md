@@ -255,7 +255,7 @@ done.
 ## 인증서 API
 
 `certificates.k8s.io` API를 사용해서
-[여기](/docs/tasks/tls/managing-tls-in-a-cluster)에설명된 대로 인증에 사용할
+[여기](/docs/tasks/tls/managing-tls-in-a-cluster)에설명된 대로 인증에 사용�
 x509 인증서를 프로비전 할 수 있다.
 
 {{% /capture %}}

@@ -52,7 +52,7 @@ _스테이트풀셋_ 은 상태있는 애플리케이션을 쿠버네티스 클�
   [`cassandra-statefulset.yaml`](/examples/application/cassandra/cassandra-statefulset.yaml)를
   다운로드한다.
 
-- 실행 중인 쿠버네티스 클러스터를 소유
+- 실행 중인 쿠버네티스 클러스터를 소�
 
 {{< note >}} 아직 클러스터가 없다면 [설치](/ko/docs/setup/)를 읽도록 하자.
 {{< /note >}}
@@ -77,7 +77,7 @@ minikube start --memory 5120 --cpus=4
 ## 카산드라를 위한 헤드리스 서비스 생성하기 {#creating-a-cassandra-headless-service}
 
 쿠버네티스 에서 {{< glossary_tooltip text="서비스" term_id="service" >}}는 동일
-작업을 수행하는 {{< glossary_tooltip text="파드" term_id="pod" >}}의 집합을 기술
+작업을 수행하는 {{< glossary_tooltip text="파드" term_id="pod" >}}의 집합을 기�
 한다.
 
 다음의 서비스는 클러스터에서 카산드라 파드와 클라이언트 간에 DNS 찾아보기 용도로

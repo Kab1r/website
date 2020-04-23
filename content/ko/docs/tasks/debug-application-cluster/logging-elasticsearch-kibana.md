@@ -12,7 +12,7 @@ Google 컴퓨트 엔진(Compute Engine, GCE) 플랫폼에서, 기본 로깅 지�
 설명되어 있다.
 
 이 문서에서는 GCE에서 운영할 때 스택드라이버 로깅의 대안으로,
-[엘라스틱서치](https://www.elastic.co/products/elasticsearch)에 로그를 수집하고
+[엘라스틱서치](https://www.elastic.co/products/elasticsearch)에 로그를 수집하�
 [키바나](https://www.elastic.co/products/kibana)를 사용하여 볼 수 있도록클러스터
 를 설정하는 방법에 대해 설명한다.
 

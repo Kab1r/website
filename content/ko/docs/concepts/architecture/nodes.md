@@ -121,7 +121,7 @@ ready 컨디션의 상태가 `pod-eviction-timeout`
 ## 관리
 
 [파드](/ko/docs/concepts/workloads/pods/pod/)와
-[서비스](/ko/docs/concepts/services-networking/service/)와 달리, 노드는 본래 쿠
+[서비스](/ko/docs/concepts/services-networking/service/)와 달리, 노드는 본래 �
 버네티스에 의해 생성되지 않는다. 구글 컴퓨트 엔진과 같은 클라우드 제공사업자에
 의해 외부로부터 생성 되거나, 물리적 또는 가상 머신의 풀 내에서 존재한다. 그래서
 쿠버네티스가 노드를 생성할 때, 노드를 나타내는 오브젝트를 생성한다. 생성 이후,
@@ -232,7 +232,7 @@ kubelet은 `NodeStatus` 와 리스 오브젝트를 생성하고 업데이트 할
 쿠버네티스 1.6을 시작으로 NodeController는 파드가 taint를 허용하지 않을 때,
 `NoExecute` taint 상태의 노드 상에 동작하는 파드 축출에 대한 책임 또한 지고 있다
 . 추가로, 기본적으로 비활성화 된 알파 기능으로, NodeController는 노드 접근 불가
-또는 준비 부족과 같은 노드 문제에 상응하는 taint 추가에 대한 책임을 진다.  
+또는 준비 부족과 같은 노드 문제에 상응하는 taint 추가에 대한 책임을 진다.
 `NoExecute` taints와 알파 기능에 대한 보다 상세한 내용은
 [이 문서](/docs/concepts/configuration/taint-and-toleration/)를 참고한다.
 
@@ -288,7 +288,7 @@ kubectl cordon $NODENAME
 ```
 
 {{< note >}} DaemonSet 컨트롤러에 의해 생성된 파드는 쿠버네티스 스케줄러를우회하
-고 노드 상에 스케줄 불가 속성을 고려하지 않는다. 심지어 리부트를 준비하는 동안애
+고 노드 상에 스케줄 불가 속성을 고려하지 않는다. 심지어 리부트를 준비하는 동안�
 플리케이션을 유출시키는 중이라 할지라도 머신 상에 속한 데몬으로 여긴다.
 {{< /note >}}
 

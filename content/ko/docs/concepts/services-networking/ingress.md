@@ -168,7 +168,7 @@ spec:
 
 ## 인그레스 클래스
 
-인그레스는 서로 다른 컨트롤러에 의해 구현될 수 있으며, 종종 다른 구성으로구현될
+인그레스는 서로 다른 컨트롤러에 의해 구현될 수 있으며, 종종 다른 구성으로구현�
 수 있다. 각 인그레스에서는 클래스를 구현해야하는 컨트롤러이름을 포함하여 추가 구
 성이 포함된 IngressClass 리소스에 대한 참조 클래스를 지정해야 한다.
 
@@ -535,7 +535,7 @@ Events:
 은
 [인그레스 컨트롤러](/ko/docs/concepts/services-networking/ingress-controllers)
 설명서를 확인한다. 페더레이션 클러스터에서 인그레스 배포에 대한 자세한 내용은
-[페더레이션 설명서](https://github.com/kubernetes-sigs/federation-v2) 를 참조할
+[페더레이션 설명서](https://github.com/kubernetes-sigs/federation-v2) 를 참조�
 수 있다.
 
 ## 앞으로의 할일

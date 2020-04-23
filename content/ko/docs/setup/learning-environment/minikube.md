@@ -407,7 +407,7 @@ macOS를 사용하는 경우 기존에 설치된 Minikube를 업그레이드하�
 [kubectl 컨텍스트](/docs/reference/generated/kubectl/kubectl-commands/#-em-set-context-em-)를
 생성한다. 이 컨텍스트는 Minikube 클러스터와 통신하는 설정을 포함한다.
 
-Minikube는 이 컨텍스트를 자동적으로 기본으로 설정한다. 만약 미래에 이것을 바꾸고
+Minikube는 이 컨텍스트를 자동적으로 기본으로 설정한다. 만약 미래에 이것을 바꾸�
 싶다면
 
 `kubectl config use-context minikube`을 실행하자.

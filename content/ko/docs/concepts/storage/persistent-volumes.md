@@ -37,7 +37,7 @@ _퍼시스턴트볼륨_ (PV)은 관리자가 프로비저닝하거나
 
 _퍼시스턴트볼륨클레임_ (PVC)은 사용자의 스토리지에 대한 요청이다. 파드와 비슷하
 다. 파드는 노드 리소스를 사용하고 PVC는 PV 리소스를 사용한다. 파드는 특정 수준의
-리소스(CPU 및 메모리)를 요청할 수 있다. 클레임은 특정 크기 및 접근 모드를 요청할
+리소스(CPU 및 메모리)를 요청할 수 있다. 클레임은 특정 크기 및 접근 모드를 요청�
 수 있다(예: 한 번 읽기/쓰기 또는 여러 번 읽기 전용으로 마운트 할 수 있음).
 
 퍼시스턴트볼륨클레임을 사용하면 사용자가 추상화된 스토리지 리소스를 사용할 수 있
@@ -622,7 +622,7 @@ PVC는
   본스토리지클래스 지정은 스토리지클래스 오브젝트에서 어노테이션
   `storageclass.kubernetes.io/is-default-class`를 `true`로설정하여 수행된다. 관
   리자가 기본값을 지정하지 않으면 어드미션 플러그인이 꺼져 있는 것처럼클러스터가
-  PVC 생성에 응답한다. 둘 이상의 기본값이 지정된 경우 어드미션플러그인은 모든
+  PVC 생성에 응답한다. 둘 이상의 기본값이 지정된 경우 어드미션플러그인은 모�
   PVC 생성을금지한다.
 - 어드미션 플러그인이 꺼져 있으면 기본 스토리지클래스에 대한 기본값 자체가 없다.
   `storageClassName`이 없는 모든 PVC는 클래스가 없는 PV에만 바인딩할 수 있다. 이
@@ -633,7 +633,7 @@ PVC는
 스터에배포할 수 있다.
 
 PVC가 스토리지클래스를 요청하는 것 외에도 `selector`를 지정하면 요구 사항들이
-AND 조건으로 동작한다. 요청된 클래스와 요청된 레이블이 있는 PV만 PVC에바인딩될
+AND 조건으로 동작한다. 요청된 클래스와 요청된 레이블이 있는 PV만 PVC에바인딩�
 수 있다.
 
 {{< note >}} 현재 비어 있지 않은 `selector`가 있는 PVC에는 PV를 동적으로 프로비
@@ -862,7 +862,7 @@ spec:
 * [퍼시스턴트 스토리지 설계 문서](https://git.k8s.io/community/contributors/design-proposals/storage/persistent-storage.md)
   읽기
 
-### 참고
+### 참�
 
 - [퍼시스턴트볼륨](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#persistentvolume-v1-core)
 - [PersistentVolumeSpec](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#persistentvolumespec-v1-core)

@@ -27,7 +27,7 @@ content_template: templates/concept
 
 ## 대시보드
 
-[`대시보드`](/ko/docs/tasks/access-application-cluster/web-ui-dashboard/), 는 쿠
+[`대시보드`](/ko/docs/tasks/access-application-cluster/web-ui-dashboard/), 는 �
 버네티스의 웹기반 유저 인터페이스이며 컨테이너화된 애플리케이션을 쿠버네티스 클
 러스터로 배포하고클러스터 및 클러스터 자원의 문제를 해결하며 관리할 수 있게 해준
 다.
@@ -40,7 +40,7 @@ content_template: templates/concept
 Helm의 용도
 
 - 쿠버네티스 차트로 배포된 인기있는 소프트웨어를 검색하고 사용
-- 쿠버네티스 차트로 나의 애플리케이션을 공유
+- 쿠버네티스 차트로 나의 애플리케이션을 공�
 - 쿠버네티스 애플리케이션의 반복가능한 빌드 및 생성
 - 매니페스트 파일의 지능화된 관리
 - Helm 패키지의 릴리스 관리
