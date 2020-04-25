@@ -3,7 +3,7 @@ title: Volumes persistants
 feature:
   title: Orchestration du stockage
   description: >
-    Montez automatiquement le système de stockage de votre choix, que ce soit à
+    Montez automatiquement le système de stockage de votre choix, que ce soit �
     partir du stockage local, d'un fournisseur de cloud public tel que <a
     href="https://cloud.google.com/storage/">GCP</a> ou <a
     href="https://aws.amazon.com/products/storage/">AWS</a>, ou un système de
@@ -343,7 +343,7 @@ redémarrage du pod.
 {{< note >}} Redimensionner un PVCs à chaud est disponible en version bêta
 depuis Kubernetes 1.15 et en version alpha depuis 1.11. La fonctionnalité
 `ExpandInUsePersistentVolumes` doit être activée, ce qui est le cas
-automatiquement pour de nombreux clusters de fonctionnalités bêta. Se référer à
+automatiquement pour de nombreux clusters de fonctionnalités bêta. Se référer �
 la documentation de la
 [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) pour
 plus d'informations. {{< /note >}}
@@ -652,7 +652,7 @@ Un PVC peut demander une classe particulière en spécifiant le nom d'une
 Les PVC n'ont pas nécessairement à demander une classe. Un PVC avec son attribut
 `storageClassName` égal à `""` est toujours interprété comme demandant un PV
 sans classe, il ne peut donc être lié qu'à des PV sans classe (pas d'annotation
-ou une annotation égal à `""`). Un PVC sans `storageClassName` n'est pas tout à
+ou une annotation égal à `""`). Un PVC sans `storageClassName` n'est pas tout �
 fait la même et est traité différemment par le cluster, selon que le
 [`DefaultStorageClass` admission plugin](/docs/reference/access-authn-authz/admission-controllers/#defaultstorageclass)
 est activé.
