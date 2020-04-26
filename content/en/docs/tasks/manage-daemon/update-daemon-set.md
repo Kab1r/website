@@ -1,6 +1,6 @@
 ---
 reviewers:
-- janetkuo
+  - janetkuo
 title: Perform a Rolling Update on a DaemonSet
 content_template: templates/task
 weight: 10
@@ -12,13 +12,12 @@ This page shows how to perform a rolling update on a DaemonSet.
 
 {{% /capture %}}
 
-
 {{% capture prerequisites %}}
 
-* The DaemonSet rolling update feature is only supported in Kubernetes version 1.6 or later.
+- The DaemonSet rolling update feature is only supported in Kubernetes version
+  1.6 or later.
 
 {{% /capture %}}
-
 
 {{% capture steps %}}
 
@@ -26,22 +25,26 @@ This page shows how to perform a rolling update on a DaemonSet.
 
 DaemonSet has two update strategy types:
 
-* OnDelete:  With `OnDelete` update strategy, after you update a DaemonSet template, new
-  DaemonSet pods will *only* be created when you manually delete old DaemonSet
-  pods. This is the same behavior of DaemonSet in Kubernetes version 1.5 or
-  before.
-* RollingUpdate: This is the default update strategy.  
-  With `RollingUpdate` update strategy, after you update a
-  DaemonSet template, old DaemonSet pods will be killed, and new DaemonSet pods
-  will be created automatically, in a controlled fashion. At most one pod of the DaemonSet will be running on each node during the whole update process.
+- OnDelete: With `OnDelete` update strategy, after you update a DaemonSet
+  template, new DaemonSet pods will _only_ be created when you manually delete
+  old DaemonSet pods. This is the same behavior of DaemonSet in Kubernetes
+  version 1.5 or before.
+- RollingUpdate: This is the default update strategy.  
+  With `RollingUpdate` update strategy, after you update a DaemonSet template,
+  old DaemonSet pods will be killed, and new DaemonSet pods will be created
+  automatically, in a controlled fashion. At most one pod of the DaemonSet will
+  be running on each node during the whole update process.
 
 ## Performing a Rolling Update
 
 To enable the rolling update feature of a DaemonSet, you must set its
 `.spec.updateStrategy.type` to `RollingUpdate`.
 
-You may want to set [`.spec.updateStrategy.rollingUpdate.maxUnavailable`](/docs/concepts/workloads/controllers/deployment/#max-unavailable) (default
-to 1) and [`.spec.minReadySeconds`](/docs/concepts/workloads/controllers/deployment/#min-ready-seconds) (default to 0) as well.
+You may want to set
+[`.spec.updateStrategy.rollingUpdate.maxUnavailable`](/docs/concepts/workloads/controllers/deployment/#max-unavailable)
+(default to 1) and
+[`.spec.minReadySeconds`](/docs/concepts/workloads/controllers/deployment/#min-ready-seconds)
+(default to 0) as well.
 
 ### Creating a DaemonSet with `RollingUpdate` update strategy
 
@@ -49,7 +52,8 @@ This YAML file specifies a DaemonSet with an update strategy as 'RollingUpdate'
 
 {{< codenew file="controllers/fluentd-daemonset.yaml" >}}
 
-After verifying the update strategy of the DaemonSet manifest, create the DaemonSet:
+After verifying the update strategy of the DaemonSet manifest, create the
+DaemonSet:
 
 ```shell
 kubectl create -f https://k8s.io/examples/controllers/fluentd-daemonset.yaml
@@ -87,11 +91,11 @@ RollingUpdate
 If the output isn't `RollingUpdate`, go back and modify the DaemonSet object or
 manifest accordingly.
 
-
 ### Updating a DaemonSet template
 
-Any updates to a `RollingUpdate` DaemonSet `.spec.template` will trigger a rolling
-update. Let's update the DaemonSet by applying a new YAML file. This can be done with several different `kubectl` commands.
+Any updates to a `RollingUpdate` DaemonSet `.spec.template` will trigger a
+rolling update. Let's update the DaemonSet by applying a new YAML file. This can
+be done with several different `kubectl` commands.
 
 {{< codenew file="controllers/fluentd-daemonset-update.yaml" >}}
 
@@ -147,12 +151,12 @@ causes:
 
 #### Some nodes run out of resources
 
-The rollout is stuck because new DaemonSet pods can't be scheduled on at least one
-node. This is possible when the node is
+The rollout is stuck because new DaemonSet pods can't be scheduled on at least
+one node. This is possible when the node is
 [running out of resources](/docs/tasks/administer-cluster/out-of-resource/).
 
-When this happens, find the nodes that don't have the DaemonSet pods scheduled on
-by comparing the output of `kubectl get nodes` and the output of:
+When this happens, find the nodes that don't have the DaemonSet pods scheduled
+on by comparing the output of `kubectl get nodes` and the output of:
 
 ```shell
 kubectl get pods -l name=fluentd-elasticsearch -o wide -n kube-system
@@ -161,11 +165,10 @@ kubectl get pods -l name=fluentd-elasticsearch -o wide -n kube-system
 Once you've found those nodes, delete some non-DaemonSet pods from the node to
 make room for new DaemonSet pods.
 
-{{< note >}}
-This will cause service disruption when deleted pods are not controlled by any controllers or pods are not
-replicated. This does not respect [PodDisruptionBudget](/docs/tasks/configure-pod-container/configure-pod-disruption-budget/)
-either.
-{{< /note >}}
+{{< note >}} This will cause service disruption when deleted pods are not
+controlled by any controllers or pods are not replicated. This does not respect
+[PodDisruptionBudget](/docs/tasks/configure-pod-container/configure-pod-disruption-budget/)
+either. {{< /note >}}
 
 #### Broken rollout
 
@@ -192,11 +195,11 @@ kubectl delete ds fluentd-elasticsearch -n kube-system
 
 {{% /capture %}}
 
-
 {{% capture whatsnext %}}
 
-* See [Task: Performing a rollback on a
-  DaemonSet](/docs/tasks/manage-daemon/rollback-daemon-set/)
-* See [Concepts: Creating a DaemonSet to adopt existing DaemonSet pods](/docs/concepts/workloads/controllers/daemonset/)
+- See
+  [Task: Performing a rollback on a DaemonSet](/docs/tasks/manage-daemon/rollback-daemon-set/)
+- See
+  [Concepts: Creating a DaemonSet to adopt existing DaemonSet pods](/docs/concepts/workloads/controllers/daemonset/)
 
 {{% /capture %}}
