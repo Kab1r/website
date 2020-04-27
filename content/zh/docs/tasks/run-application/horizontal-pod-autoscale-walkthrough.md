@@ -624,7 +624,7 @@ For example if your application processes tasks from a hosted queue service, you
 section to your HorizontalPodAutoscaler manifest to specify that you need one worker per 30 outstanding tasks.
 -->
 
-例如，如果你的应用程序处理主机上的消息队列，为了让每 30 个任务有 1 个 worker，你
+例如，如果你的应用程序处理主机上的消息队列，为了让每 30 个任务有 1 个 worker，�
 可以将下面的内容添加到 HorizontalPodAutoscaler 的配置中。
 
 ```yaml
