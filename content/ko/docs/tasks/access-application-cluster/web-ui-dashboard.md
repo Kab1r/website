@@ -70,7 +70,7 @@ UI는 커맨드가 실행된 머신에서 _오직_ 접근 가능하다. 상세 �
 초기 클러스터 대시보드에 접근하면, 환영 페이지를 볼 수 있다. 이 페이지는 첫 애플
 리케이션을 배포하는 버튼이 있을 뿐만 아니라, 이 문서의 링크를 포함하고 있다. 게
 다가, 대시보드가 있는 클러스터에서 기본적으로 `kube-system`
-[네임스페이스](/docs/tasks/administer-cluster/namespaces/)이 동작중인 시스템 애
+[네임스페이스](/docs/tasks/administer-cluster/namespaces/)이 동작중인 시스템 �
 플리케이션을 볼 수 있다.
 
 ![Kubernetes Dashboard welcome page](/images/docs/ui-dashboard-zerostate.png)
@@ -106,7 +106,7 @@ UI는 커맨드가 실행된 머신에서 _오직_ 접근 가능하다. 상세 �
   양의 정수만 허용됩니다.
 
   클러스터에 의도한 파드의 수를 유지하기 위해서
-  [디플로이먼트](/ko/docs/concepts/workloads/controllers/deployment/)가 생성될
+  [디플로이먼트](/ko/docs/concepts/workloads/controllers/deployment/)가 생성�
   것이다.
 
 - **서비스(Service)** (선택): 일부 애플리케이션의 경우, (예를 들어, 프론트엔드)
@@ -137,7 +137,7 @@ UI는 커맨드가 실행된 머신에서 _오직_ 접근 가능하다. 상세 �
 - **레이블**: 애플리케이션에 사용되는 기본적인
   [레이블](/ko/docs/concepts/overview/working-with-objects/labels/)은 애플리케이
   션 이름과 버전이다. 릴리스, 환경, 티어, 파티션, 그리고 릴리스 트랙과 같은 레이
-  블을 디플로이먼트, 서비스(Service), 그리고 파드를 생성할 때 추가적으로 정의할
+  블을 디플로이먼트, 서비스(Service), 그리고 파드를 생성할 때 추가적으로 정의�
   수 있다.
 
   예를 들면:
