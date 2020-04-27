@@ -1,8 +1,8 @@
 ---
 reviewers:
-- bryk
-- mikedanese
-- rf232
+  - bryk
+  - mikedanese
+  - rf232
 title: Web UI (Dashboard)
 content_template: templates/concept
 weight: 10
@@ -14,20 +14,27 @@ card:
 
 {{% capture overview %}}
 
-Dashboard is a web-based Kubernetes user interface. You can use Dashboard to deploy containerized applications to a Kubernetes cluster, troubleshoot your containerized application, and manage the cluster resources. You can use Dashboard to get an overview of applications running on your cluster, as well as for creating or modifying individual Kubernetes resources (such as Deployments, Jobs, DaemonSets, etc). For example, you can scale a Deployment, initiate a rolling update, restart a pod or deploy new applications using a deploy wizard.
+Dashboard is a web-based Kubernetes user interface. You can use Dashboard to
+deploy containerized applications to a Kubernetes cluster, troubleshoot your
+containerized application, and manage the cluster resources. You can use
+Dashboard to get an overview of applications running on your cluster, as well as
+for creating or modifying individual Kubernetes resources (such as Deployments,
+Jobs, DaemonSets, etc). For example, you can scale a Deployment, initiate a
+rolling update, restart a pod or deploy new applications using a deploy wizard.
 
-Dashboard also provides information on the state of Kubernetes resources in your cluster and on any errors that may have occurred.
+Dashboard also provides information on the state of Kubernetes resources in your
+cluster and on any errors that may have occurred.
 
 ![Kubernetes Dashboard UI](/images/docs/ui-dashboard.png)
 
 {{% /capture %}}
 
-
 {{% capture body %}}
 
 ## Deploying the Dashboard UI
 
-The Dashboard UI is not deployed by default. To deploy it, run the following command:
+The Dashboard UI is not deployed by default. To deploy it, run the following
+command:
 
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
@@ -35,37 +42,49 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/a
 
 ## Accessing the Dashboard UI
 
+To protect your cluster data, Dashboard deploys with a minimal RBAC
+configuration by default. Currently, Dashboard only supports logging in with a
+Bearer Token. To create a token for this demo, you can follow our guide on
+[creating a sample user](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md).
 
-To protect your cluster data, Dashboard deploys with a minimal RBAC configuration by default. Currently, Dashboard only supports logging in with a Bearer Token. To create a token for this demo, you can follow our guide on [creating a sample user](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md).
-
-{{< warning >}}
-The sample user created in the tutorial will have administrative privileges and is for educational purposes only.
-{{< /warning >}}
+{{< warning >}} The sample user created in the tutorial will have administrative
+privileges and is for educational purposes only. {{< /warning >}}
 
 ### Command line proxy
-You can access Dashboard using the kubectl command-line tool by running the following command:
+
+You can access Dashboard using the kubectl command-line tool by running the
+following command:
 
 ```
 kubectl proxy
 ```
 
-Kubectl will make Dashboard available at http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/.
+Kubectl will make Dashboard available at
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/.
 
-The UI can _only_ be accessed from the machine where the command is executed. See `kubectl proxy --help` for more options.
+The UI can _only_ be accessed from the machine where the command is executed.
+See `kubectl proxy --help` for more options.
 
-{{< note >}}
-Kubeconfig Authentication method does NOT support external identity providers or x509 certificate-based authentication.
-{{< /note >}}
+{{< note >}} Kubeconfig Authentication method does NOT support external identity
+providers or x509 certificate-based authentication. {{< /note >}}
 
 ## Welcome view
 
-When you access Dashboard on an empty cluster, you'll see the welcome page. This page contains a link to this document as well as a button to deploy your first application. In addition, you can view which system applications are running by default in the `kube-system` [namespace](/docs/tasks/administer-cluster/namespaces/) of your cluster, for example the Dashboard itself.
+When you access Dashboard on an empty cluster, you'll see the welcome page. This
+page contains a link to this document as well as a button to deploy your first
+application. In addition, you can view which system applications are running by
+default in the `kube-system`
+[namespace](/docs/tasks/administer-cluster/namespaces/) of your cluster, for
+example the Dashboard itself.
 
 ![Kubernetes Dashboard welcome page](/images/docs/ui-dashboard-zerostate.png)
 
 ## Deploying containerized applications
 
-Dashboard lets you create and deploy a containerized application as a Deployment and optional Service with a simple wizard. You can either manually specify application details, or upload a YAML or JSON file containing application configuration.
+Dashboard lets you create and deploy a containerized application as a Deployment
+and optional Service with a simple wizard. You can either manually specify
+application details, or upload a YAML or JSON file containing application
+configuration.
 
 Click the **CREATE** button in the upper right corner of any page to begin.
 
@@ -73,35 +92,67 @@ Click the **CREATE** button in the upper right corner of any page to begin.
 
 The deploy wizard expects that you provide the following information:
 
-- **App name** (mandatory): Name for your application. A [label](/docs/concepts/overview/working-with-objects/labels/) with the name will be added to the Deployment and Service, if any, that will be deployed.
+- **App name** (mandatory): Name for your application. A
+  [label](/docs/concepts/overview/working-with-objects/labels/) with the name
+  will be added to the Deployment and Service, if any, that will be deployed.
 
-  The application name must be unique within the selected Kubernetes [namespace](/docs/tasks/administer-cluster/namespaces/). It must start with a lowercase character, and end with a lowercase character or a number, and contain only lowercase letters, numbers and dashes (-). It is limited to 24 characters. Leading and trailing spaces are ignored.
+  The application name must be unique within the selected Kubernetes
+  [namespace](/docs/tasks/administer-cluster/namespaces/). It must start with a
+  lowercase character, and end with a lowercase character or a number, and
+  contain only lowercase letters, numbers and dashes (-). It is limited to 24
+  characters. Leading and trailing spaces are ignored.
 
-- **Container image** (mandatory): The URL of a public Docker [container image](/docs/concepts/containers/images/) on any registry, or a private image (commonly hosted on the Google Container Registry or Docker Hub). The container image specification must end with a colon.
+- **Container image** (mandatory): The URL of a public Docker
+  [container image](/docs/concepts/containers/images/) on any registry, or a
+  private image (commonly hosted on the Google Container Registry or Docker
+  Hub). The container image specification must end with a colon.
 
-- **Number of pods** (mandatory): The target number of Pods you want your application to be deployed in. The value must be a positive integer.
+- **Number of pods** (mandatory): The target number of Pods you want your
+  application to be deployed in. The value must be a positive integer.
 
-  A [Deployment](/docs/concepts/workloads/controllers/deployment/) will be created to maintain the desired number of Pods across your cluster.
+  A [Deployment](/docs/concepts/workloads/controllers/deployment/) will be
+  created to maintain the desired number of Pods across your cluster.
 
-- **Service** (optional): For some parts of your application (e.g. frontends) you may want to expose a [Service](/docs/concepts/services-networking/service/) onto an external, maybe public IP address outside of your cluster (external Service). For external Services, you may need to open up one or more ports to do so. Find more details [here](/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+- **Service** (optional): For some parts of your application (e.g. frontends)
+  you may want to expose a
+  [Service](/docs/concepts/services-networking/service/) onto an external, maybe
+  public IP address outside of your cluster (external Service). For external
+  Services, you may need to open up one or more ports to do so. Find more
+  details
+  [here](/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
-  Other Services that are only visible from inside the cluster are called internal Services.
+  Other Services that are only visible from inside the cluster are called
+  internal Services.
 
-  Irrespective of the Service type, if you choose to create a Service and your container listens on a port (incoming), you need to specify two ports. The Service will be created mapping the port (incoming) to the target port seen by the container. This Service will route to your deployed Pods. Supported protocols are TCP and UDP. The internal DNS name for this Service will be the value you specified as application name above.
+  Irrespective of the Service type, if you choose to create a Service and your
+  container listens on a port (incoming), you need to specify two ports. The
+  Service will be created mapping the port (incoming) to the target port seen by
+  the container. This Service will route to your deployed Pods. Supported
+  protocols are TCP and UDP. The internal DNS name for this Service will be the
+  value you specified as application name above.
 
-If needed, you can expand the **Advanced options** section where you can specify more settings:
+If needed, you can expand the **Advanced options** section where you can specify
+more settings:
 
-- **Description**: The text you enter here will be added as an [annotation](/docs/concepts/overview/working-with-objects/annotations/) to the Deployment and displayed in the application's details.
+- **Description**: The text you enter here will be added as an
+  [annotation](/docs/concepts/overview/working-with-objects/annotations/) to the
+  Deployment and displayed in the application's details.
 
-- **Labels**: Default [labels](/docs/concepts/overview/working-with-objects/labels/) to be used for your application are application name and version. You can specify additional labels to be applied to the Deployment, Service (if any), and Pods, such as release, environment, tier, partition, and release track.
+- **Labels**: Default
+  [labels](/docs/concepts/overview/working-with-objects/labels/) to be used for
+  your application are application name and version. You can specify additional
+  labels to be applied to the Deployment, Service (if any), and Pods, such as
+  release, environment, tier, partition, and release track.
 
   Example:
 
   ```conf
-release=1.0
-tier=frontend
-environment=pod
-track=stable
+  release=1.0
+  tier=frontend
+  environment=pod
+  track=stable
+  ```
+
 ```
 
 - **Namespace**: Kubernetes supports multiple virtual clusters backed by the same physical cluster. These virtual clusters are called [namespaces](/docs/tasks/administer-cluster/namespaces/). They let you partition resources into logically named groups.
@@ -170,3 +221,4 @@ For more information, see the
 [Kubernetes Dashboard project page](https://github.com/kubernetes/dashboard).
 
 {{% /capture %}}
+```
