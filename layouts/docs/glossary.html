@@ -37,7 +37,7 @@
 	{{ $.Scratch.Add "tag_classes" (printf "tag-%s " .)  }}
 	{{ end }}
 	{{ $term_identifier := (printf "term-%s" .Params.id) }}
-	
+
 	<li class="{{ $.Scratch.Get "tag_classes" }} hide" data-show-count="0">
 		<div id="{{ $term_identifier }}" class="term-anchor"></div>
 		<div>
@@ -56,4 +56,3 @@
 </ul>
 {{ end }}
 {{ end }}
-
