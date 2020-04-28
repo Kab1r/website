@@ -1,41 +1,46 @@
 ---
 reviewers:
-- caseydavenport
-- danwinship
+  - caseydavenport
+  - danwinship
 title: Declare Network Policy
 min-kubernetes-server-version: v1.8
 content_template: templates/task
 ---
-{{% capture overview %}}
-This document helps you get started using the Kubernetes [NetworkPolicy API](/docs/concepts/services-networking/network-policies/) to declare network policies that govern how pods communicate with each other.
+
+{{% capture overview %}} This document helps you get started using the
+Kubernetes
+[NetworkPolicy API](/docs/concepts/services-networking/network-policies/) to
+declare network policies that govern how pods communicate with each other.
 {{% /capture %}}
 
 {{% capture prerequisites %}}
 
 {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
 
-Make sure you've configured a network provider with network policy support. There are a number of network providers that support NetworkPolicy, including:
+Make sure you've configured a network provider with network policy support.
+There are a number of network providers that support NetworkPolicy, including:
 
-* [Calico](/docs/tasks/administer-cluster/network-policy-provider/calico-network-policy/)
-* [Cilium](/docs/tasks/administer-cluster/network-policy-provider/cilium-network-policy/)
-* [Kube-router](/docs/tasks/administer-cluster/network-policy-provider/kube-router-network-policy/)
-* [Romana](/docs/tasks/administer-cluster/network-policy-provider/romana-network-policy/)
-* [Weave Net](/docs/tasks/administer-cluster/network-policy-provider/weave-network-policy/)
+- [Calico](/docs/tasks/administer-cluster/network-policy-provider/calico-network-policy/)
+- [Cilium](/docs/tasks/administer-cluster/network-policy-provider/cilium-network-policy/)
+- [Kube-router](/docs/tasks/administer-cluster/network-policy-provider/kube-router-network-policy/)
+- [Romana](/docs/tasks/administer-cluster/network-policy-provider/romana-network-policy/)
+- [Weave Net](/docs/tasks/administer-cluster/network-policy-provider/weave-network-policy/)
 
-{{< note >}}
-The above list is sorted alphabetically by product name, not by recommendation or preference. This example is valid for a Kubernetes cluster using any of these providers.
-{{< /note >}}
-{{% /capture %}}
+{{< note >}} The above list is sorted alphabetically by product name, not by
+recommendation or preference. This example is valid for a Kubernetes cluster
+using any of these providers. {{< /note >}} {{% /capture %}}
 
 {{% capture steps %}}
 
 ## Create an `nginx` deployment and expose it via a service
 
-To see how Kubernetes network policy works, start off by creating an `nginx` Deployment.
+To see how Kubernetes network policy works, start off by creating an `nginx`
+Deployment.
 
 ```console
 kubectl create deployment nginx --image=nginx
 ```
+
 ```none
 deployment.apps/nginx created
 ```
@@ -50,7 +55,9 @@ kubectl expose deployment nginx --port=80
 service/nginx exposed
 ```
 
-The above commands create a Deployment with an nginx Pod and expose the Deployment through a Service named `nginx`. The `nginx` Pod and Deployment are found in the `default` namespace.
+The above commands create a Deployment with an nginx Pod and expose the
+Deployment through a Service named `nginx`. The `nginx` Pod and Deployment are
+found in the `default` namespace.
 
 ```console
 kubectl get svc,pod
@@ -67,7 +74,9 @@ pod/nginx-701339712-e0qfq   1/1           Running       0          35s
 
 ## Test the service by accessing it from another Pod
 
-You should be able to access the new `nginx` service from other Pods. To access the `nginx` Service from another Pod in the `default` namespace, start a busybox container:
+You should be able to access the new `nginx` service from other Pods. To access
+the `nginx` Service from another Pod in the `default` namespace, start a busybox
+container:
 
 ```console
 kubectl run busybox --rm -ti --image=busybox -- /bin/sh
@@ -86,15 +95,18 @@ remote file exists
 
 ## Limit access to the `nginx` service
 
-To limit the access to the `nginx` service so that only Pods with the label `access: true` can query it, create a NetworkPolicy object as follows:
+To limit the access to the `nginx` service so that only Pods with the label
+`access: true` can query it, create a NetworkPolicy object as follows:
 
 {{< codenew file="service/networking/nginx-policy.yaml" >}}
 
 The name of a NetworkPolicy object must be a valid
 [DNS subdomain name](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
-{{< note >}}
-NetworkPolicy includes a `podSelector` which selects the grouping of Pods to which the policy applies. You can see this policy selects Pods with the label `app=nginx`. The label was automatically added to the Pod in the `nginx` Deployment. An empty `podSelector` selects all pods in the namespace.
+{{< note >}} NetworkPolicy includes a `podSelector` which selects the grouping
+of Pods to which the policy applies. You can see this policy selects Pods with
+the label `app=nginx`. The label was automatically added to the Pod in the
+`nginx` Deployment. An empty `podSelector` selects all pods in the namespace.
 {{< /note >}}
 
 ## Assign the policy to the service
@@ -110,7 +122,9 @@ networkpolicy.networking.k8s.io/access-nginx created
 ```
 
 ## Test access to the service when access label is not defined
-When you attempt to access the `nginx` Service from a Pod without the correct labels, the request times out:
+
+When you attempt to access the `nginx` Service from a Pod without the correct
+labels, the request times out:
 
 ```console
 kubectl run busybox --rm -ti --image=busybox -- /bin/sh
