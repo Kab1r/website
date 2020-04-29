@@ -239,7 +239,7 @@ scheduler's performance significantly.
 {{< /note >}}
 -->
 
-{{< note >}} 当集群中的可调度节点少于 50 个时，调度器仍然会去检查所有的 Node，因
+{{< note >}} 当集群中的可调度节点少于 50 个时，调度器仍然会去检查所有的 Node，�
 为可调度节点太少，不足以停止调度器最初的过滤选择。
 
 同理，在小规模集群中，如果你将 `percentageOfNodesToScore` 设置为一个较低的值，则
