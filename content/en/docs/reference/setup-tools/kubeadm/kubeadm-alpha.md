@@ -1,19 +1,21 @@
 ---
 reviewers:
-- luxas
-- jbeda
+  - luxas
+  - jbeda
 title: kubeadm alpha
 weight: 90
 ---
-{{< caution >}}
-`kubeadm alpha` provides a preview of a set of features made available for gathering feedback
- from the community. Please try it out and give us feedback!
-{{< /caution >}}
+
+{{< caution >}} `kubeadm alpha` provides a preview of a set of features made
+available for gathering feedback from the community. Please try it out and give
+us feedback! {{< /caution >}}
 
 ## kubeadm alpha certs renew {#cmd-certs-renew}
 
-You can renew all Kubernetes certificates using the `all` subcommand or renew them selectively.
-For more details about certificate expiration and renewal see the [certificate management documentation](/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/).
+You can renew all Kubernetes certificates using the `all` subcommand or renew
+them selectively. For more details about certificate expiration and renewal see
+the
+[certificate management documentation](/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/).
 
 {{< tabs name="tab-certs-renew" >}}
 {{< tab name="renew" include="generated/kubeadm_alpha_certs_renew.md" />}}
@@ -32,9 +34,10 @@ For more details about certificate expiration and renewal see the [certificate m
 
 ## kubeadm alpha certs certificate-key {#cmd-certs-certificate-key}
 
-This command can be used to generate a new control-plane certificate key.
-The key can be passed as `--certificate-key` to `kubeadm init` and `kubeadm join`
-to enable the automatic copy of certificates when joining additional control-plane nodes.
+This command can be used to generate a new control-plane certificate key. The
+key can be passed as `--certificate-key` to `kubeadm init` and `kubeadm join` to
+enable the automatic copy of certificates when joining additional control-plane
+nodes.
 
 {{< tabs name="tab-certs-certificate-key" >}}
 {{< tab name="certificate-key" include="generated/kubeadm_alpha_certs_certificate-key.md" />}}
@@ -42,8 +45,9 @@ to enable the automatic copy of certificates when joining additional control-pla
 
 ## kubeadm alpha certs check-expiration {#cmd-certs-check-expiration}
 
-This command checks expiration for the certificates in the local PKI managed by kubeadm.
-For more details about certificate expiration and renewal see the [certificate management documentation](/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/).
+This command checks expiration for the certificates in the local PKI managed by
+kubeadm. For more details about certificate expiration and renewal see the
+[certificate management documentation](/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/).
 
 {{< tabs name="tab-certs-check-expiration" >}}
 {{< tab name="check-expiration" include="generated/kubeadm_alpha_certs_check-expiration.md" />}}
@@ -51,7 +55,8 @@ For more details about certificate expiration and renewal see the [certificate m
 
 ## kubeadm alpha kubeconfig user {#cmd-phase-kubeconfig}
 
-The `user` subcommand can be used for the creation of kubeconfig files for additional users.
+The `user` subcommand can be used for the creation of kubeconfig files for
+additional users.
 
 {{< tabs name="tab-kubeconfig" >}}
 {{< tab name="kubeconfig" include="generated/kubeadm_alpha_kubeconfig.md" />}}
@@ -67,10 +72,10 @@ Use the following command to enable the DynamicKubeletConfiguration feature.
 {{< tab name="enable-dynamic" include="generated/kubeadm_alpha_kubelet_config_enable-dynamic.md" />}}
 {{< /tabs >}}
 
-
 ## kubeadm alpha selfhosting pivot {#cmd-selfhosting}
 
-The subcommand `pivot` can be used to convert a static Pod-hosted control plane into a self-hosted one.
+The subcommand `pivot` can be used to convert a static Pod-hosted control plane
+into a self-hosted one.
 
 [Documentation](/docs/setup/production-environment/tools/kubeadm/self-hosting/)
 
@@ -79,8 +84,11 @@ The subcommand `pivot` can be used to convert a static Pod-hosted control plane 
 {{< tab name="pivot" include="generated/kubeadm_alpha_selfhosting_pivot.md" />}}
 {{< /tabs >}}
 
-
 ## What's next
-* [kubeadm init](/docs/reference/setup-tools/kubeadm/kubeadm-init/) to bootstrap a Kubernetes control-plane node
-* [kubeadm join](/docs/reference/setup-tools/kubeadm/kubeadm-join/) to connect a node to the cluster
-* [kubeadm reset](/docs/reference/setup-tools/kubeadm/kubeadm-reset/) to revert any changes made to this host by `kubeadm init` or `kubeadm join`
+
+- [kubeadm init](/docs/reference/setup-tools/kubeadm/kubeadm-init/) to bootstrap
+  a Kubernetes control-plane node
+- [kubeadm join](/docs/reference/setup-tools/kubeadm/kubeadm-join/) to connect a
+  node to the cluster
+- [kubeadm reset](/docs/reference/setup-tools/kubeadm/kubeadm-reset/) to revert
+  any changes made to this host by `kubeadm init` or `kubeadm join`
