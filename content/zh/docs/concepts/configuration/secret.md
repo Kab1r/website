@@ -1075,7 +1075,7 @@ See [Add ImagePullSecrets to a service account](/docs/tasks/configure-pod-contai
  for a detailed explanation of that process.
  -->
 
-### 安排 imagePullSecrets 自动附加
+### 安排 imagePullSecrets 自动附�
 
 您可以手动创建 imagePullSecret，并从 serviceAccount 引用它。使用该
 serviceAccount 创建的任何 pod 和默认使用该 serviceAccount 的 pod 将会将其的
@@ -1115,7 +1115,7 @@ They can only be referenced by pods in that same namespace.
 
 ### 限制
 
-验证 secret volume 来源确保指定的对象引用实际上指向一个类型为 Secret 的对象。因
+验证 secret volume 来源确保指定的对象引用实际上指向一个类型为 Secret 的对象。�
 此，需要在依赖于它的任何 pod 之前创建一个 secret。
 
 Secret API 对象驻留在命名空间中。它们只能由同一命名空间中的 pod 引用。
