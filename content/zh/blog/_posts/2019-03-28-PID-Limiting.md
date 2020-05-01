@@ -89,7 +89,7 @@ Derek Carr is Senior Principal Software Engineer at Red Hat. He is a Kubernetes 
 
 ##参与其中
 
-如果您对此特性有反馈或有兴趣参与其设计与开发，请加
+如果您对此特性有反馈或有兴趣参与其设计与开发，请�
 入[节点特别兴趣小组](https://github.com/kubernetes/community/tree/master/sig
 Node)。
 

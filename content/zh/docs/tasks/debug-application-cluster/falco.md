@@ -223,7 +223,7 @@ The final class of rules simply displays any Audit Event received by Falco. This
 For further details, see [Kubernetes Audit Events][falco_ka_docs] in the Falco documentation.
 -->
 
-最后一类规则仅负责显示 Falco 收到的所有审核事件。默认情况下，此规则是禁用的，因
+最后一类规则仅负责显示 Falco 收到的所有审核事件。默认情况下，此规则是禁用的，�
 为它可能会很吵。
 
 有关更多详细信息，请参阅 Falco 文档中的[Kubernetes 审计事件][falco_ka_docs]。

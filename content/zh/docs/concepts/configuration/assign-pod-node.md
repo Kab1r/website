@@ -522,7 +522,7 @@ In principle, the `topologyKey` can be any legal label-key. However,
 for performance and security reasons, there are some constraints on topologyKey:
 -->
 
-原则上，`topologyKey` 可以是任何合法的标签键。然而，出于性能和安全原因
+原则上，`topologyKey` 可以是任何合法的标签键。然而，出于性能和安全原�
 ，topologyKey 受到一些限制：
 
 <!--
