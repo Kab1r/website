@@ -3,25 +3,21 @@ title: Configure Quotas for API Objects
 content_template: templates/task
 ---
 
-
 {{% capture overview %}}
 
 This page shows how to configure quotas for API objects, including
-PersistentVolumeClaims and Services. A quota restricts the number of
-objects, of a particular type, that can be created in a namespace.
-You specify quotas in a
+PersistentVolumeClaims and Services. A quota restricts the number of objects, of
+a particular type, that can be created in a namespace. You specify quotas in a
 [ResourceQuota](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#resourcequota-v1-core)
 object.
 
 {{% /capture %}}
-
 
 {{% capture prerequisites %}}
 
 {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
 
 {{% /capture %}}
-
 
 {{% capture steps %}}
 
@@ -52,9 +48,9 @@ View detailed information about the ResourceQuota:
 kubectl get resourcequota object-quota-demo --namespace=quota-object-example --output=yaml
 ```
 
-The output shows that in the quota-object-example namespace, there can be at most
-one PersistentVolumeClaim, at most two Services of type LoadBalancer, and no Services
-of type NodePort.
+The output shows that in the quota-object-example namespace, there can be at
+most one PersistentVolumeClaim, at most two Services of type LoadBalancer, and
+no Services of type NodePort.
 
 ```yaml
 status:
@@ -105,8 +101,8 @@ Attempt to create the second PersistentVolumeClaim:
 kubectl apply -f https://k8s.io/examples/admin/resource/quota-objects-pvc-2.yaml --namespace=quota-object-example
 ```
 
-The output shows that the second PersistentVolumeClaim was not created,
-because it would have exceeded the quota for the namespace.
+The output shows that the second PersistentVolumeClaim was not created, because
+it would have exceeded the quota for the namespace.
 
 ```
 persistentvolumeclaims "pvc-quota-demo-2" is forbidden:
@@ -116,8 +112,8 @@ used: persistentvolumeclaims=1, limited: persistentvolumeclaims=1
 
 ## Notes
 
-These are the strings used to identify API resources that can be constrained
-by quotas:
+These are the strings used to identify API resources that can be constrained by
+quotas:
 
 <table>
 <tr><th>String</th><th>API Object</th></tr>
@@ -146,30 +142,24 @@ kubectl delete namespace quota-object-example
 
 ### For cluster administrators
 
-* [Configure Default Memory Requests and Limits for a Namespace](/docs/tasks/administer-cluster/memory-default-namespace/)
+- [Configure Default Memory Requests and Limits for a Namespace](/docs/tasks/administer-cluster/memory-default-namespace/)
 
-* [Configure Default CPU Requests and Limits for a Namespace](/docs/tasks/administer-cluster/cpu-default-namespace/)
+- [Configure Default CPU Requests and Limits for a Namespace](/docs/tasks/administer-cluster/cpu-default-namespace/)
 
-* [Configure Minimum and Maximum Memory Constraints for a Namespace](/docs/tasks/administer-cluster/memory-constraint-namespace/)
+- [Configure Minimum and Maximum Memory Constraints for a Namespace](/docs/tasks/administer-cluster/memory-constraint-namespace/)
 
-* [Configure Minimum and Maximum CPU Constraints for a Namespace](/docs/tasks/administer-cluster/cpu-constraint-namespace/)
+- [Configure Minimum and Maximum CPU Constraints for a Namespace](/docs/tasks/administer-cluster/cpu-constraint-namespace/)
 
-* [Configure Memory and CPU Quotas for a Namespace](/docs/tasks/administer-cluster/quota-memory-cpu-namespace/)
+- [Configure Memory and CPU Quotas for a Namespace](/docs/tasks/administer-cluster/quota-memory-cpu-namespace/)
 
-* [Configure a Pod Quota for a Namespace](/docs/tasks/administer-cluster/quota-pod-namespace/)
+- [Configure a Pod Quota for a Namespace](/docs/tasks/administer-cluster/quota-pod-namespace/)
 
 ### For app developers
 
-* [Assign Memory Resources to Containers and Pods](/docs/tasks/configure-pod-container/assign-memory-resource/)
+- [Assign Memory Resources to Containers and Pods](/docs/tasks/configure-pod-container/assign-memory-resource/)
 
-* [Assign CPU Resources to Containers and Pods](/docs/tasks/configure-pod-container/assign-cpu-resource/)
+- [Assign CPU Resources to Containers and Pods](/docs/tasks/configure-pod-container/assign-cpu-resource/)
 
-* [Configure Quality of Service for Pods](/docs/tasks/configure-pod-container/quality-service-pod/)
-
+- [Configure Quality of Service for Pods](/docs/tasks/configure-pod-container/quality-service-pod/)
 
 {{% /capture %}}
-
-
-
-
-
