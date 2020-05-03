@@ -3,11 +3,12 @@ title: 配置 API 对象配额
 content_template: templates/task
 ---
 
-<!--
+## <!--
+
+title: Configure Quotas for API Objects content_template: templates/task
+
 ---
-title: Configure Quotas for API Objects
-content_template: templates/task
----
+
 -->
 
 {{% capture overview %}}
@@ -21,19 +22,18 @@ You specify quotas in a
 object.
 -->
 
-本文讨论如何为 API 对象配置配额，包括 PersistentVolumeClaims 和 Services。
-配额限制了可以在命名空间中创建的特定类型对象的数量。
-您可以在 [ResourceQuota](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#resourcequota-v1-core) 对象中指定配额。
+本文讨论如何为 API 对象配置配额，包括 PersistentVolumeClaims 和 Services。配额限
+制了可以在命名空间中创建的特定类型对象的数量。您可以在
+[ResourceQuota](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#resourcequota-v1-core)
+对象中指定配额。
 
 {{% /capture %}}
-
 
 {{% capture prerequisites %}}
 
 {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
 
 {{% /capture %}}
-
 
 {{% capture steps %}}
 
@@ -90,8 +90,9 @@ one PersistentVolumeClaim, at most two Services of type LoadBalancer, and no Ser
 of type NodePort.
 -->
 
-输出结果表明在 quota-object-example 命名空间中，至多只能有一个 PersistentVolumeClaim，最多两个 LoadBalancer 类型的服务，不能有 NodePort 类型的服务。
-
+输出结果表明在 quota-object-example 命名空间中，至多只能有一个
+PersistentVolumeClaim，最多两个 LoadBalancer 类型的服务，不能有 NodePort 类型的
+服务。
 
 ```yaml
 status:
@@ -169,19 +170,21 @@ Attempt to create the second PersistentVolumeClaim:
 ```shell
 kubectl create -f https://k8s.io/examples/admin/resource/quota-objects-pvc-2.yaml --namespace=quota-object-example
 ```
+
 <!--
 The output shows that the second PersistentVolumeClaim was not created,
 because it would have exceeded the quota for the namespace.
 -->
 
-输出信息表明第二个 PersistentVolumeClaim 没有创建成功，因为这会超出命名空间的配额。
-
+输出信息表明第二个 PersistentVolumeClaim 没有创建成功，因为这会超出命名空间的配
+额。
 
 ```
 persistentvolumeclaims "pvc-quota-demo-2" is forbidden:
 exceeded quota: object-quota-demo, requested: persistentvolumeclaims=1,
 used: persistentvolumeclaims=1, limited: persistentvolumeclaims=1
 ```
+
 <!--
 ## Notes
 
@@ -242,17 +245,17 @@ kubectl delete namespace quota-object-example
 
 ### 集群管理员参考
 
-* [为命名空间配置默认的内存请求和限制](/docs/tasks/administer-cluster/memory-default-namespace/)
+- [为命名空间配置默认的内存请求和限制](/docs/tasks/administer-cluster/memory-default-namespace/)
 
-* [为命名空间配置默认的 CPU 请求和限制](/docs/tasks/administer-cluster/cpu-default-namespace/)
+- [为命名空间配置默认的 CPU 请求和限制](/docs/tasks/administer-cluster/cpu-default-namespace/)
 
-* [为命名空间配置内存的最小和最大限制](/docs/tasks/administer-cluster/memory-constraint-namespace/)
+- [为命名空间配置内存的最小和最大限制](/docs/tasks/administer-cluster/memory-constraint-namespace/)
 
-* [为命名空间配置 CPU 的最小和最大限制](/docs/tasks/administer-cluster/cpu-constraint-namespace/)
+- [为命名空间配置 CPU 的最小和最大限制](/docs/tasks/administer-cluster/cpu-constraint-namespace/)
 
-* [为命名空间配置 CPU 和内存配额](/docs/tasks/administer-cluster/quota-memory-cpu-namespace/)
+- [为命名空间配置 CPU 和内存配额](/docs/tasks/administer-cluster/quota-memory-cpu-namespace/)
 
-* [为命名空间配置 Pod 配额](/docs/tasks/administer-cluster/quota-pod-namespace/)
+- [为命名空间配置 Pod 配额](/docs/tasks/administer-cluster/quota-pod-namespace/)
 
 <!--
 ### For app developers
@@ -266,9 +269,8 @@ kubectl delete namespace quota-object-example
 
 ### 应用开发者参考
 
-* [为容器和 Pod 分配内存资源](/docs/tasks/configure-pod-container/assign-memory-resource/)
-* [为容器和 Pod 分配 CPU 资源](/docs/tasks/configure-pod-container/assign-cpu-resource/)
-* [为 Pod 配置服务质量](/docs/tasks/configure-pod-container/quality-service-pod/)
+- [为容器和 Pod 分配内存资源](/docs/tasks/configure-pod-container/assign-memory-resource/)
+- [为容器和 Pod 分配 CPU 资源](/docs/tasks/configure-pod-container/assign-cpu-resource/)
+- [为 Pod 配置服务质量](/docs/tasks/configure-pod-container/quality-service-pod/)
 
 {{% /capture %}}
-
