@@ -61,7 +61,7 @@ cd website
 duquel les pull requests seront ouvertes. Pour les localisations, nous demandons
 en outre que :
 
-1. Les approbateurs d'équipe ouvrent des branches de développement directement à
+1. Les approbateurs d'équipe ouvrent des branches de développement directement �
    partir de https://github.com/kubernetes/website.
 2. Les contributeurs à la localisation travaillent à partir de forks, avec des
    branches basées sur la branche de développement actuelle.
@@ -76,7 +76,7 @@ sur les pull request de localisation, voir
 
 Consultez la
 [norme ISO 639-1](https://www.loc.gov/standards/iso639-2/php/code_list.php) pour
-le code de pays en deux lettres de votre localisation. Par exemple, le code à
+le code de pays en deux lettres de votre localisation. Par exemple, le code �
 deux lettres pour l'allemand est `de`.
 
 {{< note >}} These instructions use the
@@ -92,7 +92,7 @@ Pour prendre en charge une nouvelle localisation, vous devrez modifier
 `config.toml`.
 
 Ajoutez un bloc de configuration pour la nouvelle langue dans `config.toml`,
-sous le bloc `[languages]` existant. Le bloc allemand, par exemple, ressemble à
+sous le bloc `[languages]` existant. Le bloc allemand, par exemple, ressemble �
 :
 
 ```toml
@@ -134,7 +134,7 @@ dans `README.md`ainsi que :
 - Un point de contact pour le projet de localisation
 - Toute information spécifique à la localisation
 
-Après avoir créé le fichier README localisé, ajoutez un lien vers le fichier à
+Après avoir créé le fichier README localisé, ajoutez un lien vers le fichier �
 partir du fichier anglais principal, [`README.md`'s Localizing Kubernetes
 Documentation] et incluez les coordonnées des personnes-ressources en anglais.
 Vous pouvez fournir un identifiant GitHub, une adresse e-mail,
@@ -282,7 +282,7 @@ Seuls les approbateurs peuvent accepter les pull requests, mais n'importe qui
 peut en ouvrir une avec une nouvelle branche de développement. Aucune
 autorisation spéciale n'est requise.
 
-Pour plus d'informations sur le travail à partir de forks ou directement à
+Pour plus d'informations sur le travail à partir de forks ou directement �
 partir du dépôt, voir ["fork and clone the repo"](#fork-and-clone-the-repo).
 
 ### Upstream contributions
